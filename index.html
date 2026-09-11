@@ -48,8 +48,8 @@
         .catalog-title p { color: #9ca3af; font-size: 0.9rem; }
         
         .tasas-box { background: #0b0f19; border: 1px solid #1f2937; padding: 10px 20px; border-radius: 12px; display: flex; align-items: center; gap: 15px; }
-        .tasas-info { font-size: 0.85rem; color: #9ca3af; display: flex; align-items: center; gap: 8px; }
-        .tasas-info input { background: #111827; border: 1px solid #374151; color: #38bdf8; font-weight: bold; padding: 4px 8px; border-radius: 6px; width: 80px; text-align: center; font-size: 0.9rem; }
+        .tasas-info { font-size: 0.85rem; color: #9ca3af; }
+        .tasas-info span { color: #38bdf8; font-weight: bold; }
         .currency-buttons { display: flex; gap: 5px; background: #111827; padding: 4px; border-radius: 8px; }
         .curr-btn { background: transparent; border: none; color: #9ca3af; padding: 6px 12px; border-radius: 6px; font-weight: bold; cursor: pointer; font-size: 0.85rem; }
         .curr-btn.active { background: #2563eb; color: white; }
@@ -145,17 +145,14 @@
             </div>
         </div>
 
-        <!-- Cabecera de Catálogo y Tasa Dinámica -->
+        <!-- Cabecera de Catálogo con Tasa Fija del Código -->
         <div class="catalog-header" id="catalogo">
             <div class="catalog-title">
                 <h2>Catálogo de Precios</h2>
                 <p>Explora el catálogo y añade los servicios a tu carrito por WhatsApp.</p>
             </div>
             <div class="tasas-box">
-                <div class="tasas-info">
-                    TASA BS: 
-                    <input type="number" id="input-tasa" value="960.00" step="0.01" onchange="actualizarPrecios()">
-                </div>
+                <div class="tasas-info">TASA BS: <span id="tasa-mostrada">65.00</span></div>
                 <div class="currency-buttons">
                     <button class="curr-btn active" onclick="cambiarMoneda('USD', this)">USD</button>
                     <button class="curr-btn" onclick="cambiarMoneda('Bs', this)">Bs</button>
@@ -385,7 +382,16 @@
     </div>
 
     <script>
+        // ==========================================
+        // CONFIGURACIÓN DE LA TASA (MODIFICA AQUÍ)
+        // ==========================================
+        let tasaBs = 65.00; 
+        // ==========================================
+
         let monedaActual = 'USD';
+
+        // Mostrar la tasa configurada en pantalla al cargar
+        document.getElementById('tasa-mostrada').innerText = tasaBs.toFixed(2);
 
         function cambiarMoneda(moneda, btn) {
             monedaActual = moneda;
@@ -396,23 +402,21 @@
         }
 
         function actualizarPrecios() {
-            let tasa = parseFloat(document.getElementById('input-tasa').value) || 1;
-
             // Actualizar oferta
             let ofertaElem = document.getElementById('oferta-precio');
             let usdOferta = parseFloat(ofertaElem.getAttribute('data-usd'));
             if (monedaActual === 'Bs') {
-                ofertaElem.innerHTML = `Bs ${(usdOferta * tasa).toFixed(2)} <span style="font-size: 1rem; color: #9ca3af;">Bs</span>`;
+                ofertaElem.innerHTML = `Bs ${(usdOferta * tasaBs).toFixed(2)} <span style="font-size: 1rem; color: #9ca3af;">Bs</span>`;
             } else {
                 ofertaElem.innerHTML = `$${usdOferta.toFixed(2)} <span style="font-size: 1rem; color: #9ca3af;">USD</span>`;
             }
 
-            // Actualizar catálogo general
+            // Actualizar catálogo general multiplicando dólar por la tasa fija del código
             let precios = document.querySelectorAll('.plan-price');
             precios.forEach(p => {
                 let valUSD = parseFloat(p.getAttribute('data-usd'));
                 if (monedaActual === 'Bs') {
-                    let valBs = (valUSD * tasa).toFixed(2);
+                    let valBs = (valUSD * tasaBs).toFixed(2);
                     p.innerText = 'Bs ' + valBs;
                 } else {
                     p.innerText = '$' + valUSD.toFixed(2);
