@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Streamix - Servicios Digitales</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background-color: #050811; color: #ffffff; padding: 0; }
+        nav { background: #0b0f19; display: flex; justify-content: space-between; align-items: center; padding: 15px 40px; border-bottom: 1px solid #1f2937; flex-wrap: wrap; gap: 15px; }
+        .logo-nav { font-weight: bold; font-size: 1.2rem; letter-spacing: 1px; color: #fff; }
+        .logo-nav span { display: block; font-size: 0.7rem; color: #9ca3af; font-weight: normal; }
+        .nav-links { display: flex; gap: 25px; align-items: center; list-style: none; font-size: 0.9rem; }
+        .nav-links a { color: #d1d5db; text-decoration: none; transition: color 0.2s; }
+        .nav-links a:hover { color: #38bdf8; }
+        .btn-pedido { background: #2563eb; color: white; padding: 8px 16px; border-radius: 20px; text-decoration: none; font-weight: bold; font-size: 0.9rem; }
+        .container { max-width: 1100px; margin: 0 auto; padding: 40px 20px; }
+        .badge-container { display: flex; justify-content: center; gap: 15px; margin-bottom: 25px; flex-wrap: wrap; }
+        .badge { background: #111827; border: 1px solid #374151; padding: 8px 16px; border-radius: 20px; font-size: 0.85rem; color: #9ca3af; display: flex; align-items: center; gap: 8px; }
+        .badge.green { color: #34d399; }
+        .dot { width: 8px; height: 8px; background-color: #34d399; border-radius: 50%; box-shadow: 0 0 8px #34d399; }
+        header { text-align: center; margin-bottom: 40px; }
+        header h1 { font-size: 3rem; color: #ffffff; text-transform: uppercase; letter-spacing: 3px; margin-bottom: 5px; }
+        header p { color: #9ca3af; font-size: 1.1rem; }
+        header .sub-desc { color: #9ca3af; font-size: 0.95rem; margin-top: 15px; max-width: 600px; margin-left: auto; margin-right: auto; }
+        .featured-card { background: linear-gradient(145deg, #0f172a, #1e1b4b); border: 1px solid #ef4444; border-radius: 16px; padding: 30px; margin-bottom: 40px; position: relative; box-shadow: 0 0 25px rgba(239, 68, 68, 0.15); }
+        .offer-tag { position: absolute; top: -12px; right: 30px; background: #ef4444; color: white; padding: 4px 12px; border-radius: 8px; font-size: 0.75rem; font-weight: bold; text-transform: uppercase; }
+        .featured-content { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+        .featured-info h3 { color: #fbbf24; font-size: 0.9rem; text-transform: uppercase; margin-bottom: 8px; letter-spacing: 1px; }
+        .featured-info h2 { font-size: 2rem; color: #ffffff; margin-bottom: 8px; }
+        .featured-info p { color: #9ca3af; font-size: 0.95rem; }
+        .price-box { text-align: right; }
+        .old-price { color: #6b7280; text-decoration: line-through; font-size: 0.9rem; }
+        .current-price { font-size: 2.2rem; color: #34d399; font-weight: bold; margin-bottom: 10px; }
+        .btn-oferta { display: inline-block; background: linear-gradient(90deg, #ef4444, #f97316); color: white; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-weight: bold; text-transform: uppercase; font-size: 0.85rem; transition: opacity 0.2s; }
+        .btn-oferta:hover { opacity: 0.9; }
+        h2.section-title { margin-bottom: 20px; color: #f3f4f6; font-size: 1.5rem; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+        .card { background: #0b0f19; border: 1px solid #1f2937; border-radius: 12px; padding: 25px; text-align: center; transition: transform 0.2s, border-color 0.2s; }
+        .card:hover { transform: translateY(-4px); border-color: #38bdf8; }
+        .card h3 { font-size: 1.2rem; margin-bottom: 10px; color: #ffffff; }
+        .card p { color: #9ca3af; font-size: 0.9rem; margin-bottom: 20px; }
+        .price { font-size: 1.4rem; color: #34d399; font-weight: bold; margin-bottom: 20px; }
+        .btn { display: block; background-color: #25d366; color: white; padding: 12px; border-radius: 8px; text-decoration: none; font-weight: bold; font-size: 0.95rem; transition: background 0.2s; }
+        .btn:hover { background-color: #1ebd59; }
+        @media(max-width: 768px) {
+            .featured-content { flex-direction: column; align-items: flex-start; }
+            .price-box { text-align: left; width: 100%; }
+            header h1 { font-size: 2.2rem; }
+            nav { padding: 15px 20px; }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="logo-nav">STREAMIX<span>SERVICIOS DIGITALES</span></div>
+        <ul class="nav-links">
+            <li><a href="#">🔥 OFERTAS</a></li>
+            <li><a href="#">CATÁLOGO</a></li>
+        </ul>
+        <a href="#contacto" class="btn-pedido">🛒 MI PEDIDO</a>
+    </nav>
+    <div class="container">
+        <div class="badge-container">
+            <div class="badge">🔥 Lista de Precios Oficial</div>
+            <div class="badge green"><div class="dot"></div> Abierto ahora: 9 AM - 11:30 PM</div>
+        </div>
+        <header>
+            <h1>Streamix</h1>
+            <p>Tu Entretenimiento</p>
+            <div class="sub-desc">Cuentas directas, renovables y sin caídas. Selecciona tu plan, verifica los precios y actívalo al instante.</div>
+        </header>
+        <div class="featured-card">
+            <div class="offer-tag">🔥 Oferta Limitada</div>
+            <div class="featured-content">
+                <div class="featured-info">
+                    <h3>★ Combo Streaming Pro</h3>
+                    <h2>Netflix + Disney+ + HBO MAX</h2>
+                    <p>Llévate el combo perfecto con activación inmediata y garantía total.</p>
+                </div>
+                <div class="price-box">
+                    <div class="old-price">$8.80 USD</div>
+                    <div class="current-price">$6.20 <span style="font-size: 1rem; color: #9ca3af;">USD</span></div>
+                    <a href="#" class="btn-oferta" onclick="comprar('Combo Streaming Pro (Oferta)', '$6.20 USD')">¡Aprovechar Oferta!</a>
+                </div>
+            </div>
+        </div>
+        <h2 class="section-title">Catálogo de Servicios</h2>
+        <div class="grid">
+            <div class="card">
+                <h3>Netflix Individual</h3>
+                <p>1 Pantalla / Perfil privado con pin de seguridad incluido.</p>
+                <div class="price">$3.00 USD</div>
+                <a href="#" class="btn" onclick="comprar('Netflix Individual', '$3.00 USD')">Comprar por WhatsApp</a>
+            </div>
+            <div class="card">
+                <h3>Disney+ Premium</h3>
+                <p>Acceso completo y estable por 30 días con garantía.</p>
+                <div class="price">$3.50 USD</div>
+                <a href="#" class="btn" onclick="comprar('Disney+ Premium', '$3.50 USD')">Comprar por WhatsApp</a>
+            </div>
+            <div class="card">
+                <h3>Amazon Prime Video</h3>
+                <p>Pantalla completa o cuenta completa disponible.</p>
+                <div class="price">$2.50 USD</div>
+                <a href="#" class="btn" onclick="comprar('Amazon Prime Video', '$2.50 USD')">Comprar por WhatsApp</a>
+            </div>
+        </div>
+    </div>
+    <script>
+        function comprar(producto, precio) {
+            let tuNumeroWhatsApp = "584124405245"; 
+            let mensaje = `Hola Streamix, quiero comprar el producto: *${producto}* a precio de *${precio}*. ¿Me das los datos para pagar?`;
+            let url = `https://wa.me/${tuNumeroWhatsApp}?text=${encodeURIComponent(mensaje)}`;
+            window.open(url, '_blank');
+        }
+    </script>
+</body>
+</html>
