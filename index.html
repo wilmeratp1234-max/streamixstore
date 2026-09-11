@@ -7,6 +7,8 @@
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
         body { background-color: #050811; color: #ffffff; padding: 0; }
+        
+        /* Navegación */
         nav { background: #0b0f19; display: flex; justify-content: space-between; align-items: center; padding: 15px 40px; border-bottom: 1px solid #1f2937; flex-wrap: wrap; gap: 15px; }
         .logo-nav { font-weight: bold; font-size: 1.2rem; letter-spacing: 1px; color: #fff; }
         .logo-nav span { display: block; font-size: 0.7rem; color: #9ca3af; font-weight: normal; }
@@ -14,15 +16,20 @@
         .nav-links a { color: #d1d5db; text-decoration: none; transition: color 0.2s; }
         .nav-links a:hover { color: #38bdf8; }
         .btn-pedido { background: #2563eb; color: white; padding: 8px 16px; border-radius: 20px; text-decoration: none; font-weight: bold; font-size: 0.9rem; }
-        .container { max-width: 1100px; margin: 0 auto; padding: 40px 20px; }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 40px 20px; }
+        
         .badge-container { display: flex; justify-content: center; gap: 15px; margin-bottom: 25px; flex-wrap: wrap; }
         .badge { background: #111827; border: 1px solid #374151; padding: 8px 16px; border-radius: 20px; font-size: 0.85rem; color: #9ca3af; display: flex; align-items: center; gap: 8px; }
         .badge.green { color: #34d399; }
         .dot { width: 8px; height: 8px; background-color: #34d399; border-radius: 50%; box-shadow: 0 0 8px #34d399; }
+
         header { text-align: center; margin-bottom: 40px; }
         header h1 { font-size: 3rem; color: #ffffff; text-transform: uppercase; letter-spacing: 3px; margin-bottom: 5px; }
         header p { color: #9ca3af; font-size: 1.1rem; }
         header .sub-desc { color: #9ca3af; font-size: 0.95rem; margin-top: 15px; max-width: 600px; margin-left: auto; margin-right: auto; }
+
+        /* Oferta destacada */
         .featured-card { background: linear-gradient(145deg, #0f172a, #1e1b4b); border: 1px solid #ef4444; border-radius: 16px; padding: 30px; margin-bottom: 40px; position: relative; box-shadow: 0 0 25px rgba(239, 68, 68, 0.15); }
         .offer-tag { position: absolute; top: -12px; right: 30px; background: #ef4444; color: white; padding: 4px 12px; border-radius: 8px; font-size: 0.75rem; font-weight: bold; text-transform: uppercase; }
         .featured-content { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
@@ -34,16 +41,56 @@
         .current-price { font-size: 2.2rem; color: #34d399; font-weight: bold; margin-bottom: 10px; }
         .btn-oferta { display: inline-block; background: linear-gradient(90deg, #ef4444, #f97316); color: white; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-weight: bold; text-transform: uppercase; font-size: 0.85rem; transition: opacity 0.2s; }
         .btn-oferta:hover { opacity: 0.9; }
-        h2.section-title { margin-bottom: 20px; color: #f3f4f6; font-size: 1.5rem; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
-        .card { background: #0b0f19; border: 1px solid #1f2937; border-radius: 12px; padding: 25px; text-align: center; transition: transform 0.2s, border-color 0.2s; }
-        .card:hover { transform: translateY(-4px); border-color: #38bdf8; }
-        .card h3 { font-size: 1.2rem; margin-bottom: 10px; color: #ffffff; }
-        .card p { color: #9ca3af; font-size: 0.9rem; margin-bottom: 20px; }
-        .price { font-size: 1.4rem; color: #34d399; font-weight: bold; margin-bottom: 20px; }
-        .btn { display: block; background-color: #25d366; color: white; padding: 12px; border-radius: 8px; text-decoration: none; font-weight: bold; font-size: 0.95rem; transition: background 0.2s; }
-        .btn:hover { background-color: #1ebd59; }
+
+        /* Sección Catálogo con Tasas */
+        .catalog-header { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; margin-bottom: 25px; border-bottom: 1px solid #1f2937; padding-bottom: 15px; }
+        .catalog-title h2 { font-size: 1.8rem; color: #f3f4f6; letter-spacing: 1px; }
+        .catalog-title p { color: #9ca3af; font-size: 0.9rem; }
+        
+        .tasas-box { background: #0b0f19; border: 1px solid #1f2937; padding: 10px 20px; border-radius: 12px; display: flex; align-items: center; gap: 20px; }
+        .tasas-info { font-size: 0.85rem; color: #9ca3af; }
+        .tasas-info span { color: #38bdf8; font-weight: bold; }
+        .currency-buttons { display: flex; gap: 5px; background: #111827; padding: 4px; border-radius: 8px; }
+        .curr-btn { background: transparent; border: none; color: #9ca3af; padding: 6px 12px; border-radius: 6px; font-weight: bold; cursor: pointer; font-size: 0.85rem; }
+        .curr-btn.active { background: #2563eb; color: white; }
+
+        /* Filtros de Categorías */
+        .filter-buttons { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 35px; }
+        .filter-btn { background: #0b0f19; border: 1px solid #1f2937; color: #9ca3af; padding: 10px 20px; border-radius: 25px; cursor: pointer; font-size: 0.9rem; font-weight: 500; transition: all 0.2s; display: flex; align-items: center; gap: 8px; }
+        .filter-btn:hover, .filter-btn.active { background: #1d4ed8; border-color: #38bdf8; color: white; }
+
+        /* Tarjetas de Plataformas estilo Catálogo */
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 25px; }
+        .platform-card { background: #0b0f19; border: 1px solid #1f2937; border-radius: 16px; overflow: hidden; transition: border-color 0.2s; display: flex; flex-direction: column; justify-content: space-between; }
+        .platform-card:hover { border-color: #38bdf8; }
+        
+        .platform-header { padding: 20px; display: flex; align-items: center; gap: 15px; border-bottom: 1px solid #1f2937; background: #0f172a; }
+        .platform-logo { width: 42px; height: 42px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.2rem; color: white; }
+        .netflix-bg { background: #e50914; }
+        .disney-bg { background: #0070d2; }
+        .prime-bg { background: #00a8e1; }
+        .spotify-bg { background: #1db954; }
+        .iptv-bg { background: #7c3aed; }
+        .juegos-bg { background: #ea580c; }
+        
+        .platform-title h3 { font-size: 1.2rem; color: white; margin-bottom: 2px; }
+        .platform-title span { font-size: 0.75rem; color: #9ca3af; text-transform: uppercase; letter-spacing: 1px; font-weight: 600; }
+
+        /* Filas de Planes dentro de la tarjeta */
+        .plan-item { padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #131b2e; transition: background 0.2s; }
+        .plan-item:last-child { border-bottom: none; }
+        .plan-item:hover { background: #111827; }
+        .plan-info span { display: block; color: #e5e7eb; font-size: 0.95rem; font-weight: 500; }
+        .plan-info small { color: #6b7280; font-size: 0.8rem; }
+        
+        .plan-action { text-align: right; }
+        .plan-price { font-size: 1.1rem; color: #34d399; font-weight: bold; margin-bottom: 5px; display: block; }
+        .btn-plan { background: #111827; border: 1px solid #374151; color: #f3f4f6; padding: 6px 14px; border-radius: 6px; font-size: 0.8rem; font-weight: bold; cursor: pointer; text-decoration: none; display: inline-block; transition: all 0.2s; }
+        .btn-plan:hover { background: #25d366; border-color: #25d366; color: white; }
+
         @media(max-width: 768px) {
+            .catalog-header { flex-direction: column; align-items: flex-start; }
+            .tasas-box { width: 100%; justify-content: space-between; }
             .featured-content { flex-direction: column; align-items: flex-start; }
             .price-box { text-align: left; width: 100%; }
             header h1 { font-size: 2.2rem; }
@@ -52,24 +99,36 @@
     </style>
 </head>
 <body>
+
+    <!-- Barra de navegación -->
     <nav>
-        <div class="logo-nav">STREAMIX<span>SERVICIOS DIGITALES</span></div>
+        <div class="logo-nav">
+            STREAMIX
+            <span>SERVICIOS DIGITALES</span>
+        </div>
         <ul class="nav-links">
-            <li><a href="#">🔥 OFERTAS</a></li>
-            <li><a href="#">CATÁLOGO</a></li>
+            <li><a href="#catalogo">🔥 OFERTAS</a></li>
+            <li><a href="#catalogo">CATÁLOGO</a></li>
         </ul>
-        <a href="#contacto" class="btn-pedido">🛒 MI PEDIDO</a>
+        <a href="#catalogo" class="btn-pedido">🛒 MI PEDIDO</a>
     </nav>
+
     <div class="container">
+        
+        <!-- Insignias superiores -->
         <div class="badge-container">
             <div class="badge">🔥 Lista de Precios Oficial</div>
             <div class="badge green"><div class="dot"></div> Abierto ahora: 9 AM - 11:30 PM</div>
         </div>
+
+        <!-- Encabezado principal -->
         <header>
             <h1>Streamix</h1>
             <p>Tu Entretenimiento</p>
             <div class="sub-desc">Cuentas directas, renovables y sin caídas. Selecciona tu plan, verifica los precios y actívalo al instante.</div>
         </header>
+
+        <!-- Tarjeta de Oferta Limitada -->
         <div class="featured-card">
             <div class="offer-tag">🔥 Oferta Limitada</div>
             <div class="featured-content">
@@ -85,34 +144,285 @@
                 </div>
             </div>
         </div>
-        <h2 class="section-title">Catálogo de Servicios</h2>
-        <div class="grid">
-            <div class="card">
-                <h3>Netflix Individual</h3>
-                <p>1 Pantalla / Perfil privado con pin de seguridad incluido.</p>
-                <div class="price">$3.00 USD</div>
-                <a href="#" class="btn" onclick="comprar('Netflix Individual', '$3.00 USD')">Comprar por WhatsApp</a>
+
+        <!-- Cabecera de Catálogo y Tasas (Solo Bolívares) -->
+        <div class="catalog-header" id="catalogo">
+            <div class="catalog-title">
+                <h2>Catálogo de Precios</h2>
+                <p>Explora el catálogo y añade los servicios a tu carrito por WhatsApp.</p>
             </div>
-            <div class="card">
-                <h3>Disney+ Premium</h3>
-                <p>Acceso completo y estable por 30 días con garantía.</p>
-                <div class="price">$3.50 USD</div>
-                <a href="#" class="btn" onclick="comprar('Disney+ Premium', '$3.50 USD')">Comprar por WhatsApp</a>
-            </div>
-            <div class="card">
-                <h3>Amazon Prime Video</h3>
-                <p>Pantalla completa o cuenta completa disponible.</p>
-                <div class="price">$2.50 USD</div>
-                <a href="#" class="btn" onclick="comprar('Amazon Prime Video', '$2.50 USD')">Comprar por WhatsApp</a>
+            <div class="tasas-box">
+                <div class="tasas-info">TASAS<br>Bs: <span>65.00</span></div>
+                <div class="currency-buttons">
+                    <button class="curr-btn active" onclick="cambiarMoneda('USD')">USD</button>
+                    <button class="curr-btn" onclick="cambiarMoneda('Bs')">Bs</button>
+                </div>
             </div>
         </div>
+
+        <!-- Filtros de Categorías -->
+        <div class="filter-buttons">
+            <button class="filter-btn active" onclick="filtrar('todos')">🌐 Todos</button>
+            <button class="filter-btn" onclick="filtrar('cine')">🎬 Cine & Series</button>
+            <button class="filter-btn" onclick="filtrar('musica')">🎵 Música</button>
+            <button class="filter-btn" onclick="filtrar('iptv')">📺 IPTV</button>
+            <button class="filter-btn" onclick="filtrar('juegos')">🎮 Juegos</button>
+        </div>
+
+        <!-- Cuadrícula de Plataformas -->
+        <div class="grid" id="grid-plataformas">
+            
+            <!-- NETFLIX (Cine) -->
+            <div class="platform-card" data-categoria="cine">
+                <div class="platform-header">
+                    <div class="platform-logo netflix-bg">N</div>
+                    <div class="platform-title">
+                        <h3>Netflix</h3>
+                        <span>📺 Red Hogar</span>
+                    </div>
+                </div>
+                <div class="plan-item">
+                    <div class="plan-info">
+                        <span>1 Pantalla (Con código)</span>
+                        <small>Perfil privado</small>
+                    </div>
+                    <div class="plan-action">
+                        <span class="plan-price" data-usd="3.50">$3.50</span>
+                        <a href="#" class="btn-plan" onclick="comprar('Netflix - 1 Pantalla (Con código)', '$3.50 USD')">+ Añadir Plan</a>
+                    </div>
+                </div>
+                <div class="plan-item">
+                    <div class="plan-info">
+                        <span>1 Pantalla (Sin código)</span>
+                        <small>Acceso directo</small>
+                    </div>
+                    <div class="plan-action">
+                        <span class="plan-price" data-usd="5.30">$5.30</span>
+                        <a href="#" class="btn-plan" onclick="comprar('Netflix - 1 Pantalla (Sin código)', '$5.30 USD')">+ Añadir Plan</a>
+                    </div>
+                </div>
+                <div class="plan-item">
+                    <div class="plan-info">
+                        <span>Cuenta Completa</span>
+                        <small>Tu propio correo y pin</small>
+                    </div>
+                    <div class="plan-action">
+                        <span class="plan-price" data-usd="13.50">$13.50</span>
+                        <a href="#" class="btn-plan" onclick="comprar('Netflix - Cuenta Completa', '$13.50 USD')">+ Añadir Plan</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- DISNEY+ (Cine) -->
+            <div class="platform-card" data-categoria="cine">
+                <div class="platform-header">
+                    <div class="platform-logo disney-bg">D+</div>
+                    <div class="platform-title">
+                        <h3>Disney+ Premium</h3>
+                        <span>🎬 Deportes + Cine</span>
+                    </div>
+                </div>
+                <div class="plan-item">
+                    <div class="plan-info">
+                        <span>1 Pantalla</span>
+                        <small>Estable y garantizada</small>
+                    </div>
+                    <div class="plan-action">
+                        <span class="plan-price" data-usd="3.30">$3.30</span>
+                        <a href="#" class="btn-plan" onclick="comprar('Disney+ - 1 Pantalla', '$3.30 USD')">+ Añadir Plan</a>
+                    </div>
+                </div>
+                <div class="plan-item">
+                    <div class="plan-info">
+                        <span>Cuenta Completa</span>
+                        <small>Acceso total por 30 días</small>
+                    </div>
+                    <div class="plan-action">
+                        <span class="plan-price" data-usd="14.00">$14.00</span>
+                        <a href="#" class="btn-plan" onclick="comprar('Disney+ - Cuenta Completa', '$14.00 USD')">+ Añadir Plan</a>
+                    </div>
+                </div>
+                <div class="plan-item">
+                    <div class="plan-info">
+                        <span>Completa (A tu correo)</span>
+                        <small>Renovable mes a mes</small>
+                    </div>
+                    <div class="plan-action">
+                        <span class="plan-price" data-usd="17.00">$17.00</span>
+                        <a href="#" class="btn-plan" onclick="comprar('Disney+ - A tu correo', '$17.00 USD')">+ Añadir Plan</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PRIME VIDEO (Cine) -->
+            <div class="platform-card" data-categoria="cine">
+                <div class="platform-header">
+                    <div class="platform-logo prime-bg">PV</div>
+                    <div class="platform-title">
+                        <h3>Prime Video</h3>
+                        <span>🍿 Series y Películas</span>
+                    </div>
+                </div>
+                <div class="plan-item">
+                    <div class="plan-info">
+                        <span>1 Pantalla</span>
+                        <small>Perfil individual</small>
+                    </div>
+                    <div class="plan-action">
+                        <span class="plan-price" data-usd="1.40">$1.40</span>
+                        <a href="#" class="btn-plan" onclick="comprar('Prime Video - 1 Pantalla', '$1.40 USD')">+ Añadir Plan</a>
+                    </div>
+                </div>
+                <div class="plan-item">
+                    <div class="plan-info">
+                        <span>Cuenta Completa</span>
+                        <small>Dispositivos ilimitados</small>
+                    </div>
+                    <div class="plan-action">
+                        <span class="plan-price" data-usd="4.00">$4.00</span>
+                        <a href="#" class="btn-plan" onclick="comprar('Prime Video - Cuenta Completa', '$4.00 USD')">+ Añadir Plan</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SPOTIFY (Música) -->
+            <div class="platform-card" data-categoria="musica">
+                <div class="platform-header">
+                    <div class="platform-logo spotify-bg">🎧</div>
+                    <div class="platform-title">
+                        <h3>Spotify Premium</h3>
+                        <span>🎵 Música sin anuncios</span>
+                    </div>
+                </div>
+                <div class="plan-item">
+                    <div class="plan-info">
+                        <span>Individual (1 Mes)</span>
+                        <small>A tu propio correo</small>
+                    </div>
+                    <div class="plan-action">
+                        <span class="plan-price" data-usd="2.50">$2.50</span>
+                        <a href="#" class="btn-plan" onclick="comprar('Spotify - Individual 1 Mes', '$2.50 USD')">+ Añadir Plan</a>
+                    </div>
+                </div>
+                <div class="plan-item">
+                    <div class="plan-info">
+                        <span>Plan Familiar (Invitación)</span>
+                        <small>Acceso completo</small>
+                    </div>
+                    <div class="plan-action">
+                        <span class="plan-price" data-usd="4.00">$4.00</span>
+                        <a href="#" class="btn-plan" onclick="comprar('Spotify - Plan Familiar', '$4.00 USD')">+ Añadir Plan</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- IPTV (IPTV) -->
+            <div class="platform-card" data-categoria="iptv">
+                <div class="platform-header">
+                    <div class="platform-logo iptv-bg">📺</div>
+                    <div class="platform-title">
+                        <h3>IPTV Smarters Pro</h3>
+                        <span>📡 Canales en Vivo y PPV</span>
+                    </div>
+                </div>
+                <div class="plan-item">
+                    <div class="plan-info">
+                        <span>1 Mes de Servicio</span>
+                        <small>Más de 1000 canales y películas</small>
+                    </div>
+                    <div class="plan-action">
+                        <span class="plan-price" data-usd="5.00">$5.00</span>
+                        <a href="#" class="btn-plan" onclick="comprar('IPTV - 1 Mes', '$5.00 USD')">+ Añadir Plan</a>
+                    </div>
+                </div>
+                <div class="plan-item">
+                    <div class="plan-info">
+                        <span>3 Meses (Oferta)</span>
+                        <small>Ahorro especial</small>
+                    </div>
+                    <div class="plan-action">
+                        <span class="plan-price" data-usd="12.00">$12.00</span>
+                        <a href="#" class="btn-plan" onclick="comprar('IPTV - 3 Meses', '$12.00 USD')">+ Añadir Plan</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- JUEGOS (Juegos) -->
+            <div class="platform-card" data-categoria="juegos">
+                <div class="platform-header">
+                    <div class="platform-logo juegos-bg">🎮</div>
+                    <div class="platform-title">
+                        <h3>PlayStation & Recargas</h3>
+                        <span>⚡ Juegos y Monedas</span>
+                    </div>
+                </div>
+                <div class="plan-item">
+                    <div class="plan-info">
+                        <span>Mobile Legends (Diamantes)</span>
+                        <small>Recarga por ID y Zona ID</small>
+                    </div>
+                    <div class="plan-action">
+                        <span class="plan-price" data-usd="2.00">$2.00</span>
+                        <a href="#" class="btn-plan" onclick="comprar('Mobile Legends - Diamantes', '$2.00 USD')">+ Añadir Plan</a>
+                    </div>
+                </div>
+                <div class="plan-item">
+                    <div class="plan-info">
+                        <span>Juego PS4 / PS5 (Cuenta Primaria)</span>
+                        <small>Garantía de por vida</small>
+                    </div>
+                    <div class="plan-action">
+                        <span class="plan-price" data-usd="15.00">$15.00</span>
+                        <a href="#" class="btn-plan" onclick="comprar('Juego PlayStation - Cuenta Primaria', '$15.00 USD')">+ Añadir Plan</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
     </div>
+
     <script>
-        function comprar(producto, precio) {
+        let tasaBs = 65.00; // Puedes cambiar la tasa aquí cuando lo necesites
+        let monedaActual = 'USD';
+
+        function comprar(producto, precioUSD) {
             let tuNumeroWhatsApp = "584124405245"; 
-            let mensaje = `Hola Streamix, quiero comprar el producto: *${producto}* a precio de *${precio}*. ¿Me das los datos para pagar?`;
+            let mensaje = `Hola Streamix, quiero comprar el producto: *${producto}* por un valor de *${precioUSD}*. ¿Me das los datos para pagar?`;
             let url = `https://wa.me/${tuNumeroWhatsApp}?text=${encodeURIComponent(mensaje)}`;
             window.open(url, '_blank');
+        }
+
+        function cambiarMoneda(moneda) {
+            monedaActual = moneda;
+            let botones = document.querySelectorAll('.curr-btn');
+            botones.forEach(b => b.classList.remove('active'));
+            event.target.classList.add('active');
+
+            let precios = document.querySelectorAll('.plan-price');
+            precios.forEach(p => {
+                let valUSD = parseFloat(p.getAttribute('data-usd'));
+                if (moneda === 'Bs') {
+                    let valBs = (valUSD * tasaBs).toFixed(2);
+                    p.innerText = 'Bs ' + valBs;
+                } else {
+                    p.innerText = '$' + valUSD.toFixed(2);
+                }
+            });
+        }
+
+        function filtrar(categoria) {
+            let botonesFiltro = document.querySelectorAll('.filter-btn');
+            botonesFiltro.forEach(b => b.classList.remove('active'));
+            event.target.classList.add('active');
+
+            let tarjetas = document.querySelectorAll('.platform-card');
+            tarjetas.forEach(t => {
+                if (categoria === 'todos' || t.getAttribute('data-categoria') === categoria) {
+                    t.style.display = 'flex';
+                } else {
+                    t.style.display = 'none';
+                }
+            });
         }
     </script>
 </body>
