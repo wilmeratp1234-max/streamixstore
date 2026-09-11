@@ -47,9 +47,9 @@
         .catalog-title h2 { font-size: 1.8rem; color: #f3f4f6; letter-spacing: 1px; }
         .catalog-title p { color: #9ca3af; font-size: 0.9rem; }
         
-        .tasas-box { background: #0b0f19; border: 1px solid #1f2937; padding: 10px 20px; border-radius: 12px; display: flex; align-items: center; gap: 20px; }
-        .tasas-info { font-size: 0.85rem; color: #9ca3af; }
-        .tasas-info span { color: #38bdf8; font-weight: bold; }
+        .tasas-box { background: #0b0f19; border: 1px solid #1f2937; padding: 10px 20px; border-radius: 12px; display: flex; align-items: center; gap: 15px; }
+        .tasas-info { font-size: 0.85rem; color: #9ca3af; display: flex; align-items: center; gap: 8px; }
+        .tasas-info input { background: #111827; border: 1px solid #374151; color: #38bdf8; font-weight: bold; padding: 4px 8px; border-radius: 6px; width: 80px; text-align: center; font-size: 0.9rem; }
         .currency-buttons { display: flex; gap: 5px; background: #111827; padding: 4px; border-radius: 8px; }
         .curr-btn { background: transparent; border: none; color: #9ca3af; padding: 6px 12px; border-radius: 6px; font-weight: bold; cursor: pointer; font-size: 0.85rem; }
         .curr-btn.active { background: #2563eb; color: white; }
@@ -139,40 +139,43 @@
                 </div>
                 <div class="price-box">
                     <div class="old-price">$8.80 USD</div>
-                    <div class="current-price">$6.20 <span style="font-size: 1rem; color: #9ca3af;">USD</span></div>
-                    <a href="#" class="btn-oferta" onclick="comprar('Combo Streaming Pro (Oferta)', '$6.20 USD')">¡Aprovechar Oferta!</a>
+                    <div class="current-price" id="oferta-precio" data-usd="6.20">$6.20 <span style="font-size: 1rem; color: #9ca3af;">USD</span></div>
+                    <a href="#" class="btn-oferta" onclick="comprar('Combo Streaming Pro (Oferta)', document.getElementById('oferta-precio').innerText)">¡Aprovechar Oferta!</a>
                 </div>
             </div>
         </div>
 
-        <!-- Cabecera de Catálogo y Tasas (Solo Bolívares) -->
+        <!-- Cabecera de Catálogo y Tasa Dinámica -->
         <div class="catalog-header" id="catalogo">
             <div class="catalog-title">
                 <h2>Catálogo de Precios</h2>
                 <p>Explora el catálogo y añade los servicios a tu carrito por WhatsApp.</p>
             </div>
             <div class="tasas-box">
-                <div class="tasas-info">TASA<br>Bs: <span>960.00</span></div>
+                <div class="tasas-info">
+                    TASA BS: 
+                    <input type="number" id="input-tasa" value="65.00" step="0.01" onchange="actualizarPrecios()">
+                </div>
                 <div class="currency-buttons">
-                    <button class="curr-btn active" onclick="cambiarMoneda('USD')">USD</button>
-                    <button class="curr-btn" onclick="cambiarMoneda('Bs')">Bs</button>
+                    <button class="curr-btn active" onclick="cambiarMoneda('USD', this)">USD</button>
+                    <button class="curr-btn" onclick="cambiarMoneda('Bs', this)">Bs</button>
                 </div>
             </div>
         </div>
 
         <!-- Filtros de Categorías -->
         <div class="filter-buttons">
-            <button class="filter-btn active" onclick="filtrar('todos')">🌐 Todos</button>
-            <button class="filter-btn" onclick="filtrar('cine')">🎬 Cine & Series</button>
-            <button class="filter-btn" onclick="filtrar('musica')">🎵 Música</button>
-            <button class="filter-btn" onclick="filtrar('iptv')">📺 IPTV</button>
-            <button class="filter-btn" onclick="filtrar('juegos')">🎮 Juegos</button>
+            <button class="filter-btn active" onclick="filtrar('todos', this)">🌐 Todos</button>
+            <button class="filter-btn" onclick="filtrar('cine', this)">🎬 Cine & Series</button>
+            <button class="filter-btn" onclick="filtrar('musica', this)">🎵 Música</button>
+            <button class="filter-btn" onclick="filtrar('iptv', this)">📺 IPTV</button>
+            <button class="filter-btn" onclick="filtrar('juegos', this)">🎮 Juegos</button>
         </div>
 
         <!-- Cuadrícula de Plataformas -->
         <div class="grid" id="grid-plataformas">
             
-            <!-- NETFLIX (Cine) -->
+            <!-- NETFLIX -->
             <div class="platform-card" data-categoria="cine">
                 <div class="platform-header">
                     <div class="platform-logo netflix-bg">N</div>
@@ -188,7 +191,7 @@
                     </div>
                     <div class="plan-action">
                         <span class="plan-price" data-usd="3.50">$3.50</span>
-                        <a href="#" class="btn-plan" onclick="comprar('Netflix - 1 Pantalla (Con código)', '$3.50 USD')">+ Añadir Plan</a>
+                        <a href="#" class="btn-plan" onclick="comprarPlan(this)">+ Añadir Plan</a>
                     </div>
                 </div>
                 <div class="plan-item">
@@ -198,7 +201,7 @@
                     </div>
                     <div class="plan-action">
                         <span class="plan-price" data-usd="5.30">$5.30</span>
-                        <a href="#" class="btn-plan" onclick="comprar('Netflix - 1 Pantalla (Sin código)', '$5.30 USD')">+ Añadir Plan</a>
+                        <a href="#" class="btn-plan" onclick="comprarPlan(this)">+ Añadir Plan</a>
                     </div>
                 </div>
                 <div class="plan-item">
@@ -208,12 +211,12 @@
                     </div>
                     <div class="plan-action">
                         <span class="plan-price" data-usd="13.50">$13.50</span>
-                        <a href="#" class="btn-plan" onclick="comprar('Netflix - Cuenta Completa', '$13.50 USD')">+ Añadir Plan</a>
+                        <a href="#" class="btn-plan" onclick="comprarPlan(this)">+ Añadir Plan</a>
                     </div>
                 </div>
             </div>
 
-            <!-- DISNEY+ (Cine) -->
+            <!-- DISNEY+ -->
             <div class="platform-card" data-categoria="cine">
                 <div class="platform-header">
                     <div class="platform-logo disney-bg">D+</div>
@@ -229,7 +232,7 @@
                     </div>
                     <div class="plan-action">
                         <span class="plan-price" data-usd="3.30">$3.30</span>
-                        <a href="#" class="btn-plan" onclick="comprar('Disney+ - 1 Pantalla', '$3.30 USD')">+ Añadir Plan</a>
+                        <a href="#" class="btn-plan" onclick="comprarPlan(this)">+ Añadir Plan</a>
                     </div>
                 </div>
                 <div class="plan-item">
@@ -239,7 +242,7 @@
                     </div>
                     <div class="plan-action">
                         <span class="plan-price" data-usd="14.00">$14.00</span>
-                        <a href="#" class="btn-plan" onclick="comprar('Disney+ - Cuenta Completa', '$14.00 USD')">+ Añadir Plan</a>
+                        <a href="#" class="btn-plan" onclick="comprarPlan(this)">+ Añadir Plan</a>
                     </div>
                 </div>
                 <div class="plan-item">
@@ -249,12 +252,12 @@
                     </div>
                     <div class="plan-action">
                         <span class="plan-price" data-usd="17.00">$17.00</span>
-                        <a href="#" class="btn-plan" onclick="comprar('Disney+ - A tu correo', '$17.00 USD')">+ Añadir Plan</a>
+                        <a href="#" class="btn-plan" onclick="comprarPlan(this)">+ Añadir Plan</a>
                     </div>
                 </div>
             </div>
 
-            <!-- PRIME VIDEO (Cine) -->
+            <!-- PRIME VIDEO -->
             <div class="platform-card" data-categoria="cine">
                 <div class="platform-header">
                     <div class="platform-logo prime-bg">PV</div>
@@ -270,7 +273,7 @@
                     </div>
                     <div class="plan-action">
                         <span class="plan-price" data-usd="1.40">$1.40</span>
-                        <a href="#" class="btn-plan" onclick="comprar('Prime Video - 1 Pantalla', '$1.40 USD')">+ Añadir Plan</a>
+                        <a href="#" class="btn-plan" onclick="comprarPlan(this)">+ Añadir Plan</a>
                     </div>
                 </div>
                 <div class="plan-item">
@@ -280,12 +283,12 @@
                     </div>
                     <div class="plan-action">
                         <span class="plan-price" data-usd="4.00">$4.00</span>
-                        <a href="#" class="btn-plan" onclick="comprar('Prime Video - Cuenta Completa', '$4.00 USD')">+ Añadir Plan</a>
+                        <a href="#" class="btn-plan" onclick="comprarPlan(this)">+ Añadir Plan</a>
                     </div>
                 </div>
             </div>
 
-            <!-- SPOTIFY (Música) -->
+            <!-- SPOTIFY -->
             <div class="platform-card" data-categoria="musica">
                 <div class="platform-header">
                     <div class="platform-logo spotify-bg">🎧</div>
@@ -301,7 +304,7 @@
                     </div>
                     <div class="plan-action">
                         <span class="plan-price" data-usd="2.50">$2.50</span>
-                        <a href="#" class="btn-plan" onclick="comprar('Spotify - Individual 1 Mes', '$2.50 USD')">+ Añadir Plan</a>
+                        <a href="#" class="btn-plan" onclick="comprarPlan(this)">+ Añadir Plan</a>
                     </div>
                 </div>
                 <div class="plan-item">
@@ -311,12 +314,12 @@
                     </div>
                     <div class="plan-action">
                         <span class="plan-price" data-usd="4.00">$4.00</span>
-                        <a href="#" class="btn-plan" onclick="comprar('Spotify - Plan Familiar', '$4.00 USD')">+ Añadir Plan</a>
+                        <a href="#" class="btn-plan" onclick="comprarPlan(this)">+ Añadir Plan</a>
                     </div>
                 </div>
             </div>
 
-            <!-- IPTV (IPTV) -->
+            <!-- IPTV -->
             <div class="platform-card" data-categoria="iptv">
                 <div class="platform-header">
                     <div class="platform-logo iptv-bg">📺</div>
@@ -332,7 +335,7 @@
                     </div>
                     <div class="plan-action">
                         <span class="plan-price" data-usd="5.00">$5.00</span>
-                        <a href="#" class="btn-plan" onclick="comprar('IPTV - 1 Mes', '$5.00 USD')">+ Añadir Plan</a>
+                        <a href="#" class="btn-plan" onclick="comprarPlan(this)">+ Añadir Plan</a>
                     </div>
                 </div>
                 <div class="plan-item">
@@ -342,12 +345,12 @@
                     </div>
                     <div class="plan-action">
                         <span class="plan-price" data-usd="12.00">$12.00</span>
-                        <a href="#" class="btn-plan" onclick="comprar('IPTV - 3 Meses', '$12.00 USD')">+ Añadir Plan</a>
+                        <a href="#" class="btn-plan" onclick="comprarPlan(this)">+ Añadir Plan</a>
                     </div>
                 </div>
             </div>
 
-            <!-- JUEGOS (Juegos) -->
+            <!-- JUEGOS -->
             <div class="platform-card" data-categoria="juegos">
                 <div class="platform-header">
                     <div class="platform-logo juegos-bg">🎮</div>
@@ -363,7 +366,7 @@
                     </div>
                     <div class="plan-action">
                         <span class="plan-price" data-usd="2.00">$2.00</span>
-                        <a href="#" class="btn-plan" onclick="comprar('Mobile Legends - Diamantes', '$2.00 USD')">+ Añadir Plan</a>
+                        <a href="#" class="btn-plan" onclick="comprarPlan(this)">+ Añadir Plan</a>
                     </div>
                 </div>
                 <div class="plan-item">
@@ -373,7 +376,7 @@
                     </div>
                     <div class="plan-action">
                         <span class="plan-price" data-usd="15.00">$15.00</span>
-                        <a href="#" class="btn-plan" onclick="comprar('Juego PlayStation - Cuenta Primaria', '$15.00 USD')">+ Añadir Plan</a>
+                        <a href="#" class="btn-plan" onclick="comprarPlan(this)">+ Añadir Plan</a>
                     </div>
                 </div>
             </div>
@@ -382,27 +385,34 @@
     </div>
 
     <script>
-        let tasaBs = 65.00; // Puedes cambiar la tasa aquí cuando lo necesites
         let monedaActual = 'USD';
 
-        function comprar(producto, precioUSD) {
-            let tuNumeroWhatsApp = "584124405245"; 
-            let mensaje = `Hola Streamix, quiero comprar el producto: *${producto}* por un valor de *${precioUSD}*. ¿Me das los datos para pagar?`;
-            let url = `https://wa.me/${tuNumeroWhatsApp}?text=${encodeURIComponent(mensaje)}`;
-            window.open(url, '_blank');
-        }
-
-        function cambiarMoneda(moneda) {
+        function cambiarMoneda(moneda, btn) {
             monedaActual = moneda;
             let botones = document.querySelectorAll('.curr-btn');
             botones.forEach(b => b.classList.remove('active'));
-            event.target.classList.add('active');
+            btn.classList.add('active');
+            actualizarPrecios();
+        }
 
+        function actualizarPrecios() {
+            let tasa = parseFloat(document.getElementById('input-tasa').value) || 1;
+
+            // Actualizar oferta
+            let ofertaElem = document.getElementById('oferta-precio');
+            let usdOferta = parseFloat(ofertaElem.getAttribute('data-usd'));
+            if (monedaActual === 'Bs') {
+                ofertaElem.innerHTML = `Bs ${(usdOferta * tasa).toFixed(2)} <span style="font-size: 1rem; color: #9ca3af;">Bs</span>`;
+            } else {
+                ofertaElem.innerHTML = `$${usdOferta.toFixed(2)} <span style="font-size: 1rem; color: #9ca3af;">USD</span>`;
+            }
+
+            // Actualizar catálogo general
             let precios = document.querySelectorAll('.plan-price');
             precios.forEach(p => {
                 let valUSD = parseFloat(p.getAttribute('data-usd'));
-                if (moneda === 'Bs') {
-                    let valBs = (valUSD * tasaBs).toFixed(2);
+                if (monedaActual === 'Bs') {
+                    let valBs = (valUSD * tasa).toFixed(2);
                     p.innerText = 'Bs ' + valBs;
                 } else {
                     p.innerText = '$' + valUSD.toFixed(2);
@@ -410,10 +420,28 @@
             });
         }
 
-        function filtrar(categoria) {
+        function comprar(producto, precioTexto) {
+            let tuNumeroWhatsApp = "584124405245"; 
+            let mensaje = `Hola Streamix, quiero comprar el producto: *${producto}* por un valor de *${precioTexto}*. ¿Me das los datos para pagar?`;
+            let url = `https://wa.me/${tuNumeroWhatsApp}?text=${encodeURIComponent(mensaje)}`;
+            window.open(url, '_blank');
+        }
+
+        function comprarPlan(btn) {
+            let card = btn.closest('.platform-card');
+            let nombrePlataforma = card.querySelector('.platform-title h3').innerText;
+            let planItem = btn.closest('.plan-item');
+            let nombrePlan = planItem.querySelector('.plan-info span').innerText;
+            let precioTexto = planItem.querySelector('.plan-price').innerText;
+            
+            let productoCompleto = `${nombrePlataforma} - ${nombrePlan}`;
+            comprar(productoCompleto, precioTexto);
+        }
+
+        function filtrar(categoria, btn) {
             let botonesFiltro = document.querySelectorAll('.filter-btn');
             botonesFiltro.forEach(b => b.classList.remove('active'));
-            event.target.classList.add('active');
+            btn.classList.add('active');
 
             let tarjetas = document.querySelectorAll('.platform-card');
             tarjetas.forEach(t => {
