@@ -66,8 +66,13 @@
         .platform-card:hover { border-color: #ef4444; }
         
         .platform-header { display: flex; align-items: center; gap: 15px; margin-bottom: 15px; }
-        .platform-logo { width: 45px; height: 45px; border-radius: 12px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; background: #111827; border: 1px solid #1f2937; padding: 8px; }
-        .platform-logo svg { width: 100%; height: 100%; }
+        .platform-logo { width: 45px; height: 45px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.2rem; color: white; flex-shrink: 0; }
+        .netflix-bg { background: #e50914; }
+        .disney-bg { background: #0070d2; }
+        .prime-bg { background: #00a8e1; }
+        .spotify-bg { background: #1db954; }
+        .iptv-bg { background: #7c3aed; }
+        .juegos-bg { background: #ea580c; }
         
         .platform-title h3 { font-size: 1.2rem; color: white; margin-bottom: 2px; }
         .platform-title span { font-size: 0.75rem; color: #ef4444; text-transform: uppercase; letter-spacing: 0.5px; font-weight: bold; display: flex; align-items: center; gap: 4px; }
@@ -77,7 +82,7 @@
         .card-plan-item:last-child { border-bottom: none; }
         .card-plan-item:hover { background: #1f2937; }
         .card-plan-name { color: #e5e7eb; font-size: 0.9rem; font-weight: 500; }
-        .card-plan-price { color: #f87171; font-weight: bold; font-size: 0.95rem; }
+        .card-plan-price { color: #f87171; font-weight: bold; font-size: 0.95ln; }
 
         .btn-card-addplan { background: transparent; border: 1px solid #374151; color: #9ca3af; width: 100%; padding: 10px; border-radius: 10px; font-weight: bold; font-size: 0.85rem; cursor: pointer; transition: all 0.2s; text-align: center; }
         .btn-card-addplan:hover { background: #1f2937; color: white; border-color: #ef4444; }
@@ -151,7 +156,7 @@
         .btn-tg-pay { background: #0ea5e9; color: white; border: none; padding: 12px; border-radius: 12px; font-weight: bold; font-size: 0.85rem; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 6px; text-decoration: none; transition: opacity 0.2s; }
         .btn-tg-pay:hover { opacity: 0.9; }
 
-        /* FOOTER INFERIOR PERSONALIZADO */
+        /* FOOTER NUEVO */
         footer { background: #070a12; border-top: 1px solid #1f2937; padding: 40px 20px 25px 20px; margin-top: 60px; }
         .footer-content { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 25px; }
         .footer-brand { display: flex; flex-direction: column; gap: 5px; }
@@ -160,9 +165,8 @@
         .footer-status-dot { width: 7px; height: 7px; background-color: #22c55e; border-radius: 50%; box-shadow: 0 0 6px #22c55e; }
 
         .footer-socials { display: flex; gap: 12px; }
-        .social-icon-btn { width: 44px; height: 44px; background: #0b0f19; border: 1px solid #1f2937; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #9ca3af; text-decoration: none; transition: all 0.2s; padding: 11px; }
-        .social-icon-btn svg { width: 100%; height: 100%; fill: currentColor; }
-        .social-icon-btn:hover { background: #111827; border-color: #374151; color: white; transform: translateY(-2px); }
+        .social-icon-btn { width: 40px; height: 40px; background: #111827; border: 1px solid #374151; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; text-decoration: none; transition: all 0.2s; font-size: 1.1rem; }
+        .social-icon-btn:hover { background: #ef4444; border-color: #ef4444; transform: translateY(-2px); }
 
         .footer-bottom { max-width: 1200px; margin: 30px auto 0 auto; padding-top: 20px; border-top: 1px solid #111827; text-align: center; font-size: 0.85rem; color: #6b7280; }
 
@@ -255,9 +259,7 @@
             <!-- NETFLIX -->
             <div class="platform-card" data-categoria="cine">
                 <div class="platform-header">
-                    <div class="platform-logo">
-                        <svg viewBox="0 0 24 24" fill="#E50914"><path d="M5.524 0V24H10.15V14.184H13.85V24H18.476V0H13.85V9.816H10.15V0H5.524Z"/></svg>
-                    </div>
+                    <div class="platform-logo netflix-bg">N</div>
                     <div class="platform-title">
                         <h3>Netflix</h3>
                         <span>📺 RED HOGAR</span>
@@ -283,9 +285,7 @@
             <!-- DISNEY+ -->
             <div class="platform-card" data-categoria="cine">
                 <div class="platform-header">
-                    <div class="platform-logo">
-                        <svg viewBox="0 0 24 24" fill="#0070D2"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm3.87 17.062c-1.488.228-3.006-.462-3.612-1.932-.606-1.47-.072-3.18 1.218-4.002.852-.534 1.956-.372 2.658.372 1.032 1.092.828 2.922-.264 3.792-.372.3-1.32.72-1.996.77zm-8.82-5.832c.984.096 1.836-.612 1.932-1.596.096-.984-.612-1.836-1.596-1.932-.984-.096-1.836.612-1.932 1.596-.096.984.612 1.836 1.596 1.932zm3.18 4.704c1.152.12 2.16-.708 2.28-1.86.12-1.152-.708-2.16-1.86-2.28-1.152-.12-2.16.708-2.28 1.86-.12 1.152.708 2.16 1.86 2.28z"/></svg>
-                    </div>
+                    <div class="platform-logo disney-bg">D+</div>
                     <div class="platform-title">
                         <h3>Disney+ Premium</h3>
                         <span>🎬 DEPORTES + CINE</span>
@@ -311,9 +311,7 @@
             <!-- PRIME VIDEO -->
             <div class="platform-card" data-categoria="cine">
                 <div class="platform-header">
-                    <div class="platform-logo">
-                        <svg viewBox="0 0 24 24" fill="#00A8E1"><path d="M11.571 14.772c-1.325 0-2.394-.378-3.207-1.134-.813-.756-1.22-1.776-1.22-3.06 0-1.284.407-2.304 1.22-3.06.813-.756 1.882-1.134 3.207-1.134 1.325 0 2.394.378 3.207 1.134.813.756 1.22 1.776 1.22 3.06 0 1.284-.407 2.304-1.22 3.06-.813.756-1.882 1.134-3.207 1.134zm0-10.428c-2.022 0-3.632.612-4.83 1.836-1.198 1.224-1.797 2.826-1.797 4.806 0 1.98.599 3.582 1.797 4.806 1.198 1.224 2.808 1.836 4.83 1.836 2.022 0 3.632-.612 4.83-1.836 1.198-1.224 1.797-2.826 1.797-4.806 0-1.98-.599-3.582-1.797-4.806-1.198-1.224-2.808-1.836-4.83-1.836z"/></svg>
-                    </div>
+                    <div class="platform-logo prime-bg">PV</div>
                     <div class="platform-title">
                         <h3>Prime Video</h3>
                         <span>🍿 SERIES Y PELÍCULAS</span>
@@ -335,9 +333,7 @@
             <!-- SPOTIFY -->
             <div class="platform-card" data-categoria="musica">
                 <div class="platform-header">
-                    <div class="platform-logo">
-                        <svg viewBox="0 0 24 24" fill="#1DB954"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.6 0 12 0zm5.521 17.34c-.24.36-.72.48-1.08.24-2.94-1.8-6.66-2.22-11.04-1.2-.42.12-.84-.12-.96-.54-.12-.42.12-.84.54-.96 4.68-1.08 8.88-.6 12.24 1.56.36.24.48.72.3 1.08zm1.5-3.84c-.3.48-.9.6-1.38.3-3.36-2.04-8.52-2.64-12.48-1.44-.54.18-1.14-.12-1.32-.66-.18-.54.12-1.14.66-1.32 4.44-1.32 10.14-.66 14.1 1.8 0 .48.3.9.42 1.32zm.12-4.08C14.28 7.08 8.28 6.9 4.8 7.98c-.66.18-1.38-.18-1.56-.84-.18-.66.18-1.38.84-1.56 3.96-1.2 10.62-1.02 14.88 1.44.6.36.78 1.14.42 1.74-.36.6-1.14.78-1.74.42z"/></svg>
-                    </div>
+                    <div class="platform-logo spotify-bg">🎧</div>
                     <div class="platform-title">
                         <h3>Spotify Premium</h3>
                         <span>🎵 MÚSICA SIN ANUNCIOS</span>
@@ -359,9 +355,7 @@
             <!-- IPTV -->
             <div class="platform-card" data-categoria="iptv">
                 <div class="platform-header">
-                    <div class="platform-logo">
-                        <svg viewBox="0 0 24 24" fill="#7C3AED"><path d="M21 3H3C1.9 3 1 3.9 1 5v12c0 1.1.9 2 2 2h5v2h8v-2h5c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 14H3V5h18v12z"/></svg>
-                    </div>
+                    <div class="platform-logo iptv-bg">📺</div>
                     <div class="platform-title">
                         <h3>IPTV Smarters Pro</h3>
                         <span>📡 CANALES EN VIVO Y PPV</span>
@@ -383,9 +377,7 @@
             <!-- JUEGOS -->
             <div class="platform-card" data-categoria="juegos">
                 <div class="platform-header">
-                    <div class="platform-logo">
-                        <svg viewBox="0 0 24 24" fill="#EA580C"><path d="M21 6H3c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-10 7H8v3H6v-3H3v-2h3V8h2v3h3v2zm4.5 2c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm3-3c-.83 0-1.5-.67-1.5-1.5S17.67 9 18.5 9s1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/></svg>
-                    </div>
+                    <div class="platform-logo juegos-bg">🎮</div>
                     <div class="platform-title">
                         <h3>PlayStation & Recargas</h3>
                         <span>⚡ JUEGOS Y MONEDAS</span>
@@ -407,7 +399,7 @@
         </div>
     </div>
 
-    <!-- FOOTER INFERIOR CON LOS ICONOS EXACTOS -->
+    <!-- FOOTER INFERIOR PERSONALIZADO -->
     <footer>
         <div class="footer-content">
             <div class="footer-brand">
@@ -418,22 +410,10 @@
                 </div>
             </div>
             <div class="footer-socials">
-                <!-- Instagram -->
-                <a href="https://instagram.com" target="_blank" class="social-icon-btn" title="Instagram">
-                    <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
-                </a>
-                <!-- TikTok -->
-                <a href="https://tiktok.com" target="_blank" class="social-icon-btn" title="TikTok">
-                    <svg viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/></svg>
-                </a>
-                <!-- Telegram -->
-                <a href="https://t.me/Wilmerst" target="_blank" class="social-icon-btn" title="Telegram">
-                    <svg viewBox="0 0 24 24"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.562 8.161c-.18 1.897-.962 6.502-1.359 8.627-.168.9-.5 1.201-.82 1.23-.697.064-1.228-.461-1.901-.903-1.056-.693-1.653-1.124-2.678-1.8-1.185-.781-.417-1.21.258-1.911.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-752-.245-1.349-.374-1.297-.789.027-.216.324-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635.099-.002.321.023.465.141.119.098.152.228.163.33.016.116.033.382.019.589z"/></svg>
-                </a>
-                <!-- WhatsApp -->
-                <a href="https://wa.me/584124405245" target="_blank" class="social-icon-btn" title="WhatsApp">
-                    <svg viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
-                </a>
+                <a href="https://instagram.com" target="_blank" class="social-icon-btn" title="Instagram">📷</a>
+                <a href="https://tiktok.com" target="_blank" class="social-icon-btn" title="TikTok">🎵</a>
+                <a href="https://t.me/Wilmerst" target="_blank" class="social-icon-btn" title="Telegram">✈️</a>
+                <a href="https://wa.me/584124405245" target="_blank" class="social-icon-btn" title="WhatsApp">💬</a>
             </div>
         </div>
         <div class="footer-bottom">
