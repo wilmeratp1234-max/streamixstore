@@ -41,6 +41,7 @@
         .price-box { text-align: right; }
         .old-price { color: #6b7280; text-decoration: line-through; font-size: 0.9rem; }
         .current-price { font-size: 2.2rem; color: #ef4444; font-weight: bold; margin-bottom: 10px; }
+        .current-price.blue-price { color: #3b82f6 !important; }
         .btn-oferta { display: inline-block; background: linear-gradient(90deg, #ef4444, #b91c1c); color: white; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-weight: bold; text-transform: uppercase; font-size: 0.85rem; transition: opacity 0.2s; cursor: pointer; border: none; }
         .btn-oferta:hover { opacity: 0.9; }
 
@@ -74,7 +75,7 @@
         
         .tasas-box { background: #0b0f19; border: 1px solid #1f2937; padding: 10px 20px; border-radius: 12px; display: flex; align-items: center; gap: 15px; }
         .tasas-info { font-size: 0.85rem; color: #9ca3af; }
-        .tasas-info span { color: #ef4444; font-weight: bold; }
+        .tasas-info span { color: #3b82f6; font-weight: bold; } /* Tasa en color azul */
         .currency-buttons { display: flex; gap: 5px; background: #111827; padding: 4px; border-radius: 8px; }
         .curr-btn { background: transparent; border: none; color: #9ca3af; padding: 6px 12px; border-radius: 6px; font-weight: bold; cursor: pointer; font-size: 0.85rem; }
         .curr-btn.active { background: #ef4444; color: white; }
@@ -107,6 +108,7 @@
         .card-plan-item:hover { background: #1f2937; }
         .card-plan-name { color: #e5e7eb; font-size: 0.9rem; font-weight: 500; }
         .card-plan-price { color: #f87171; font-weight: bold; font-size: 0.95rem; }
+        .card-plan-price.blue-price { color: #3b82f6 !important; } /* Precios en Bs color azul */
 
         .btn-card-addplan { background: transparent; border: 1px solid #374151; color: #9ca3af; width: 100%; padding: 10px; border-radius: 10px; font-weight: bold; font-size: 0.85rem; cursor: pointer; transition: all 0.2s; text-align: center; }
         .btn-card-addplan:hover { background: #1f2937; color: white; border-color: #ef4444; }
@@ -130,6 +132,7 @@
         .modal-subtotal-row { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #1f2937; padding-top: 15px; margin-bottom: 20px; }
         .modal-subtotal-row span { color: #9ca3af; font-size: 0.95rem; }
         .modal-subtotal-val { font-size: 1.5rem; font-weight: bold; color: #ef4444; }
+        .modal-subtotal-val.blue-price { color: #3b82f6 !important; }
 
         .btn-modal-agregar { background: #ef4444; border: none; color: white; width: 100%; padding: 14px; border-radius: 10px; font-weight: bold; text-transform: uppercase; font-size: 0.9rem; cursor: pointer; transition: background 0.2s; }
         .btn-modal-agregar:hover { background: #dc2626; }
@@ -150,11 +153,13 @@
         .cart-item-footer { display: flex; justify-content: space-between; align-items: center; }
         .cart-item-qty { color: #f87171; font-size: 0.85rem; font-weight: 500; }
         .cart-item-price { color: #ef4444; font-weight: bold; font-size: 1rem; }
+        .cart-item-price.blue-price { color: #3b82f6 !important; }
         .cart-item-delete { background: none; border: none; color: #ef4444; cursor: pointer; font-size: 1rem; position: absolute; top: 15px; right: 15px; }
 
         .cart-footer { padding: 20px; border-top: 1px solid #1f2937; background: #0f172a; }
         .cart-total-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; font-size: 1.1rem; }
         .cart-total-row span:last-child { color: #ef4444; font-weight: bold; font-size: 1.5rem; }
+        .cart-total-row span:last-child.blue-price { color: #3b82f6 !important; }
         .btn-procesar { background: #ef4444; border: none; color: white; width: 100%; padding: 14px; border-radius: 10px; font-weight: bold; font-size: 0.95rem; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; transition: background 0.2s; }
         .btn-procesar:hover { background: #dc2626; }
 
@@ -163,7 +168,7 @@
         .checkout-total-box { background: #111827; border: 1px solid #1f2937; border-radius: 12px; padding: 15px; text-align: center; margin-bottom: 20px; }
         .checkout-total-title { font-size: 0.85rem; color: #9ca3af; margin-bottom: 5px; text-transform: uppercase; letter-spacing: 0.5px; }
         .checkout-total-usd { font-size: 1.8rem; color: #ef4444; font-weight: bold; }
-        .checkout-total-conversions { font-size: 0.85rem; color: #9ca3af; margin-top: 4px; }
+        .checkout-total-conversions { font-size: 1.1rem; color: #3b82f6; font-weight: bold; margin-top: 4px; } /* Total Bs en azul */
 
         .payment-info-box { background: #111827; border: 1px solid #1f2937; border-radius: 12px; padding: 15px; margin-bottom: 20px; font-size: 0.9rem; }
         .payment-section-title { font-size: 0.85rem; color: #f87171; font-weight: bold; margin-bottom: 10px; display: flex; align-items: center; gap: 6px; }
@@ -289,8 +294,7 @@
                 <p>Añade tus plataformas y juegos favoritos.</p>
             </div>
             <div class="tasas-box">
-                <div class="tasas-info">TASA 
-				: <span id="tasa-mostrada">960.00</span></div>
+                <div class="tasas-info">TASA: <span id="tasa-mostrada">960.00</span></div>
                 <div class="currency-buttons">
                     <button class="curr-btn active" onclick="cambiarMoneda('USD', this)">USD</button>
                     <button class="curr-btn" onclick="cambiarMoneda('Bs', this)">Bs</button>
@@ -959,7 +963,7 @@
                 <strong>Paso 2:</strong> Selecciona abajo por dónde deseas enviar tu comprobante para activar tu servicio.
             </div>
 
-            <!-- Campo dinámico de Nombre de Pantalla / Datos de Juego -->
+            <!-- Campo dinámico de Nombre de Pantalla / Juegos -->
             <div class="pantalla-input-box" id="pantalla-input-container" style="display: none;">
                 <label for="input-nombre-pantalla" id="label-input-dinamico">Nombre para la pantalla:</label>
                 <input type="text" id="input-nombre-pantalla" placeholder="Ej. Juan / Perfil 1">
@@ -979,7 +983,12 @@
         let planesActualesModal = [];
         let categoriaModalActual = '';
 
-        document.getElementById('tasa-mostrada').innerText = tasaBs.toFixed(2);
+        document.getElementById('tasa-mostrada').innerText = formatearBs(tasaBs);
+
+        // Función auxiliar para formatear los montos en bolívares (ej: 3.360,00)
+        function formatearBs(valor) {
+            return valor.toLocaleString('es-VE', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        }
 
         function cambiarMoneda(moneda, btn) {
             monedaActual = moneda;
@@ -993,17 +1002,21 @@
             let ofertaElem = document.getElementById('oferta-precio');
             let usdOferta = parseFloat(ofertaElem.getAttribute('data-usd'));
             if (monedaActual === 'Bs') {
-                ofertaElem.innerHTML = `Bs ${(usdOferta * tasaBs).toFixed(2)} <span style="font-size: 1rem; color: #9ca3af;">Bs</span>`;
+                ofertaElem.innerHTML = `Bs. ${formatearBs(usdOferta * tasaBs)} <span style="font-size: 1rem; color: #9ca3af;">Bs</span>`;
+                ofertaElem.classList.add('blue-price');
             } else {
                 ofertaElem.innerHTML = `$${usdOferta.toFixed(2)} <span style="font-size: 1rem; color: #9ca3af;">USD</span>`;
+                ofertaElem.classList.remove('blue-price');
             }
 
             document.querySelectorAll('.card-plan-price').forEach(p => {
                 let valUSD = parseFloat(p.getAttribute('data-usd'));
                 if (monedaActual === 'Bs') {
-                    p.innerText = 'Bs ' + (valUSD * tasaBs).toFixed(2);
+                    p.innerText = 'Bs. ' + formatearBs(valUSD * tasaBs);
+                    p.classList.add('blue-price');
                 } else {
                     p.innerText = '$' + valUSD.toFixed(2);
+                    p.classList.remove('blue-price');
                 }
             });
         }
@@ -1019,7 +1032,7 @@
             planes.forEach((p, index) => {
                 let option = document.createElement('option');
                 option.value = index;
-                let precioMostrar = monedaActual === 'Bs' ? `Bs ${(p.precio * tasaBs).toFixed(2)}` : `$${p.precio.toFixed(2)}`;
+                let precioMostrar = monedaActual === 'Bs' ? `Bs. ${formatearBs(p.precio * tasaBs)}` : `$${p.precio.toFixed(2)}`;
                 option.textContent = `${p.nombre} - ${precioMostrar}`;
                 if(index === indiceSeleccionado) option.selected = true;
                 select.appendChild(option);
@@ -1050,9 +1063,11 @@
 
             let subtotalElem = document.getElementById('modal-subtotal');
             if (monedaActual === 'Bs') {
-                subtotalElem.innerText = 'Bs ' + (totalUSD * tasaBs).toFixed(2);
+                subtotalElem.innerText = 'Bs. ' + formatearBs(totalUSD * tasaBs);
+                subtotalElem.classList.add('blue-price');
             } else {
                 subtotalElem.innerText = '$' + totalUSD.toFixed(2);
+                subtotalElem.classList.remove('blue-price');
             }
         }
 
@@ -1111,7 +1126,8 @@
 
             if (carrito.length === 0) {
                 container.innerHTML = '<div class="cart-empty">Tu pedido está vacío</div>';
-                totalValElem.innerText = monedaActual === 'Bs' ? 'Bs 0.00' : '$0.00';
+                totalValElem.innerText = monedaActual === 'Bs' ? 'Bs. 0,00' : '$0.00';
+                totalValElem.classList.remove('blue-price');
                 return;
             }
 
@@ -1122,7 +1138,8 @@
                 let subtotalItemUSD = item.precioUSD * item.cantidad;
                 totalGeneralUSD += subtotalItemUSD;
 
-                let precioTexto = monedaActual === 'Bs' ? `Bs ${(subtotalItemUSD * tasaBs).toFixed(2)}` : `$${subtotalItemUSD.toFixed(2)}`;
+                let precioTexto = monedaActual === 'Bs' ? `Bs. ${formatearBs(subtotalItemUSD * tasaBs)}` : `$${subtotalItemUSD.toFixed(2)}`;
+                let claseColor = monedaActual === 'Bs' ? 'blue-price' : '';
 
                 let div = document.createElement('div');
                 div.className = 'cart-item';
@@ -1132,16 +1149,18 @@
                     <div class="cart-item-sub">${item.plan}</div>
                     <div class="cart-item-footer">
                         <span class="cart-item-qty">Cant: ${item.cantidad}</span>
-                        <span class="cart-item-price">${precioTexto}</span>
+                        <span class="cart-item-price ${claseColor}">${precioTexto}</span>
                     </div>
                 `;
                 container.appendChild(div);
             });
 
             if (monedaActual === 'Bs') {
-                totalValElem.innerText = 'Bs ' + (totalGeneralUSD * tasaBs).toFixed(2);
+                totalValElem.innerText = 'Bs. ' + formatearBs(totalGeneralUSD * tasaBs);
+                totalValElem.classList.add('blue-price');
             } else {
                 totalValElem.innerText = '$' + totalGeneralUSD.toFixed(2);
+                totalValElem.classList.remove('blue-price');
             }
         }
 
@@ -1155,7 +1174,7 @@
             let totalBs = totalGeneralUSD * tasaBs;
 
             document.getElementById('checkout-total-usd').innerText = `$${totalGeneralUSD.toFixed(2)} USD`;
-            document.getElementById('checkout-total-bs').innerText = `Bs. ${totalBs.toFixed(2)}`;
+            document.getElementById('checkout-total-bs').innerText = `Bs. ${formatearBs(totalBs)}`;
 
             // Verificamos si el carrito tiene productos de la categoría 'juegos' y/o de otras categorías
             let hayJuegos = carrito.some(item => item.categoria === 'juegos');
@@ -1196,7 +1215,8 @@
             
             carrito.forEach(item => {
                 let subtotalUSD = item.precioUSD * item.cantidad;
-                mensaje += `• *${item.plataforma}* (${item.plan}) x${item.cantidad} - $${subtotalUSD.toFixed(2)}\n`;
+                let subtotalBs = subtotalUSD * tasaBs;
+                mensaje += `• *${item.plataforma}* (${item.plan}) x${item.cantidad} - $${subtotalUSD.toFixed(2)} (Bs. ${formatearBs(subtotalBs)})\n`;
             });
 
             // Capturamos el texto del input dinámico si está visible
@@ -1209,7 +1229,7 @@
                 }
             }
 
-            mensaje += `\n\n*Total a pagar:* $${totalGeneralUSD.toFixed(2)} USD (Bs. ${totalBs.toFixed(2)})`;
+            mensaje += `\n\n*Total a pagar:* $${totalGeneralUSD.toFixed(2)} USD (Bs. ${formatearBs(totalBs)})`;
             mensaje += `\n\nAdjunto mi comprobante de pago. Quedo a la espera de la activación.`;
 
             if (plataformaEnvio === 'whatsapp') {
