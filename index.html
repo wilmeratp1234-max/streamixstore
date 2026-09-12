@@ -872,7 +872,7 @@
             </div>
         </div>
         <div class="footer-bottom">
-            © 2026 Streamix Venezuela. 🇻🇪 🇨🇴
+            © 2026 Streamix Venezuela.
         </div>
     </footer>
 
@@ -933,7 +933,7 @@
             </div>
 
             <div class="payment-info-box">
-                <div class="payment-section-title">📱 Pago Móvil (Venezuela)</div>
+                <div class="payment-section-title">📱 Pago Móvil</div>
                 <div class="payment-details">
                     <strong>Bancos:</strong> Bancamiga (0172) o Banco Nacional de Credito (0191)<br>
                     <strong>Teléfono:</strong> 0412-2818460<br>
@@ -943,13 +943,13 @@
                 <div class="payment-section-title" style="margin-top: 15px;">🟡 Binance Pay (USDT)</div>
                 <div class="payment-details">
                     <strong>Correo:</strong> wilmertorres123@gmail.com<br>
-                    <strong>Pay ID:</strong> 152220009
+                    <strong>Pay ID:</strong> 559760306
                 </div>
             </div>
 
             <div class="steps-box">
                 ℹ️ <strong>Paso 1:</strong> Realiza el pago a los datos mostrados y toma captura.<br>
-                <strong>Paso 2:</strong> Selecciona abajo por dónde deseas enviar tu comprobante para activar tu servicio.
+                <strong>Paso 2:</strong> Coloca el nombre de tu patalla y selecciona abajo por dónde deseas enviar tu comprobante para activar tu servicio.
             </div>
 
             <!-- Campo dinámico de Nombre de Pantalla / Datos de Juego -->
@@ -1185,7 +1185,7 @@
             let totalGeneralUSD = carrito.reduce((sum, item) => sum + (item.precioUSD * item.cantidad), 0);
             let totalBs = totalGeneralUSD * tasaBs;
 
-            let mensaje = `Hola Streamix Store, quiero procesar el siguiente pedido:\n\n`;
+            let mensaje = `Hola *Streamix Store*, ya he realizado el pago:\n\n`;
             
             carrito.forEach(item => {
                 let subtotalUSD = item.precioUSD * item.cantidad;
@@ -1210,7 +1210,7 @@
                 let url = `https://wa.me/${tuNumeroWhatsApp}?text=${encodeURIComponent(mensaje)}`;
                 window.open(url, '_blank');
             } else if (plataformaEnvio === 'telegram') {
-                let tuUserTelegram = "Wilmerst";
+                let tuUserTelegram = "@sxstoreve";
                 let url = `https://t.me/${tuUserTelegram}?text=${encodeURIComponent(mensaje)}`;
                 window.open(url, '_blank');
             }
