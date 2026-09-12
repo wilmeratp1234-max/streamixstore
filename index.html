@@ -43,7 +43,7 @@
         .old-price { color: #6b7280; text-decoration: line-through; font-size: 0.9rem; }
         .current-price { font-size: 2.2rem; color: #3b82f6; font-weight: bold; margin-bottom: 10px; }
         .current-price.blue-price { color: #3b82f6 !important; }
-        .btn-oferta { display: inline-block; background: linear-gradient(90deg, #ef4444, #b91c1c); color: white; padding: 12px 15px; border-radius: 8px; text-decoration: none; font-weight: bold; text-transform: uppercase; font-size: 0.85rem; transition: opacity 0.2s; cursor: pointer; border: none; }
+        .btn-oferta { display: inline-block; background: linear-gradient(90deg, #ef4444, #b91c1c); color: white; padding: 12px px; border-radius: 8px; text-decoration: none; font-weight: bold; text-transform: uppercase; font-size: 0.85rem; transition: opacity 0.2s; cursor: pointer; border: none; }
         .btn-oferta:hover { opacity: 0.9; }
 
         /* Estructura en 2 columnas: Catálogo + Panel Lateral con separación limpia (gap: 35px) */
@@ -506,7 +506,7 @@
                         <div class="platform-logo" style="background: #000000;">U+</div>
                         <div class="platform-title">
                             <h3>Universal</h3>
-                            <span>🍿 UNIVERSAL+</span>
+                            <span>🍿 UNIVERSAL+ +</span>
                         </div>
                     </div>
                     <div class="plans-list-box">
@@ -657,25 +657,20 @@
                         </div>
                     </div>
                     <div class="plans-list-box">
-                        <div class="card-plan-item" onclick="abrirModal('Free Fire', [{nombre: '100 Diamantes', precio: 0.95}, {nombre: '310 Diamantes', precio: 3.05}, {nombre: '520 Diamantes', precio: 4.10}, {nombre: '1060 Diamantes', precio: 9.05}], 0, 'juegos')">
+                        <div class="card-plan-item" onclick="abrirModal('Free Fire', [{nombre: '100 Diamantes', precio: 0.95}, {nombre: '310 Diamantes', precio: 3.05}, {nombre: '520 Diamantes', precio: 4.10}], 0, 'juegos')">
                             <span class="card-plan-name">100 Diamantes</span>
                             <span class="card-plan-price" data-usd="0.95">$0.95</span>
                         </div>
-                        <div class="card-plan-item" onclick="abrirModal('Free Fire', [{nombre: '100 Diamantes', precio: 0.95}, {nombre: '310 Diamantes', precio: 3.05}, {nombre: '520 Diamantes', precio: 4.10}, {nombre: '1060 Diamantes', precio: 9.05}], 0, 'juegos')">
+                        <div class="card-plan-item" onclick="abrirModal('Free Fire', [{nombre: '100 Diamantes', precio: 0.95}, {nombre: '310 Diamantes', precio: 3.05}, {nombre: '520 Diamantes', precio: 4.10}], 1, 'juegos')">
                             <span class="card-plan-name">310 Diamantes</span>
                             <span class="card-plan-price" data-usd="3.05">$3.05</span>
                         </div>
-                        <div class="card-plan-item" onclick="abrirModal('Free Fire', [[{nombre: '100 Diamantes', precio: 0.95}, {nombre: '310 Diamantes', precio: 3.05}, {nombre: '520 Diamantes', precio: 4.10}, {nombre: '1060 Diamantes', precio: 9.05}], 0, 'juegos')">
+                        <div class="card-plan-item" onclick="abrirModal('Free Fire', [{nombre: '100 Diamantes', precio: 0.95}, {nombre: '310 Diamantes', precio: 3.05}, {nombre: '520 Diamantes', precio: 4.10}], 2, 'juegos')">
                             <span class="card-plan-name">520 Diamantes</span>
                             <span class="card-plan-price" data-usd="4.10">$4.10</span>
                         </div>
                     </div>
-					<div class="card-plan-item" onclick="abrirModal('Free Fire', [[{nombre: '100 Diamantes', precio: 0.95}, {nombre: '310 Diamantes', precio: 3.05}, {nombre: '520 Diamantes', precio: 4.10}, {nombre: '1060 Diamantes', precio: 9.05}], 0, 'juegos')">
-                            <span class="card-plan-name">1060 Diamantes</span>
-                            <span class="card-plan-price" data-usd="9.05">$9.05</span>
-                        </div>
-                    </div>
-                    <button class="btn-card-addplan" onclick="abrirModal('Free Fire', [[{nombre: '100 Diamantes', precio: 0.95}, {nombre: '310 Diamantes', precio: 3.05}, {nombre: '520 Diamantes', precio: 4.10}, {nombre: '1060 Diamantes', precio: 9.05}], 0, 'juegos')">+ Añadir Plan</button>
+                    <button class="btn-card-addplan" onclick="abrirModal('Free Fire', [{nombre: '100 Diamantes', precio: 0.95}, {nombre: '310 Diamantes', precio: 3.05}, {nombre: '520 Diamantes', precio: 4.10}], 0, 'juegos')">+ Añadir Plan</button>
                 </div>
 
                 <!-- CALL OF DUTY MOBILE -->
