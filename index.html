@@ -3,1233 +3,521 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Streamix Store - Servicios Digitales</title>
+    <title>SX Store - Verificación de Pedido</title>
     <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-        body { background-color: #050811; color: #ffffff; padding: 0; overflow-x: hidden; }
-        
-        /* Navegación */
-        nav { background: #0b0f19; display: flex; justify-content: space-between; align-items: center; padding: 15px 40px; border-bottom: 1px solid #1f2937; flex-wrap: wrap; gap: 15px; position: sticky; top: 0; z-index: 100; }
-        .logo-nav { font-weight: bold; font-size: 1.2rem; letter-spacing: 1px; color: #fff; }
-        .logo-nav span { display: block; font-size: 0.7rem; color: #9ca3af; font-weight: normal; }
-        .nav-links { display: flex; gap: 25px; align-items: center; list-style: none; font-size: 0.9rem; }
-        .nav-links a { color: #d1d5db; text-decoration: none; transition: color 0.2s; cursor: pointer; }
-        .nav-links a:hover { color: #ef4444; }
-        .btn-pedido { background: #ef4444; color: white; padding: 8px 16px; border-radius: 20px; text-decoration: none; font-weight: bold; font-size: 0.9rem; cursor: pointer; border: none; display: flex; align-items: center; gap: 6px; transition: background 0.2s; }
-        .btn-pedido:hover { background: #dc2626; }
-
-        /* Aumentamos el ancho máximo a 1400px para dar amplitud al panel lateral */
-        .container { max-width: 1400px; margin: 0 auto; padding: 40px 30px; }
-        
-        .badge-container { display: flex; justify-content: center; gap: 15px; margin-bottom: 25px; flex-wrap: wrap; }
-        .badge { background: #111827; border: 1px solid #374151; padding: 8px 16px; border-radius: 20px; font-size: 0.85rem; color: #9ca3af; display: flex; align-items: center; gap: 8px; }
-        .badge.red { color: #f87171; border-color: rgba(239, 68, 68, 0.3); }
-        .dot { width: 8px; height: 8px; background-color: #ef4444; border-radius: 50%; box-shadow: 0 0 8px #ef4444; }
-
-        header { text-align: center; margin-bottom: 40px; }
-        header h1 { font-size: 3rem; color: #ffffff; text-transform: uppercase; letter-spacing: 3px; margin-bottom: 5px; }
-        header p { color: #9ca3af; font-size: 1.1rem; }
-        header .sub-desc { color: #9ca3af; font-size: 0.95rem; margin-top: 15px; max-width: 600px; margin-left: auto; margin-right: auto; }
-
-        /* Oferta destacada */
-        .featured-card { background: linear-gradient(145deg, #0f172a, #180d12); border: 1px solid #ef4444; border-radius: 16px; padding: 30px; margin-bottom: 40px; position: relative; box-shadow: 0 0 25px rgba(239, 68, 68, 0.15); }
-        .offer-tag { position: absolute; top: -12px; right: 30px; background: #ef4444; color: white; padding: 4px 12px; border-radius: 8px; font-size: 0.75rem; font-weight: bold; text-transform: uppercase; }
-        .featured-content { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
-        .featured-info h3 { color: #f87171; font-size: 0.9rem; text-transform: uppercase; margin-bottom: 8px; letter-spacing: 1px; }
-        .featured-info h2 { font-size: 2rem; color: #ffffff; margin-bottom: 8px; }
-        .featured-info p { color: #9ca3af; font-size: 0.95rem; }
-        .price-box { text-align: right; }
-        .old-price { color: #6b7280; text-decoration: line-through; font-size: 0.9rem; }
-        .current-price { font-size: 2.2rem; color: #ef4444; font-weight: bold; margin-bottom: 10px; }
-        .btn-oferta { display: inline-block; background: linear-gradient(90deg, #ef4444, #b91c1c); color: white; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-weight: bold; text-transform: uppercase; font-size: 0.85rem; transition: opacity 0.2s; cursor: pointer; border: none; }
-        .btn-oferta:hover { opacity: 0.9; }
-
-        /* Estructura en 2 columnas: Catálogo + Panel Lateral con separación limpia (gap: 35px) */
-        .content-wrapper { display: flex; gap: 35px; align-items: flex-start; }
-        .content-wrapper .grid { flex: 1; }
-
-        /* Panel Lateral de Próximos Estrenos separado a la derecha */
-        .sidebar-estrenos { width: 340px; background: #0b0f19; border: 1px solid #1f2937; border-radius: 16px; padding: 22px; position: sticky; top: 90px; flex-shrink: 0; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
-        .sidebar-badge { display: inline-block; color: #ef4444; font-size: 0.65rem; font-weight: bold; letter-spacing: 1px; border: 1px solid rgba(239, 68, 68, 0.3); padding: 4px 8px; border-radius: 12px; background: rgba(239, 68, 68, 0.1); margin-bottom: 15px; text-transform: uppercase; }
-        .sidebar-badge .dot-small { display: inline-block; width: 6px; height: 6px; background-color: #ef4444; border-radius: 50%; margin-right: 4px; box-shadow: 0 0 6px #ef4444; }
-        .sidebar-title { color: #3b82f6; font-size: 1.4rem; margin-bottom: 20px; font-weight: bold; letter-spacing: 0.5px; }
-        
-        .sidebar-featured { position: relative; border-radius: 12px; overflow: hidden; margin-bottom: 20px; border: 1px solid #1f2937; background: #111827; }
-        .sidebar-featured img { width: 100%; height: 380px; object-fit: cover; display: block; }
-        .sidebar-featured-info { position: absolute; bottom: 0; left: 0; width: 100%; background: linear-gradient(transparent, #000000 95%); padding: 35px 15px 15px 15px; }
-        .sidebar-featured-title { color: white; font-size: 0.95rem; font-weight: bold; text-transform: uppercase; }
-
-        .estrenos-list { display: flex; flex-direction: column; gap: 15px; }
-        .estreno-item { display: flex; align-items: center; gap: 15px; border-radius: 8px; padding: 4px; }
-        .estreno-number { color: #a855f7; font-weight: bold; font-size: 1.1rem; width: 15px; text-align: center; }
-        .estreno-info { display: flex; flex-direction: column; }
-        .estreno-name { color: white; font-size: 0.85rem; font-weight: 600; margin-bottom: 2px; }
-        .estreno-plat { color: #9ca3af; font-size: 0.7rem; display: flex; align-items: center; gap: 4px; }
-        .estreno-plat span { color: #ef4444; font-size: 0.5rem; }
-
-        /* Cabecera de Catálogo y Tasa Fija */
-        .catalog-header { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; margin-bottom: 25px; border-bottom: 1px solid #1f2937; padding-bottom: 15px; }
-        .catalog-title h2 { font-size: 1.8rem; color: #f3f4f6; letter-spacing: 1px; }
-        .catalog-title p { color: #9ca3af; font-size: 0.9rem; }
-        
-        .tasas-box { background: #0b0f19; border: 1px solid #1f2937; padding: 10px 20px; border-radius: 12px; display: flex; align-items: center; gap: 15px; }
-        .tasas-info { font-size: 0.85rem; color: #9ca3af; }
-        .tasas-info span { color: #ef4444; font-weight: bold; }
-        .currency-buttons { display: flex; gap: 5px; background: #111827; padding: 4px; border-radius: 8px; }
-        .curr-btn { background: transparent; border: none; color: #9ca3af; padding: 6px 12px; border-radius: 6px; font-weight: bold; cursor: pointer; font-size: 0.85rem; }
-        .curr-btn.active { background: #ef4444; color: white; }
-
-        /* Filtros de Categorías */
-        .filter-buttons { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 35px; }
-        .filter-btn { background: #0b0f19; border: 1px solid #1f2937; color: #9ca3af; padding: 10px 20px; border-radius: 25px; cursor: pointer; font-size: 0.9rem; font-weight: 500; transition: all 0.2s; display: flex; align-items: center; gap: 8px; }
-        .filter-btn:hover, .filter-btn.active { background: #dc2626; border-color: #ef4444; color: white; }
-
-        /* Tarjetas de Plataformas */
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; }
-        .platform-card { background: #0b0f19; border: 1px solid #1f2937; border-radius: 16px; overflow: hidden; transition: border-color 0.2s; display: flex; flex-direction: column; justify-content: space-between; padding: 20px; }
-        .platform-card:hover { border-color: #ef4444; }
-        
-        .platform-header { display: flex; align-items: center; gap: 15px; margin-bottom: 15px; }
-        .platform-logo { width: 45px; height: 45px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.2rem; color: white; flex-shrink: 0; }
-        .netflix-bg { background: #e50914; }
-        .disney-bg { background: #0070d2; }
-        .prime-bg { background: #00a8e1; }
-        .spotify-bg { background: #1db954; }
-        .iptv-bg { background: #7c3aed; }
-        .juegos-bg { background: #ea580c; }
-        
-        .platform-title h3 { font-size: 1.2rem; color: white; margin-bottom: 2px; }
-        .platform-title span { font-size: 0.75rem; color: #ef4444; text-transform: uppercase; letter-spacing: 0.5px; font-weight: bold; display: flex; align-items: center; gap: 4px; }
-
-        .plans-list-box { background: #111827; border: 1px solid #1f2937; border-radius: 12px; overflow: hidden; margin-bottom: 15px; }
-        .card-plan-item { padding: 12px 15px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #1f2937; cursor: pointer; transition: background 0.2s; }
-        .card-plan-item:last-child { border-bottom: none; }
-        .card-plan-item:hover { background: #1f2937; }
-        .card-plan-name { color: #e5e7eb; font-size: 0.9rem; font-weight: 500; }
-        .card-plan-price { color: #f87171; font-weight: bold; font-size: 0.95rem; }
-
-        .btn-card-addplan { background: transparent; border: 1px solid #374151; color: #9ca3af; width: 100%; padding: 10px; border-radius: 10px; font-weight: bold; font-size: 0.85rem; cursor: pointer; transition: all 0.2s; text-align: center; }
-        .btn-card-addplan:hover { background: #1f2937; color: white; border-color: #ef4444; }
-
-        /* MODAL DE SELECCIÓN DE PLAN */
-        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.75); display: none; justify-content: center; align-items: center; z-index: 1000; backdrop-filter: blur(4px); }
-        .modal-card { background: #0b0f19; border: 1px solid #374151; width: 90%; max-width: 420px; border-radius: 20px; padding: 25px; position: relative; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
-        .modal-close { position: absolute; top: 20px; right: 20px; background: #1f2937; border: none; color: #9ca3af; width: 30px; height: 30px; border-radius: 50%; cursor: pointer; font-size: 1rem; display: flex; align-items: center; justify-content: center; }
-        .modal-close:hover { background: #374151; color: white; }
-        .modal-card h2 { font-size: 1.5rem; color: white; margin-bottom: 20px; }
-        
-        .modal-section-title { font-size: 0.75rem; text-transform: uppercase; color: #9ca3af; letter-spacing: 1px; margin-bottom: 8px; font-weight: bold; }
-        .modal-select { background: #111827; border: 1px solid #374151; color: white; padding: 12px 15px; border-radius: 10px; width: 100%; font-size: 0.95rem; margin-bottom: 20px; outline: none; cursor: pointer; }
-        .modal-select:focus { border-color: #ef4444; }
-        
-        .qty-box { display: flex; align-items: center; justify-content: space-between; background: #111827; border: 1px solid #374151; border-radius: 10px; padding: 8px 15px; margin-bottom: 25px; }
-        .qty-btn { background: #1f2937; border: none; color: white; width: 32px; height: 32px; border-radius: 8px; font-size: 1.1rem; cursor: pointer; font-weight: bold; }
-        .qty-btn:hover { background: #374151; }
-        .qty-value { font-size: 1.2rem; font-weight: bold; color: white; }
-
-        .modal-subtotal-row { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #1f2937; padding-top: 15px; margin-bottom: 20px; }
-        .modal-subtotal-row span { color: #9ca3af; font-size: 0.95rem; }
-        .modal-subtotal-val { font-size: 1.5rem; font-weight: bold; color: #ef4444; }
-
-        .btn-modal-agregar { background: #ef4444; border: none; color: white; width: 100%; padding: 14px; border-radius: 10px; font-weight: bold; text-transform: uppercase; font-size: 0.9rem; cursor: pointer; transition: background 0.2s; }
-        .btn-modal-agregar:hover { background: #dc2626; }
-
-        /* CARRITO LATERAL */
-        .cart-sidebar { position: fixed; top: 0; right: -420px; width: 100%; max-width: 400px; height: 100%; background: #0b0f19; border-left: 1px solid #1f2937; z-index: 1100; transition: right 0.3s ease; display: flex; flex-direction: column; }
-        .cart-sidebar.open { right: 0; }
-        .cart-header { padding: 20px; border-bottom: 1px solid #1f2937; display: flex; justify-content: space-between; align-items: center; background: #0f172a; }
-        .cart-header h3 { font-size: 1.2rem; color: white; display: flex; align-items: center; gap: 8px; }
-        .cart-close { background: transparent; border: none; color: #9ca3af; font-size: 1.2rem; cursor: pointer; }
-        
-        .cart-body { padding: 20px; flex-grow: 1; overflow-y: auto; display: flex; flex-direction: column; gap: 15px; }
-        .cart-empty { color: #6b7280; text-align: center; margin-top: 40px; font-size: 0.95rem; }
-        
-        .cart-item { background: #111827; border: 1px solid #1f2937; border-radius: 12px; padding: 15px; position: relative; }
-        .cart-item-title { font-weight: bold; color: white; font-size: 0.95rem; margin-bottom: 4px; }
-        .cart-item-sub { color: #9ca3af; font-size: 0.8rem; margin-bottom: 8px; }
-        .cart-item-footer { display: flex; justify-content: space-between; align-items: center; }
-        .cart-item-qty { color: #f87171; font-size: 0.85rem; font-weight: 500; }
-        .cart-item-price { color: #ef4444; font-weight: bold; font-size: 1rem; }
-        .cart-item-delete { background: none; border: none; color: #ef4444; cursor: pointer; font-size: 1rem; position: absolute; top: 15px; right: 15px; }
-
-        .cart-footer { padding: 20px; border-top: 1px solid #1f2937; background: #0f172a; }
-        .cart-total-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; font-size: 1.1rem; }
-        .cart-total-row span:last-child { color: #ef4444; font-weight: bold; font-size: 1.5rem; }
-        .btn-procesar { background: #ef4444; border: none; color: white; width: 100%; padding: 14px; border-radius: 10px; font-weight: bold; font-size: 0.95rem; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; transition: background 0.2s; }
-        .btn-procesar:hover { background: #dc2626; }
-
-        /* MODAL DE PROCESAR PAGO */
-        .checkout-modal-card { background: #0b0f19; border: 1px solid #374151; width: 92%; max-width: 450px; border-radius: 20px; padding: 25px; position: relative; max-height: 90vh; overflow-y: auto; box-shadow: 0 15px 40px rgba(0,0,0,0.7); }
-        .checkout-total-box { background: #111827; border: 1px solid #1f2937; border-radius: 12px; padding: 15px; text-align: center; margin-bottom: 20px; }
-        .checkout-total-title { font-size: 0.85rem; color: #9ca3af; margin-bottom: 5px; text-transform: uppercase; letter-spacing: 0.5px; }
-        .checkout-total-usd { font-size: 1.8rem; color: #ef4444; font-weight: bold; }
-        .checkout-total-conversions { font-size: 0.85rem; color: #9ca3af; margin-top: 4px; }
-
-        .payment-info-box { background: #111827; border: 1px solid #1f2937; border-radius: 12px; padding: 15px; margin-bottom: 20px; font-size: 0.9rem; }
-        .payment-section-title { font-size: 0.85rem; color: #f87171; font-weight: bold; margin-bottom: 10px; display: flex; align-items: center; gap: 6px; }
-        .payment-details { color: #d1d5db; line-height: 1.6; margin-bottom: 15px; font-size: 0.88rem; }
-        .payment-details:last-child { margin-bottom: 0; }
-
-        .steps-box { background: #111827; border: 1px solid #374151; border-radius: 12px; padding: 15px; margin-bottom: 20px; font-size: 0.85rem; color: #9ca3af; line-height: 1.5; }
-        .steps-box strong { color: white; }
-
-        /* Estilo para el input de Nombre de Pantalla */
-        .pantalla-input-box { background: #111827; border: 1px solid #374151; border-radius: 12px; padding: 15px; margin-bottom: 20px; }
-        .pantalla-input-box label { font-size: 0.85rem; color: #f87171; font-weight: bold; margin-bottom: 8px; display: block; }
-        .pantalla-input-box input { width: 100%; padding: 10px 12px; background: #0b0f19; border: 1px solid #374151; border-radius: 8px; color: white; font-size: 0.9rem; outline: none; }
-        .pantalla-input-box input:focus { border-color: #ef4444; }
-
-        .checkout-buttons-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-        .btn-wa-pay { background: #22c55e; color: white; border: none; padding: 12px; border-radius: 12px; font-weight: bold; font-size: 0.85rem; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 6px; text-decoration: none; transition: opacity 0.2s; }
-        .btn-wa-pay:hover { opacity: 0.9; }
-        .btn-tg-pay { background: #0ea5e9; color: white; border: none; padding: 12px; border-radius: 12px; font-weight: bold; font-size: 0.85rem; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 6px; text-decoration: none; transition: opacity 0.2s; }
-        .btn-tg-pay:hover { opacity: 0.9; }
-
-        /* FOOTER */
-        footer { background: #070a12; border-top: 1px solid #1f2937; padding: 40px 20px 25px 20px; margin-top: 60px; }
-        .footer-content { max-width: 1400px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 25px; }
-        .footer-brand { display: flex; flex-direction: column; gap: 5px; }
-        .footer-logo-title { font-size: 1.2rem; font-weight: bold; color: white; letter-spacing: 1px; }
-        .footer-status { display: flex; align-items: center; gap: 8px; font-size: 0.85rem; color: #9ca3af; background: #111827; border: 1px solid #1f2937; padding: 6px 12px; border-radius: 20px; width: fit-content; }
-        .footer-status-dot { width: 7px; height: 7px; background-color: #22c55e; border-radius: 50%; box-shadow: 0 0 6px #22c55e; }
-
-        .footer-socials { display: flex; gap: 12px; align-items: center; }
-        
-        .social-icon-btn { 
-            width: 44px; 
-            height: 44px; 
-            background-color: rgba(255, 255, 255, 0.03); 
-            border: 1px solid rgba(255, 255, 255, 0.1); 
-            border-radius: 50%; 
-            display: flex; 
-            align-items: center; 
-            justify-content: center; 
-            color: #d1d5db; 
-            text-decoration: none; 
-            transition: all 0.3s ease; 
+        :root {
+            --bg-color: #0b0c10;
+            --card-bg: #12141c;
+            --border-color: #1f2330;
+            --accent-red: #ff334b;
+            --accent-green: #00e676;
+            --text-main: #ffffff;
+            --text-muted: #8b92a5;
         }
-        .social-icon-btn:hover { 
-            background-color: rgba(255, 255, 255, 0.08); 
-            border-color: rgba(255, 255, 255, 0.25); 
-            transform: translateY(-2px); 
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .checkout-container {
+            width: 100%;
+            max-width: 1100px;
+            display: grid;
+            grid-template-columns: 1fr 380px;
+            gap: 25px;
+        }
+
+        @media (max-width: 850px) {
+            .checkout-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Panel Izquierdo */
+        .left-panel {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .game-header {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 20px;
+        }
+
+        .game-logo {
+            width: 70px;
+            height: 70px;
+            border-radius: 14px;
+            object-fit: cover;
+        }
+
+        .game-title h1 {
+            font-size: 26px;
+            font-weight: 900;
+            letter-spacing: 1px;
+            font-style: italic;
+        }
+
+        .badges {
+            display: flex;
+            gap: 10px;
+            margin-top: 8px;
+            flex-wrap: wrap;
+        }
+
+        .badge {
+            font-size: 11px;
+            padding: 4px 10px;
+            border-radius: 20px;
+            border: 1px solid var(--border-color);
+            color: var(--text-muted);
+            background: #171a24;
+        }
+
+        .badge.green {
+            color: var(--accent-green);
+            border-color: rgba(0, 230, 118, 0.3);
+        }
+
+        /* Stepper superior dentro del panel */
+        .steps-indicator {
+            display: flex;
+            gap: 10px;
+            justify-content: flex-end;
+        }
+
+        .step-pill {
+            font-size: 12px;
+            font-weight: bold;
+            padding: 6px 14px;
+            border-radius: 20px;
+            background: #171a24;
+            color: var(--text-muted);
+            border: 1px solid var(--border-color);
+        }
+
+        .step-pill.active {
+            background: linear-gradient(135deg, #ff334b, #ff6b6b);
             color: white;
-        }
-        .social-icon-btn svg {
-            width: 20px;
-            height: 20px;
+            border: none;
         }
 
-        .footer-bottom { max-width: 1400px; margin: 30px auto 0 auto; padding-top: 20px; border-top: 1px solid #111827; text-align: center; font-size: 0.85rem; color: #6b7280; }
+        .form-section h2 {
+            font-size: 15px;
+            color: var(--accent-red);
+            text-transform: uppercase;
+            font-weight: 800;
+            margin-bottom: 15px;
+            letter-spacing: 0.5px;
+        }
 
-        @media(max-width: 1024px) {
-            .content-wrapper { flex-direction: column; }
-            .sidebar-estrenos { width: 100%; position: static; }
-            .catalog-header { flex-direction: column; align-items: flex-start; }
-            .tasas-box { width: 100%; justify-content: space-between; }
-            .featured-content { flex-direction: column; align-items: flex-start; }
-            .price-box { text-align: left; width: 100%; }
-            header h1 { font-size: 2.2rem; }
-            nav { padding: 15px 20px; }
-            .cart-sidebar { max-width: 100%; right: -100%; }
-            .footer-content { flex-direction: column; align-items: flex-start; }
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .input-group label {
+            font-size: 12px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            font-weight: bold;
+        }
+
+        .input-wrapper {
+            position: relative;
+        }
+
+        .input-wrapper input {
+            width: 100%;
+            background: #0b0c10;
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 15px;
+            color: white;
+            font-size: 15px;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        .input-wrapper input:focus {
+            border-color: var(--accent-red);
+        }
+
+        .char-count {
+            position: absolute;
+            right: 15px;
+            bottom: 12px;
+            font-size: 11px;
+            color: var(--text-muted);
+        }
+
+        .verify-btn {
+            background: #1a1e29;
+            color: var(--text-muted);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 16px;
+            font-size: 14px;
+            font-weight: bold;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+            letter-spacing: 1px;
+        }
+
+        .verify-btn.ready {
+            background: linear-gradient(135deg, #ff334b, #d9142d);
+            color: white;
+            border: none;
+            box-shadow: 0 4px 15px rgba(255, 51, 75, 0.4);
+        }
+
+        .verify-btn.ready:hover {
+            opacity: 0.9;
+        }
+
+        /* Panel Derecho (Resumen) */
+        .right-panel {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            gap: 20px;
+            height: fit-content;
+        }
+
+        .summary-title {
+            font-size: 14px;
+            font-weight: 800;
+            color: var(--accent-red);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-left: 3px solid var(--accent-red);
+            padding-left: 8px;
+        }
+
+        .product-card-mini {
+            background: #0b0c10;
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 12px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .product-card-mini img {
+            width: 45px;
+            height: 45px;
+            border-radius: 8px;
+            object-fit: cover;
+        }
+
+        .product-info h4 {
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .product-info p {
+            font-size: 12px;
+            color: var(--accent-green);
+            margin-top: 2px;
+        }
+
+        .quantity-control {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #0b0c10;
+            padding: 10px 15px;
+            border-radius: 10px;
+            border: 1px solid var(--border-color);
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+
+        .qty-btns {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .qty-btn {
+            background: #1f2330;
+            border: none;
+            color: white;
+            width: 24px;
+            height: 24px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .qty-btn:hover {
+            background: var(--accent-red);
+        }
+
+        .player-data-box {
+            background: #0b0c10;
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 12px;
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+        .totals-section {
+            border-top: 1px solid var(--border-color);
+            padding-top: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .subtotal-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+
+        .total-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 5px;
+        }
+
+        .total-row span:first-child {
+            font-size: 12px;
+            font-weight: bold;
+            color: var(--text-muted);
+            text-transform: uppercase;
+        }
+
+        .total-amount {
+            font-size: 22px;
+            font-weight: 900;
+            color: var(--accent-red);
+        }
+
+        .ssl-footer {
+            text-align: center;
+            font-size: 10px;
+            color: var(--text-muted);
+            margin-top: 5px;
         }
     </style>
 </head>
 <body>
 
-    <!-- Barra de navegación -->
-    <nav>
-        <div class="logo-nav">
-            STREAMIX STORE
-            <span>SERVICIOS DIGITALES</span>
-        </div>
-        <ul class="nav-links">
-            <li><a href="#catalogo">🔥 OFERTAS</a></li>
-            <li><a href="#catalogo">CATÁLOGO</a></li>
-        </ul>
-        <button class="btn-pedido" onclick="toggleCart()">🛒 MI PEDIDO (<span id="cart-count">0</span>)</button>
-    </nav>
-
-    <div class="container">
-        
-        <!-- Insignias superiores -->
-        <div class="badge-container">
-            <div class="badge">🔥 Lista de Precios Oficial</div>
-            <div class="badge green"><div class="dot"></div> Abierto ahora: 9 AM - 11:30 PM</div>
-        </div>
-
-        <!-- Encabezado principal -->
-        <header>
-            <h1>Streamix Store</h1>
-            <p>Tu Entretenimiento Digital</p>
-            <div class="sub-desc">Cuentas directas, renovables y sin caídas. Selecciona tu plan, verifica los precios y actívalo al instante.</div>
-        </header>
-
-        <!-- Tarjeta de Oferta Limitada -->
-        <div class="featured-card">
-            <div class="offer-tag">🔥 Oferta Limitada</div>
-            <div class="featured-content">
-                <div class="featured-info">
-                    <h3>★ Combo Streaming Pro</h3>
-                    <h2>Netflix + Disney+ + HBO MAX</h2>
-                    <p>Llévate el combo perfecto con activación inmediata y garantía total.</p>
-                </div>
-                <div class="price-box">
-                    <div class="old-price">$8.80 USD</div>
-                    <div class="current-price" id="oferta-precio" data-usd="6.20">$6.20 <span style="font-size: 1rem; color: #9ca3af;">USD</span></div>
-                    <button class="btn-oferta" onclick="agregarDirecto('Combo Streaming Pro (Oferta)', 6.20, 'cine')">¡Aprovechar Oferta!</button>
+    <div class="checkout-container">
+        <!-- PANEL IZQUIERDO: DINÁMICO SEGÚN EL JUEGO -->
+        <div class="left-panel">
+            <div class="game-header">
+                <img id="gameLogo" src="" alt="Juego" class="game-logo">
+                <div class="game-title">
+                    <h1 id="gameName">CARGANDO...</h1>
+                    <div class="badges">
+                        <span class="badge">Latam</span>
+                        <span class="badge green">⚡ Entrega instantánea</span>
+                        <span class="badge">🔒 Pago seguro</span>
+                    </div>
                 </div>
             </div>
+
+            <div class="steps-indicator">
+                <div class="step-pill">1 PAQUETE</div>
+                <div class="step-pill active">2 DATOS</div>
+                <div class="step-pill">3 PAGO</div>
+            </div>
+
+            <div class="form-section">
+                <h2 id="formTitle">2 DATOS DEL JUGADOR</h2>
+                <div class="input-group">
+                    <label id="inputLabel" for="playerIdInput">Ingresa tu ID</label>
+                    <div class="input-wrapper">
+                        <input type="text" id="playerIdInput" placeholder="Ingresa tu ID" oninput="actualizarDatos()">
+                        <span class="char-count" id="charCount">0/13</span>
+                    </div>
+                </div>
+            </div>
+
+            <button id="verifyBtn" class="verify-btn" onclick="completarPedidoWhatsApp()">Verificar ID</button>
         </div>
 
-        <!-- Cabecera de Catálogo y Tasa Fija -->
-        <div class="catalog-header" id="catalogo">
-            <div class="catalog-title">
-                <h2>Catálogo de Precios</h2>
-                <p>Explora el catálogo y añade los servicios a tu carrito.</p>
-            </div>
-            <div class="tasas-box">
-                <div class="tasas-info">TASA BS: <span id="tasa-mostrada">65.00</span></div>
-                <div class="currency-buttons">
-                    <button class="curr-btn active" onclick="cambiarMoneda('USD', this)">USD</button>
-                    <button class="curr-btn" onclick="cambiarMoneda('Bs', this)">Bs</button>
-                </div>
-            </div>
-        </div>
+        <!-- PANEL DERECHO: RESUMEN DE VENTA -->
+        <div class="right-panel">
+            <div style="display: flex; flex-direction: column; gap: 15px;">
+                <div class="summary-title">Resumen de Venta</div>
 
-        <!-- Filtros de Categorías -->
-        <div class="filter-buttons">
-            <button class="filter-btn active" onclick="filtrar('todos', this)">🌐 Todos</button>
-            <button class="filter-btn" onclick="filtrar('cine', this)">🎬 Cine & Series</button>
-            <button class="filter-btn" onclick="filtrar('musica', this)">🎵 Música</button>
-            <button class="filter-btn" onclick="filtrar('iptv', this)">📺 IPTV</button>
-            <button class="filter-btn" onclick="filtrar('disenos', this)">💻 Diseños y Programas</button>
-            <button class="filter-btn" onclick="filtrar('juegos', this)">🎮 Juegos</button>
-            <button class="filter-btn" onclick="filtrar('giftcards', this)">🎁 Gift Cards</button>
-        </div>
-
-        <!-- CONTENEDOR DE DOS COLUMNAS: CATÁLOGO + PRÓXIMOS ESTRENOS -->
-        <div class="content-wrapper">
-
-            <!-- Cuadrícula de Plataformas -->
-            <div class="grid" id="grid-plataformas">
-                
-                <!-- NETFLIX -->
-                <div class="platform-card" data-categoria="cine">
-                    <div class="platform-header">
-                        <div class="platform-logo netflix-bg">N</div>
-                        <div class="platform-title">
-                            <h3>Netflix</h3>
-                            <span>📺 RED HOGAR</span>
-                        </div>
-                    </div>
-                    <div class="plans-list-box">
-                        <div class="card-plan-item" onclick="abrirModal('Netflix', [{nombre: '1 Pantalla (Con código)', precio: 3.50}, {nombre: '1 Pantalla (Sin código)', precio: 5.30}, {nombre: 'Cuenta Completa', precio: 13.50}], 0, 'cine')">
-                            <span class="card-plan-name">1 Pantalla (Con código)</span>
-                            <span class="card-plan-price" data-usd="3.50">$3.50</span>
-                        </div>
-                        <div class="card-plan-item" onclick="abrirModal('Netflix', [{nombre: '1 Pantalla (Con código)', precio: 3.50}, {nombre: '1 Pantalla (Sin código)', precio: 5.30}, {nombre: 'Cuenta Completa', precio: 13.50}], 1, 'cine')">
-                            <span class="card-plan-name">1 Pantalla (Sin código)</span>
-                            <span class="card-plan-price" data-usd="5.30">$5.30</span>
-                        </div>
-                        <div class="card-plan-item" onclick="abrirModal('Netflix', [{nombre: '1 Pantalla (Con código)', precio: 3.50}, {nombre: '1 Pantalla (Sin código)', precio: 5.30}, {nombre: 'Cuenta Completa', precio: 13.50}], 2, 'cine')">
-                            <span class="card-plan-name">Cuenta Completa</span>
-                            <span class="card-plan-price" data-usd="13.50">$13.50</span>
-                        </div>
-                    </div>
-                    <button class="btn-card-addplan" onclick="abrirModal('Netflix', [{nombre: '1 Pantalla (Con código)', precio: 3.50}, {nombre: '1 Pantalla (Sin código)', precio: 5.30}, {nombre: 'Cuenta Completa', precio: 13.50}], 0, 'cine')">+ Añadir Plan</button>
-                </div>
-
-                <!-- DISNEY+ -->
-                <div class="platform-card" data-categoria="cine">
-                    <div class="platform-header">
-                        <div class="platform-logo disney-bg">D+</div>
-                        <div class="platform-title">
-                            <h3>Disney+ Premium</h3>
-                            <span>🎬 DEPORTES + CINE</span>
-                        </div>
-                    </div>
-                    <div class="plans-list-box">
-                        <div class="card-plan-item" onclick="abrirModal('Disney+ Premium', [{nombre: '1 Pantalla', precio: 3.30}, {nombre: 'Cuenta Completa', precio: 14.00}, {nombre: 'Completa (A tu correo)', precio: 17.00}], 0, 'cine')">
-                            <span class="card-plan-name">1 Pantalla</span>
-                            <span class="card-plan-price" data-usd="3.30">$3.30</span>
-                        </div>
-                        <div class="card-plan-item" onclick="abrirModal('Disney+ Premium', [{nombre: '1 Pantalla', precio: 3.30}, {nombre: 'Cuenta Completa', precio: 14.00}, {nombre: 'Completa (A tu correo)', precio: 17.00}], 1, 'cine')">
-                            <span class="card-plan-name">Cuenta Completa</span>
-                            <span class="card-plan-price" data-usd="14.00">$14.00</span>
-                        </div>
-                        <div class="card-plan-item" onclick="abrirModal('Disney+ Premium', [{nombre: '1 Pantalla', precio: 3.30}, {nombre: 'Cuenta Completa', precio: 14.00}, {nombre: 'Completa (A tu correo)', precio: 17.00}], 2, 'cine')">
-                            <span class="card-plan-name">Completa (A tu correo)</span>
-                            <span class="card-plan-price" data-usd="17.00">$17.00</span>
-                        </div>
-                    </div>
-                    <button class="btn-card-addplan" onclick="abrirModal('Disney+ Premium', [{nombre: '1 Pantalla', precio: 3.30}, {nombre: 'Cuenta Completa', precio: 14.00}, {nombre: 'Completa (A tu correo)', precio: 17.00}], 0, 'cine')">+ Añadir Plan</button>
-                </div>
-
-                <!-- PRIME VIDEO -->
-                <div class="platform-card" data-categoria="cine">
-                    <div class="platform-header">
-                        <div class="platform-logo prime-bg">PV</div>
-                        <div class="platform-title">
-                            <h3>Prime Video</h3>
-                            <span>🍿 SERIES Y PELÍCULAS</span>
-                        </div>
-                    </div>
-                    <div class="plans-list-box">
-                        <div class="card-plan-item" onclick="abrirModal('Prime Video', [{nombre: '1 Pantalla', precio: 1.40}, {nombre: 'Cuenta Completa', precio: 4.00}], 0, 'cine')">
-                            <span class="card-plan-name">1 Pantalla</span>
-                            <span class="card-plan-price" data-usd="1.40">$1.40</span>
-                        </div>
-                        <div class="card-plan-item" onclick="abrirModal('Prime Video', [{nombre: '1 Pantalla', precio: 1.40}, {nombre: 'Cuenta Completa', precio: 4.00}], 1, 'cine')">
-                            <span class="card-plan-name">Cuenta Completa</span>
-                            <span class="card-plan-price" data-usd="4.00">$4.00</span>
-                        </div>
-                    </div>
-                    <button class="btn-card-addplan" onclick="abrirModal('Prime Video', [{nombre: '1 Pantalla', precio: 1.40}, {nombre: 'Cuenta Completa', precio: 4.00}], 0, 'cine')">+ Añadir Plan</button>
-                </div>
-
-                <!-- HBO MAX -->
-                <div class="platform-card" data-categoria="cine">
-                    <div class="platform-header">
-                        <div class="platform-logo" style="background: #5b21b6;">H</div>
-                        <div class="platform-title">
-                            <h3>Hbo Max</h3>
-                            <span>🍿 SERIES Y PELÍCULAS</span>
-                        </div>
-                    </div>
-                    <div class="plans-list-box">
-                        <div class="card-plan-item" onclick="abrirModal('Hbo Max', [{nombre: '1 Pantalla', precio: 2.00}, {nombre: 'Cuenta Completa', precio: 5.50}], 0, 'cine')">
-                            <span class="card-plan-name">1 Pantalla</span>
-                            <span class="card-plan-price" data-usd="2.00">$2.00</span>
-                        </div>
-                        <div class="card-plan-item" onclick="abrirModal('Hbo Max', [{nombre: '1 Pantalla', precio: 2.00}, {nombre: 'Cuenta Completa', precio: 5.50}], 1, 'cine')">
-                            <span class="card-plan-name">Cuenta Completa</span>
-                            <span class="card-plan-price" data-usd="5.50">$5.50</span>
-                        </div>
-                    </div>
-                    <button class="btn-card-addplan" onclick="abrirModal('Hbo Max', [{nombre: '1 Pantalla', precio: 2.00}, {nombre: 'Cuenta Completa', precio: 5.50}], 0, 'cine')">+ Añadir Plan</button>
-                </div>
-
-                <!-- CRUNCHYROLL -->
-                <div class="platform-card" data-categoria="cine">
-                    <div class="platform-header">
-                        <div class="platform-logo" style="background: #f97316;">CR</div>
-                        <div class="platform-title">
-                            <h3>Crunchyroll</h3>
-                            <span>⚡ ANIME STREAMING</span>
-                        </div>
-                    </div>
-                    <div class="plans-list-box">
-                        <div class="card-plan-item" onclick="abrirModal('Crunchyroll', [{nombre: '1 Mes (Perfil)', precio: 1.50}, {nombre: 'Cuenta Completa 1 Mes', precio: 4.00}], 0, 'cine')">
-                            <span class="card-plan-name">1 Mes (Perfil)</span>
-                            <span class="card-plan-price" data-usd="1.50">$1.50</span>
-                        </div>
-                        <div class="card-plan-item" onclick="abrirModal('Crunchyroll', [{nombre: '1 Mes (Perfil)', precio: 1.50}, {nombre: 'Cuenta Completa 1 Mes', precio: 4.00}], 1, 'cine')">
-                            <span class="card-plan-name">Cuenta Completa 1 Mes</span>
-                            <span class="card-plan-price" data-usd="4.00">$4.00</span>
-                        </div>
-                    </div>
-                    <button class="btn-card-addplan" onclick="abrirModal('Crunchyroll', [{nombre: '1 Mes (Perfil)', precio: 1.50}, {nombre: 'Cuenta Completa 1 Mes', precio: 4.00}], 0, 'cine')">+ Añadir Plan</button>
-                </div>
-
-                <!-- PARAMOUNT+ -->
-                <div class="platform-card" data-categoria="cine">
-                    <div class="platform-header">
-                        <div class="platform-logo" style="background: #1d4ed8;">P+</div>
-                        <div class="platform-title">
-                            <h3>Paramount+</h3>
-                            <span>🎬 PELÍCULAS Y SERIES</span>
-                        </div>
-                    </div>
-                    <div class="plans-list-box">
-                        <div class="card-plan-item" onclick="abrirModal('Paramount+', [{nombre: '1 Mes (Cuenta Completa)', precio: 3.50}], 0, 'cine')">
-                            <span class="card-plan-name">1 Mes (Cuenta Completa)</span>
-                            <span class="card-plan-price" data-usd="3.50">$3.50</span>
-                        </div>
-                    </div>
-                    <button class="btn-card-addplan" onclick="abrirModal('Paramount+', [{nombre: '1 Mes (Cuenta Completa)', precio: 3.50}], 0, 'cine')">+ Añadir Plan</button>
-                </div>
-
-                <!-- VIX -->
-                <div class="platform-card" data-categoria="cine">
-                    <div class="platform-header">
-                        <div class="platform-logo" style="background: #be185d;">V</div>
-                        <div class="platform-title">
-                            <h3>Vix</h3>
-                            <span>📺 NOVELAS Y DEPORTES</span>
-                        </div>
-                    </div>
-                    <div class="plans-list-box">
-                        <div class="card-plan-item" onclick="abrirModal('Vix', [{nombre: '1 Mes (Cuenta Completa)', precio: 3.00}], 0, 'cine')">
-                            <span class="card-plan-name">1 Mes (Cuenta Completa)</span>
-                            <span class="card-plan-price" data-usd="3.00">$3.00</span>
-                        </div>
-                    </div>
-                    <button class="btn-card-addplan" onclick="abrirModal('Vix', [{nombre: '1 Mes (Cuenta Completa)', precio: 3.00}], 0, 'cine')">+ Añadir Plan</button>
-                </div>
-
-                <!-- APPLE TV -->
-                <div class="platform-card" data-categoria="cine">
-                    <div class="platform-header">
-                        <div class="platform-logo" style="background: #374151;"></div>
-                        <div class="platform-title">
-                            <h3>AppleTV</h3>
-                            <span>🎬 APPLE ORIGINALS</span>
-                        </div>
-                    </div>
-                    <div class="plans-list-box">
-                        <div class="card-plan-item" onclick="abrirModal('AppleTV', [{nombre: '1 Mes (Cuenta Completa)', precio: 4.00}], 0, 'cine')">
-                            <span class="card-plan-name">1 Mes (Cuenta Completa)</span>
-                            <span class="card-plan-price" data-usd="4.00">$4.00</span>
-                        </div>
-                    </div>
-                    <button class="btn-card-addplan" onclick="abrirModal('AppleTV', [{nombre: '1 Mes (Cuenta Completa)', precio: 4.00}], 0, 'cine')">+ Añadir Plan</button>
-                </div>
-
-                <!-- UNIVERSAL -->
-                <div class="platform-card" data-categoria="cine">
-                    <div class="platform-header">
-                        <div class="platform-logo" style="background: #2563eb;">U</div>
-                        <div class="platform-title">
-                            <h3>Universal</h3>
-                            <span>🍿 UNIVERSAL +</span>
-                        </div>
-                    </div>
-                    <div class="plans-list-box">
-                        <div class="card-plan-item" onclick="abrirModal('Universal', [{nombre: '1 Mes (Cuenta Completa)', precio: 3.50}], 0, 'cine')">
-                            <span class="card-plan-name">1 Mes (Cuenta Completa)</span>
-                            <span class="card-plan-price" data-usd="3.50">$3.50</span>
-                        </div>
-                    </div>
-                    <button class="btn-card-addplan" onclick="abrirModal('Universal', [{nombre: '1 Mes (Cuenta Completa)', precio: 3.50}], 0, 'cine')">+ Añadir Plan</button>
-                </div>
-
-                <!-- SPOTIFY -->
-                <div class="platform-card" data-categoria="musica">
-                    <div class="platform-header">
-                        <div class="platform-logo spotify-bg">🎧</div>
-                        <div class="platform-title">
-                            <h3>Spotify Premium</h3>
-                            <span>🎵 MÚSICA SIN ANUNCIOS</span>
-                        </div>
-                    </div>
-                    <div class="plans-list-box">
-                        <div class="card-plan-item" onclick="abrirModal('Spotify Premium', [{nombre: 'Individual (1 Mes)', precio: 2.50}, {nombre: 'Plan Familiar (Invitación)', precio: 4.00}], 0, 'musica')">
-                            <span class="card-plan-name">Individual (1 Mes)</span>
-                            <span class="card-plan-price" data-usd="2.50">$2.50</span>
-                        </div>
-                        <div class="card-plan-item" onclick="abrirModal('Spotify Premium', [{nombre: 'Individual (1 Mes)', precio: 2.50}, {nombre: 'Plan Familiar (Invitación)', precio: 4.00}], 1, 'musica')">
-                            <span class="card-plan-name">Plan Familiar (Invitación)</span>
-                            <span class="card-plan-price" data-usd="4.00">$4.00</span>
-                        </div>
-                    </div>
-                    <button class="btn-card-addplan" onclick="abrirModal('Spotify Premium', [{nombre: 'Individual (1 Mes)', precio: 2.50}, {nombre: 'Plan Familiar (Invitación)', precio: 4.00}], 0, 'musica')">+ Añadir Plan</button>
-                </div>
-
-                <!-- YOUTUBE PREMIUM -->
-                <div class="platform-card" data-categoria="musica">
-                    <div class="platform-header">
-                        <div class="platform-logo" style="background: #dc2626;">YT</div>
-                        <div class="platform-title">
-                            <h3>Youtube Premium</h3>
-                            <span>🎵 MÚSICA Y VIDEOS SIN ANUNCIOS</span>
-                        </div>
-                    </div>
-                    <div class="plans-list-box">
-                        <div class="card-plan-item" onclick="abrirModal('Youtube Premium', [{nombre: '1 Mes (Invitación Familiar)', precio: 2.00}, {nombre: '1 Mes (A tu correo)', precio: 3.50}], 0, 'musica')">
-                            <span class="card-plan-name">1 Mes (Invitación Familiar)</span>
-                            <span class="card-plan-price" data-usd="2.00">$2.00</span>
-                        </div>
-                        <div class="card-plan-item" onclick="abrirModal('Youtube Premium', [{nombre: '1 Mes (Invitación Familiar)', precio: 2.00}, {nombre: '1 Mes (A tu correo)', precio: 3.50}], 1, 'musica')">
-                            <span class="card-plan-name">1 Mes (A tu correo)</span>
-                            <span class="card-plan-price" data-usd="3.50">$3.50</span>
-                        </div>
-                    </div>
-                    <button class="btn-card-addplan" onclick="abrirModal('Youtube Premium', [{nombre: '1 Mes (Invitación Familiar)', precio: 2.00}, {nombre: '1 Mes (A tu correo)', precio: 3.50}], 0, 'musica')">+ Añadir Plan</button>
-                </div>
-
-                <!-- IPTV -->
-                <div class="platform-card" data-categoria="iptv">
-                    <div class="platform-header">
-                        <div class="platform-logo iptv-bg">📺</div>
-                        <div class="platform-title">
-                            <h3>IPTV Smarters Pro</h3>
-                            <span>📡 CANALES EN VIVO Y PPV</span>
-                        </div>
-                    </div>
-                    <div class="plans-list-box">
-                        <div class="card-plan-item" onclick="abrirModal('IPTV Smarters Pro', [{nombre: '1 Mes de Servicio', precio: 5.00}, {nombre: '3 Meses (Oferta)', precio: 12.00}], 0, 'iptv')">
-                            <span class="card-plan-name">1 Mes de Servicio</span>
-                            <span class="card-plan-price" data-usd="5.00">$5.00</span>
-                        </div>
-                        <div class="card-plan-item" onclick="abrirModal('IPTV Smarters Pro', [{nombre: '1 Mes de Servicio', precio: 5.00}, {nombre: '3 Meses (Oferta)', precio: 12.00}], 1, 'iptv')">
-                            <span class="card-plan-name">3 Meses (Oferta)</span>
-                            <span class="card-plan-price" data-usd="12.00">$12.00</span>
-                        </div>
-                    </div>
-                    <button class="btn-card-addplan" onclick="abrirModal('IPTV Smarters Pro', [{nombre: '1 Mes de Servicio', precio: 5.00}, {nombre: '3 Meses (Oferta)', precio: 12.00}], 0, 'iptv')">+ Añadir Plan</button>
-                </div>
-
-                <!-- FLUJOTV -->
-                <div class="platform-card" data-categoria="iptv">
-                    <div class="platform-header">
-                        <div class="platform-logo" style="background: #0284c7;">FTV</div>
-                        <div class="platform-title">
-                            <h3>FlujoTV</h3>
-                            <span>📡 TV EN VIVO Y STREAMING</span>
-                        </div>
-                    </div>
-                    <div class="plans-list-box">
-                        <div class="card-plan-item" onclick="abrirModal('FlujoTV', [{nombre: '1 Mes de Servicio', precio: 6.00}, {nombre: '3 Meses', precio: 16.00}], 0, 'iptv')">
-                            <span class="card-plan-name">1 Mes de Servicio</span>
-                            <span class="card-plan-price" data-usd="6.00">$6.00</span>
-                        </div>
-                        <div class="card-plan-item" onclick="abrirModal('FlujoTV', [{nombre: '1 Mes de Servicio', precio: 6.00}, {nombre: '3 Meses', precio: 16.00}], 1, 'iptv')">
-                            <span class="card-plan-name">3 Meses</span>
-                            <span class="card-plan-price" data-usd="16.00">$16.00</span>
-                        </div>
-                    </div>
-                    <button class="btn-card-addplan" onclick="abrirModal('FlujoTV', [{nombre: '1 Mes de Servicio', precio: 6.00}, {nombre: '3 Meses', precio: 16.00}], 0, 'iptv')">+ Añadir Plan</button>
-                </div>
-
-                <!-- CANVA -->
-                <div class="platform-card" data-categoria="disenos">
-                    <div class="platform-header">
-                        <div class="platform-logo" style="background: #0d9488;">C</div>
-                        <div class="platform-title">
-                            <h3>Canva</h3>
-                            <span>💻 DISEÑO GRÁFICO PRO</span>
-                        </div>
-                    </div>
-                    <div class="plans-list-box">
-                        <div class="card-plan-item" onclick="abrirModal('Canva', [{nombre: 'Cuenta Pro (1 Mes - Invitación)', precio: 1.50}, {nombre: 'Cuenta Pro (1 Año)', precio: 10.00}], 0, 'disenos')">
-                            <span class="card-plan-name">Cuenta Pro (1 Mes - Invitación)</span>
-                            <span class="card-plan-price" data-usd="1.50">$1.50</span>
-                        </div>
-                        <div class="card-plan-item" onclick="abrirModal('Canva', [{nombre: 'Cuenta Pro (1 Mes - Invitación)', precio: 1.50}, {nombre: 'Cuenta Pro (1 Año)', precio: 10.00}], 1, 'disenos')">
-                            <span class="card-plan-name">Cuenta Pro (1 Año)</span>
-                            <span class="card-plan-price" data-usd="10.00">$10.00</span>
-                        </div>
-                    </div>
-                    <button class="btn-card-addplan" onclick="abrirModal('Canva', [{nombre: 'Cuenta Pro (1 Mes - Invitación)', precio: 1.50}, {nombre: 'Cuenta Pro (1 Año)', precio: 10.00}], 0, 'disenos')">+ Añadir Plan</button>
-                </div>
-
-                <!-- CAPCUT -->
-                <div class="platform-card" data-categoria="disenos">
-                    <div class="platform-header">
-                        <div class="platform-logo" style="background: #111827; border: 1px solid #374151;">CC</div>
-                        <div class="platform-title">
-                            <h3>Capcut</h3>
-                            <span>💻 EDICIÓN DE VIDEO PRO</span>
-                        </div>
-                    </div>
-                    <div class="plans-list-box">
-                        <div class="card-plan-item" onclick="abrirModal('Capcut', [{nombre: '1 Mes Pro', precio: 3.00}, {nombre: '3 Meses Pro', precio: 7.50}], 0, 'disenos')">
-                            <span class="card-plan-name">1 Mes Pro</span>
-                            <span class="card-plan-price" data-usd="3.00">$3.00</span>
-                        </div>
-                        <div class="card-plan-item" onclick="abrirModal('Capcut', [{nombre: '1 Mes Pro', precio: 3.00}, {nombre: '3 Meses Pro', precio: 7.50}], 1, 'disenos')">
-                            <span class="card-plan-name">3 Meses Pro</span>
-                            <span class="card-plan-price" data-usd="7.50">$7.50</span>
-                        </div>
-                    </div>
-                    <button class="btn-card-addplan" onclick="abrirModal('Capcut', [{nombre: '1 Mes Pro', precio: 3.00}, {nombre: '3 Meses Pro', precio: 7.50}], 0, 'disenos')">+ Añadir Plan</button>
-                </div>
-
-                <!-- JUEGOS -->
-                <div class="platform-card" data-categoria="juegos">
-                    <div class="platform-header">
-                        <div class="platform-logo juegos-bg">🎮</div>
-                        <div class="platform-title">
-                            <h3>PlayStation & Recargas</h3>
-                            <span>⚡ JUEGOS Y MONEDAS</span>
-                        </div>
-                    </div>
-                    <div class="plans-list-box">
-                        <div class="card-plan-item" onclick="abrirModal('PlayStation & Recargas', [{nombre: 'Mobile Legends (Diamantes)', precio: 2.00}, {nombre: 'Juego PS4 / PS5 (Cuenta Primaria)', precio: 15.00}], 0, 'juegos')">
-                            <span class="card-plan-name">Mobile Legends (Diamantes)</span>
-                            <span class="card-plan-price" data-usd="2.00">$2.00</span>
-                        </div>
-                        <div class="card-plan-item" onclick="abrirModal('PlayStation & Recargas', [{nombre: 'Mobile Legends (Diamantes)', precio: 2.00}, {nombre: 'Juego PS4 / PS5 (Cuenta Primaria)', precio: 15.00}], 1, 'juegos')">
-                            <span class="card-plan-name">Juego PS4 / PS5 (Cuenta Primaria)</span>
-                            <span class="card-plan-price" data-usd="15.00">$15.00</span>
-                        </div>
-                    </div>
-                    <button class="btn-card-addplan" onclick="abrirModal('PlayStation & Recargas', [{nombre: 'Mobile Legends (Diamantes)', precio: 2.00}, {nombre: 'Juego PS4 / PS5 (Cuenta Primaria)', precio: 15.00}], 0, 'juegos')">+ Añadir Plan</button>
-                </div>
-
-                <!-- FREE FIRE -->
-                <div class="platform-card" data-categoria="juegos">
-                    <div class="platform-header">
-                        <div class="platform-logo" style="background: #b45309;">FF</div>
-                        <div class="platform-title">
-                            <h3>Free Fire</h3>
-                            <span>🔥 RECARGA DE DIAMANTES</span>
-                        </div>
-                    </div>
-                    <div class="plans-list-box">
-                        <div class="card-plan-item" onclick="abrirModal('Free Fire', [{nombre: '100 Diamantes', precio: 1.10}, {nombre: '310 Diamantes', precio: 3.10}, {nombre: '520 Diamantes', precio: 5.00}], 0, 'juegos')">
-                            <span class="card-plan-name">100 Diamantes</span>
-                            <span class="card-plan-price" data-usd="1.10">$1.10</span>
-                        </div>
-                        <div class="card-plan-item" onclick="abrirModal('Free Fire', [{nombre: '100 Diamantes', precio: 1.10}, {nombre: '310 Diamantes', precio: 3.10}, {nombre: '520 Diamantes', precio: 5.00}], 1, 'juegos')">
-                            <span class="card-plan-name">310 Diamantes</span>
-                            <span class="card-plan-price" data-usd="3.10">$3.10</span>
-                        </div>
-                        <div class="card-plan-item" onclick="abrirModal('Free Fire', [{nombre: '100 Diamantes', precio: 1.10}, {nombre: '310 Diamantes', precio: 3.10}, {nombre: '520 Diamantes', precio: 5.00}], 2, 'juegos')">
-                            <span class="card-plan-name">520 Diamantes</span>
-                            <span class="card-plan-price" data-usd="5.00">$5.00</span>
-                        </div>
-                    </div>
-                    <button class="btn-card-addplan" onclick="abrirModal('Free Fire', [{nombre: '100 Diamantes', precio: 1.10}, {nombre: '310 Diamantes', precio: 3.10}, {nombre: '520 Diamantes', precio: 5.00}], 0, 'juegos')">+ Añadir Plan</button>
-                </div>
-
-                <!-- CALL OF DUTY MOBILE -->
-                <div class="platform-card" data-categoria="juegos">
-                    <div class="platform-header">
-                        <div class="platform-logo" style="background: #334155;">COD</div>
-                        <div class="platform-title">
-                            <h3>Call Of Duty Mobile</h3>
-                            <span>🎯 CP PUNTOS COD</span>
-                        </div>
-                    </div>
-                    <div class="plans-list-box">
-                        <div class="card-plan-item" onclick="abrirModal('Call Of Duty Mobile', [{nombre: '88 CP', precio: 1.20}, {nombre: '420 CP', precio: 5.50}], 0, 'juegos')">
-                            <span class="card-plan-name">88 CP</span>
-                            <span class="card-plan-price" data-usd="1.20">$1.20</span>
-                        </div>
-                        <div class="card-plan-item" onclick="abrirModal('Call Of Duty Mobile', [{nombre: '88 CP', precio: 1.20}, {nombre: '420 CP', precio: 5.50}], 1, 'juegos')">
-                            <span class="card-plan-name">420 CP</span>
-                            <span class="card-plan-price" data-usd="5.50">$5.50</span>
-                        </div>
-                    </div>
-                    <button class="btn-card-addplan" onclick="abrirModal('Call Of Duty Mobile', [{nombre: '88 CP', precio: 1.20}, {nombre: '420 CP', precio: 5.50}], 0, 'juegos')">+ Añadir Plan</button>
-                </div>
-
-                <!-- ROBLOX -->
-                <div class="platform-card" data-categoria="juegos">
-                    <div class="platform-header">
-                        <div class="platform-logo" style="background: #ef4444;">RBX</div>
-                        <div class="platform-title">
-                            <h3>Roblox</h3>
-                            <span>🧱 ROBUX DIRECTOS</span>
-                        </div>
-                    </div>
-                    <div class="plans-list-box">
-                        <div class="card-plan-item" onclick="abrirModal('Roblox', [{nombre: '400 Robux', precio: 5.00}, {nombre: '800 Robux', precio: 10.00}], 0, 'juegos')">
-                            <span class="card-plan-name">400 Robux</span>
-                            <span class="card-plan-price" data-usd="5.00">$5.00</span>
-                        </div>
-                        <div class="card-plan-item" onclick="abrirModal('Roblox', [{nombre: '400 Robux', precio: 5.00}, {nombre: '800 Robux', precio: 10.00}], 1, 'juegos')">
-                            <span class="card-plan-name">800 Robux</span>
-                            <span class="card-plan-price" data-usd="10.00">$10.00</span>
-                        </div>
-                    </div>
-                    <button class="btn-card-addplan" onclick="abrirModal('Roblox', [{nombre: '400 Robux', precio: 5.00}, {nombre: '800 Robux', precio: 10.00}], 0, 'juegos')">+ Añadir Plan</button>
-                </div>
-
-                <!-- GIFT CARD NETFLIX -->
-                <div class="platform-card" data-categoria="giftcards">
-                    <div class="platform-header">
-                        <div class="platform-logo" style="background: #b91c1c;">GC</div>
-                        <div class="platform-title">
-                            <h3>Gift Card Netflix</h3>
-                            <span>🎁 TARJETA DE REGALO</span>
-                        </div>
-                    </div>
-                    <div class="plans-list-box">
-                        <div class="card-plan-item" onclick="abrirModal('Gift Card Netflix', [{nombre: 'Gift Card $15', precio: 16.00}, {nombre: 'Gift Card $30', precio: 32.00}], 0, 'giftcards')">
-                            <span class="card-plan-name">Gift Card $15</span>
-                            <span class="card-plan-price" data-usd="16.00">$16.00</span>
-                        </div>
-                        <div class="card-plan-item" onclick="abrirModal('Gift Card Netflix', [{nombre: 'Gift Card $15', precio: 16.00}, {nombre: 'Gift Card $30', precio: 32.00}], 1, 'giftcards')">
-                            <span class="card-plan-name">Gift Card $30</span>
-                            <span class="card-plan-price" data-usd="32.00">$32.00</span>
-                        </div>
-                    </div>
-                    <button class="btn-card-addplan" onclick="abrirModal('Gift Card Netflix', [{nombre: 'Gift Card $15', precio: 16.00}, {nombre: 'Gift Card $30', precio: 32.00}], 0, 'giftcards')">+ Añadir Plan</button>
-                </div>
-
-                <!-- GIFT CARD ITUNES -->
-                <div class="platform-card" data-categoria="giftcards">
-                    <div class="platform-header">
-                        <div class="platform-logo" style="background: #475569;">GC</div>
-                        <div class="platform-title">
-                            <h3>Gift Card iTunes</h3>
-                            <span>🎁 APPLE / ITUNES USA</span>
-                        </div>
-                    </div>
-                    <div class="plans-list-box">
-                        <div class="card-plan-item" onclick="abrirModal('Gift Card iTunes', [{nombre: 'Gift Card $10', precio: 11.00}, {nombre: 'Gift Card $25', precio: 27.00}], 0, 'giftcards')">
-                            <span class="card-plan-name">Gift Card $10</span>
-                            <span class="card-plan-price" data-usd="11.00">$11.00</span>
-                        </div>
-                        <div class="card-plan-item" onclick="abrirModal('Gift Card iTunes', [{nombre: 'Gift Card $10', precio: 11.00}, {nombre: 'Gift Card $25', precio: 27.00}], 1, 'giftcards')">
-                            <span class="card-plan-name">Gift Card $25</span>
-                            <span class="card-plan-price" data-usd="27.00">$27.00</span>
-                        </div>
-                    </div>
-                    <button class="btn-card-addplan" onclick="abrirModal('Gift Card iTunes', [{nombre: 'Gift Card $10', precio: 11.00}, {nombre: 'Gift Card $25', precio: 27.00}], 0, 'giftcards')">+ Añadir Plan</button>
-                </div>
-
-                <!-- GIFT CARD PLAY STATION USA -->
-                <div class="platform-card" data-categoria="giftcards">
-                    <div class="platform-header">
-                        <div class="platform-logo" style="background: #1d4ed8;">PS</div>
-                        <div class="platform-title">
-                            <h3>Gift Card Play Station USA</h3>
-                            <span>🎁 PSN STORE USA</span>
-                        </div>
-                    </div>
-                    <div class="plans-list-box">
-                        <div class="card-plan-item" onclick="abrirModal('Gift Card Play Station USA', [{nombre: 'PSN Card $10', precio: 11.00}, {nombre: 'PSN Card $25', precio: 27.00}, {nombre: 'PSN Card $50', precio: 54.00}], 0, 'giftcards')">
-                            <span class="card-plan-name">PSN Card $10</span>
-                            <span class="card-plan-price" data-usd="11.00">$11.00</span>
-                        </div>
-                        <div class="card-plan-item" onclick="abrirModal('Gift Card Play Station USA', [{nombre: 'PSN Card $10', precio: 11.00}, {nombre: 'PSN Card $25', precio: 27.00}, {nombre: 'PSN Card $50', precio: 54.00}], 1, 'giftcards')">
-                            <span class="card-plan-name">PSN Card $25</span>
-                            <span class="card-plan-price" data-usd="27.00">$27.00</span>
-                        </div>
-                        <div class="card-plan-item" onclick="abrirModal('Gift Card Play Station USA', [{nombre: 'PSN Card $10', precio: 11.00}, {nombre: 'PSN Card $25', precio: 27.00}, {nombre: 'PSN Card $50', precio: 54.00}], 2, 'giftcards')">
-                            <span class="card-plan-name">PSN Card $50</span>
-                            <span class="card-plan-price" data-usd="54.00">$54.00</span>
-                        </div>
-                    </div>
-                    <button class="btn-card-addplan" onclick="abrirModal('Gift Card Play Station USA', [{nombre: 'PSN Card $10', precio: 11.00}, {nombre: 'PSN Card $25', precio: 27.00}, {nombre: 'PSN Card $50', precio: 54.00}], 0, 'giftcards')">+ Añadir Plan</button>
-                </div>
-
-            </div>
-
-            <!-- CUADRO LATERAL: PRÓXIMOS ESTRENOS -->
-            <aside class="sidebar-estrenos">
-                <div class="sidebar-badge"><span class="dot-small"></span> PRONTO</div>
-                <h2 class="sidebar-title">Próximos Estrenos</h2>
-
-                <div class="sidebar-featured">
-                    <img src="https://picsum.photos/seed/lastofus/400/550" alt="Estreno Destacado">
-                    <div class="sidebar-featured-info">
-                        <div class="sidebar-featured-title">The Last Of Us: S3 (Max)</div>
+                <div class="product-card-mini">
+                    <img id="summaryGameLogo" src="" alt="Mini Logo">
+                    <div class="product-info">
+                        <h4 id="summaryGameName">Juego</h4>
+                        <p id="summaryPackage">Paquete</p>
                     </div>
                 </div>
 
-                <div class="estrenos-list">
-                    <div class="estreno-item">
-                        <div class="estreno-number">1</div>
-                        <div class="estreno-info">
-                            <div class="estreno-name">Merlina (Temporada 2)</div>
-                            <div class="estreno-plat"><span>▲</span> Netflix • Muy Pronto</div>
-                        </div>
-                    </div>
-
-                    <div class="estreno-item">
-                        <div class="estreno-number">2</div>
-                        <div class="estreno-info">
-                            <div class="estreno-name">Fallout (Temporada 2)</div>
-                            <div class="estreno-plat"><span>▲</span> Prime Video • Muy Pronto</div>
-                        </div>
-                    </div>
-
-                    <div class="estreno-item">
-                        <div class="estreno-number">3</div>
-                        <div class="estreno-info">
-                            <div class="estreno-name">The Mandalorian & Grogu</div>
-                            <div class="estreno-plat"><span>▲</span> Disney+ • Muy Pronto</div>
-                        </div>
-                    </div>
-
-                    <div class="estreno-item">
-                        <div class="estreno-number">4</div>
-                        <div class="estreno-info">
-                            <div class="estreno-name">Peacemaker (Temporada 2)</div>
-                            <div class="estreno-plat"><span>▲</span> Max • Muy Pronto</div>
-                        </div>
-                    </div>
-
-                    <div class="estreno-item">
-                        <div class="estreno-number">5</div>
-                        <div class="estreno-info">
-                            <div class="estreno-name">Stranger Things (Final)</div>
-                            <div class="estreno-plat"><span>▲</span> Netflix • Muy Pronto</div>
-                        </div>
+                <div class="quantity-control">
+                    <span>Combos</span>
+                    <div class="qty-btns">
+                        <button class="qty-btn" onclick="cambiarCantidad(-1)">-</button>
+                        <span id="quantityVal" style="color: white; font-weight: bold;">1</span>
+                        <button class="qty-btn" onclick="cambiarCantidad(1)">+</button>
                     </div>
                 </div>
-            </aside>
 
-        </div>
-    </div>
-
-    <!-- FOOTER -->
-    <footer>
-        <div class="footer-content">
-            <div class="footer-brand">
-                <div class="footer-logo-title">STREAMIX STORE</div>
-                <div class="footer-status">
-                    <div class="footer-status-dot"></div>
-                    Atención En línea
-                </div>
-            </div>
-            <div class="footer-socials">
-                <!-- Instagram -->
-                <a href="https://instagram.com" target="_blank" class="social-icon-btn" title="Instagram">
-                    <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
-                </a>
-                <!-- TikTok -->
-                <a href="https://tiktok.com" target="_blank" class="social-icon-btn" title="TikTok">
-                    <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"></path></svg>
-                </a>
-                <!-- Telegram -->
-                <a href="https://t.me/Wilmerst" target="_blank" class="social-icon-btn" title="Telegram">
-                    <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
-                </a>
-                <!-- WhatsApp -->
-                <a href="https://wa.me/584124405245" target="_blank" class="social-icon-btn" title="WhatsApp">
-                    <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
-                </a>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            © 2026 Streamix Venezuela. 🇻🇪 🇨🇴
-        </div>
-    </footer>
-
-    <!-- MODAL DE SELECCIÓN DE PLAN -->
-    <div class="modal-overlay" id="modal-seleccion">
-        <div class="modal-card">
-            <button class="modal-close" onclick="cerrarModal()">✕</button>
-            <h2 id="modal-titulo">Plataforma</h2>
-            
-            <div class="modal-section-title">1. Selecciona el Plan</div>
-            <select class="modal-select" id="modal-select-planes" onchange="actualizarSubtotalModal()">
-            </select>
-
-            <div class="modal-section-title">2. Cantidad</div>
-            <div class="qty-box">
-                <button class="qty-btn" onclick="cambiarCantidadModal(-1)">-</button>
-                <span class="qty-value" id="modal-qty">1</span>
-                <button class="qty-btn" onclick="cambiarCantidadModal(1)">+</button>
-            </div>
-
-            <div class="modal-subtotal-row">
-                <span>Subtotal:</span>
-                <span class="modal-subtotal-val" id="modal-subtotal">$0.00</span>
-            </div>
-
-            <button class="btn-modal-agregar" onclick="agregarAlPedidoDesdeModal()">Agregar al pedido</button>
-        </div>
-    </div>
-
-    <!-- CARRITO LATERAL -->
-    <div class="cart-sidebar" id="cart-sidebar">
-        <div class="cart-header">
-            <h3>🛒 Tu Pedido</h3>
-            <button class="cart-close" onclick="toggleCart()">✕</button>
-        </div>
-        <div class="cart-body" id="cart-items-container">
-            <div class="cart-empty">Tu pedido está vacío</div>
-        </div>
-        <div class="cart-footer">
-            <div class="cart-total-row">
-                <span>Total a pagar:</span>
-                <span id="cart-total-val">$0.00</span>
-            </div>
-            <button class="btn-procesar" onclick="abrirModalCheckout()">💬 Procesar Pago</button>
-        </div>
-    </div>
-
-    <!-- MODAL DE PROCESAR PAGO -->
-    <div class="modal-overlay" id="modal-checkout">
-        <div class="checkout-modal-card">
-            <button class="modal-close" onclick="cerrarModalCheckout()">✕</button>
-            <h2 style="font-size: 1.4rem; color: white; margin-bottom: 15px;">Realizar Pago</h2>
-            
-            <div class="checkout-total-box">
-                <div class="checkout-total-title">Total a transferir:</div>
-                <div class="checkout-total-usd" id="checkout-total-usd">$0.00</div>
-                <div class="checkout-total-conversions" id="checkout-total-bs">Bs. 0.00</div>
-            </div>
-
-            <div class="payment-info-box">
-                <div class="payment-section-title">📱 Pago Móvil (Venezuela)</div>
-                <div class="payment-details">
-                    <strong>Bancos:</strong> Bancamiga (0172) o Banco Nacional de Credito (0191)<br>
-                    <strong>Teléfono:</strong> 0412-2818460<br>
-                    <strong>Cédula:</strong> V-27178466
-                </div>
-
-                <div class="payment-section-title" style="margin-top: 15px;">🟡 Binance Pay (USDT)</div>
-                <div class="payment-details">
-                    <strong>Correo:</strong> wilmertorres123@gmail.com<br>
-                    <strong>Pay ID:</strong> 152220009
+                <div class="player-data-box">
+                    Datos del jugador:<br>
+                    <span id="displayPlayerId" style="color: white;">Player ID: (Pendiente)</span>
                 </div>
             </div>
 
-            <div class="steps-box">
-                ℹ️ <strong>Paso 1:</strong> Realiza el pago a los datos mostrados y toma captura.<br>
-                <strong>Paso 2:</strong> Selecciona abajo por dónde deseas enviar tu comprobante para activar tu servicio.
-            </div>
-
-            <!-- Campo de Nombre para la pantalla (Condicional) -->
-            <div class="pantalla-input-box" id="pantalla-input-container" style="display: none;">
-                <label for="input-nombre-pantalla">Nombre para la pantalla:</label>
-                <input type="text" id="input-nombre-pantalla" placeholder="Ej. Juan / Perfil 1">
-            </div>
-
-            <div class="checkout-buttons-grid">
-                <button class="btn-wa-pay" onclick="enviarPedido('whatsapp')">💬 WhatsApp</button>
-                <button class="btn-tg-pay" onclick="enviarPedido('telegram')">✈️ Telegram</button>
+            <div class="totals-section">
+                <div class="subtotal-row">
+                    <span>Subtotal</span>
+                    <span id="subtotalText">Bs. 0,00</span>
+                </div>
+                <div class="total-row">
+                    <span>Total a Pagar</span>
+                    <span class="total-amount" id="totalText">Bs. 0,00</span>
+                </div>
+                <div class="ssl-footer">Transacción segura SSL 🚀</div>
             </div>
         </div>
     </div>
 
     <script>
-        let tasaBs = 65.00; 
-        let monedaActual = 'USD';
-        let carrito = [];
-        let planesActualesModal = [];
-        let categoriaModalActual = '';
+        // Simulamos la base de datos de los juegos y la data recibida
+        // Esto lo puedes conectar fácilmente con parámetros URL (ej: ?juego=freefire&paquete=100)
+        const urlParams = new URLSearchParams(window.location.search);
+        const juegoKey = urlParams.get('juego') || 'freefire';
+        const paqueteKey = urlParams.get('paq') || '100';
 
-        document.getElementById('tasa-mostrada').innerText = tasaBs.toFixed(2);
-
-        function cambiarMoneda(moneda, btn) {
-            monedaActual = moneda;
-            document.querySelectorAll('.curr-btn').forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-            actualizarPreciosVista();
-            actualizarCarritoUI();
-        }
-
-        function actualizarPreciosVista() {
-            let ofertaElem = document.getElementById('oferta-precio');
-            let usdOferta = parseFloat(ofertaElem.getAttribute('data-usd'));
-            if (monedaActual === 'Bs') {
-                ofertaElem.innerHTML = `Bs ${(usdOferta * tasaBs).toFixed(2)} <span style="font-size: 1rem; color: #9ca3af;">Bs</span>`;
-            } else {
-                ofertaElem.innerHTML = `$${usdOferta.toFixed(2)} <span style="font-size: 1rem; color: #9ca3af;">USD</span>`;
+        // Configuración de Catálogo por Juego
+        const catalogoJuegos = {
+            'freefire': {
+                nombre: 'FREE FIRE',
+                logo: 'https://images.unsplash.com/photo-1542751371-adc38448a05e?w=150', // Reemplaza con tu enlace o asset local
+                labelInput: 'Ingresa tu ID de Free Fire',
+                placeholderInput: 'Ej: 123456789',
+                paqueteNombre: '💎 100 + 10 Diamantes',
+                precioUnitario: 816.76
+            },
+            'roblox': {
+                nombre: 'ROBLOX',
+                logo: 'https://images.unsplash.com/photo-1612287233202-b51a36616763?w=150',
+                labelInput: 'Ingresa tu Usuario de Roblox',
+                placeholderInput: 'Ej: TuUsuario123',
+                paqueteNombre: 'robux 400 Robux',
+                precioUnitario: 550.00
+            },
+            'cod': {
+                nombre: 'CALL OF DUTY',
+                logo: 'https://images.unsplash.com/photo-1538481199705-c710c4e965fc?w=150',
+                labelInput: 'Ingresa tu ID de COD Mobile',
+                placeholderInput: 'Ej: CODPlayer99',
+                paqueteNombre: 'CP 880 पॉइंट्स',
+                precioUnitario: 950.00
             }
+        };
 
-            document.querySelectorAll('.card-plan-price').forEach(p => {
-                let valUSD = parseFloat(p.getAttribute('data-usd'));
-                if (monedaActual === 'Bs') {
-                    p.innerText = 'Bs ' + (valUSD * tasaBs).toFixed(2);
-                } else {
-                    p.innerText = '$' + valUSD.toFixed(2);
-                }
-            });
-        }
+        // Seleccionar datos actuales
+        let datosJuego = catalogoJuegos[juegoKey] || catalogoJuegos['freefire'];
+        let cantidadCombos = 1;
+        let idIngresado = "";
 
-        function abrirModal(plataforma, planes, indiceSeleccionado = 0, categoria = 'cine') {
-            document.getElementById('modal-titulo').innerText = plataforma;
-            planesActualesModal = planes;
-            categoriaModalActual = categoria;
-            document.getElementById('modal-qty').innerText = '1';
+        // Inicializar la interfaz visual
+        document.getElementById('gameLogo').src = datosJuego.logo;
+        document.getElementById('summaryGameLogo').src = datosJuego.logo;
+        document.getElementById('gameName').innerText = datosJuego.nombre;
+        document.getElementById('summaryGameName').innerText = datosJuego.nombre;
+        document.getElementById('formTitle').innerText = `2 DATOS DEL ${datosJuego.nombre}`;
+        document.getElementById('inputLabel').innerText = datosJuego.labelInput;
+        document.getElementById('playerIdInput').placeholder = datosJuego.placeholderInput;
+        document.getElementById('summaryPackage').innerText = datosJuego.paqueteNombre;
+
+        actualizarCalculos();
+
+        function actualizarDatos() {
+            const input = document.getElementById('playerIdInput');
+            idIngresado = input.value.trim();
+            document.getElementById('charCount').innerText = `${idIngresado.length}/13`;
             
-            let select = document.getElementById('modal-select-planes');
-            select.innerHTML = '';
-            planes.forEach((p, index) => {
-                let option = document.createElement('option');
-                option.value = index;
-                let precioMostrar = monedaActual === 'Bs' ? `Bs ${(p.precio * tasaBs).toFixed(2)}` : `$${p.precio.toFixed(2)}`;
-                option.textContent = `${p.nombre} - ${precioMostrar}`;
-                if(index === indiceSeleccionado) option.selected = true;
-                select.appendChild(option);
-            });
+            const display = document.getElementById('displayPlayerId');
+            const btn = document.getElementById('verifyBtn');
 
-            document.getElementById('modal-seleccion').style.display = 'flex';
-            actualizarSubtotalModal();
-        }
-
-        function cerrarModal() {
-            document.getElementById('modal-seleccion').style.display = 'none';
-        }
-
-        function cambiarCantidadModal(delta) {
-            let qtyElem = document.getElementById('modal-qty');
-            let qty = parseInt(qtyElem.innerText) + delta;
-            if (qty < 1) qty = 1;
-            qtyElem.innerText = qty;
-            actualizarSubtotalModal();
-        }
-
-        function actualizarSubtotalModal() {
-            let select = document.getElementById('modal-select-planes');
-            let index = select.value;
-            let planSeleccionado = planesActualesModal[index];
-            let qty = parseInt(document.getElementById('modal-qty').innerText);
-            let totalUSD = planSeleccionado.precio * qty;
-
-            let subtotalElem = document.getElementById('modal-subtotal');
-            if (monedaActual === 'Bs') {
-                subtotalElem.innerText = 'Bs ' + (totalUSD * tasaBs).toFixed(2);
+            if(idIngresado.length > 3) {
+                display.innerText = `Player ID: ${idIngresado}`;
+                btn.classList.add('ready');
+                btn.innerText = "Verificar ID y Continuar a WhatsApp";
             } else {
-                subtotalElem.innerText = '$' + totalUSD.toFixed(2);
+                display.innerText = `Player ID: (Pendiente)`;
+                btn.classList.remove('ready');
+                btn.innerText = "Verificar ID";
             }
         }
 
-        function agregarAlPedidoDesdeModal() {
-            let plataforma = document.getElementById('modal-titulo').innerText;
-            let select = document.getElementById('modal-select-planes');
-            let planSeleccionado = planesActualesModal[select.value];
-            let qty = parseInt(document.getElementById('modal-qty').innerText);
-
-            let itemExistente = carrito.find(i => i.plataforma === plataforma && i.plan === planSeleccionado.nombre);
-            if (itemExistente) {
-                itemExistente.cantidad += qty;
-            } else {
-                carrito.push({
-                    plataforma: plataforma,
-                    plan: planSeleccionado.nombre,
-                    precioUSD: planSeleccionado.precio,
-                    cantidad: qty,
-                    categoria: categoriaModalActual
-                });
-            }
-
-            cerrarModal();
-            actualizarCarritoUI();
-            toggleCart();
+        function cambiarCantidad(cambio) {
+            cantidadCombos += cambio;
+            if(cantidadCombos < 1) cantidadCombos = 1;
+            document.getElementById('quantityVal').innerText = cantidadCombos;
+            actualizarCalculos();
         }
 
-        function agregarDirecto(nombreCompleto, precioUSD, categoria = 'cine') {
-            carrito.push({
-                plataforma: nombreCompleto,
-                plan: 'Oferta Especial',
-                precioUSD: precioUSD,
-                cantidad: 1,
-                categoria: categoria
-            });
-            actualizarCarritoUI();
-            toggleCart();
+        function actualizarCalculos() {
+            let total = datosJuego.precioUnitario * cantidadCombos;
+            let formatoTotal = `Bs. ${total.toLocaleString('es-VE', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+            document.getElementById('subtotalText').innerText = formatoTotal;
+            document.getElementById('totalText').innerText = formatoTotal;
         }
 
-        function toggleCart() {
-            document.getElementById('cart-sidebar').classList.toggle('open');
-        }
-
-        function eliminarItem(index) {
-            carrito.splice(index, 1);
-            actualizarCarritoUI();
-        }
-
-        function actualizarCarritoUI() {
-            let container = document.getElementById('cart-items-container');
-            let countElem = document.getElementById('cart-count');
-            let totalValElem = document.getElementById('cart-total-val');
-
-            let totalItems = carrito.reduce((sum, item) => sum + item.cantidad, 0);
-            countElem.innerText = totalItems;
-
-            if (carrito.length === 0) {
-                container.innerHTML = '<div class="cart-empty">Tu pedido está vacío</div>';
-                totalValElem.innerText = monedaActual === 'Bs' ? 'Bs 0.00' : '$0.00';
+        function completarPedidoWhatsApp() {
+            if(idIngresado.length < 3) {
+                alert("Por favor ingresa un ID válido antes de continuar.");
                 return;
             }
 
-            container.innerHTML = '';
-            let totalGeneralUSD = 0;
+            // Armamos el mensaje para WhatsApp tal como lo manejas en tus automatizaciones
+            let numeroWhatsApp = "584120000000"; // Reemplaza con tu número de WhatsApp de SX Store
+            let mensaje = `Hola *SX Store* 👋,%0A` +
+                          `Quiero confirmar un pedido:%0A%0A` +
+                          `🎮 *Juego:* ${datosJuego.nombre}%0A` +
+                          `📦 *Paquete:* ${datosJuego.paqueteNombre}%0A` +
+                          `🔢 *Cantidad:* ${cantidadCombos}%0A` +
+                          `🆔 *ID / Datos:* ${idIngresado}%0A` +
+                          `💰 *Total a Pagar:* ${document.getElementById('totalText').innerText}%0A%0A` +
+                          `Quedo atento para realizar el pago.`;
 
-            carrito.forEach((item, index) => {
-                let subtotalItemUSD = item.precioUSD * item.cantidad;
-                totalGeneralUSD += subtotalItemUSD;
-
-                let precioTexto = monedaActual === 'Bs' ? `Bs ${(subtotalItemUSD * tasaBs).toFixed(2)}` : `$${subtotalItemUSD.toFixed(2)}`;
-
-                let div = document.createElement('div');
-                div.className = 'cart-item';
-                div.innerHTML = `
-                    <button class="cart-item-delete" onclick="eliminarItem(${index})">🗑️</button>
-                    <div class="cart-item-title">${item.plataforma}</div>
-                    <div class="cart-item-sub">${item.plan}</div>
-                    <div class="cart-item-footer">
-                        <span class="cart-item-qty">Cant: ${item.cantidad}</span>
-                        <span class="cart-item-price">${precioTexto}</span>
-                    </div>
-                `;
-                container.appendChild(div);
-            });
-
-            if (monedaActual === 'Bs') {
-                totalValElem.innerText = 'Bs ' + (totalGeneralUSD * tasaBs).toFixed(2);
-            } else {
-                totalValElem.innerText = '$' + totalGeneralUSD.toFixed(2);
-            }
-        }
-
-        function abrirModalCheckout() {
-            if (carrito.length === 0) {
-                alert("Tu carrito está vacío.");
-                return;
-            }
-
-            let totalGeneralUSD = carrito.reduce((sum, item) => sum + (item.precioUSD * item.cantidad), 0);
-            let totalBs = totalGeneralUSD * tasaBs;
-
-            document.getElementById('checkout-total-usd').innerText = `$${totalGeneralUSD.toFixed(2)} USD`;
-            document.getElementById('checkout-total-bs').innerText = `Bs. ${totalBs.toFixed(2)}`;
-
-            // Verificar si hay al menos un producto que NO sea de la categoría 'juegos'
-            let hayNoJuegos = carrito.some(item => item.categoria !== 'juegos');
-            let pantallaContainer = document.getElementById('pantalla-input-container');
-
-            if (hayNoJuegos) {
-                pantallaContainer.style.display = 'block';
-                document.getElementById('input-nombre-pantalla').value = ''; // Limpiar campo anterior
-            } else {
-                pantallaContainer.style.display = 'none';
-            }
-
-            document.getElementById('modal-checkout').style.display = 'flex';
-            toggleCart();
-        }
-
-        function cerrarModalCheckout() {
-            document.getElementById('modal-checkout').style.display = 'none';
-        }
-
-        function enviarPedido(plataformaEnvio) {
-            let totalGeneralUSD = carrito.reduce((sum, item) => sum + (item.precioUSD * item.cantidad), 0);
-            let totalBs = totalGeneralUSD * tasaBs;
-
-            let mensaje = `Hola Streamix Store, quiero procesar el siguiente pedido:\n\n`;
-            
-            carrito.forEach(item => {
-                let subtotalUSD = item.precioUSD * item.cantidad;
-                mensaje += `• *${item.plataforma}* (${item.plan}) x${item.cantidad} - $${subtotalUSD.toFixed(2)}\n`;
-            });
-
-            // Si el campo de nombre de pantalla está visible, lo capturamos y agregamos al mensaje
-            let pantallaContainer = document.getElementById('pantalla-input-container');
-            if (pantallaContainer.style.display !== 'none') {
-                let nombrePantalla = document.getElementById('input-nombre-pantalla').value.trim();
-                if (nombrePantalla) {
-                    mensaje += `\n*Nombre para la pantalla:* ${nombrePantalla}`;
-                }
-            }
-
-            mensaje += `\n\n*Total a pagar:* $${totalGeneralUSD.toFixed(2)} USD (Bs. ${totalBs.toFixed(2)})`;
-            mensaje += `\n\nAdjunto mi comprobante de pago. Quedo a la espera de la activación.`;
-
-            if (plataformaEnvio === 'whatsapp') {
-                let tuNumeroWhatsApp = "584124405245";
-                let url = `https://wa.me/${tuNumeroWhatsApp}?text=${encodeURIComponent(mensaje)}`;
-                window.open(url, '_blank');
-            } else if (plataformaEnvio === 'telegram') {
-                let tuUserTelegram = "Wilmerst";
-                let url = `https://t.me/${tuUserTelegram}?text=${encodeURIComponent(mensaje)}`;
-                window.open(url, '_blank');
-            }
-        }
-
-        function filtrar(categoria, btn) {
-            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-
-            document.querySelectorAll('.platform-card').forEach(t => {
-                if (categoria === 'todos' || t.getAttribute('data-categoria') === categoria) {
-                    t.style.display = 'flex';
-                } else {
-                    t.style.display = 'none';
-                }
-            });
+            // Redirigir a WhatsApp
+            window.location.href = `https://wa.me/${numeroWhatsApp}?text=${mensaje}`;
         }
     </script>
 </body>
