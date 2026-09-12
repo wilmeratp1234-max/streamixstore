@@ -250,7 +250,9 @@
             <button class="filter-btn" onclick="filtrar('cine', this)">🎬 Cine & Series</button>
             <button class="filter-btn" onclick="filtrar('musica', this)">🎵 Música</button>
             <button class="filter-btn" onclick="filtrar('iptv', this)">📺 IPTV</button>
+            <button class="filter-btn" onclick="filtrar('disenos', this)">💻 Diseños y Programas</button>
             <button class="filter-btn" onclick="filtrar('juegos', this)">🎮 Juegos</button>
+            <button class="filter-btn" onclick="filtrar('giftcards', this)">🎁 Gift Cards</button>
         </div>
 
         <!-- Cuadrícula de Plataformas -->
@@ -330,6 +332,122 @@
                 <button class="btn-card-addplan" onclick="abrirModal('Prime Video', [{nombre: '1 Pantalla', precio: 1.40}, {nombre: 'Cuenta Completa', precio: 4.00}], 0)">+ Añadir Plan</button>
             </div>
 
+            <!-- HBO MAX -->
+            <div class="platform-card" data-categoria="cine">
+                <div class="platform-header">
+                    <div class="platform-logo" style="background: #5b21b6;">H</div>
+                    <div class="platform-title">
+                        <h3>Hbo Max</h3>
+                        <span>🍿 SERIES Y PELÍCULAS</span>
+                    </div>
+                </div>
+                <div class="plans-list-box">
+                    <div class="card-plan-item" onclick="abrirModal('Hbo Max', [{nombre: '1 Pantalla', precio: 2.00}, {nombre: 'Cuenta Completa', precio: 5.50}], 0)">
+                        <span class="card-plan-name">1 Pantalla</span>
+                        <span class="card-plan-price" data-usd="2.00">$2.00</span>
+                    </div>
+                    <div class="card-plan-item" onclick="abrirModal('Hbo Max', [{nombre: '1 Pantalla', precio: 2.00}, {nombre: 'Cuenta Completa', precio: 5.50}], 1)">
+                        <span class="card-plan-name">Cuenta Completa</span>
+                        <span class="card-plan-price" data-usd="5.50">$5.50</span>
+                    </div>
+                </div>
+                <button class="btn-card-addplan" onclick="abrirModal('Hbo Max', [{nombre: '1 Pantalla', precio: 2.00}, {nombre: 'Cuenta Completa', precio: 5.50}], 0)">+ Añadir Plan</button>
+            </div>
+
+            <!-- CRUNCHYROLL -->
+            <div class="platform-card" data-categoria="cine">
+                <div class="platform-header">
+                    <div class="platform-logo" style="background: #f97316;">CR</div>
+                    <div class="platform-title">
+                        <h3>Crunchyroll</h3>
+                        <span>⚡ ANIME STREAMING</span>
+                    </div>
+                </div>
+                <div class="plans-list-box">
+                    <div class="card-plan-item" onclick="abrirModal('Crunchyroll', [{nombre: '1 Mes (Perfil)', precio: 1.50}, {nombre: 'Cuenta Completa 1 Mes', precio: 4.00}], 0)">
+                        <span class="card-plan-name">1 Mes (Perfil)</span>
+                        <span class="card-plan-price" data-usd="1.50">$1.50</span>
+                    </div>
+                    <div class="card-plan-item" onclick="abrirModal('Crunchyroll', [{nombre: '1 Mes (Perfil)', precio: 1.50}, {nombre: 'Cuenta Completa 1 Mes', precio: 4.00}], 1)">
+                        <span class="card-plan-name">Cuenta Completa 1 Mes</span>
+                        <span class="card-plan-price" data-usd="4.00">$4.00</span>
+                    </div>
+                </div>
+                <button class="btn-card-addplan" onclick="abrirModal('Crunchyroll', [{nombre: '1 Mes (Perfil)', precio: 1.50}, {nombre: 'Cuenta Completa 1 Mes', precio: 4.00}], 0)">+ Añadir Plan</button>
+            </div>
+
+            <!-- PARAMOUNT+ -->
+            <div class="platform-card" data-categoria="cine">
+                <div class="platform-header">
+                    <div class="platform-logo" style="background: #1d4ed8;">P+</div>
+                    <div class="platform-title">
+                        <h3>Paramount+</h3>
+                        <span>🎬 PELÍCULAS Y SERIES</span>
+                    </div>
+                </div>
+                <div class="plans-list-box">
+                    <div class="card-plan-item" onclick="abrirModal('Paramount+', [{nombre: '1 Mes (Cuenta Completa)', precio: 3.50}], 0)">
+                        <span class="card-plan-name">1 Mes (Cuenta Completa)</span>
+                        <span class="card-plan-price" data-usd="3.50">$3.50</span>
+                    </div>
+                </div>
+                <button class="btn-card-addplan" onclick="abrirModal('Paramount+', [{nombre: '1 Mes (Cuenta Completa)', precio: 3.50}], 0)">+ Añadir Plan</button>
+            </div>
+
+            <!-- VIX -->
+            <div class="platform-card" data-categoria="cine">
+                <div class="platform-header">id
+                    <div class="platform-logo" style="background: #be185d;">V</div>
+                    <div class="platform-title">
+                        <h3>Vix</h3>
+                        <span>📺 NOVELAS Y DEPORTES</span>
+                    </div>
+                </div>
+                <div class="plans-list-box">
+                    <div class="card-plan-item" onclick="abrirModal('Vix', [{nombre: '1 Mes (Cuenta Completa)', precio: 3.00}], 0)">
+                        <span class="card-plan-name">1 Mes (Cuenta Completa)</span>
+                        <span class="card-plan-price" data-usd="3.00">$3.00</span>
+                    </div>
+                </div>
+                <button class="btn-card-addplan" onclick="abrirModal('Vix', [{nombre: '1 Mes (Cuenta Completa)', precio: 3.00}], 0)">+ Añadir Plan</button>
+            </div>
+
+            <!-- APPLE TV -->
+            <div class="platform-card" data-categoria="cine">
+                <div class="platform-header">
+                    <div class="platform-logo" style="background: #374151;"></div>
+                    <div class="platform-title">
+                        <h3>AppleTV</h3>
+                        <span>🎬 APPLE ORIGINALS</span>
+                    </div>
+                </div>
+                <div class="plans-list-box">
+                    <div class="card-plan-item" onclick="abrirModal('AppleTV', [{nombre: '1 Mes (Cuenta Completa)', precio: 4.00}], 0)">
+                        <span class="card-plan-name">1 Mes (Cuenta Completa)</span>
+                        <span class="card-plan-price" data-usd="4.00">$4.00</span>
+                    </div>
+                </div>
+                <button class="btn-card-addplan" onclick="abrirModal('AppleTV', [{nombre: '1 Mes (Cuenta Completa)', precio: 4.00}], 0)">+ Añadir Plan</button>
+            </div>
+
+            <!-- UNIVERSAL -->
+            <div class="platform-card" data-categoria="cine">
+                <div class="platform-header">
+                    <div class="platform-logo" style="background: #2563eb;">U</div>
+                    <div class="platform-title">
+                        <h3>Universal</h3>
+                        <span>🍿 UNIVERSAL +</span>
+                    </div>
+                </div>
+                <div class="plans-list-box">
+                    <div class="card-plan-item" onclick="abrirModal('Universal', [{nombre: '1 Mes (Cuenta Completa)', precio: 3.50}], 0)">
+                        <span class="card-plan-name">1 Mes (Cuenta Completa)</span>
+                        <span class="card-plan-price" data-usd="3.50">$3.50</span>
+                    </div>
+                </div>
+                <button class="btn-card-addplan" onclick="abrirModal('Universal', [{nombre: '1 Mes (Cuenta Completa)', precio: 3.50}], 0)">+ Añadir Plan</button>
+            </div>
+
             <!-- SPOTIFY -->
             <div class="platform-card" data-categoria="musica">
                 <div class="platform-header">
@@ -350,6 +468,28 @@
                     </div>
                 </div>
                 <button class="btn-card-addplan" onclick="abrirModal('Spotify Premium', [{nombre: 'Individual (1 Mes)', precio: 2.50}, {nombre: 'Plan Familiar (Invitación)', precio: 4.00}], 0)">+ Añadir Plan</button>
+            </div>
+
+            <!-- YOUTUBE PREMIUM -->
+            <div class="platform-card" data-categoria="musica">
+                <div class="platform-header">
+                    <div class="platform-logo" style="background: #dc2626;">YT</div>
+                    <div class="platform-title">
+                        <h3>Youtube Premium</h3>
+                        <span>🎵 MÚSICA Y VIDEOS SIN ANUNCIOS</span>
+                    </div>
+                </div>
+                <div class="plans-list-box">
+                    <div class="card-plan-item" onclick="abrirModal('Youtube Premium', [{nombre: '1 Mes (Invitación Familiar)', precio: 2.00}, {nombre: '1 Mes (A tu correo)', precio: 3.50}], 0)">
+                        <span class="card-plan-name">1 Mes (Invitación Familiar)</span>
+                        <span class="card-plan-price" data-usd="2.00">$2.00</span>
+                    </div>
+                    <div class="card-plan-item" onclick="abrirModal('Youtube Premium', [{nombre: '1 Mes (Invitación Familiar)', precio: 2.00}, {nombre: '1 Mes (A tu correo)', precio: 3.50}], 1)">
+                        <span class="card-plan-name">1 Mes (A tu correo)</span>
+                        <span class="card-plan-price" data-usd="3.50">$3.50</span>
+                    </div>
+                </div>
+                <button class="btn-card-addplan" onclick="abrirModal('Youtube Premium', [{nombre: '1 Mes (Invitación Familiar)', precio: 2.00}, {nombre: '1 Mes (A tu correo)', precio: 3.50}], 0)">+ Añadir Plan</button>
             </div>
 
             <!-- IPTV -->
@@ -374,6 +514,72 @@
                 <button class="btn-card-addplan" onclick="abrirModal('IPTV Smarters Pro', [{nombre: '1 Mes de Servicio', precio: 5.00}, {nombre: '3 Meses (Oferta)', precio: 12.00}], 0)">+ Añadir Plan</button>
             </div>
 
+            <!-- FLUJOTV -->
+            <div class="platform-card" data-categoria="iptv">
+                <div class="platform-header">
+                    <div class="platform-logo" style="background: #0284c7;">FTV</div>
+                    <div class="platform-title">
+                        <h3>FlujoTV</h3>
+                        <span>📡 TV EN VIVO Y STREAMING</span>
+                    </div>
+                </div>
+                <div class="plans-list-box">
+                    <div class="card-plan-item" onclick="abrirModal('FlujoTV', [{nombre: '1 Mes de Servicio', precio: 6.00}, {nombre: '3 Meses', precio: 16.00}], 0)">
+                        <span class="card-plan-name">1 Mes de Servicio</span>
+                        <span class="card-plan-price" data-usd="6.00">$6.00</span>
+                    </div>
+                    <div class="card-plan-item" onclick="abrirModal('FlujoTV', [{nombre: '1 Mes de Servicio', precio: 6.00}, {nombre: '3 Meses', precio: 16.00}], 1)">
+                        <span class="card-plan-name">3 Meses</span>
+                        <span class="card-plan-price" data-usd="16.00">$16.00</span>
+                    </div>
+                </div>
+                <button class="btn-card-addplan" onclick="abrirModal('FlujoTV', [{nombre: '1 Mes de Servicio', precio: 6.00}, {nombre: '3 Meses', precio: 16.00}], 0)">+ Añadir Plan</button>
+            </div>
+
+            <!-- CANVA -->
+            <div class="platform-card" data-categoria="disenos">
+                <div class="platform-header">
+                    <div class="platform-logo" style="background: #0d9488;">C</div>
+                    <div class="platform-title">
+                        <h3>Canva</h3>
+                        <span>💻 DISEÑO GRÁFICO PRO</span>
+                    </div>
+                </div>
+                <div class="plans-list-box">
+                    <div class="card-plan-item" onclick="abrirModal('Canva', [{nombre: 'Cuenta Pro (1 Mes - Invitación)', precio: 1.50}, {nombre: 'Cuenta Pro (1 Año)', precio: 10.00}], 0)">
+                        <span class="card-plan-name">Cuenta Pro (1 Mes - Invitación)</span>
+                        <span class="card-plan-price" data-usd="1.50">$1.50</span>
+                    </div>
+                    <div class="card-plan-item" onclick="abrirModal('Canva', [{nombre: 'Cuenta Pro (1 Mes - Invitación)', precio: 1.50}, {nombre: 'Cuenta Pro (1 Año)', precio: 10.00}], 1)">
+                        <span class="card-plan-name">Cuenta Pro (1 Año)</span>
+                        <span class="card-plan-price" data-usd="10.00">$10.00</span>
+                    </div>
+                </div>
+                <button class="btn-card-addplan" onclick="abrirModal('Canva', [{nombre: 'Cuenta Pro (1 Mes - Invitación)', precio: 1.50}, {nombre: 'Cuenta Pro (1 Año)', precio: 10.00}], 0)">+ Añadir Plan</button>
+            </div>
+
+            <!-- CAPCUT -->
+            <div class="platform-card" data-categoria="disenos">
+                <div class="platform-header">
+                    <div class="platform-logo" style="background: #111827; border: 1px solid #374151;">CC</div>
+                    <div class="platform-title">
+                        <h3>Capcut</h3>
+                        <span>💻 EDICIÓN DE VIDEO PRO</span>
+                    </div>
+                </div>
+                <div class="plans-list-box">
+                    <div class="card-plan-item" onclick="abrirModal('Capcut', [{nombre: '1 Mes Pro', precio: 3.00}, {nombre: '3 Meses Pro', precio: 7.50}], 0)">
+                        <span class="card-plan-name">1 Mes Pro</span>
+                        <span class="card-plan-price" data-usd="3.00">$3.00</span>
+                    </div>
+                    <div class="card-plan-item" onclick="abrirModal('Capcut', [{nombre: '1 Mes Pro', precio: 3.00}, {nombre: '3 Meses Pro', precio: 7.50}], 1)">
+                        <span class="card-plan-name">3 Meses Pro</span>
+                        <span class="card-plan-price" data-usd="7.50">$7.50</span>
+                    </div>
+                </div>
+                <button class="btn-card-addplan" onclick="abrirModal('Capcut', [{nombre: '1 Mes Pro', precio: 3.00}, {nombre: '3 Meses Pro', precio: 7.50}], 0)">+ Añadir Plan</button>
+            </div>
+
             <!-- JUEGOS -->
             <div class="platform-card" data-categoria="juegos">
                 <div class="platform-header">
@@ -394,6 +600,146 @@
                     </div>
                 </div>
                 <button class="btn-card-addplan" onclick="abrirModal('PlayStation & Recargas', [{nombre: 'Mobile Legends (Diamantes)', precio: 2.00}, {nombre: 'Juego PS4 / PS5 (Cuenta Primaria)', precio: 15.00}], 0)">+ Añadir Plan</button>
+            </div>
+
+            <!-- FREE FIRE -->
+            <div class="platform-card" data-categoria="juegos">
+                <div class="platform-header">
+                    <div class="platform-logo" style="background: #b45309;">FF</div>
+                    <div class="platform-title">
+                        <h3>Free Fire</h3>
+                        <span>🔥 RECARGA DE DIAMANTES</span>
+                    </div>
+                </div>
+                <div class="plans-list-box">
+                    <div class="card-plan-item" onclick="abrirModal('Free Fire', [{nombre: '100 Diamantes', priecio: 1.10, precio: 1.10}, {nombre: '310 Diamantes', precio: 3.10}, {nombre: '520 Diamantes', precio: 5.00}], 0)">
+                        <span class="card-plan-name">100 Diamantes</span>
+                        <span class="card-plan-price" data-usd="1.10">$1.10</span>
+                    </div>
+                    <div class="card-plan-item" onclick="abrirModal('Free Fire', [{nombre: '100 Diamantes', precio: 1.10}, {nombre: '310 Diamantes', precio: 3.10}, {nombre: '520 Diamantes', precio: 5.00}], 1)">
+                        <span class="card-plan-name">310 Diamantes</span>
+                        <span class="card-plan-price" data-usd="3.10">$3.10</span>
+                    </div>
+                    <div class="card-plan-item" onclick="abrirModal('Free Fire', [{nombre: '100 Diamantes', precio: 1.10}, {nombre: '310 Diamantes', precio: 3.10}, {nombre: '520 Diamantes', precio: 5.00}], 2)">
+                        <span class="card-plan-name">520 Diamantes</span>
+                        <span class="card-plan-price" data-usd="5.00">$5.00</span>
+                    </div>
+                </div>
+                <button class="btn-card-addplan" onclick="abrirModal('Free Fire', [{nombre: '100 Diamantes', precio: 1.10}, {nombre: '310 Diamantes', precio: 3.10}, {nombre: '520 Diamantes', precio: 5.00}], 0)">+ Añadir Plan</button>
+            </div>
+
+            <!-- CALL OF DUTY MOBILE -->
+            <div class="platform-card" data-categoria="juegos">
+                <div class="platform-header">
+                    <div class="platform-logo" style="background: #334155;">COD</div>
+                    <div class="platform-title">
+                        <h3>Call Of Duty Mobile</h3>
+                        <span>🎯 CP PUNTOS COD</span>
+                    </div>
+                </div>
+                <div class="plans-list-box">
+                    <div class="card-plan-item" onclick="abrirModal('Call Of Duty Mobile', [{nombre: '88 CP', precio: 1.20}, {nombre: '420 CP', precio: 5.50}], 0)">
+                        <span class="card-plan-name">88 CP</span>
+                        <span class="card-plan-price" data-usd="1.20">$1.20</span>
+                    </div>
+                    <div class="card-plan-item" onclick="abrirModal('Call Of Duty Mobile', [{nombre: '88 CP', precio: 1.20}, {nombre: '420 CP', precio: 5.50}], 1)">
+                        <span class="card-plan-name">420 CP</span>
+                        <span class="card-plan-price" data-usd="5.50">$5.50</span>
+                    </div>
+                </div>
+                <button class="btn-card-addplan" onclick="abrirModal('Call Of Duty Mobile', [{nombre: '88 CP', precio: 1.20}, {nombre: '420 CP', precio: 5.50}], 0)">+ Añadir Plan</button>
+            </div>
+
+            <!-- ROBLOX -->
+            <div class="platform-card" data-categoria="juegos">
+                <div class="platform-header">
+                    <div class="platform-logo" style="background: #ef4444;">RBX</div>
+                    <div class="platform-title">
+                        <h3>Roblox</h3>
+                        <span>🧱 ROBUX DIRECTOS</span>
+                    </div>
+                </div>
+                <div class="plans-list-box">
+                    <div class="card-plan-item" onclick="abrirModal('Roblox', [{nombre: '400 Robux', precio: 5.00}, {nombre: '800 Robux', precio: 10.00}], 0)">
+                        <span class="card-plan-name">400 Robux</span>
+                        <span class="card-plan-price" data-usd="5.00">$5.00</span>
+                    </div>
+                    <div class="card-plan-item" onclick="abrirModal('Roblox', [{nombre: '400 Robux', precio: 5.00}, {nombre: '800 Robux', precio: 10.00}], 1)">
+                        <span class="card-plan-name">800 Robux</span>
+                        <span class="card-plan-price" data-usd="10.00">$10.00</span>
+                    </div>
+                </div>
+                <button class="btn-card-addplan" onclick="abrirModal('Roblox', [{nombre: '400 Robux', precio: 5.00}, {nombre: '800 Robux', precio: 10.00}], 0)">+ Añadir Plan</button>
+            </div>
+
+            <!-- GIFT CARD NETFLIX -->
+            <div class="platform-card" data-categoria="giftcards">
+                <div class="platform-header">
+                    <div class="platform-logo" style="background: #b91c1c;">GC</div>
+                    <div class="platform-title">
+                        <h3>Gift Card Netflix</h3>
+                        <span>🎁 TARJETA DE REGALO</span>
+                    </div>
+                </div>
+                <div class="plans-list-box">
+                    <div class="card-plan-item" onclick="abrirModal('Gift Card Netflix', [{nombre: 'Gift Card $15', precio: 16.00}, {nombre: 'Gift Card $30', precio: 32.00}], 0)">
+                        <span class="card-plan-name">Gift Card $15</span>
+                        <span class="card-plan-price" data-usd="16.00">$16.00</span>
+                    </div>
+                    <div class="card-plan-item" onclick="abrirModal('Gift Card Netflix', [{nombre: 'Gift Card $15', precio: 16.00}, {nombre: 'Gift Card $30', precio: 32.00}], 1)">
+                        <span class="card-plan-name">Gift Card $30</span>
+                        <span class="card-plan-price" data-usd="32.00">$32.00</span>
+                    </div>
+                </div>
+                <button class="btn-card-addplan" onclick="abrirModal('Gift Card Netflix', [{nombre: 'Gift Card $15', precio: 16.00}, {nombre: 'Gift Card $30', precio: 32.00}], 0)">+ Añadir Plan</button>
+            </div>
+
+            <!-- GIFT CARD ITUNES -->
+            <div class="platform-card" data-categoria="giftcards">
+                <div class="platform-header">
+                    <div class="platform-logo" style="background: #475569;">GC</div>
+                    <div class="platform-title">
+                        <h3>Gift Card iTunes</h3>
+                        <span>🎁 APPLE / ITUNES USA</span>
+                    </div>
+                </div>
+                <div class="plans-list-box">
+                    <div class="card-plan-item" onclick="abrirModal('Gift Card iTunes', [{nombre: 'Gift Card $10', precio: 11.00}, {nombre: 'Gift Card $25', precio: 27.00}], 0)">
+                        <span class="card-plan-name">Gift Card $10</span>
+                        <span class="card-plan-price" data-usd="11.00">$11.00</span>
+                    </div>
+                    <div class="card-plan-item" onclick="abrirModal('Gift Card iTunes', [{nombre: 'Gift Card $10', precio: 11.00}, {nombre: 'Gift Card $25', precio: 27.00}], 1)">
+                        <span class="card-plan-name">Gift Card $25</span>
+                        <span class="card-plan-price" data-usd="27.00">$27.00</span>
+                    </div>
+                </div>
+                <button class="btn-card-addplan" onclick="abrirModal('Gift Card iTunes', [{nombre: 'Gift Card $10', precio: 11.00}, {nombre: 'Gift Card $25', precio: 27.00}], 0)">+ Añadir Plan</button>
+            </div>
+
+            <!-- GIFT CARD PLAY STATION USA -->
+            <div class="platform-card" data-categoria="giftcards">
+                <div class="platform-header">
+                    <div class="platform-logo" style="background: #1d4ed8;">PS</div>
+                    <div class="platform-title">
+                        <h3>Gift Card Play Station USA</h3>
+                        <span>🎁 PSN STORE USA</span>
+                    </div>
+                </div>
+                <div class="plans-list-box">
+                    <div class="card-plan-item" onclick="abrirModal('Gift Card Play Station USA', [{nombre: 'PSN Card $10', precio: 11.00}, {nombre: 'PSN Card $25', precio: 27.00}, {nombre: 'PSN Card $50', precio: 54.00}], 0)">
+                        <span class="card-plan-name">PSN Card $10</span>
+                        <span class="card-plan-price" data-usd="11.00">$11.00</span>
+                    </div>
+                    <div class="card-plan-item" onclick="abrirModal('Gift Card Play Station USA', [{nombre: 'PSN Card $10', precio: 11.00}, {nombre: 'PSN Card $25', precio: 27.00}, {nombre: 'PSN Card $50', precio: 54.00}], 1)">
+                        <span class="card-plan-name">PSN Card $25</span>
+                        <span class="card-plan-price" data-usd="27.00">$27.00</span>
+                    </div>
+                    <div class="card-plan-item" onclick="abrirModal('Gift Card Play Station USA', [{nombre: 'PSN Card $10', precio: 11.00}, {nombre: 'PSN Card $25', precio: 27.00}, {nombre: 'PSN Card $50', precio: 54.00}], 2)">
+                        <span class="card-plan-name">PSN Card $50</span>
+                        <span class="card-plan-price" data-usd="54.00">$54.00</span>
+                    </div>
+                </div>
+                <button class="btn-card-addplan" onclick="abrirModal('Gift Card Play Station USA', [{nombre: 'PSN Card $10', precio: 11.00}, {nombre: 'PSN Card $25', precio: 27.00}, {nombre: 'PSN Card $50', precio: 54.00}], 0)">+ Añadir Plan</button>
             </div>
 
         </div>
