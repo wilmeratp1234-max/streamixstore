@@ -173,7 +173,7 @@
         .steps-box { background: #111827; border: 1px solid #374151; border-radius: 12px; padding: 15px; margin-bottom: 20px; font-size: 0.85rem; color: #9ca3af; line-height: 1.5; }
         .steps-box strong { color: white; }
 
-        /* Estilo para el input de Nombre de Pantalla */
+        /* Estilo para el input de Nombre de Pantalla / Juegos */
         .pantalla-input-box { background: #111827; border: 1px solid #374151; border-radius: 12px; padding: 15px; margin-bottom: 20px; }
         .pantalla-input-box label { font-size: 0.85rem; color: #f87171; font-weight: bold; margin-bottom: 8px; display: block; }
         .pantalla-input-box input { width: 100%; padding: 10px 12px; background: #0b0f19; border: 1px solid #374151; border-radius: 8px; color: white; font-size: 0.9rem; outline: none; }
@@ -968,9 +968,9 @@
                 <strong>Paso 2:</strong> Selecciona abajo por dónde deseas enviar tu comprobante para activar tu servicio.
             </div>
 
-            <!-- Campo de Nombre para la pantalla (Condicional) -->
+            <!-- Campo dinámico de Nombre de Pantalla / Datos de Juego -->
             <div class="pantalla-input-box" id="pantalla-input-container" style="display: none;">
-                <label for="input-nombre-pantalla">Nombre para la pantalla:</label>
+                <label for="input-nombre-pantalla" id="label-input-dinamico">Nombre para la pantalla:</label>
                 <input type="text" id="input-nombre-pantalla" placeholder="Ej. Juan / Perfil 1">
             </div>
 
@@ -1166,13 +1166,25 @@
             document.getElementById('checkout-total-usd').innerText = `$${totalGeneralUSD.toFixed(2)} USD`;
             document.getElementById('checkout-total-bs').innerText = `Bs. ${totalBs.toFixed(2)}`;
 
-            // Verificar si hay al menos un producto que NO sea de la categoría 'juegos'
+            // Verificamos si el carrito tiene productos de la categoría 'juegos' y/o de otras categorías
+            let hayJuegos = carrito.some(item => item.categoria === 'juegos');
             let hayNoJuegos = carrito.some(item => item.categoria !== 'juegos');
             let pantallaContainer = document.getElementById('pantalla-input-container');
+            let labelInput = document.getElementById('label-input-dinamico');
+            let inputCamp = document.getElementById('input-nombre-pantalla');
 
-            if (hayNoJuegos) {
+            if (hayJuegos && !hayNoJuegos) {
+                // Si son EXCLUSIVAMENTE juegos
                 pantallaContainer.style.display = 'block';
-                document.getElementById('input-nombre-pantalla').value = ''; // Limpiar campo anterior
+                labelInput.innerText = 'ID del Jugador / Correo y clave de la cuenta:';
+                inputCamp.placeholder = 'Ej. ID: 12345678 / correo@gmail.com - clave';
+                inputCamp.value = '';
+            } else if (hayNoJuegos) {
+                // Si incluye otros servicios (streaming, etc.)
+                pantallaContainer.style.display = 'block';
+                labelInput.innerText = 'Nombre para la pantalla:';
+                inputCamp.placeholder = 'Ej. Juan / Perfil 1';
+                inputCamp.value = '';
             } else {
                 pantallaContainer.style.display = 'none';
             }
@@ -1196,12 +1208,13 @@
                 mensaje += `• *${item.plataforma}* (${item.plan}) x${item.cantidad} - $${subtotalUSD.toFixed(2)}\n`;
             });
 
-            // Si el campo de nombre de pantalla está visible, lo capturamos y agregamos al mensaje
+            // Capturamos el texto del input dinámico si está visible
             let pantallaContainer = document.getElementById('pantalla-input-container');
             if (pantallaContainer.style.display !== 'none') {
-                let nombrePantalla = document.getElementById('input-nombre-pantalla').value.trim();
-                if (nombrePantalla) {
-                    mensaje += `\n*Nombre para la pantalla:* ${nombrePantalla}`;
+                let valorInput = document.getElementById('input-nombre-pantalla').value.trim();
+                let etiquetaActual = document.getElementById('label-input-dinamico').innerText.replace(':', '');
+                if (valorInput) {
+                    mensaje += `\n*${etiquetaActual}:* ${valorInput}`;
                 }
             }
 
@@ -1234,4 +1247,3 @@
     </script>
 </body>
 </html>
-```[cite: 4]
