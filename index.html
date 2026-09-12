@@ -23,8 +23,7 @@
         
         .badge-container { display: flex; justify-content: center; gap: 15px; margin-bottom: 25px; flex-wrap: wrap; }
         .badge { background: #111827; border: 1px solid #374151; padding: 8px 16px; border-radius: 20px; font-size: 0.85rem; color: #9ca3af; display: flex; align-items: center; gap: 8px; }
-        .badge.
-		{ color: #20e651; border-color: rgba(239, 68, 68, 0.3); }
+        .badge.green { color: #20e651; border-color: rgba(239, 68, 68, 0.3); }
         .dot { width: 8px; height: 8px; background-color: #20e651; border-radius: 50%; box-shadow: 0 0 8px #20e651; }
 
         header { text-align: center; margin-bottom: 40px; }
@@ -32,9 +31,52 @@
         header p { color: #9ca3af; font-size: 1.1rem; }
         header .sub-desc { color: #9ca3af; font-size: 0.95rem; margin-top: 15px; max-width: 600px; margin-left: auto; margin-right: auto; }
 
-        /* Oferta destacada */
-        .featured-card { background: linear-gradient(145deg, #0f172a, #180d12); border: 1px solid #ef4444; border-radius: 16px; padding: 30px; margin-bottom: 40px; position: relative; box-shadow: 0 0 25px rgba(239, 68, 68, 0.15); }
-        .offer-tag { position: absolute; top: -12px; right: 30px; background: #ef4444; color: white; padding: 4px 12px; border-radius: 8px; font-size: 0.75rem; font-weight: bold; text-transform: uppercase; }
+        /* Oferta destacada con efecto de luz giratoria dinámica */
+        .featured-card { 
+            position: relative;
+            background: linear-gradient(145deg, #0f172a, #180d12); 
+            border-radius: 16px; 
+            padding: 30px; 
+            margin-bottom: 40px; 
+            box-shadow: 0 0 25px rgba(239, 68, 68, 0.15);
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        /* Capa de luz giratoria en el borde */
+        .featured-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(
+                transparent, 
+                transparent, 
+                transparent, 
+                #ef4444
+            );
+            animation: rotarLuz 4s linear infinite;
+            z-index: -2;
+        }
+
+        /* Capa interna para enmascarar el fondo oscuro y dejar visible solo el borde brillante */
+        .featured-card::after {
+            content: '';
+            position: absolute;
+            inset: 2px;
+            background: linear-gradient(145deg, #0f172a, #180d12);
+            border-radius: 14px;
+            z-index: -1;
+        }
+
+        @keyframes rotarLuz {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .offer-tag { position: absolute; top: -12px; right: 30px; background: #ef4444; color: white; padding: 4px 12px; border-radius: 8px; font-size: 0.75rem; font-weight: bold; text-transform: uppercase; z-index: 2; }
         .featured-content { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
         .featured-info h3 { color: #f87171; font-size: 0.9rem; text-transform: uppercase; margin-bottom: 8px; letter-spacing: 1px; }
         .featured-info h2 { font-size: 2rem; color: #ffffff; margin-bottom: 8px; }
@@ -75,7 +117,7 @@
         
         .tasas-box { background: #0b0f19; border: 1px solid #1f2937; padding: 10px 20px; border-radius: 12px; display: flex; align-items: center; gap: 15px; }
         .tasas-info { font-size: 0.85rem; color: #9ca3af; }
-        .tasas-info span { color: #3b82f6; font-weight: bold; } /* Tasa en color azul */
+        .tasas-info span { color: #3b82f6; font-weight: bold; }
         .currency-buttons { display: flex; gap: 5px; background: #111827; padding: 4px; border-radius: 8px; }
         .curr-btn { background: transparent; border: none; color: #9ca3af; padding: 6px 12px; border-radius: 6px; font-weight: bold; cursor: pointer; font-size: 0.85rem; }
         .curr-btn.active { background: #ef4444; color: white; }
@@ -108,7 +150,7 @@
         .card-plan-item:hover { background: #1f2937; }
         .card-plan-name { color: #e5e7eb; font-size: 0.9rem; font-weight: 500; }
         .card-plan-price { color: #3b82f6; font-weight: bold; font-size: 0.95rem; }
-        .card-plan-price.blue-price { color: #3b82f6 !important; } /* Precios en Bs color azul */
+        .card-plan-price.blue-price { color: #3b82f6 !important; }
 
         .btn-card-addplan { background: transparent; border: 1px solid #374151; color: #9ca3af; width: 100%; padding: 10px; border-radius: 10px; font-weight: bold; font-size: 0.85rem; cursor: pointer; transition: all 0.2s; text-align: center; }
         .btn-card-addplan:hover { background: #1f2937; color: white; border-color: #ef4444; }
@@ -168,7 +210,7 @@
         .checkout-total-box { background: #111827; border: 1px solid #1f2937; border-radius: 12px; padding: 15px; text-align: center; margin-bottom: 20px; }
         .checkout-total-title { font-size: 0.85rem; color: #9ca3af; margin-bottom: 5px; text-transform: uppercase; letter-spacing: 0.5px; }
         .checkout-total-usd { font-size: 1.8rem; color: #ef4444; font-weight: bold; }
-        .checkout-total-conversions { font-size: 1.1rem; color: #3b82f6; font-weight: bold; margin-top: 4px; } /* Total Bs en azul */
+        .checkout-total-conversions { font-size: 1.1rem; color: #3b82f6; font-weight: bold; margin-top: 4px; }
 
         .payment-info-box { background: #111827; border: 1px solid #1f2937; border-radius: 12px; padding: 15px; margin-bottom: 20px; font-size: 0.9rem; }
         .payment-section-title { font-size: 0.85rem; color: #f87171; font-weight: bold; margin-bottom: 10px; display: flex; align-items: center; gap: 6px; }
@@ -178,7 +220,6 @@
         .steps-box { background: #111827; border: 1px solid #374151; border-radius: 12px; padding: 15px; margin-bottom: 20px; font-size: 0.85rem; color: #9ca3af; line-height: 1.5; }
         .steps-box strong { color: white; }
 
-        /* Estilo para el input de Nombre de Pantalla / Juegos */
         .pantalla-input-box { background: #111827; border: 1px solid #374151; border-radius: 12px; padding: 15px; margin-bottom: 20px; }
         .pantalla-input-box label { font-size: 0.85rem; color: #f87171; font-weight: bold; margin-bottom: 8px; display: block; }
         .pantalla-input-box input { width: 100%; padding: 10px 12px; background: #0b0f19; border: 1px solid #374151; border-radius: 8px; color: white; font-size: 0.9rem; outline: none; }
@@ -199,30 +240,9 @@
         .footer-status-dot { width: 7px; height: 7px; background-color: #22c55e; border-radius: 50%; box-shadow: 0 0 6px #22c55e; }
 
         .footer-socials { display: flex; gap: 12px; align-items: center; }
-        
-        .social-icon-btn { 
-            width: 44px; 
-            height: 44px; 
-            background-color: rgba(255, 255, 255, 0.03); 
-            border: 1px solid rgba(255, 255, 255, 0.1); 
-            border-radius: 50%; 
-            display: flex; 
-            align-items: center; 
-            justify-content: center; 
-            color: #d1d5db; 
-            text-decoration: none; 
-            transition: all 0.3s ease; 
-        }
-        .social-icon-btn:hover { 
-            background-color: rgba(255, 255, 255, 0.08); 
-            border-color: rgba(255, 255, 255, 0.25); 
-            transform: translateY(-2px); 
-            color: white;
-        }
-        .social-icon-btn svg {
-            width: 20px;
-            height: 20px;
-        }
+        .social-icon-btn { width: 44px; height: 44px; background-color: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #d1d5db; text-decoration: none; transition: all 0.3s ease; }
+        .social-icon-btn:hover { background-color: rgba(255, 255, 255, 0.08); border-color: rgba(255, 255, 255, 0.25); transform: translateY(-2px); color: white; }
+        .social-icon-btn svg { width: 20px; height: 20px; }
 
         .footer-bottom { max-width: 1400px; margin: 30px auto 0 auto; padding-top: 20px; border-top: 1px solid #111827; text-align: center; font-size: 0.85rem; color: #6b7280; }
 
@@ -259,8 +279,7 @@
         
         <!-- Insignias superiores -->
         <div class="badge-container">
-            <div class="badge green"><div class="dot"></div> Horario:
-			9 AM - 11 PM</div>
+            <div class="badge green"><div class="dot"></div> Horario: 9 AM - 11 PM</div>
         </div>
 
         <!-- Encabezado principal -->
@@ -270,14 +289,14 @@
             <div class="sub-desc">Cuentas y Perfiles Originales, renovables y sin caídas. Elige tu plan, paga y estará activo en minutos.</div>
         </header>
 
-        <!-- Tarjeta de Oferta Limitada -->
+        <!-- Tarjeta de Oferta Limitada con Luz Dinámica -->
         <div class="featured-card">
-            <div class="offer-tag">🤩Oferta Limitada</div>
+            <div class="offer-tag">🤩 Oferta Limitada</div>
             <div class="featured-content">
                 <div class="featured-info">
                     <h3>Combo DUO</h3>
                     <h2>HBO MAX + VIX</h2>
-                    <p>Llévate el DUO perfecto, disfruta de las mejores series y peliculas del momento.</p>
+                    <p>Llévate el DUO perfecto, disfruta de las mejores series y películas del momento.</p>
                 </div>
                 <div class="price-box">
                     <div class="old-price">$3.60 USD</div>
@@ -860,7 +879,7 @@
                 <div class="footer-logo-title">STREAMIX STORE</div>
                 <div class="footer-status">
                     <div class="footer-status-dot"></div>
-                    Atención En línea
+                    Soporte en Linea
                 </div>
             </div>
             <div class="footer-socials">
@@ -985,7 +1004,6 @@
 
         document.getElementById('tasa-mostrada').innerText = formatearBs(tasaBs);
 
-        // Función auxiliar para formatear los montos en bolívares (ej: 3.360,00)
         function formatearBs(valor) {
             return valor.toLocaleString('es-VE', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
         }
@@ -1176,7 +1194,6 @@
             document.getElementById('checkout-total-usd').innerText = `$${totalGeneralUSD.toFixed(2)} USD`;
             document.getElementById('checkout-total-bs').innerText = `Bs. ${formatearBs(totalBs)}`;
 
-            // Verificamos si el carrito tiene productos de la categoría 'juegos' y/o de otras categorías
             let hayJuegos = carrito.some(item => item.categoria === 'juegos');
             let hayNoJuegos = carrito.some(item => item.categoria !== 'juegos');
             let pantallaContainer = document.getElementById('pantalla-input-container');
@@ -1184,13 +1201,11 @@
             let inputCamp = document.getElementById('input-nombre-pantalla');
 
             if (hayJuegos && !hayNoJuegos) {
-                // Si son EXCLUSIVAMENTE juegos
                 pantallaContainer.style.display = 'block';
                 labelInput.innerText = 'ID del Jugador / Correo y clave de la cuenta:';
                 inputCamp.placeholder = 'Ej. ID: 12345678 / correo@gmail.com - clave';
                 inputCamp.value = '';
             } else if (hayNoJuegos) {
-                // Si incluye otros servicios (streaming, etc.)
                 pantallaContainer.style.display = 'block';
                 labelInput.innerText = 'Nombre para la pantalla:';
                 inputCamp.placeholder = 'Ej. Juan / Perfil 1';
@@ -1219,7 +1234,6 @@
                 mensaje += `• *${item.plataforma}* (${item.plan}) x${item.cantidad} - $${subtotalUSD.toFixed(2)} (Bs. ${formatearBs(subtotalBs)})\n`;
             });
 
-            // Capturamos el texto del input dinámico si está visible
             let pantallaContainer = document.getElementById('pantalla-input-container');
             if (pantallaContainer.style.display !== 'none') {
                 let valorInput = document.getElementById('input-nombre-pantalla').value.trim();
