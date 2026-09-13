@@ -1561,7 +1561,7 @@
                 document.getElementById('distri-code-input').value = "";
                 solicitarAccesoDistribuidores();
             } else {
-                alert("Código de revendedor incorrecto. Solicita tu código a soporte.");
+                alert("Código de distribuidor incorrecto. Solicita tu código a soporte.");
             }
         }
 
@@ -1734,7 +1734,7 @@
         function prepararEnlacesEnvio(totalUSD, totalBs) {
             const nombrePerfil = document.getElementById('input-nombre-perfil').value.trim();
 
-            let mensaje = `Hola Streamix Store, deseo realizar el siguiente pedido:\n\n`;
+            let mensaje = `Hola Streamix Store, ya he realizado el pago del siguiente pedido:\n\n`;
             carrito.forEach(item => {
                 mensaje += `• ${item.nombre} x${item.cantidad} - $${(item.precioUSD * item.cantidad).toFixed(2)}\n`;
             });
@@ -1745,7 +1745,7 @@
 
             mensaje += `\n💰 Total USD: $${totalUSD.toFixed(2)}`;
             mensaje += `\n🇻🇪 Total Bs (Tasa ${tasaCambio.toFixed(2)}): Bs ${totalBs.toLocaleString('es-VE', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
-            mensaje += `\n\nQuedo a la espera de los datos de pago.`;
+            mensaje += `\n\nAdjunto comprobante de mi pago. Quedo a la espera de los datos de pago.`;
 
             const mensajeEncoded = encodeURIComponent(mensaje);
 
