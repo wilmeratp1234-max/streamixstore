@@ -306,61 +306,7 @@
         .btn-distri-verify:hover { opacity: 0.95; transform: translateY(-1px); }
         .btn-distri-verify:active { transform: translateY(0); }
 
-        /* CARRITO LATERAL */
-        .cart-sidebar {
-            position: fixed;
-            top: 0;
-            right: -100%;
-            width: 320px;
-            height: 100%;
-            background: #1e293b;
-            box-shadow: -5px 0 15px rgba(0,0,0,0.5);
-            transition: right 0.3s ease;
-            z-index: 1000;
-            display: flex;
-            flex-direction: column;
-            color: white;
-        }
-
-        .cart-sidebar.open {
-            right: 0;
-        }
-
-        .cart-header {
-            padding: 15px;
-            background: #0f172a;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .cart-body {
-            flex: 1;
-            padding: 15px;
-            overflow-y: auto;
-        }
-
-        .cart-footer {
-            padding: 15px;
-            background: #0f172a;
-        }
-
-        .btn-procesar {
-            width: 100%;
-            padding: 12px;
-            background: #3b82f6;
-            color: white;
-            border: none;
-            border-radius: 6px;
-            font-weight: bold;
-            cursor: pointer;
-            margin-top: 10px;
-        }
-
-        .blue-price {
-            color: #3b82f6 !important;}
-
-        /* ESTILOS DEL MODAL Y CHECKOUT */
+        /* MANTENIMIENTO DE ESTILOS Y REGULARES DE CONTROL DE MODALES */
         .modal-overlay {
             display: none;
             position: fixed;
@@ -374,106 +320,22 @@
             align-items: center;
         }
 
-        .checkout-modal-card {
-            background: #1e293b;
-            padding: 24px;
-            border-radius: 12px;
-            max-width: 500px;
-            width: 90%;
-            position: relative;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
-            color: white;
+        .cart-sidebar {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 320px;
+            height: 100%;
+            transition: right 0.3s ease;
+            z-index: 1000;
         }
 
-        .modal-close {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            background: transparent;
-            border: none;
-            color: #9ca3af;
-            font-size: 1.2rem;
-            cursor: pointer;
+        .cart-sidebar.open {
+            right: 0;
         }
 
-        .checkout-total-box {
-            background: #0f172a;
-            padding: 15px;
-            border-radius: 8px;
-            text-align: center;
-            margin-bottom: 15px;
-        }
-
-        .checkout-total-title {
-            font-size: 0.9rem;
-            color: #9ca3af;
-        }
-
-        .checkout-total-usd {
-            font-size: 1.8rem;
-            font-weight: bold;
-            color: #10b981;
-        }
-
-        .checkout-total-conversions {
-            font-size: 1.1rem;
-            color: #3b82f6;
-        }
-
-        .payment-info-box {
-            background: #334155;
-            padding: 12px;
-            border-radius: 8px;
-            font-size: 0.85rem;
-            margin-bottom: 15px;
-        }
-
-        .payment-section-title {
-            font-weight: bold;
-            margin-bottom: 5px;
-        }
-
-        .pantalla-input-box {
-            margin-bottom: 15px;
-        }
-
-        .pantalla-input-box label {
-            display: block;
-            font-size: 0.85rem;
-            margin-bottom: 5px;
-            color: #cbd5e1;
-        }
-
-        .pantalla-input-box input {
-            width: 100%;
-            padding: 10px;
-            border-radius: 6px;
-            border: 1px solid #475569;
-            background: #0f172a;
-            color: white;
-            box-sizing: border-box;
-        }
-
-        .steps-box {
-            font-size: 0.85rem;
-            color: #9ca3af;
-            margin-bottom: 15px;
-        }
-
-        .checkout-buttons-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-        }
-
-        .btn-wa-pay, .btn-tg-pay {
-            display: block;
-            text-align: center;
-            padding: 12px;
-            border-radius: 6px;
-            text-decoration: none;
-            font-weight: bold;
-            color: white;
+        .blue-price {
+            color: #3b82f6 !important;
         }
 
         .btn-wa-pay { background-color: #25d366; }
@@ -1596,8 +1458,8 @@
         document.addEventListener('DOMContentLoaded', () => {
             let tasaEl = document.getElementById('tasa-mostrada');
             if (tasaEl) tasaEl.innerText = tasaCambio.toFixed(2);
-            let filterBtnActive = document.querySelector('.filter-btn.active');
-            if (filterBtnActive) filtrar('todos', filterBtnActive);
+            let filterActive = document.querySelector('.filter-btn.active');
+            if (filterActive) filtrar('todos', filterActive);
         });
 
         // Cambio de Moneda (USD <-> Bs)
@@ -1854,11 +1716,11 @@
 
             prepararEnlacesEnvio(totalUSD, totalBs);
             
-            // Oculta el carrito lateral si está abierto
+            // Cierra la barra lateral del carrito si está visible
             const cartSidebar = document.getElementById('cart-sidebar');
             if (cartSidebar) cartSidebar.classList.remove('open');
-            
-            // Muestra inmediatamente el modal checkout
+
+            // Despliega inmediatamente la ventana de checkout
             document.getElementById('modal-checkout').style.display = 'flex';
         }
 
