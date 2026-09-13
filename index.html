@@ -1404,24 +1404,31 @@
     </div>
 
     <!-- MODAL DE PROCESAR PAGO / CHECKOUT -->
-    <div class="modal-overlay" id="modal-checkout">
-        <div class="checkout-modal-card">
-            <button class="modal-close" onclick="cerrarCheckoutModal()">🗑️</button>
-            <h2 style="font-size: 1.4rem; color: white; margin-bottom: 15px;">Finalizar Pedido</h2>
-            
-            <div class="checkout-total-box">
-                <div class="checkout-total-title">Monto Total a Pagar</div>
-                <div class="checkout-total-usd" id="checkout-monto-usd">$0.00 USD</div>
-                <div class="checkout-total-conversions" id="checkout-monto-bs">Bs 0.00</div>
-            </div>
+    <div class="payment-info-box">
+    <div class="payment-section-title">💳 MÉTODOS DE PAGO DISPONIBLES</div>
+    <div class="payment-details">
+        
+        <!-- Método 1: Pago Móvil -->
+        <div class="payment-method">
+            <strong>PAGO MÓVIL:</strong>
+            <ul>
+                <li><strong>BANCO:</strong> Bancamiga (0172) o BNC (0191)</li>
+                <li><strong>TELÉFONO:</strong> 0412-2818460</li>
+                <li><strong>CÉDULA:</strong> V-27178466</li>
+            </ul>
+        </div>
 
-            <div class="payment-info-box">
-                <div class="payment-section-title">💳 MÉTODOS DE PAGO DISPONIBLES</div>
-                <div class="payment-details">
-                    • <strong>Pago Móvil Bs:</strong> 📱 Pago Móvil Bancos: Bancamiga (0172) o BNC (0191) Teléfono: 0412-2818460 Cédula: V-27178466.<br>
-                    • <strong>Binance Pay (USDT) wilmertorres123@gmail.com</strong>
-                </div>
-            </div>
+        <!-- Método 2: Binance Pay -->
+        <div class="payment-method" style="margin-top: 15px;">
+            <strong>BINANCE PAY:</strong>
+            <ul>
+                <li><strong>CORREO:</strong> wilmertorres123@gmail.com</li>
+                <!-- Si necesitas agregar el ID u otros datos más adelante, solo añade un <li> aquí -->
+            </ul>
+        </div>
+
+    </div>
+</div>
 
             <div class="pantalla-input-box">
                 <label for="input-nombre-perfil">Nombre de Pantalla / Perfil (Opcional):</label>
