@@ -1711,96 +1711,54 @@
         }
 
         // Checkout y Enlaces de Envío
-        function abrirModalCheckout() {
+        function abrirCheckoutModal() {
             if (carrito.length === 0) {
-                alert("Tu carrito está vacío.");
+                alert("Tu carrito está vacío. Agrega productos antes de procesar.");
                 return;
             }
 
-            let totalGeneralUSD = carrito.reduce((sum, item) => sum + (item.precioUSD * item.cantidad), 0);
-            let totalBs = totalGeneralUSD * tasaBs;
+            let totalUSD = carrito.reduce((sum, item) => sum + (item.precioUSD * item.cantidad), 0);
+            let totalBs = totalUSD * tasaCambio;
 
-            document.getElementById('checkout-total-usd').innerText = `$${totalGeneralUSD.toFixed(2)} USD`;
-            document.getElementById('checkout-total-bs').innerText = `Bs. ${totalBs.toFixed(2)}`;
+            document.getElementById('checkout-monto-usd').innerText = `$${totalUSD.toFixed(2)} USD`;
+            document.getElementById('checkout-monto-bs').innerText = `Bs ${totalBs.toLocaleString('es-VE', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
 
-            // Verificamos si el carrito tiene productos de la categoría 'juegos' y/o de otras categorías
-            let hayJuegos = carrito.some(item => item.categoria === 'juegos');
-            let hayNoJuegos = carrito.some(item => item.categoria !== 'juegos');
-            let pantallaContainer = document.getElementById('pantalla-input-container');
-            let labelInput = document.getElementById('label-input-dinamico');
-            let inputCamp = document.getElementById('input-nombre-pantalla');
-
-            if (hayJuegos && !hayNoJuegos) {
-                // Si son EXCLUSIVAMENTE juegos
-                pantallaContainer.style.display = 'block';
-                labelInput.innerText = 'ID del Jugador / Correo y clave de la cuenta:';
-                inputCamp.placeholder = 'Ej. ID: 12345678 / correo@gmail.com - clave';
-                inputCamp.value = '';
-            } else if (hayNoJuegos) {
-                // Si incluye otros servicios (streaming, etc.)
-                pantallaContainer.style.display = 'block';
-                labelInput.innerText = 'Nombre para la pantalla:';
-                inputCamp.placeholder = 'Ej. Juan / Perfil 1';
-                inputCamp.value = '';
-            } else {
-                pantallaContainer.style.display = 'none';
-            }
-
+            prepararEnlacesEnvio(totalUSD, totalBs);
             document.getElementById('modal-checkout').style.display = 'flex';
-            toggleCart();
         }
 
-        function cerrarModalCheckout() {
+        function cerrarCheckoutModal() {
             document.getElementById('modal-checkout').style.display = 'none';
         }
 
-        function enviarPedido(plataformaEnvio) {
-            let totalGeneralUSD = carrito.reduce((sum, item) => sum + (item.precioUSD * item.cantidad), 0);
-            let totalBs = totalGeneralUSD * tasaBs;
+        function prepararEnlacesEnvio(totalUSD, totalBs) {
+            const nombrePerfil = document.getElementById('input-nombre-perfil').value.trim();
 
-            let mensaje = `Hola Streamix Store, quiero procesar el siguiente pedido:\n\n`;
-            
+            let mensaje = `Hola Streamix Store, ya he realizado el pago del siguiente pedido:\n\n`;
             carrito.forEach(item => {
-                let subtotalUSD = item.precioUSD * item.cantidad;
-                mensaje += `• *${item.plataforma}* (${item.plan}) x${item.cantidad} - $${subtotalUSD.toFixed(2)}\n`;
+                mensaje += `• ${item.nombre} x${item.cantidad} - $${(item.precioUSD * item.cantidad).toFixed(2)}\n`;
             });
 
-            // Capturamos el texto del input dinámico si está visible
-            let pantallaContainer = document.getElementById('pantalla-input-container');
-            if (pantallaContainer.style.display !== 'none') {
-                let valorInput = document.getElementById('input-nombre-pantalla').value.trim();
-                let etiquetaActual = document.getElementById('label-input-dinamico').innerText.replace(':', '');
-                if (valorInput) {
-                    mensaje += `\n*${etiquetaActual}:* ${valorInput}`;
-                }
+            if (nombrePerfil) {
+                mensaje += `\n👤 Nombre de Pantalla/Perfil: ${nombrePerfil}\n`;
             }
 
-            mensaje += `\n\n*Total a pagar:* $${totalGeneralUSD.toFixed(2)} USD (Bs. ${totalBs.toFixed(2)})`;
-            mensaje += `\n\nAdjunto mi comprobante de pago. Quedo a la espera de la activación.`;
+            mensaje += `\n💰 Total USD: $${totalUSD.toFixed(2)}`;
+            mensaje += `\n🇻🇪 Total Bs (Tasa ${tasaCambio.toFixed(2)}): Bs ${totalBs.toLocaleString('es-VE', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+            mensaje += `\n\nAdjunto comprobante de mi pago. Quedo a la espera de los datos de pago.`;
 
-            if (plataformaEnvio === 'whatsapp') {
-                let tuNumeroWhatsApp = "584124405245";
-                let url = `https://wa.me/${tuNumeroWhatsApp}?text=${encodeURIComponent(mensaje)}`;
-                window.open(url, '_blank');
-            } else if (plataformaEnvio === 'telegram') {
-                let tuUserTelegram = "Wilmerst";
-                let url = `https://t.me/${tuUserTelegram}?text=${encodeURIComponent(mensaje)}`;
-                window.open(url, '_blank');
-            }
+            const mensajeEncoded = encodeURIComponent(mensaje);
+
+            document.getElementById('btn-envio-wa').href = `https://wa.me/584124405245?text=${mensajeEncoded}`;
+            document.getElementById('btn-envio-tg').href = `https://t.me/sxstoreve?text=${mensajeEncoded}`;
         }
 
-        function filtrar(categoria, btn) {
-            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-
-            document.querySelectorAll('.platform-card').forEach(t => {
-                if (categoria === 'todos' || t.getAttribute('data-categoria') === categoria) {
-                    t.style.display = 'flex';
-                } else {
-                    t.style.display = 'none';
-                }
-            });
-        }
+        // Actualizar enlace de mensajes si el usuario escribe el nombre del perfil
+        document.getElementById('input-nombre-perfil').addEventListener('input', () => {
+            let totalUSD = carrito.reduce((sum, item) => sum + (item.precioUSD * item.cantidad), 0);
+            let totalBs = totalUSD * tasaCambio;
+            prepararEnlacesEnvio(totalUSD, totalBs);
+        });
     </script>
 </body>
 </html>
