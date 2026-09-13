@@ -172,6 +172,72 @@
         .btn-modal-agregar { background: #ef4444; border: none; color: white; width: 100%; padding: 14px; border-radius: 10px; font-weight: bold; text-transform: uppercase; font-size: 0.9rem; cursor: pointer; transition: background 0.2s; }
         .btn-modal-agregar:hover { background: #dc2626; }
 
+        /* MODAL ÁREA VIP MAYORISTAS (DISTRIBUIDORES) */
+        .distri-modal-card {
+            background: #0d111d;
+            border: 1px solid #2e264e;
+            width: 90%;
+            max-width: 460px;
+            border-radius: 20px;
+            padding: 30px;
+            position: relative;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.8), 0 0 20px rgba(124, 58, 237, 0.15);
+        }
+        .distri-modal-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; }
+        .distri-modal-title { font-size: 1.6rem; font-weight: 800; color: #ffffff; letter-spacing: 0.5px; }
+        .distri-modal-title span { color: #a78bfa; }
+        .distri-modal-close { background: #1a1b2d; border: 1px solid #2e2e48; color: #9ca3af; width: 34px; height: 34px; border-radius: 8px; cursor: pointer; font-size: 1.1rem; display: flex; align-items: center; justify-content: center; transition: all 0.2s; }
+        .distri-modal-close:hover { background: #2e2e48; color: white; }
+        .distri-modal-subtext { color: #9ca3af; font-size: 0.88rem; margin-bottom: 22px; line-height: 1.4; }
+        
+        .distri-alert-box {
+            background: #17152d;
+            border: 1px solid #4c2885;
+            border-radius: 12px;
+            padding: 14px 16px;
+            margin-bottom: 22px;
+            font-size: 0.85rem;
+            color: #d1d5db;
+            line-height: 1.4;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+        .distri-alert-box strong { color: #ffffff; }
+
+        .distri-input-label { font-size: 0.75rem; text-transform: uppercase; font-weight: 800; color: #9ca3af; letter-spacing: 1px; margin-bottom: 8px; display: block; }
+        .distri-input-code {
+            width: 100%;
+            background: #090c15;
+            border: 1px solid #2e264e;
+            border-radius: 12px;
+            padding: 16px 18px;
+            color: white;
+            font-size: 0.95rem;
+            outline: none;
+            margin-bottom: 22px;
+            transition: border-color 0.2s;
+        }
+        .distri-input-code:focus { border-color: #8b5cf6; }
+
+        .btn-distri-verify {
+            width: 100%;
+            background: linear-gradient(90deg, #6366f1, #8b5cf6);
+            border: none;
+            color: white;
+            padding: 16px;
+            border-radius: 12px;
+            font-weight: 800;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: opacity 0.2s, transform 0.1s;
+            box-shadow: 0 4px 15px rgba(124, 58, 237, 0.4);
+        }
+        .btn-distri-verify:hover { opacity: 0.95; transform: translateY(-1px); }
+        .btn-distri-verify:active { transform: translateY(0); }
+
         /* CARRITO LATERAL */
         .cart-sidebar { position: fixed; top: 0; right: -420px; width: 100%; max-width: 400px; height: 100%; background: #0b0f19; border-left: 1px solid #1f2937; z-index: 1100; transition: right 0.3s ease; display: flex; flex-direction: column; }
         .cart-sidebar.open { right: 0; }
@@ -264,7 +330,7 @@
         <ul class="nav-links">
             <li><a href="#catalogo">OFERTAS</a></li>
             <li><a href="#catalogo">CATÁLOGO</a></li>
-            <li><a onclick="filtrar('distribuidores', document.querySelector('.btn-distri'))" href="#catalogo">DISTRIBUIDORES</a></li>
+            <li><a onclick="solicitarAccesoDistribuidores(document.querySelector('.btn-distri'))" href="#catalogo">DISTRIBUIDORES</a></li>
         </ul>
         <button class="btn-pedido" onclick="toggleCart()">🛒 MI PEDIDO (<span id="cart-count">0</span>)</button>
     </nav>
@@ -324,7 +390,7 @@
             <button class="filter-btn" onclick="filtrar('disenos', this)">💻 Diseños y Programas</button>
             <button class="filter-btn" onclick="filtrar('juegos', this)">🎮 Juegos</button>
             <button class="filter-btn" onclick="filtrar('giftcards', this)">🎁 Gift Cards</button>
-            <button class="filter-btn btn-distri" onclick="filtrar('distribuidores', this)">🤝 Distribuidores</button>
+            <button class="filter-btn btn-distri" onclick="solicitarAccesoDistribuidores(this)">🤝 Distribuidores</button>
         </div>
 
         <!-- CONTENEDOR DE DOS COLUMNAS: CATÁLOGO + PRÓXIMOS ESTRENOS -->
@@ -964,6 +1030,27 @@
         </div>
     </div>
 
+    <!-- MODAL ÁREA VIP MAYORISTAS (DISTRIBUIDORES) -->
+    <div class="modal-overlay" id="modal-distribuidores">
+        <div class="distri-modal-card">
+            <div class="distri-modal-header">
+                <div class="distri-modal-title">Área VIP <span>Mayoristas</span></div>
+                <button class="distri-modal-close" onclick="cerrarModalDistribuidores()">✕</button>
+            </div>
+            
+            <p class="distri-modal-subtext">Bienvenido al portal exclusivo para revendedores de STREAMIX STORE.</p>
+
+            <div class="distri-alert-box">
+                <div>💡 <strong>Seguridad:</strong> Para acceder a los precios al mayor del catálogo necesitas ingresar tu código de acceso.</div>
+            </div>
+
+            <label class="distri-input-label" for="distri-code-input">Código de Revendedor</label>
+            <input type="password" id="distri-code-input" class="distri-input-code" placeholder="Escribe el código aquí">
+
+            <button class="btn-distri-verify" onclick="validarCodigoDistribuidor()">VERIFICAR E INGRESAR</button>
+        </div>
+    </div>
+
     <!-- CARRITO LATERAL -->
     <div class="cart-sidebar" id="cart-sidebar">
         <div class="cart-header">
@@ -1032,6 +1119,8 @@
         let carrito = [];
         let planesActualesModal = [];
         let categoriaModalActual = '';
+        let accesoDistribuidoresPermitido = false;
+        const CODIGO_DISTRIBUIDOR = "STREAMIX2026"; // Código de acceso asignado
 
         document.getElementById('tasa-mostrada').innerText = formatearBs(tasaBs);
 
@@ -1093,6 +1182,34 @@
 
         function cerrarModal() {
             document.getElementById('modal-seleccion').style.display = 'none';
+        }
+
+        /* LÓGICA VIP MAYORISTAS / DISTRIBUIDORES */
+        let elementoBotonDistri = null;
+
+        function solicitarAccesoDistribuidores(btn) {
+            elementoBotonDistri = btn;
+            if (accesoDistribuidoresPermitido) {
+                filtrar('distribuidores', btn);
+            } else {
+                document.getElementById('distri-code-input').value = '';
+                document.getElementById('modal-distribuidores').style.display = 'flex';
+            }
+        }
+
+        function cerrarModalDistribuidores() {
+            document.getElementById('modal-distribuidores').style.display = 'none';
+        }
+
+        function validarCodigoDistribuidor() {
+            let inputCode = document.getElementById('distri-code-input').value.trim();
+            if (inputCode === CODIGO_DISTRIBUIDOR) {
+                accesoDistribuidoresPermitido = true;
+                cerrarModalDistribuidores();
+                filtrar('distribuidores', elementoBotonDistri || document.querySelector('.btn-distri'));
+            } else {
+                alert("Código incorrecto. Por favor verifique e intente nuevamente.");
+            }
         }
 
         function cambiarCantidadModal(delta) {
@@ -1289,6 +1406,11 @@
         }
 
         function filtrar(categoria, btn) {
+            if (categoria === 'distribuidores' && !accesoDistribuidoresPermitido) {
+                solicitarAccesoDistribuidores(btn);
+                return;
+            }
+
             document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
             if(btn) btn.classList.add('active');
 
