@@ -70,8 +70,8 @@
 
         .offer-tag {
     position: absolute;
-    top: -22px; /* Subido más para que flote fuera de la tarjeta sin cortarse */
-    right: 30px;
+    top: 15px; /* Ubicada dentro de la tarjeta para que no la corte ningún borde */
+    right: 20px;
     background: #00FF7F;
     color: #050811;
     padding: 4px 12px;
@@ -79,7 +79,7 @@
     font-size: 0.75rem;
     font-weight: bold;
     text-transform: uppercase;
-    z-index: 10; /* Aumentado para asegurar que esté por encima de todo */
+    z-index: 10;
 }
 
 .featured-content {
@@ -88,6 +88,8 @@
     align-items: center;
     flex-wrap: wrap;
     gap: 20px;
+    position: relative; /* Asegura que la tarjeta controle la posición interna */
+    padding-top: 10px; /* Espacio extra para que no choque con la etiqueta */
 }
 
 .featured-info h3 {
@@ -692,7 +694,7 @@
                 <!-- YOUTUBE PREMIUM -->
                 <div class="platform-card" data-categoria="musica">
                     <div class="platform-header">
-                        <div class="platform-logo" style="background: #E50914; color: #E50914;">YT</div>
+                        <div class="platform-logo" style="background: #E50914; color: #FFFFFF;">YT</div>
                         <div class="platform-title">
                             <h3>Youtube Premium</h3>
                             <span>🎵 MÚSICA Y VIDEOS SIN ANUNCIOS</span>
@@ -1160,7 +1162,7 @@
                 <!-- YOUTUBE PREMIUM (DISTRIBUIDOR) -->
                 <div class="platform-card" data-categoria="distribuidores">
                     <div class="platform-header">
-                        <div class="platform-logo" style="background: #E50914; color: #E50914;">YT</div>
+                        <div class="platform-logo" style="background: #E50914; color: #FFFFFF;">YT</div>
                         <div class="platform-title">
                             <h3>Youtube Premium (Mayorista)</h3>
                             <span>💼 PRECIO DISTRIBUIDOR</span>
