@@ -172,78 +172,71 @@
         .btn-modal-agregar { background: #ef4444; border: none; color: white; width: 100%; padding: 14px; border-radius: 10px; font-weight: bold; text-transform: uppercase; font-size: 0.9rem; cursor: pointer; transition: background 0.2s; }
         .btn-modal-agregar:hover { background: #dc2626; }
 
-        /* MODAL ÁREA VIP MAYORISTAS (DISTRIBUIDORES - FORMULARIO DE 4 PREGUNTAS) */
+        /* MODAL ÁREA VIP MAYORISTAS (DISTRIBUIDORES) */
         .distri-modal-card {
             background: #0d111d;
             border: 1px solid #2e264e;
             width: 90%;
-            max-width: 480px;
+            max-width: 460px;
             border-radius: 20px;
             padding: 30px;
             position: relative;
             box-shadow: 0 15px 40px rgba(0,0,0,0.8), 0 0 20px rgba(124, 58, 237, 0.15);
-            max-height: 90vh;
-            overflow-y: auto;
         }
         .distri-modal-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; }
-        .distri-modal-title { font-size: 1.4rem; font-weight: 800; color: #ffffff; letter-spacing: 0.5px; }
+        .distri-modal-title { font-size: 1.6rem; font-weight: 800; color: #ffffff; letter-spacing: 0.5px; }
         .distri-modal-title span { color: #a78bfa; }
-        .distri-modal-close { background: #1a1b2d; border: 1px solid #2e2e48; color: #9ca3af; width: 34px; height: 34px; border-radius: 8px; cursor: pointer; font-size: 1.1rem; display: flex; align-items: center; justify-content: center; transition: all 0.2s; flex-shrink: 0; }
+        .distri-modal-close { background: #1a1b2d; border: 1px solid #2e2e48; color: #9ca3af; width: 34px; height: 34px; border-radius: 8px; cursor: pointer; font-size: 1.1rem; display: flex; align-items: center; justify-content: center; transition: all 0.2s; }
         .distri-modal-close:hover { background: #2e2e48; color: white; }
-        .distri-modal-subtext { color: #9ca3af; font-size: 0.85rem; margin-bottom: 20px; line-height: 1.4; }
+        .distri-modal-subtext { color: #9ca3af; font-size: 0.88rem; margin-bottom: 22px; line-height: 1.4; }
         
-        .distri-form-group { margin-bottom: 15px; }
-        .distri-input-label { font-size: 0.78rem; text-transform: uppercase; font-weight: 800; color: #a78bfa; letter-spacing: 0.5px; margin-bottom: 6px; display: block; }
-        .distri-input-code, .distri-select-code {
+        .distri-alert-box {
+            background: #17152d;
+            border: 1px solid #4c2885;
+            border-radius: 12px;
+            padding: 14px 16px;
+            margin-bottom: 22px;
+            font-size: 0.85rem;
+            color: #d1d5db;
+            line-height: 1.4;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+        .distri-alert-box strong { color: #ffffff; }
+
+        .distri-input-label { font-size: 0.75rem; text-transform: uppercase; font-weight: 800; color: #9ca3af; letter-spacing: 1px; margin-bottom: 8px; display: block; }
+        .distri-input-code {
             width: 100%;
             background: #090c15;
             border: 1px solid #2e264e;
-            border-radius: 10px;
-            padding: 12px 15px;
+            border-radius: 12px;
+            padding: 16px 18px;
             color: white;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             outline: none;
+            margin-bottom: 22px;
             transition: border-color 0.2s;
         }
-        .distri-input-code:focus, .distri-select-code:focus { border-color: #8b5cf6; }
+        .distri-input-code:focus { border-color: #8b5cf6; }
 
-        .distri-buttons-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 20px; }
-        .btn-distri-wa {
-            background: #22c55e;
+        .btn-distri-verify {
+            width: 100%;
+            background: linear-gradient(90deg, #6366f1, #8b5cf6);
             border: none;
             color: white;
-            padding: 14px 10px;
-            border-radius: 10px;
+            padding: 16px;
+            border-radius: 12px;
             font-weight: 800;
             text-transform: uppercase;
-            font-size: 0.82rem;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
             cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 6px;
-            text-decoration: none;
-            transition: opacity 0.2s;
+            transition: opacity 0.2s, transform 0.1s;
+            box-shadow: 0 4px 15px rgba(124, 58, 237, 0.4);
         }
-        .btn-distri-wa:hover { opacity: 0.9; }
-        .btn-distri-tg {
-            background: #0ea5e9;
-            border: none;
-            color: white;
-            padding: 14px 10px;
-            border-radius: 10px;
-            font-weight: 800;
-            text-transform: uppercase;
-            font-size: 0.82rem;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 6px;
-            text-decoration: none;
-            transition: opacity 0.2s;
-        }
-        .btn-distri-tg:hover { opacity: 0.9; }
+        .btn-distri-verify:hover { opacity: 0.95; transform: translateY(-1px); }
+        .btn-distri-verify:active { transform: translateY(0); }
 
         /* CARRITO LATERAL */
         .cart-sidebar { position: fixed; top: 0; right: -420px; width: 100%; max-width: 400px; height: 100%; background: #0b0f19; border-left: 1px solid #1f2937; z-index: 1100; transition: right 0.3s ease; display: flex; flex-direction: column; }
@@ -335,10 +328,10 @@
             <span>LÍDERES EN ENTRETENIMIENTO</span>
         </div>
         <ul class="nav-links">
-		    <li><a onclick="solicitarAccesoDistribuidores(this)" style="cursor: pointer;">¿QUIERES SER DISTRIBUIDOR?</a></li>
+		    <li><a href="#catalogo">¿QUIERES SER DISTRIBUIDOR?</a></li>
             <li><a href="#catalogo">OFERTAS</a></li>
             <li><a href="#catalogo">CATÁLOGO</a></li>
-            <li><a onclick="solicitarAccesoDistribuidores(this)" style="cursor: pointer;">DISTRIBUIDORES</a></li>
+            <li><a onclick="solicitarAccesoDistribuidores(document.querySelector('.btn-distri'))" href="#catalogo">DISTRIBUIDORES</a></li>
         </ul>
         <button class="btn-pedido" onclick="toggleCart()">🛒 MI PEDIDO (<span id="cart-count">0</span>)</button>
     </nav>
@@ -1223,17 +1216,38 @@
                     <button class="btn-card-addplan" onclick="abrirModal('Pack Revendedor Streaming', [{nombre: 'Pack 10 Pantallas Variadas', precio: 18.00}, {nombre: 'Pack 25 Pantallas Variadas', precio: 40.00}], 0, 'distribuidores')">+ Añadir Plan</button>
                 </div>
 
+                <div class="platform-card" data-categoria="distribuidores">
+                    <div class="platform-header">
+                        <div class="platform-logo distri-bg">👑</div>
+                        <div class="platform-title">
+                            <h3>Panel Reseller IPTV</h3>
+                            <span>📡 PANEL DE CRÉDITOS</span>
+                        </div>
+                    </div>
+                    <div class="plans-list-box">
+                        <div class="card-plan-item" onclick="abrirModal('Panel Reseller IPTV', [{nombre: 'Panel con 10 Créditos', precio: 15.00}, {nombre: 'Panel con 25 Créditos', precio: 32.00}], 0, 'distribuidores')">
+                            <span class="card-plan-name">Panel con 10 Créditos</span>
+                            <span class="card-plan-price" data-usd="15.00">$15.00</span>
+                        </div>
+                        <div class="card-plan-item" onclick="abrirModal('Panel Reseller IPTV', [{nombre: 'Panel con 10 Créditos', precio: 15.00}, {nombre: 'Panel con 25 Créditos', precio: 32.00}], 1, 'distribuidores')">
+                            <span class="card-plan-name">Panel con 25 Créditos</span>
+                            <span class="card-plan-price" data-usd="32.00">$32.00</span>
+                        </div>
+                    </div>
+                    <button class="btn-card-addplan" onclick="abrirModal('Panel Reseller IPTV', [{nombre: 'Panel con 10 Créditos', precio: 15.00}, {nombre: 'Panel con 25 Créditos', precio: 32.00}], 0, 'distribuidores')">+ Añadir Plan</button>
+                </div>
+
             </div>
 
-            <!-- Panel Lateral de Próximos Estrenos -->
-            <div class="sidebar-estrenos">
-                <div class="sidebar-badge"><div class="dot-small"></div> PRÓXIMAMENTE</div>
-                <h3 class="sidebar-title">Próximos Estrenos</h3>
-                
+            <!-- CUADRO LATERAL: PRÓXIMOS ESTRENOS -->
+            <aside class="sidebar-estrenos">
+                <div class="sidebar-badge"><span class="dot-small"></span> PRONTO</div>
+                <h2 class="sidebar-title">Próximos Estrenos</h2>
+
                 <div class="sidebar-featured">
-                    <img src="https://images.unsplash.com/photo-1534447677768-be436bb09401?auto=format&fit=crop&q=80&w=600" alt="Estreno Destacado">
+                    <img src="https://mx.web.img3.acsta.net/pictures/24/02/28/21/09/1907370.jpg" alt="Estreno Destacado">
                     <div class="sidebar-featured-info">
-                        <div class="sidebar-featured-title">GTA VI - Preventa Global</div>
+                        <div class="sidebar-featured-title">Los Caballeros: T2 (Netflix)</div>
                     </div>
                 </div>
 
@@ -1241,26 +1255,51 @@
                     <div class="estreno-item">
                         <div class="estreno-number">1</div>
                         <div class="estreno-info">
-                            <span class="estreno-name">Deadpool & Wolverine</span>
-                            <span class="estreno-plat">Disney+ <span>●</span> Estreno HD</span>
+                            <div class="estreno-name">Merlina (Temporada 2)</div>
+                            <div class="estreno-plat"><span>▲</span> Netflix • Muy Pronto</div>
                         </div>
                     </div>
+
                     <div class="estreno-item">
                         <div class="estreno-number">2</div>
                         <div class="estreno-info">
-                            <span class="estreno-name">Intensa-Mente 2</span>
-                            <span class="estreno-plat">Disney+ <span>●</span> Disponible</span>
+                            <div class="estreno-name">Fallout (Temporada 2)</div>
+                            <div class="estreno-plat"><span>▲</span> Prime Video • Muy Pronto</div>
                         </div>
                     </div>
+
+                    <div class="sidebar-featured">
+                        <img src="https://m.media-amazon.com/images/M/MV5BOTkzOWVhYTAtM2MzMS00YmIxLWJhMjYtMzBhNThiYmEwMTYwXkEyXkFqcGc@._V1_.jpg" alt="Estreno Destacado">
+                        <div class="sidebar-featured-info">
+                            <div class="sidebar-featured-title">Toy Story 5 (Disney+)</div>
+                        </div>
+                    </div>
+
                     <div class="estreno-item">
                         <div class="estreno-number">3</div>
                         <div class="estreno-info">
-                            <span class="estreno-name">El Pingüino</span>
-                            <span class="estreno-plat">HBO Max <span>●</span> Nuevos Capítulos</span>
+                            <div class="estreno-name">The Mandalorian & Grogu</div>
+                            <div class="estreno-plat"><span>▲</span> Disney+ • Muy Pronto</div>
+                        </div>
+                    </div>
+
+                    <div class="estreno-item">
+                        <div class="estreno-number">4</div>
+                        <div class="estreno-info">
+                            <div class="estreno-name">Peacemaker (Temporada 2)</div>
+                            <div class="estreno-plat"><span>▲</span> Max • Muy Pronto</div>
+                        </div>
+                    </div>
+
+                    <div class="estreno-item">
+                        <div class="estreno-number">5</div>
+                        <div class="estreno-info">
+                            <div class="estreno-name">Stranger Things (Final)</div>
+                            <div class="estreno-plat"><span>▲</span> Netflix • Muy Pronto</div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </aside>
 
         </div>
     </div>
@@ -1272,30 +1311,39 @@
                 <div class="footer-logo-title">STREAMIX STORE</div>
                 <div class="footer-status">
                     <div class="footer-status-dot"></div>
-                    Sistemas Operativos 100% Activos
+                    Soporte en Linea
                 </div>
             </div>
             <div class="footer-socials">
-                <a href="#" class="social-icon-btn" title="Instagram">
-                    <svg fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                <a href="https://www.instagram.com/streamix.store/" target="_blank" class="social-icon-btn" title="Instagram">
+                    <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+                </a>
+                <a href="https://tiktok.com" target="_blank" class="social-icon-btn" title="TikTok">
+                    <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"></path></svg>
+                </a>
+                <a href="https://t.me/sxstoreve" target="_blank" class="social-icon-btn" title="Telegram">
+                    <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+                </a>
+                <a href="https://wa.me/584124405245" target="_blank" class="social-icon-btn" title="WhatsApp">
+                    <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
                 </a>
             </div>
         </div>
         <div class="footer-bottom">
-            &copy; 2026 Streamix Store. Todos los derechos reservados.
+            © 2026 Streamix Venezuela.
         </div>
     </footer>
 
     <!-- MODAL DE SELECCIÓN DE PLAN -->
-    <div class="modal-overlay" id="modalPlan">
+    <div class="modal-overlay" id="modal-seleccion">
         <div class="modal-card">
             <button class="modal-close" onclick="cerrarModal()">✕</button>
             <h2 id="modal-titulo">Plataforma</h2>
             
-            <div class="modal-section-title">Selecciona un Plan</div>
+            <div class="modal-section-title">1. Selecciona el Plan</div>
             <select class="modal-select" id="modal-select-planes" onchange="actualizarSubtotalModal()"></select>
-            
-            <div class="modal-section-title">Cantidad</div>
+
+            <div class="modal-section-title">2. Cantidad</div>
             <div class="qty-box">
                 <button class="qty-btn" onclick="cambiarCantidadModal(-1)">-</button>
                 <span class="qty-value" id="modal-qty">1</span>
@@ -1307,216 +1355,239 @@
                 <span class="modal-subtotal-val" id="modal-subtotal">$0.00</span>
             </div>
 
-            <button class="btn-modal-agregar" onclick="agregarAlCarritoDesdeModal()">Añadir al Carrito</button>
+            <button class="btn-modal-agregar" onclick="agregarAlPedidoDesdeModal()">Agregar al pedido</button>
         </div>
     </div>
 
-    <!-- MODAL DE FORMULARIO DE DISTRIBUIDOR (4 PREGUNTAS) -->
-    <div class="modal-overlay" id="modalDistribuidores">
+    <!-- MODAL ÁREA VIP MAYORISTAS (DISTRIBUIDORES) -->
+    <div class="modal-overlay" id="modal-distribuidores">
         <div class="distri-modal-card">
             <div class="distri-modal-header">
-                <div class="distri-modal-title">Solicitud de <span>Distribuidor</span></div>
+                <div class="distri-modal-title">Área VIP <span>Mayoristas</span></div>
                 <button class="distri-modal-close" onclick="cerrarModalDistribuidores()">✕</button>
             </div>
-            <div class="distri-modal-subtext">Responde las siguientes 4 preguntas para tramitar tu acceso como distribuidor oficial en Streamix Store.</div>
             
-            <div class="distri-form-group">
-                <label class="distri-input-label">1. ¿Cuál es tu Nombre Completo?</label>
-                <input type="text" class="distri-input-code" id="distriNombre" placeholder="Ej. Carlos Pérez">
+            <p class="distri-modal-subtext">Bienvenido al portal exclusivo para revendedores de STREAMIX STORE.</p>
+
+            <div class="distri-alert-box">
+                <div>💡 <strong>Seguridad:</strong> Para acceder a los precios al mayor del catálogo necesitas ingresar tu código de acceso.</div>
             </div>
 
-            <div class="distri-form-group">
-                <label class="distri-input-label">2. ¿Tienes experiencia vendiendo streaming?</label>
-                <select class="distri-select-code" id="distriExperiencia">
-                    <option value="Sí, ya tengo experiencia">Sí, ya tengo experiencia</option>
-                    <option value="No, pero quiero aprender">No, pero quiero aprender desde cero</option>
-                </select>
+            <label class="distri-input-label" for="distri-code-input">Código de Revendedor</label>
+            <input type="password" id="distri-code-input" class="distri-input-code" placeholder="Escribe el código aquí">
+
+            <button class="btn-distri-verify" onclick="validarCodigoDistribuidor()">VERIFICAR E INGRESAR</button>
+        </div>
+    </div>
+
+    <!-- MODAL DE PROCESAR PAGO / CHECKOUT -->
+    <div class="modal-overlay" id="modal-checkout">
+        <div class="checkout-modal-card">
+            <button class="modal-close" onclick="cerrarCheckoutModal()">✕</button>
+            <h2 style="font-size: 1.4rem; color: white; margin-bottom: 15px;">Finalizar Pedido</h2>
+            
+            <div class="checkout-total-box">
+                <div class="checkout-total-title">Monto Total a Pagar</div>
+                <div class="checkout-total-usd" id="checkout-monto-usd">$0.00 USD</div>
+                <div class="checkout-total-conversions" id="checkout-monto-bs">Bs 0.00</div>
             </div>
 
-            <div class="distri-form-group">
-                <label class="distri-input-label">3. ¿Por qué medio planeas vender?</label>
-                <select class="distri-select-code" id="distriMedio">
-                    <option value="WhatsApp y Estados">WhatsApp y Estados</option>
-                    <option value="Instagram / Redes Sociales">Instagram / Redes Sociales</option>
-                    <option value="Local físico o negocio propio">Local físico o negocio propio</option>
-                    <option value="Otro">Otro</option>
-                </select>
+            <div class="payment-info-box">
+                <div class="payment-section-title">💳 MÉTODOS DE PAGO DISPONIBLES</div>
+                <div class="payment-details">
+                    • <strong>Pago Móvil / Transferencia Bs:</strong> Tasa Fija del día.<br>
+                    • <strong>Binance Pay (USDT) / Zelle / Zinli / Reserve</strong>
+                </div>
             </div>
 
-            <div class="distri-form-group">
-                <label class="distri-input-label">4. ¿Cuál es tu País y Moneda de pago?</label>
-                <input type="text" class="distri-input-code" id="distriPais" placeholder="Ej. Venezuela / Pago Móvil / Binance">
+            <div class="pantalla-input-box">
+                <label for="input-nombre-perfil">Nombre de Pantalla / Perfil (Opcional):</label>
+                <input type="text" id="input-nombre-perfil" placeholder="Ej: Mi Nombre, Sala, etc.">
             </div>
 
-            <div class="distri-buttons-grid">
-                <button class="btn-distri-wa" onclick="enviarDistribuidor('whatsapp')">💬 Enviar a WA</button>
-                <button class="btn-distri-tg" onclick="enviarDistribuidor('telegram')">✈️ Enviar a TG</button>
+            <div class="steps-box">
+                <strong>Paso final:</strong> Haz clic en uno de los botones para enviar el resumen detallado de tu orden por WhatsApp o Telegram a nuestro equipo de atención.
+            </div>
+
+            <div class="checkout-buttons-grid">
+                <a id="btn-envio-wa" class="btn-wa-pay" target="_blank">📲 WhatsApp</a>
+                <a id="btn-envio-tg" class="btn-tg-pay" target="_blank">✈️ Telegram</a>
             </div>
         </div>
     </div>
 
-    <!-- CARRITOR LATERAL -->
-    <div class="cart-sidebar" id="cartSidebar">
+    <!-- CARRITO LATERAL -->
+    <div class="cart-sidebar" id="cart-sidebar">
         <div class="cart-header">
             <h3>🛒 Tu Pedido</h3>
             <button class="cart-close" onclick="toggleCart()">✕</button>
         </div>
         <div class="cart-body" id="cart-body">
-            <div class="cart-empty">Tu carrito está vacío</div>
+            <div class="cart-empty">El carrito está vacío.</div>
         </div>
         <div class="cart-footer">
             <div class="cart-total-row">
                 <span>Total:</span>
-                <span id="cart-total-val">$0.00</span>
+                <span id="cart-total">$0.00</span>
             </div>
-            <button class="btn-procesar" onclick="abrirModalCheckout()">Proceder al Pago ➔</button>
+            <button class="btn-procesar" onclick="abrirCheckoutModal()">⚡ PROCESAR PEDIDO</button>
         </div>
     </div>
 
-    <!-- MODAL DE PROCESAR PAGO -->
-    <div class="modal-overlay" id="modalCheckout">
-        <div class="checkout-modal-card">
-            <button class="modal-close" onclick="cerrarModalCheckout()">✕</button>
-            <h2 style="font-size: 1.4rem; color: white; margin-bottom: 15px;">Finalizar Pedido</h2>
-            
-            <div class="checkout-total-box">
-                <div class="checkout-total-title">Total a Pagar</div>
-                <div class="checkout-total-usd" id="checkout-usd-val">$0.00</div>
-                <div class="checkout-total-conversions" id="checkout-conv-val">Bs. 0.00</div>
-            </div>
-
-            <div class="payment-info-box">
-                <div class="payment-section-title">📱 Pago Móvil (Venezuela)</div>
-                <div class="payment-details">
-                    <strong>Banco:</strong> Banesco / Mercantil<br>
-                    <strong>Teléfono:</strong> 0412-0000000<br>
-                    <strong>C.I:</strong> V-00.000.000
-                </div>
-                
-                <div class="payment-section-title" style="margin-top: 15px;">🌐 Criptomonedas / Internacional</div>
-                <div class="payment-details">
-                    <strong>Binance Pay (USDT):</strong> Correo o ID de Pago<br>
-                    <strong>Zelle / Binance Card:</strong> Consultar al interno
-                </div>
-            </div>
-
-            <div class="steps-box">
-                <strong>Instrucciones:</strong><br>
-                1. Realiza el pago correspondiente al monto indicado.<br>
-                2. Copia o ingresa tu correo de acceso/contacto abajo.<br>
-                3. Envía tu pedido por WhatsApp o Telegram junto con el comprobante de pago.
-            </div>
-
-            <div class="pantalla-input-box">
-                <label>Correo / Teléfono de Contacto (Para entrega):</label>
-                <input type="text" id="input-correo-cliente" placeholder="ejemplo@correo.com o tu número">
-            </div>
-
-            <div class="checkout-buttons-grid">
-                <a href="#" id="btn-final-wa" target="_blank" class="btn-wa-pay">💬 WhatsApp</a>
-                <a href="#" id="btn-final-tg" target="_blank" class="btn-tg-pay">✈️ Telegram</a>
-            </div>
-        </div>
-    </div>
-
+    <!-- LÓGICA JAVASCRIPT -->
     <script>
-        let monedaActual = 'USD';
+        // Variables globales del estado
         let tasaCambio = 960.00;
+        let monedaActual = 'USD';
         let carrito = [];
+        let distribuidorAutorizado = false;
 
-        function cambiarMoneda(moneda, btnElement) {
+        // Estado del Modal de Producto
+        let modalPlataformaActual = '';
+        let modalPlanesActuales = [];
+        let modalCantidadActual = 1;
+        let modalCategoriaActual = '';
+
+        // Inicialización
+        document.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('tasa-mostrada').innerText = tasaCambio.toFixed(2);
+            filtrar('todos', document.querySelector('.filter-btn.active'));
+        });
+
+        // Cambio de Moneda (USD <-> Bs)
+        function cambiarMoneda(moneda, btn) {
             monedaActual = moneda;
-            document.querySelectorAll('.curr-btn').forEach(btn => btn.classList.remove('active'));
-            btnElement.classList.add('active');
+            document.querySelectorAll('.curr-btn').forEach(b => b.classList.remove('active'));
+            if(btn) btn.classList.add('active');
 
-            // Actualizar precios en tarjetas principales
+            // Actualizar precios en tarjetas
             document.querySelectorAll('.card-plan-price').forEach(el => {
-                let usdVal = parseFloat(el.getAttribute('data-usd'));
+                let usdPrice = parseFloat(el.getAttribute('data-usd'));
                 if (moneda === 'Bs') {
-                    let bsVal = usdVal * tasaCambio;
-                    el.innerText = 'Bs. ' + bsVal.toFixed(2);
+                    let bsPrice = usdPrice * tasaCambio;
+                    el.innerText = 'Bs ' + bsPrice.toLocaleString('es-VE', {minimumFractionDigits: 2, maximumFractionDigits: 2});
                     el.classList.add('blue-price');
                 } else {
-                    el.innerText = '$' + usdVal.toFixed(2);
+                    el.innerText = '$' + usdPrice.toFixed(2);
                     el.classList.remove('blue-price');
                 }
             });
 
             // Actualizar oferta destacada
             let ofertaEl = document.getElementById('oferta-precio');
-            if(ofertaEl) {
-                let usdOferta = parseFloat(ofertaEl.getAttribute('data-usd'));
-                if(moneda === 'Bs') {
-                    ofertaEl.innerHTML = 'Bs. ' + (usdOferta * tasaCambio).toFixed(2) + ' <span style="font-size: 1rem; color: #9ca3af;">Bs</span>';
-                } else {
-                    ofertaEl.innerHTML = '$' + usdOferta.toFixed(2) + ' <span style="font-size: 1rem; color: #9ca3af;">USD</span>';
-                }
+            let usdOferta = parseFloat(ofertaEl.getAttribute('data-usd'));
+            if (moneda === 'Bs') {
+                let bsOferta = usdOferta * tasaCambio;
+                ofertaEl.innerHTML = 'Bs ' + bsOferta.toLocaleString('es-VE', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+            } else {
+                ofertaEl.innerHTML = '$' + usdOferta.toFixed(2) + ' <span style="font-size: 1rem; color: #9ca3af;">USD</span>';
             }
 
-            actualizarVistaCarrito();
+            actualizarCarritoUI();
+            if (document.getElementById('modal-seleccion').style.display === 'flex') {
+                actualizarSubtotalModal();
+            }
         }
 
-        function filtrar(categoria, btnElement) {
-            document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
-            btnElement.classList.add('active');
+        // Filtro de Categorías
+        function filtrar(categoria, btn) {
+            if (categoria === 'distribuidores' && !distribuidorAutorizado) {
+                solicitarAccesoDistribuidores(btn);
+                return;
+            }
 
-            let tarjetas = document.querySelectorAll('.platform-card');
-            tarjetas.forEach(tarjeta => {
-                let cat = tarjeta.getAttribute('data-categoria');
-                if (categoria === 'todos' || cat === categoria) {
-                    tarjeta.style.display = 'flex';
+            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            if(btn) btn.classList.add('active');
+
+            const tarjetas = document.querySelectorAll('.platform-card');
+            tarjetas.forEach(card => {
+                const catCard = card.getAttribute('data-categoria');
+                if (categoria === 'todos') {
+                    card.style.display = (catCard === 'distribuidores') ? 'none' : 'flex';
                 } else {
-                    tarjeta.style.display = 'none';
+                    card.style.display = (catCard === categoria) ? 'flex' : 'none';
                 }
             });
         }
 
-        /* Variables y funciones del Modal de Planes */
-        let planActualData = null;
-        let cantidadModal = 1;
+        // Control del Modal de Revendedores
+        function solicitarAccesoDistribuidores(btn) {
+            if (distribuidorAutorizado) {
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                const btnDist = document.querySelector('.filter-btn.btn-distri');
+                if(btnDist) btnDist.classList.add('active');
+                
+                const tarjetas = document.querySelectorAll('.platform-card');
+                tarjetas.forEach(card => {
+                    card.style.display = (card.getAttribute('data-categoria') === 'distribuidores') ? 'flex' : 'none';
+                });
+            } else {
+                document.getElementById('modal-distribuidores').style.display = 'flex';
+            }
+        }
 
-        function abrirModal(nombrePlataforma, planesArray, indiceSeleccionado, categoria) {
-            planActualData = { plataforma: nombrePlataforma, planes: planesArray, categoria: categoria };
-            document.getElementById('modal-titulo').innerText = nombrePlataforma;
-            
-            let select = document.getElementById('modal-select-planes');
+        function cerrarModalDistribuidores() {
+            document.getElementById('modal-distribuidores').style.display = 'none';
+        }
+
+        function validarCodigoDistribuidor() {
+            const inputCode = document.getElementById('distri-code-input').value.trim();
+            if (inputCode === "DISTRI2026" || inputCode === "STREAMIX29" ) {
+                distribuidorAutorizado = true;
+                cerrarModalDistribuidores();
+                document.getElementById('distri-code-input').value = "";
+                solicitarAccesoDistribuidores();
+            } else {
+                alert("Código de revendedor incorrecto. Solicita tu código a soporte.");
+            }
+        }
+
+        // Modal de Selección de Plan
+        function abrirModal(plataforma, planes, indexSeleccionado = 0, categoria = 'cine') {
+            modalPlataformaActual = plataforma;
+            modalPlanesActuales = planes;
+            modalCantidadActual = 1;
+            modalCategoriaActual = categoria;
+
+            document.getElementById('modal-titulo').innerText = plataforma;
+            document.getElementById('modal-qty').innerText = modalCantidadActual;
+
+            const select = document.getElementById('modal-select-planes');
             select.innerHTML = '';
-            planesArray.forEach((plan, idx) => {
-                let option = document.createElement('option');
+            planes.forEach((plan, idx) => {
+                const option = document.createElement('option');
                 option.value = idx;
-                let precioTexto = monedaActual === 'Bs' ? 'Bs. ' + (plan.precio * tasaCambio).toFixed(2) : '$' + plan.precio.toFixed(2);
-                option.textContent = plan.nombre + ' - ' + precioTexto;
-                if(idx === indiceSeleccionado) option.selected = true;
+                option.innerText = `${plan.nombre} - $${plan.precio.toFixed(2)}`;
                 select.appendChild(option);
             });
 
-            cantidadModal = 1;
-            document.getElementById('modal-qty').innerText = cantidadModal;
+            select.value = indexSeleccionado;
             actualizarSubtotalModal();
-            document.getElementById('modalPlan').style.display = 'flex';
+            document.getElementById('modal-seleccion').style.display = 'flex';
         }
 
         function cerrarModal() {
-            document.getElementById('modalPlan').style.display = 'none';
+            document.getElementById('modal-seleccion').style.display = 'none';
         }
 
-        function cambiarCantidadModal(cambio) {
-            cantidadModal += cambio;
-            if (cantidadModal < 1) cantidadModal = 1;
-            document.getElementById('modal-qty').innerText = cantidadModal;
+        function cambiarCantidadModal(delta) {
+            modalCantidadActual += delta;
+            if (modalCantidadActual < 1) modalCantidadActual = 1;
+            document.getElementById('modal-qty').innerText = modalCantidadActual;
             actualizarSubtotalModal();
         }
 
         function actualizarSubtotalModal() {
-            let select = document.getElementById('modal-select-planes');
-            let idx = select.value;
-            if(!planActualData) return;
-            let planSeleccionado = planActualData.planes[idx];
-            let subtotalUSD = planSeleccionado.precio * cantidadModal;
-            
-            let subtotalEl = document.getElementById('modal-subtotal');
+            const select = document.getElementById('modal-select-planes');
+            const planSel = modalPlanesActuales[select.value];
+            if (!planSel) return;
+
+            const subtotalUSD = planSel.precio * modalCantidadActual;
+            const subtotalEl = document.getElementById('modal-subtotal');
+
             if (monedaActual === 'Bs') {
-                subtotalEl.innerText = 'Bs. ' + (subtotalUSD * tasaCambio).toFixed(2);
+                const subtotalBs = subtotalUSD * tasaCambio;
+                subtotalEl.innerText = 'Bs ' + subtotalBs.toLocaleString('es-VE', {minimumFractionDigits: 2, maximumFractionDigits: 2});
                 subtotalEl.classList.add('blue-price');
             } else {
                 subtotalEl.innerText = '$' + subtotalUSD.toFixed(2);
@@ -1524,172 +1595,147 @@
             }
         }
 
-        function agregarAlCarritoDesdeModal() {
-            let select = document.getElementById('modal-select-planes');
-            let idx = select.value;
-            let planSeleccionado = planActualData.planes[idx];
-
-            let itemExistente = carrito.find(i => i.plataforma === planActualData.plataforma && i.nombrePlan === planSeleccionado.nombre);
-            if(itemExistente) {
-                itemExistente.cantidad += cantidadModal;
-            } else {
-                carrito.push({
-                    plataforma: planActualData.plataforma,
-                    nombrePlan: planSeleccionado.nombre,
-                    precioUSD: planSeleccionado.precio,
-                    cantidad: cantidadModal
-                });
-            }
-
+        function agregarAlPedidoDesdeModal() {
+            const select = document.getElementById('modal-select-planes');
+            const planSel = modalPlanesActuales[select.value];
+            
+            agregarAlCarrito(`${modalPlataformaActual} - ${planSel.nombre}`, planSel.precio, modalCantidadActual);
             cerrarModal();
-            actualizarContadorCarrito();
-            toggleCart();
+            toggleCart(true);
         }
 
-        function agregarDirecto(nombrePlataforma, precioUSD, categoria) {
-            let itemExistente = carrito.find(i => i.plataforma === nombrePlataforma);
-            if(itemExistente) {
-                itemExistente.cantidad += 1;
+        function agregarDirecto(nombreCompleto, precioUSD, categoria) {
+            agregarAlCarrito(nombreCompleto, precioUSD, 1);
+            toggleCart(true);
+        }
+
+        // Lógica del Carrito de Compras
+        function agregarAlCarrito(nombre, precioUSD, cantidad) {
+            const index = carrito.findIndex(item => item.nombre === nombre);
+            if (index > -1) {
+                carrito[index].cantidad += cantidad;
             } else {
-                carrito.push({
-                    plataforma: nombrePlataforma,
-                    nombrePlan: 'Oferta Especial',
-                    precioUSD: precioUSD,
-                    cantidad: 1
+                carrito.push({ nombre, precioUSD, cantidad });
+            }
+            actualizarCarritoUI();
+        }
+
+        function eliminarDelCarrito(index) {
+            carrito.splice(index, 1);
+            actualizarCarritoUI();
+        }
+
+        function toggleCart(forceOpen = false) {
+            const cartSidebar = document.getElementById('cart-sidebar');
+            if (forceOpen) {
+                cartSidebar.classList.add('open');
+            } else {
+                cartSidebar.classList.toggle('open');
+            }
+        }
+
+        function actualizarCarritoUI() {
+            const cartBody = document.getElementById('cart-body');
+            const cartCount = document.getElementById('cart-count');
+            const cartTotal = document.getElementById('cart-total');
+
+            let totalItems = 0;
+            let totalUSD = 0;
+
+            cartBody.innerHTML = '';
+
+            if (carrito.length === 0) {
+                cartBody.innerHTML = '<div class="cart-empty">El carrito está vacío.</div>';
+            } else {
+                carrito.forEach((item, index) => {
+                    totalItems += item.cantidad;
+                    const itemTotalUSD = item.precioUSD * item.cantidad;
+                    totalUSD += itemTotalUSD;
+
+                    let displayPrice = '';
+                    if (monedaActual === 'Bs') {
+                        let priceBs = itemTotalUSD * tasaCambio;
+                        displayPrice = 'Bs ' + priceBs.toLocaleString('es-VE', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+                    } else {
+                        displayPrice = '$' + itemTotalUSD.toFixed(2);
+                    }
+
+                    const itemEl = document.createElement('div');
+                    itemEl.className = 'cart-item';
+                    itemEl.innerHTML = `
+                        <button class="cart-item-delete" onclick="eliminarDelCarrito(${index})">✕</button>
+                        <div class="cart-item-title">${item.nombre}</div>
+                        <div class="cart-item-sub">Unidades: ${item.cantidad} x $${item.precioUSD.toFixed(2)}</div>
+                        <div class="cart-item-footer">
+                            <span class="cart-item-qty">Cant: ${item.cantidad}</span>
+                            <span class="cart-item-price ${monedaActual === 'Bs' ? 'blue-price' : ''}">${displayPrice}</span>
+                        </div>
+                    `;
+                    cartBody.appendChild(itemEl);
                 });
             }
-            actualizarContadorCarrito();
-            toggleCart();
-        }
 
-        function toggleCart() {
-            let sidebar = document.getElementById('cartSidebar');
-            sidebar.classList.toggle('open');
-            actualizarVistaCarrito();
-        }
+            cartCount.innerText = totalItems;
 
-        function actualizarContadorCarrito() {
-            let totalItems = carrito.reduce((sum, item) => sum + item.cantidad, 0);
-            document.getElementById('cart-count').innerText = totalItems;
-        }
-
-        function actualizarVistaCarrito() {
-            let body = document.getElementById('cart-body');
-            body.innerHTML = '';
-
-            if (carrito.length === 0) {
-                body.innerHTML = '<div class="cart-empty">Tu carrito está vacío</div>';
-                document.getElementById('cart-total-val').innerText = monedaActual === 'Bs' ? 'Bs. 0.00' : '$0.00';
-                return;
-            }
-
-            let totalGeneralUSD = 0;
-
-            carrito.forEach((item, index) => {
-                let subtotalUSD = item.precioUSD * item.cantidad;
-                totalGeneralUSD += subtotalUSD;
-
-                let precioMostrar = monedaActual === 'Bs' ? 'Bs. ' + (subtotalUSD * tasaCambio).toFixed(2) : '$' + subtotalUSD.toFixed(2);
-                let clasePrecio = monedaActual === 'Bs' ? 'cart-item-price blue-price' : 'cart-item-price';
-
-                let div = document.createElement('div');
-                div.className = 'cart-item';
-                div.innerHTML = `
-                    <div class="cart-item-title">${item.plataforma}</div>
-                    <div class="cart-item-sub">${item.nombrePlan}</div>
-                    <div class="cart-item-footer">
-                        <span class="cart-item-qty">Cant: ${item.cantidad}</span>
-                        <span class="${clasePrecio}">${precioMostrar}</span>
-                    </div>
-                    <button class="cart-item-delete" onclick="eliminarItemCarrito(${index})">🗑</button>
-                `;
-                body.appendChild(div);
-            });
-
-            let totalEl = document.getElementById('cart-total-val');
             if (monedaActual === 'Bs') {
-                totalEl.innerText = 'Bs. ' + (totalGeneralUSD * tasaCambio).toFixed(2);
-                totalEl.classList.add('blue-price');
+                let totalBs = totalUSD * tasaCambio;
+                cartTotal.innerText = 'Bs ' + totalBs.toLocaleString('es-VE', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+                cartTotal.classList.add('blue-price');
             } else {
-                totalEl.innerText = '$' + totalGeneralUSD.toFixed(2);
-                totalEl.classList.remove('blue-price');
+                cartTotal.innerText = '$' + totalUSD.toFixed(2);
+                cartTotal.classList.remove('blue-price');
             }
         }
 
-        function eliminarItemCarrito(index) {
-            carrito.splice(index, 1);
-            actualizarContadorCarrito();
-            actualizarVistaCarrito();
-        }
-
-        function abrirModalCheckout() {
+        // Checkout y Enlaces de Envío
+        function abrirCheckoutModal() {
             if (carrito.length === 0) {
-                alert("Agrega al menos un producto al carrito para continuar.");
+                alert("Tu carrito está vacío. Agrega productos antes de procesar.");
                 return;
             }
-            toggleCart();
 
             let totalUSD = carrito.reduce((sum, item) => sum + (item.precioUSD * item.cantidad), 0);
             let totalBs = totalUSD * tasaCambio;
 
-            document.getElementById('checkout-usd-val').innerText = '$' + totalUSD.toFixed(2);
-            document.getElementById('checkout-conv-val').innerText = 'Bs. ' + totalBs.toFixed(2);
+            document.getElementById('checkout-monto-usd').innerText = `$${totalUSD.toFixed(2)} USD`;
+            document.getElementById('checkout-monto-bs').innerText = `Bs ${totalBs.toLocaleString('es-VE', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
 
-            let textoMensaje = "¡Hola Streamix Store! Deseo procesar el siguiente pedido:%0A";
+            prepararEnlacesEnvio(totalUSD, totalBs);
+            document.getElementById('modal-checkout').style.display = 'flex';
+        }
+
+        function cerrarCheckoutModal() {
+            document.getElementById('modal-checkout').style.display = 'none';
+        }
+
+        function prepararEnlacesEnvio(totalUSD, totalBs) {
+            const nombrePerfil = document.getElementById('input-nombre-perfil').value.trim();
+
+            let mensaje = `Hola Streamix Store, deseo realizar el siguiente pedido:\n\n`;
             carrito.forEach(item => {
-                textoMensaje += `- ${item.cantidad}x ${item.plataforma} (${item.nombrePlan}) - $${(item.precioUSD * item.cantidad).toFixed(2)}%0A`;
+                mensaje += `• ${item.nombre} x${item.cantidad} - $${(item.precioUSD * item.cantidad).toFixed(2)}\n`;
             });
-            textoMensaje += `%0ATotal: $${totalUSD.toFixed(2)} (Bs. ${totalBs.toFixed(2)})`;
 
-            let telefonoNegocio = "584120000000"; // Reemplaza con tu número de WhatsApp
-            let linkWa = `https://wa.me/${telefonoNegocio}?text=${textoMensaje}`;
-            let linkTg = `https://t.me/TuUsuarioTelegram?text=${encodeURIComponent(textoMensaje)}`
-
-            document.getElementById('btn-final-wa').href = linkWa;
-            document.getElementById('btn-final-tg').href = linkTg;
-
-            document.getElementById('modalCheckout').style.display = 'flex';
-        }
-
-        function cerrarModalCheckout() {
-            document.getElementById('modalCheckout').style.display = 'none';
-        }
-
-        /* Funciones del Formulario de Distribuidores (4 Preguntas) */
-        function solicitarAccesoDistribuidores(element) {
-            document.getElementById('modalDistribuidores').style.display = 'flex';
-        }
-
-        function cerrarModalDistribuidores() {
-            document.getElementById('modalDistribuidores').style.display = 'none';
-        }
-
-        function enviarDistribuidor(plataformaEnvio) {
-            let nombre = document.getElementById('distriNombre').value.trim();
-            let experiencia = document.getElementById('distriExperiencia').value;
-            let medio = document.getElementById('distriMedio').value;
-            let pais = document.getElementById('distriPais').value.trim();
-
-            if(!nombre || !pais) {
-                alert("Por favor completa tu nombre y tu país/método de pago.");
-                return;
+            if (nombrePerfil) {
+                mensaje += `\n👤 Nombre de Pantalla/Perfil: ${nombrePerfil}\n`;
             }
 
-            let mensaje = `🤝 *SOLICITUD DE DISTRIBUIDOR - STREAMIX STORE*%0A%0A` +
-                          `1️⃣ *Nombre:* ${nombre}%0A` +
-                          `2️⃣ *Experiencia:* ${experiencia}%0A` +
-                          `3️⃣ *Medio de venta:* ${medio}%0A` +
-                          `4️⃣ *País / Pago:* ${pais}`;
+            mensaje += `\n💰 Total USD: $${totalUSD.toFixed(2)}`;
+            mensaje += `\n🇻🇪 Total Bs (Tasa ${tasaCambio.toFixed(2)}): Bs ${totalBs.toLocaleString('es-VE', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+            mensaje += `\n\nQuedo a la espera de los datos de pago.`;
 
-            if(plataformaEnvio === 'whatsapp') {
-                let numeroWA = "584120000000"; // Reemplaza con tu número WhatsApp
-                window.open(`https://wa.me/${numeroWA}?text=${mensaje}`, '_blank');
-            } else {
-                let usuarioTG = "TuUsuarioTelegram"; // Reemplaza con tu usuario de Telegram
-                window.open(`https://t.me/${usuarioTG}?text=${encodeURIComponent(mensaje)}`, '_blank');
-            }
-            cerrarModalDistribuidores();
+            const mensajeEncoded = encodeURIComponent(mensaje);
+
+            document.getElementById('btn-envio-wa').href = `https://wa.me/584124405245?text=${mensajeEncoded}`;
+            document.getElementById('btn-envio-tg').href = `https://t.me/sxstoreve?text=${mensajeEncoded}`;
         }
+
+        // Actualizar enlace de mensajes si el usuario escribe el nombre del perfil
+        document.getElementById('input-nombre-perfil').addEventListener('input', () => {
+            let totalUSD = carrito.reduce((sum, item) => sum + (item.precioUSD * item.cantidad), 0);
+            let totalBs = totalUSD * tasaCambio;
+            prepararEnlacesEnvio(totalUSD, totalBs);
+        });
     </script>
 </body>
 </html>
