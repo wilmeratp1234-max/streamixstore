@@ -1554,28 +1554,15 @@
         }
 
         function validarCodigoDistribuidor() {
-    const inputCode = document.getElementById('distri-code-input').value.trim();
-    
-    // Lista con los 7 códigos de acceso permitidos
-    const codigosPermitidos = [
-        "DISTRI2026", 
-        "STREAMIX29", 
-        "CODIGO3", 
-        "CODIGO4", 
-        "CODIGO5", 
-        "CODIGO6", 
-        "CODIGO7"
-    ];
-
-    if (codigosPermitidos.includes(inputCode)) {
-        distribuidorAutorizado = true;
-        cerrarModalDistribuidores();
-        document.getElementById('distri-code-input').value = "";
-        solicitarAccesoDistribuidores();
-    } else {
-        alert("Código de revendedor incorrecto. Solicita tu código a soporte.");
-    }
-}
+            const inputCode = document.getElementById('distri-code-input').value.trim();
+            if (inputCode === "DISTRI2026" || inputCode === "STREAMIX29" ) {
+                distribuidorAutorizado = true;
+                cerrarModalDistribuidores();
+                document.getElementById('distri-code-input').value = "";
+                solicitarAccesoDistribuidores();
+            } else {
+                alert("Código de revendedor incorrecto. Solicita tu código a soporte.");
+            }
         }
 
         // Modal de Selección de Plan
