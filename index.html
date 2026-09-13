@@ -1379,28 +1379,6 @@
             <button class="btn-distri-verify" onclick="validarCodigoDistribuidor()">VERIFICAR E INGRESAR</button>
         </div>
     </div>
-	
-	<!-- MODAL DE FORMULARIO DE DISTRIBUIDOR (4 PREGUNTAS) -->
-    <div class="modal-overlay" id="modalDistribuidores">
-        <div class="distri-modal-card">
-            <div class="distri-modal-header">
-                <div class="distri-modal-title">Solicitud de <span>Distribuidor</span></div>
-                <button class="distri-modal-close" onclick="cerrarModalDistribuidores()">✕</button>
-            </div>
-            <div class="distri-modal-subtext">Responde las siguientes 4 preguntas para tramitar tu acceso como distribuidor oficial en Streamix Store.</div>
-            
-            <div class="distri-form-group">
-                <label class="distri-input-label">1. ¿Cuál es tu Nombre Completo?</label>
-                <input type="text" class="distri-input-code" id="distriNombre" placeholder="Ej. Carlos Pérez">
-            </div>
-
-            <div class="distri-form-group">
-                <label class="distri-input-label">2. ¿Tienes experiencia vendiendo streaming?</label>
-                <select class="distri-select-code" id="distriExperiencia">
-                    <option value="Sí, ya tengo experiencia">Sí, ya tengo experiencia</option>
-                    <option value="No, pero quiero aprender">No, pero quiero aprender desde cero</option>
-                </select>
-            </div>
 
     <!-- MODAL DE PROCESAR PAGO / CHECKOUT -->
     <div class="modal-overlay" id="modal-checkout">
@@ -1751,41 +1729,7 @@
             document.getElementById('btn-envio-wa').href = `https://wa.me/584124405245?text=${mensajeEncoded}`;
             document.getElementById('btn-envio-tg').href = `https://t.me/sxstoreve?text=${mensajeEncoded}`;
         }
-        /* Funciones del Formulario de Distribuidores (4 Preguntas) */
-        function solicitarAccesoDistribuidores(element) {
-            document.getElementById('modalDistribuidores').style.display = 'flex';
-        }
 
-        function cerrarModalDistribuidores() {
-            document.getElementById('modalDistribuidores').style.display = 'none';
-        }
-
-        function enviarDistribuidor(plataformaEnvio) {
-            let nombre = document.getElementById('distriNombre').value.trim();
-            let experiencia = document.getElementById('distriExperiencia').value;
-            let medio = document.getElementById('distriMedio').value;
-            let pais = document.getElementById('distriPais').value.trim();
-
-            if(!nombre || !pais) {
-                alert("Por favor completa tu nombre y tu país/método de pago.");
-                return;
-            }
-
-            let mensaje = `🤝 *SOLICITUD DE DISTRIBUIDOR - STREAMIX STORE*%0A%0A` +
-                          `1️⃣ *Nombre:* ${nombre}%0A` +
-                          `2️⃣ *Experiencia:* ${experiencia}%0A` +
-                          `3️⃣ *Medio de venta:* ${medio}%0A` +
-                          `4️⃣ *País / Pago:* ${pais}`;
-
-            if(plataformaEnvio === 'whatsapp') {
-                let numeroWA = "584120000000"; // Reemplaza con tu número WhatsApp
-                window.open(`https://wa.me/${numeroWA}?text=${mensaje}`, '_blank');
-            } else {
-                let usuarioTG = "TuUsuarioTelegram"; // Reemplaza con tu usuario de Telegram
-                window.open(`https://t.me/${usuarioTG}?text=${encodeURIComponent(mensaje)}`, '_blank');
-            }
-            cerrarModalDistribuidores();
-        }
         // Actualizar enlace de mensajes si el usuario escribe el nombre del perfil
         document.getElementById('input-nombre-perfil').addEventListener('input', () => {
             let totalUSD = carrito.reduce((sum, item) => sum + (item.precioUSD * item.cantidad), 0);
