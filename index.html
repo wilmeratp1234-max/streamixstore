@@ -1421,10 +1421,23 @@
     </div>
 
     <!-- PAGO MÓVIL -->
+    <div class="payment-info-box" style="background: rgba(255, 255, 255, 0.05); padding: 15px; border-radius: 8px; margin-bottom: 15px; border: 1px solid rgba(255, 255, 255, 0.1);">
+    <div class="payment-section-title" style="font-weight: bold; margin-bottom: 10px; color: #38bdf8; text-align: center;">
+        💳 MÉTODOS DE PAGO DISPONIBLES
+    </div>
+
+    <!-- PAGO MÓVIL -->
     <div style="background: rgba(0, 0, 0, 0.2); padding: 10px; border-radius: 6px; margin-bottom: 10px;">
-        <div style="font-weight: bold; color: #4ade80; margin-bottom: 6px; display: flex; align-items: center; gap: 5px;">
-            📱 Pago Móvil (Bs)
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+            <div style="font-weight: bold; color: #4ade80; display: flex; align-items: center; gap: 5px;">
+                📱 Pago Móvil (Bs)
+            </div>
+            <!-- BOTÓN PARA COPIAR PAGO MÓVIL -->
+            <button type="button" id="btn-copiar-pm" onclick="copiarDatosPagoMovil()" style="background: #2563eb; color: white; border: none; padding: 4px 10px; border-radius: 4px; font-size: 0.75rem; cursor: pointer; font-weight: bold; transition: background 0.2s;">
+                📋 Copiar Datos
+            </button>
         </div>
+
         <div style="display: grid; grid-template-columns: auto 1fr; gap: 4px 12px; font-size: 0.9rem;">
             <span style="color: #9ca3af; font-weight: bold;">Bancos:</span>
             <span>Bancamiga (0172) / BNC (0191)</span>
@@ -1443,10 +1456,35 @@
             🟡 Binance Pay (USDT)
         </div>
         <div style="display: grid; grid-template-columns: auto 1fr; gap: 4px 12px; font-size: 0.9rem;">
-            <span style="color: #9ca3af; font-weight: bold;">ID BINANCE:</span>
-            <span>559760306</span>
+            <span style="color: #9ca3af; font-weight: bold;">Correo:</span>
+            <span>wilmertorres123@gmail.com</span>
         </div>
     </div>
+</div>
+
+<!-- LÓGICA JAVASCRIPT PARA COPIAR -->
+<script>
+function copiarDatosPagoMovil() {
+    const datosPM = `Pago Móvil
+Bancos: Bancamiga (0172) / BNC (0191)
+Teléfono: 04122818460
+Cédula: V27178466`;
+
+    navigator.clipboard.writeText(datosPM).then(() => {
+        const btn = document.getElementById('btn-copiar-pm');
+        const textoOriginal = btn.innerHTML;
+        
+        btn.innerHTML = '✅ ¡Copiado!';
+        btn.style.background = '#16a34a';
+
+        setTimeout(() => {
+            btn.innerHTML = textoOriginal;
+            btn.style.background = '#2563eb';
+        }, 2000);
+    }).catch(err => {
+        alert('No se pudo copiar los datos automáticamente.');
+    });
+}
 </div>
 
         <div class="pantalla-input-box">
