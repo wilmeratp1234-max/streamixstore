@@ -1404,375 +1404,396 @@
     </div>
 
     <!-- MODAL DE PROCESAR PAGO / CHECKOUT -->
-    <div class="modal-overlay" id="modal-checkout">
-        <div class="checkout-modal-card">
-            <button class="modal-close" onclick="cerrarCheckoutModal()">✕</button>
-            <h2 style="font-size: 1.4rem; color: white; margin-bottom: 15px;">Finalizar Pedido</h2>
-            
-            <div class="checkout-total-box">
-                <div class="checkout-total-title">Monto Total a Pagar</div>
-                <div class="checkout-total-usd" id="checkout-monto-usd">$0.00 USD</div>
-                <div class="checkout-total-conversions" id="checkout-monto-bs">Bs 0.00</div>
-            </div>
+<div class="modal-overlay" id="modal-checkout">
+    <div class="checkout-modal-card">
+        <button class="modal-close" onclick="cerrarCheckoutModal()">✕</button>
+        <h2 style="font-size: 1.4rem; color: white; margin-bottom: 15px;">Finalizar Pedido</h2>
+        
+        <div class="checkout-total-box">
+            <div class="checkout-total-title">Monto Total a Pagar</div>
+            <div class="checkout-total-usd" id="checkout-monto-usd">$0.00 USD</div>
+            <div class="checkout-total-conversions" id="checkout-monto-bs">Bs 0.00</div>
+        </div>
 
-            <div class="payment-info-box">
-                <div class="payment-section-title">💳 MÉTODOS DE PAGO DISPONIBLES</div>
-                <div class="payment-details">
-                    • <strong>Pago Móvil Bs:</strong> 📱 Pago Móvil Bancos: Bancamiga (0172) o BNC (0191) Teléfono: 0412-2818460 Cédula: V-27178466.<br>
-                    • <strong>Binance Pay (USDT) wilmertorres123@gmail.com</strong>
-                </div>
+        <div class="payment-info-box">
+            <div class="payment-section-title">💳 MÉTODOS DE PAGO DISPONIBLES</div>
+            <div class="payment-details">
+                • <strong>Pago Móvil Bs:</strong> 📱 Pago Móvil Bancos: Bancamiga (0172) o BNC (0191) Teléfono: 0412-2818460 Cédula: V-27178466.<br>
+                • <strong>Binance Pay (USDT) wilmertorres123@gmail.com</strong>
             </div>
+        </div>
 
-            <div class="pantalla-input-box">
-                <label for="input-nombre-perfil">Nombre de Pantalla / Perfil (Opcional):</label>
-                <input type="text" id="input-nombre-perfil" placeholder="Ej: Mi Nombre, Sala, etc.">
-            </div>
+        <div class="pantalla-input-box">
+            <label for="input-nombre-perfil">Nombre de Pantalla / Perfil <span style="color: #ef4444;">* Obligatorio</span>:</label>
+            <input type="text" id="input-nombre-perfil" placeholder="Ej: Mi Nombre, Sala, etc.">
+            <small id="error-nombre-perfil" style="color: #ef4444; display: none; margin-top: 4px; font-size: 0.8rem;">Por favor, ingresa el nombre de pantalla para continuar.</small>
+        </div>
 
-            <div class="steps-box">
-                <strong>Paso final:</strong> Haz clic en uno de los botones para enviar el resumen detallado de tu orden por WhatsApp o Telegram a nuestro equipo de atención.
-            </div>
+        <div class="steps-box">
+            <strong>Paso final:</strong> Haz clic en uno de los botones para enviar el resumen detallado de tu orden por WhatsApp o Telegram a nuestro equipo de atención.
+        </div>
 
-            <div class="checkout-buttons-grid">
-                <a id="btn-envio-wa" class="btn-wa-pay" target="_blank">WhatsApp</a>
-                <a id="btn-envio-tg" class="btn-tg-pay" target="_blank">Telegram</a>
-            </div>
+        <div class="checkout-buttons-grid">
+            <a id="btn-envio-wa" class="btn-wa-pay" target="_blank">WhatsApp</a>
+            <a id="btn-envio-tg" class="btn-tg-pay" target="_blank">Telegram</a>
         </div>
     </div>
+</div>
 
-    <!-- CARRITO LATERAL -->
-    <div class="cart-sidebar" id="cart-sidebar">
-        <div class="cart-header">
-            <h3>🛒 Tu Pedido</h3>
-            <button class="cart-close" onclick="toggleCart()">✕</button>
-        </div>
-        <div class="cart-body" id="cart-body">
-            <div class="cart-empty">El carrito está vacío.</div>
-        </div>
-        <div class="cart-footer">
-            <div class="cart-total-row">
-                <span>Total:</span>
-                <span id="cart-total">$0.00</span>
-            </div>
-            <button class="btn-procesar" onclick="abrirCheckoutModal()">⚡ PROCESAR PEDIDO</button>
-        </div>
+<!-- CARRITO LATERAL -->
+<div class="cart-sidebar" id="cart-sidebar">
+    <div class="cart-header">
+        <h3>🛒 Tu Pedido</h3>
+        <button class="cart-close" onclick="toggleCart()">✕</button>
     </div>
+    <div class="cart-body" id="cart-body">
+        <div class="cart-empty">El carrito está vacío.</div>
+    </div>
+    <div class="cart-footer">
+        <div class="cart-total-row">
+            <span>Total:</span>
+            <span id="cart-total">$0.00</span>
+        </div>
+        <button class="btn-procesar" onclick="abrirCheckoutModal()">⚡ PROCESAR PEDIDO</button>
+    </div>
+</div>
 
-    <!-- LÓGICA JAVASCRIPT -->
-    <script>
-        // Variables globales del estado
-        let tasaCambio = 960.00;
-        let monedaActual = 'USD';
-        let carrito = [];
-        let distribuidorAutorizado = false;
+<!-- LÓGICA JAVASCRIPT -->
+<script>
+    // Variables globales del estado
+    let tasaCambio = 960.00;
+    let monedaActual = 'USD';
+    let carrito = [];
+    let distribuidorAutorizado = false;
 
-        // Estado del Modal de Producto
-        let modalPlataformaActual = '';
-        let modalPlanesActuales = [];
-        let modalCantidadActual = 1;
-        let modalCategoriaActual = '';
+    // Estado del Modal de Producto
+    let modalPlataformaActual = '';
+    let modalPlanesActuales = [];
+    let modalCantidadActual = 1;
+    let modalCategoriaActual = '';
 
-        // Inicialización
-        document.addEventListener('DOMContentLoaded', () => {
-            let tasaEl = document.getElementById('tasa-mostrada');
-            if (tasaEl) tasaEl.innerText = tasaCambio.toFixed(2);
-            let filterActive = document.querySelector('.filter-btn.active');
-            if (filterActive) filtrar('todos', filterActive);
+    // Inicialización
+    document.addEventListener('DOMContentLoaded', () => {
+        let tasaEl = document.getElementById('tasa-mostrada');
+        if (tasaEl) tasaEl.innerText = tasaCambio.toFixed(2);
+        let filterBtnActive = document.querySelector('.filter-btn.active');
+        if (filterBtnActive) filtrar('todos', filterBtnActive);
+    });
+
+    // Cambio de Moneda (USD <-> Bs)
+    function cambiarMoneda(moneda, btn) {
+        monedaActual = moneda;
+        document.querySelectorAll('.curr-btn').forEach(b => b.classList.remove('active'));
+        if(btn) btn.classList.add('active');
+
+        // Actualizar precios en tarjetas
+        document.querySelectorAll('.card-plan-price').forEach(el => {
+            let usdPrice = parseFloat(el.getAttribute('data-usd'));
+            if (moneda === 'Bs') {
+                let bsPrice = usdPrice * tasaCambio;
+                el.innerText = 'Bs ' + bsPrice.toLocaleString('es-VE', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+                el.classList.add('blue-price');
+            } else {
+                el.innerText = '$' + usdPrice.toFixed(2);
+                el.classList.remove('blue-price');
+            }
         });
 
-        // Cambio de Moneda (USD <-> Bs)
-        function cambiarMoneda(moneda, btn) {
-            monedaActual = moneda;
-            document.querySelectorAll('.curr-btn').forEach(b => b.classList.remove('active'));
-            if(btn) btn.classList.add('active');
-
-            // Actualizar precios en tarjetas
-            document.querySelectorAll('.card-plan-price').forEach(el => {
-                let usdPrice = parseFloat(el.getAttribute('data-usd'));
-                if (moneda === 'Bs') {
-                    let bsPrice = usdPrice * tasaCambio;
-                    el.innerText = 'Bs ' + bsPrice.toLocaleString('es-VE', {minimumFractionDigits: 2, maximumFractionDigits: 2});
-                    el.classList.add('blue-price');
-                } else {
-                    el.innerText = '$' + usdPrice.toFixed(2);
-                    el.classList.remove('blue-price');
-                }
-            });
-
-            // Actualizar oferta destacada
-            let ofertaEl = document.getElementById('oferta-precio');
-            if (ofertaEl) {
-                let usdOferta = parseFloat(ofertaEl.getAttribute('data-usd'));
-                if (moneda === 'Bs') {
-                    let bsOferta = usdOferta * tasaCambio;
-                    ofertaEl.innerHTML = 'Bs ' + bsOferta.toLocaleString('es-VE', {minimumFractionDigits: 2, maximumFractionDigits: 2});
-                } else {
-                    ofertaEl.innerHTML = '$' + usdOferta.toFixed(2) + ' <span style="font-size: 1rem; color: #9ca3af;">USD</span>';
-                }
-            }
-
-            actualizarCarritoUI();
-            let modalSel = document.getElementById('modal-seleccion');
-            if (modalSel && modalSel.style.display === 'flex') {
-                actualizarSubtotalModal();
+        // Actualizar oferta destacada
+        let ofertaEl = document.getElementById('oferta-precio');
+        if (ofertaEl) {
+            let usdOferta = parseFloat(ofertaEl.getAttribute('data-usd'));
+            if (moneda === 'Bs') {
+                let bsOferta = usdOferta * tasaCambio;
+                ofertaEl.innerHTML = 'Bs ' + bsOferta.toLocaleString('es-VE', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+            } else {
+                ofertaEl.innerHTML = '$' + usdOferta.toFixed(2) + ' <span style="font-size: 1rem; color: #9ca3af;">USD</span>';
             }
         }
 
-        // Filtro de Categorías
-        function filtrar(categoria, btn) {
-            if (categoria === 'distribuidores' && !distribuidorAutorizado) {
-                solicitarAccesoDistribuidores(btn);
-                return;
+        actualizarCarritoUI();
+        let modalSel = document.getElementById('modal-seleccion');
+        if (modalSel && modalSel.style.display === 'flex') {
+            actualizarSubtotalModal();
+        }
+    }
+
+    // Filtro de Categorías
+    function filtrar(categoria, btn) {
+        if (categoria === 'distribuidores' && !distribuidorAutorizado) {
+            solicitarAccesoDistribuidores(btn);
+            return;
+        }
+
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        if(btn) btn.classList.add('active');
+
+        const tarjetas = document.querySelectorAll('.platform-card');
+        tarjetas.forEach(card => {
+            const catCard = card.getAttribute('data-categoria');
+            if (categoria === 'todos') {
+                card.style.display = (catCard === 'distribuidores') ? 'none' : 'flex';
+            } else {
+                card.style.display = (catCard === categoria) ? 'flex' : 'none';
             }
+        });
+    }
 
+    // Control del Modal de Revendedores
+    function solicitarAccesoDistribuidores(btn) {
+        if (distribuidorAutorizado) {
             document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-            if(btn) btn.classList.add('active');
-
+            const btnDist = document.querySelector('.filter-btn.btn-distri');
+            if(btnDist) btnDist.classList.add('active');
+            
             const tarjetas = document.querySelectorAll('.platform-card');
             tarjetas.forEach(card => {
-                const catCard = card.getAttribute('data-categoria');
-                if (categoria === 'todos') {
-                    card.style.display = (catCard === 'distribuidores') ? 'none' : 'flex';
-                } else {
-                    card.style.display = (catCard === categoria) ? 'flex' : 'none';
-                }
+                card.style.display = (card.getAttribute('data-categoria') === 'distribuidores') ? 'flex' : 'none';
             });
-        }
-
-        // Control del Modal de Revendedores
-        function solicitarAccesoDistribuidores(btn) {
-            if (distribuidorAutorizado) {
-                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-                const btnDist = document.querySelector('.filter-btn.btn-distri');
-                if(btnDist) btnDist.classList.add('active');
-                
-                const tarjetas = document.querySelectorAll('.platform-card');
-                tarjetas.forEach(card => {
-                    card.style.display = (card.getAttribute('data-categoria') === 'distribuidores') ? 'flex' : 'none';
-                });
-            } else {
-                let modalDist = document.getElementById('modal-distribuidores');
-                if (modalDist) modalDist.style.display = 'flex';
-            }
-        }
-
-        function cerrarModalDistribuidores() {
+        } else {
             let modalDist = document.getElementById('modal-distribuidores');
-            if (modalDist) modalDist.style.display = 'none';
+            if (modalDist) modalDist.style.display = 'flex';
         }
+    }
 
-        function validarCodigoDistribuidor() {
-            const inputCode = document.getElementById('distri-code-input').value.trim();
-            if (inputCode === "DISTRI2026" || inputCode === "STREAMIX29" ) {
-                distribuidorAutorizado = true;
-                cerrarModalDistribuidores();
-                document.getElementById('distri-code-input').value = "";
-                solicitarAccesoDistribuidores();
-            } else {
-                alert("Código de distribuidor incorrecto. Solicita tu código a soporte.");
-            }
+    function cerrarModalDistribuidores() {
+        let modalDist = document.getElementById('modal-distribuidores');
+        if (modalDist) modalDist.style.display = 'none';
+    }
+
+    function validarCodigoDistribuidor() {
+        const inputCode = document.getElementById('distri-code-input').value.trim();
+        if (inputCode === "DISTRI2026" || inputCode === "STREAMIX29" ) {
+            distribuidorAutorizado = true;
+            cerrarModalDistribuidores();
+            document.getElementById('distri-code-input').value = "";
+            solicitarAccesoDistribuidores();
+        } else {
+            alert("Código de distribuidor incorrecto. Solicita tu código a soporte.");
         }
+    }
 
-        // Modal de Selección de Plan
-        function abrirModal(plataforma, planes, indexSeleccionado = 0, categoria = 'cine') {
-            modalPlataformaActual = plataforma;
-            modalPlanesActuales = planes;
-            modalCantidadActual = 1;
-            modalCategoriaActual = categoria;
+    // Modal de Selección de Plan
+    function abrirModal(plataforma, planes, indexSeleccionado = 0, categoria = 'cine') {
+        modalPlataformaActual = plataforma;
+        modalPlanesActuales = planes;
+        modalCantidadActual = 1;
+        modalCategoriaActual = categoria;
 
-            document.getElementById('modal-titulo').innerText = plataforma;
-            document.getElementById('modal-qty').innerText = modalCantidadActual;
+        document.getElementById('modal-titulo').innerText = plataforma;
+        document.getElementById('modal-qty').innerText = modalCantidadActual;
 
-            const select = document.getElementById('modal-select-planes');
-            select.innerHTML = '';
-            planes.forEach((plan, idx) => {
-                const option = document.createElement('option');
-                option.value = idx;
-                option.innerText = `${plan.nombre} - $${plan.precio.toFixed(2)}`;
-                select.appendChild(option);
-            });
-
-            select.value = indexSeleccionado;
-            actualizarSubtotalModal();
-            document.getElementById('modal-seleccion').style.display = 'flex';
-        }
-
-        function cerrarModal() {
-            let modalSel = document.getElementById('modal-seleccion');
-            if (modalSel) modalSel.style.display = 'none';
-        }
-
-        function cambiarCantidadModal(delta) {
-            modalCantidadActual += delta;
-            if (modalCantidadActual < 1) modalCantidadActual = 1;
-            document.getElementById('modal-qty').innerText = modalCantidadActual;
-            actualizarSubtotalModal();
-        }
-
-        function actualizarSubtotalModal() {
-            const select = document.getElementById('modal-select-planes');
-            const planSel = modalPlanesActuales[select.value];
-            if (!planSel) return;
-
-            const subtotalUSD = planSel.precio * modalCantidadActual;
-            const subtotalEl = document.getElementById('modal-subtotal');
-
-            if (monedaActual === 'Bs') {
-                const subtotalBs = subtotalUSD * tasaCambio;
-                subtotalEl.innerText = 'Bs ' + subtotalBs.toLocaleString('es-VE', {minimumFractionDigits: 2, maximumFractionDigits: 2});
-                subtotalEl.classList.add('blue-price');
-            } else {
-                subtotalEl.innerText = '$' + subtotalUSD.toFixed(2);
-                subtotalEl.classList.remove('blue-price');
-            }
-        }
-
-        function agregarAlPedidoDesdeModal() {
-            const select = document.getElementById('modal-select-planes');
-            const planSel = modalPlanesActuales[select.value];
-            
-            agregarAlCarrito(`${modalPlataformaActual} - ${planSel.nombre}`, planSel.precio, modalCantidadActual);
-            cerrarModal();
-            toggleCart(true);
-        }
-
-        function agregarDirecto(nombreCompleto, precioUSD, categoria) {
-            agregarAlCarrito(nombreCompleto, precioUSD, 1);
-            toggleCart(true);
-        }
-
-        // Lógica del Carrito de Compras
-        function agregarAlCarrito(nombre, precioUSD, cantidad) {
-            const index = carrito.findIndex(item => item.nombre === nombre);
-            if (index > -1) {
-                carrito[index].cantidad += cantidad;
-            } else {
-                carrito.push({ nombre, precioUSD, cantidad });
-            }
-            actualizarCarritoUI();
-        }
-
-        function eliminarDelCarrito(index) {
-            carrito.splice(index, 1);
-            actualizarCarritoUI();
-        }
-
-        function toggleCart(forceOpen = false) {
-            const cartSidebar = document.getElementById('cart-sidebar');
-            if (forceOpen) {
-                cartSidebar.classList.add('open');
-            } else {
-                cartSidebar.classList.toggle('open');
-            }
-        }
-
-        function actualizarCarritoUI() {
-            const cartBody = document.getElementById('cart-body');
-            const cartCount = document.getElementById('cart-count');
-            const cartTotal = document.getElementById('cart-total');
-
-            let totalItems = 0;
-            let totalUSD = 0;
-
-            cartBody.innerHTML = '';
-
-            if (carrito.length === 0) {
-                cartBody.innerHTML = '<div class="cart-empty">El carrito está vacío.</div>';
-            } else {
-                carrito.forEach((item, index) => {
-                    totalItems += item.cantidad;
-                    const itemTotalUSD = item.precioUSD * item.cantidad;
-                    totalUSD += itemTotalUSD;
-
-                    let displayPrice = '';
-                    if (monedaActual === 'Bs') {
-                        let priceBs = itemTotalUSD * tasaCambio;
-                        displayPrice = 'Bs ' + priceBs.toLocaleString('es-VE', {minimumFractionDigits: 2, maximumFractionDigits: 2});
-                    } else {
-                        displayPrice = '$' + itemTotalUSD.toFixed(2);
-                    }
-
-                    const itemEl = document.createElement('div');
-                    itemEl.className = 'cart-item';
-                    itemEl.innerHTML = `
-                        <button class="cart-item-delete" onclick="eliminarDelCarrito(${index})">✕</button>
-                        <div class="cart-item-title">${item.nombre}</div>
-                        <div class="cart-item-sub">Unidades: ${item.cantidad} x $${item.precioUSD.toFixed(2)}</div>
-                        <div class="cart-item-footer">
-                            <span class="cart-item-qty">Cant: ${item.cantidad}</span>
-                            <span class="cart-item-price ${monedaActual === 'Bs' ? 'blue-price' : ''}">${displayPrice}</span>
-                        </div>
-                    `;
-                    cartBody.appendChild(itemEl);
-                });
-            }
-
-            if (cartCount) cartCount.innerText = totalItems;
-
-            if (monedaActual === 'Bs') {
-                let totalBs = totalUSD * tasaCambio;
-                cartTotal.innerText = 'Bs ' + totalBs.toLocaleString('es-VE', {minimumFractionDigits: 2, maximumFractionDigits: 2});
-                cartTotal.classList.add('blue-price');
-            } else {
-                cartTotal.innerText = '$' + totalUSD.toFixed(2);
-                cartTotal.classList.remove('blue-price');
-            }
-        }
-
-        // Checkout y Enlaces de Envío
-        function abrirCheckoutModal() {
-            if (carrito.length === 0) {
-                alert("Tu carrito está vacío. Agrega productos antes de procesar.");
-                return;
-            }
-
-            let totalUSD = carrito.reduce((sum, item) => sum + (item.precioUSD * item.cantidad), 0);
-            let totalBs = totalUSD * tasaCambio;
-
-            document.getElementById('checkout-monto-usd').innerText = `$${totalUSD.toFixed(2)} USD`;
-            document.getElementById('checkout-monto-bs').innerText = `Bs ${totalBs.toLocaleString('es-VE', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
-
-            prepararEnlacesEnvio(totalUSD, totalBs);
-            
-            // Cierra la barra lateral del carrito si está visible
-            const cartSidebar = document.getElementById('cart-sidebar');
-            if (cartSidebar) cartSidebar.classList.remove('open');
-
-            // Despliega inmediatamente la ventana de checkout
-            document.getElementById('modal-checkout').style.display = 'flex';
-        }
-
-        function cerrarCheckoutModal() {
-            document.getElementById('modal-checkout').style.display = 'none';
-        }
-
-        function prepararEnlacesEnvio(totalUSD, totalBs) {
-            const nombrePerfil = document.getElementById('input-nombre-perfil').value.trim();
-
-            let mensaje = `Hola Streamix Store, ya he realizado el pago del siguiente pedido:\n\n`;
-            carrito.forEach(item => {
-                mensaje += `• ${item.nombre} x${item.cantidad} - $${(item.precioUSD * item.cantidad).toFixed(2)}\n`;
-            });
-
-            if (nombrePerfil) {
-                mensaje += `\n👤 Nombre de Pantalla/Perfil: ${nombrePerfil}\n`;
-            }
-
-            mensaje += `\n💰 Total USD: $${totalUSD.toFixed(2)}`;
-            mensaje += `\n🇻🇪 Total Bs (Tasa ${tasaCambio.toFixed(2)}): Bs ${totalBs.toLocaleString('es-VE', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
-            mensaje += `\n\nAdjunto comprobante de mi pago. Quedo a la espera de los datos de pago.`;
-
-            const mensajeEncoded = encodeURIComponent(mensaje);
-
-            document.getElementById('btn-envio-wa').href = `https://wa.me/584124405245?text=${mensajeEncoded}`;
-            document.getElementById('btn-envio-tg').href = `https://t.me/sxstoreve?text=${mensajeEncoded}`;
-        }
-
-        // Actualizar enlace de mensajes si el usuario escribe el nombre del perfil
-        document.getElementById('input-nombre-perfil').addEventListener('input', () => {
-            let totalUSD = carrito.reduce((sum, item) => sum + (item.precioUSD * item.cantidad), 0);
-            let totalBs = totalUSD * tasaCambio;
-            prepararEnlacesEnvio(totalUSD, totalBs);
+        const select = document.getElementById('modal-select-planes');
+        select.innerHTML = '';
+        planes.forEach((plan, idx) => {
+            const option = document.createElement('option');
+            option.value = idx;
+            option.innerText = `${plan.nombre} - $${plan.precio.toFixed(2)}`;
+            select.appendChild(option);
         });
-    </script>
+
+        select.value = indexSeleccionado;
+        actualizarSubtotalModal();
+        document.getElementById('modal-seleccion').style.display = 'flex';
+    }
+
+    function cerrarModal() {
+        let modalSel = document.getElementById('modal-seleccion');
+        if (modalSel) modalSel.style.display = 'none';
+    }
+
+    function cambiarCantidadModal(delta) {
+        modalCantidadActual += delta;
+        if (modalCantidadActual < 1) modalCantidadActual = 1;
+        document.getElementById('modal-qty').innerText = modalCantidadActual;
+        actualizarSubtotalModal();
+    }
+
+    function actualizarSubtotalModal() {
+        const select = document.getElementById('modal-select-planes');
+        const planSel = modalPlanesActuales[select.value];
+        if (!planSel) return;
+
+        const subtotalUSD = planSel.precio * modalCantidadActual;
+        const subtotalEl = document.getElementById('modal-subtotal');
+
+        if (monedaActual === 'Bs') {
+            const subtotalBs = subtotalUSD * tasaCambio;
+            subtotalEl.innerText = 'Bs ' + subtotalBs.toLocaleString('es-VE', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+            subtotalEl.classList.add('blue-price');
+        } else {
+            subtotalEl.innerText = '$' + subtotalUSD.toFixed(2);
+            subtotalEl.classList.remove('blue-price');
+        }
+    }
+
+    function agregarAlPedidoDesdeModal() {
+        const select = document.getElementById('modal-select-planes');
+        const planSel = modalPlanesActuales[select.value];
+        
+        agregarAlCarrito(`${modalPlataformaActual} - ${planSel.nombre}`, planSel.precio, modalCantidadActual);
+        cerrarModal();
+        toggleCart(true);
+    }
+
+    function agregarDirecto(nombreCompleto, precioUSD, categoria) {
+        agregarAlCarrito(nombreCompleto, precioUSD, 1);
+        toggleCart(true);
+    }
+
+    // Lógica del Carrito de Compras
+    function agregarAlCarrito(nombre, precioUSD, cantidad) {
+        const index = carrito.findIndex(item => item.nombre === nombre);
+        if (index > -1) {
+            carrito[index].cantidad += cantidad;
+        } else {
+            carrito.push({ nombre, precioUSD, cantidad });
+        }
+        actualizarCarritoUI();
+    }
+
+    function eliminarDelCarrito(index) {
+        carrito.splice(index, 1);
+        actualizarCarritoUI();
+    }
+
+    function toggleCart(forceOpen = false) {
+        const cartSidebar = document.getElementById('cart-sidebar');
+        if (forceOpen) {
+            cartSidebar.classList.add('open');
+        } else {
+            cartSidebar.classList.toggle('open');
+        }
+    }
+
+    function actualizarCarritoUI() {
+        const cartBody = document.getElementById('cart-body');
+        const cartCount = document.getElementById('cart-count');
+        const cartTotal = document.getElementById('cart-total');
+
+        let totalItems = 0;
+        let totalUSD = 0;
+
+        cartBody.innerHTML = '';
+
+        if (carrito.length === 0) {
+            cartBody.innerHTML = '<div class="cart-empty">El carrito está vacío.</div>';
+        } else {
+            carrito.forEach((item, index) => {
+                totalItems += item.cantidad;
+                const itemTotalUSD = item.precioUSD * item.cantidad;
+                totalUSD += itemTotalUSD;
+
+                let displayPrice = '';
+                if (monedaActual === 'Bs') {
+                    let priceBs = itemTotalUSD * tasaCambio;
+                    displayPrice = 'Bs ' + priceBs.toLocaleString('es-VE', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+                } else {
+                    displayPrice = '$' + itemTotalUSD.toFixed(2);
+                }
+
+                const itemEl = document.createElement('div');
+                itemEl.className = 'cart-item';
+                itemEl.innerHTML = `
+                    <button class="cart-item-delete" onclick="eliminarDelCarrito(${index})">✕</button>
+                    <div class="cart-item-title">${item.nombre}</div>
+                    <div class="cart-item-sub">Unidades: ${item.cantidad} x $${item.precioUSD.toFixed(2)}</div>
+                    <div class="cart-item-footer">
+                        <span class="cart-item-qty">Cant: ${item.cantidad}</span>
+                        <span class="cart-item-price ${monedaActual === 'Bs' ? 'blue-price' : ''}">${displayPrice}</span>
+                    </div>
+                `;
+                cartBody.appendChild(itemEl);
+            });
+        }
+
+        if (cartCount) cartCount.innerText = totalItems;
+
+        if (monedaActual === 'Bs') {
+            let totalBs = totalUSD * tasaCambio;
+            cartTotal.innerText = 'Bs ' + totalBs.toLocaleString('es-VE', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+            cartTotal.classList.add('blue-price');
+        } else {
+            cartTotal.innerText = '$' + totalUSD.toFixed(2);
+            cartTotal.classList.remove('blue-price');
+        }
+    }
+
+    // Checkout y Enlaces de Envío
+    function abrirCheckoutModal() {
+        if (carrito.length === 0) {
+            alert("Tu carrito está vacío. Agrega productos antes de procesar.");
+            return;
+        }
+
+        let totalUSD = carrito.reduce((sum, item) => sum + (item.precioUSD * item.cantidad), 0);
+        let totalBs = totalUSD * tasaCambio;
+
+        document.getElementById('checkout-monto-usd').innerText = `$${totalUSD.toFixed(2)} USD`;
+        document.getElementById('checkout-monto-bs').innerText = `Bs ${totalBs.toLocaleString('es-VE', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+
+        prepararEnlacesEnvio(totalUSD, totalBs);
+        
+        // Cierra la barra lateral del carrito si está visible
+        const cartSidebar = document.getElementById('cart-sidebar');
+        if (cartSidebar) cartSidebar.classList.remove('open');
+
+        // Despliega inmediatamente la ventana de checkout
+        document.getElementById('modal-checkout').style.display = 'flex';
+    }
+
+    function cerrarCheckoutModal() {
+        document.getElementById('modal-checkout').style.display = 'none';
+    }
+
+    function prepararEnlacesEnvio(totalUSD, totalBs) {
+        const inputNombre = document.getElementById('input-nombre-perfil');
+        const nombrePerfil = inputNombre.value.trim();
+        const errorMsg = document.getElementById('error-nombre-perfil');
+
+        // Validación: si no colocan nombre, deshabilita el envío
+        if (!nombrePerfil) {
+            if (errorMsg) errorMsg.style.display = 'block';
+            inputNombre.style.borderColor = '#ef4444';
+            document.getElementById('btn-envio-wa').removeAttribute('href');
+            document.getElementById('btn-envio-tg').removeAttribute('href');
+            document.getElementById('btn-envio-wa').style.pointerEvents = 'none';
+            document.getElementById('btn-envio-tg').style.pointerEvents = 'none';
+            document.getElementById('btn-envio-wa').style.opacity = '0.5';
+            document.getElementById('btn-envio-tg').style.opacity = '0.5';
+            return;
+        }
+
+        // Si el usuario ingresó nombre de perfil, activa los botones
+        if (errorMsg) errorMsg.style.display = 'none';
+        inputNombre.style.borderColor = '#475569';
+        document.getElementById('btn-envio-wa').style.pointerEvents = 'auto';
+        document.getElementById('btn-envio-tg').style.pointerEvents = 'auto';
+        document.getElementById('btn-envio-wa').style.opacity = '1';
+        document.getElementById('btn-envio-tg').style.opacity = '1';
+
+        let mensaje = `Hola Streamix Store, ya he realizado el pago del siguiente pedido:\n\n`;
+        carrito.forEach(item => {
+            mensaje += `• ${item.nombre} x${item.cantidad} - $${(item.precioUSD * item.cantidad).toFixed(2)}\n`;
+        });
+
+        mensaje += `\n👤 Nombre de Pantalla/Perfil: ${nombrePerfil}\n`;
+        mensaje += `\n💰 Total USD: $${totalUSD.toFixed(2)}`;
+        mensaje += `\n🇻🇪 Total Bs (Tasa ${tasaCambio.toFixed(2)}): Bs ${totalBs.toLocaleString('es-VE', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+        mensaje += `\n\nAdjunto comprobante de mi pago. Quedo a la espera de los datos de pago.`;
+
+        const mensajeEncoded = encodeURIComponent(mensaje);
+
+        document.getElementById('btn-envio-wa').href = `https://wa.me/584124405245?text=${mensajeEncoded}`;
+        document.getElementById('btn-envio-tg').href = `https://t.me/sxstoreve?text=${mensajeEncoded}`;
+    }
+
+    // Actualizar enlace de mensajes si el usuario escribe el nombre del perfil
+    document.getElementById('input-nombre-perfil').addEventListener('input', () => {
+        let totalUSD = carrito.reduce((sum, item) => sum + (item.precioUSD * item.cantidad), 0);
+        let totalBs = totalUSD * tasaCambio;
+        prepararEnlacesEnvio(totalUSD, totalBs);
+    });
+</script>
 </body>
 </html>
