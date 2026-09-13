@@ -18,7 +18,6 @@
         .btn-pedido { background: #ef4444; color: white; padding: 8px 16px; border-radius: 20px; text-decoration: none; font-weight: bold; font-size: 0.9rem; cursor: pointer; border: none; display: flex; align-items: center; gap: 6px; transition: background 0.2s; }
         .btn-pedido:hover { background: #dc2626; }
 
-        /* Aumentamos el ancho máximo a 1400px para dar amplitud al panel lateral */
         .container { max-width: 1400px; margin: 0 auto; padding: 40px 30px; }
         
         .badge-container { display: flex; justify-content: center; gap: 15px; margin-bottom: 25px; flex-wrap: wrap; }
@@ -31,7 +30,7 @@
         header p { color: #9ca3af; font-size: 1.1rem; }
         header .sub-desc { color: #9ca3af; font-size: 0.95rem; margin-top: 15px; max-width: 600px; margin-left: auto; margin-right: auto; }
 
-        /* Oferta destacada con efecto de luz giratoria dinámica */
+        /* Oferta destacada con efecto de luz giratoria */
         .featured-card { 
             position: relative;
             background: linear-gradient(145deg, #0f172a, #180d12); 
@@ -43,7 +42,6 @@
             z-index: 1;
         }
 
-        /* Capa de luz giratoria en el borde */
         .featured-card::before {
             content: '';
             position: absolute;
@@ -51,17 +49,11 @@
             left: -50%;
             width: 200%;
             height: 200%;
-            background: conic-gradient(
-                transparent, 
-                transparent, 
-                transparent, 
-                #ef4444
-            );
+            background: conic-gradient(transparent, transparent, transparent, #ef4444);
             animation: rotarLuz 4s linear infinite;
             z-index: -2;
         }
 
-        /* Capa interna para enmascarar el fondo oscuro y dejar visible solo el borde brillante */
         .featured-card::after {
             content: '';
             position: absolute;
@@ -87,11 +79,11 @@
         .btn-oferta { display: inline-block; background: linear-gradient(90deg, #ef4444, #b91c1c); color: white; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-weight: bold; text-transform: uppercase; font-size: 0.85rem; transition: opacity 0.2s; cursor: pointer; border: none; }
         .btn-oferta:hover { opacity: 0.9; }
 
-        /* Estructura en 2 columnas: Catálogo + Panel Lateral con separación limpia (gap: 35px) */
+        /* Estructura en 2 columnas */
         .content-wrapper { display: flex; gap: 35px; align-items: flex-start; }
         .content-wrapper .grid { flex: 1; }
 
-        /* Panel Lateral de Próximos Estrenos separado a la derecha */
+        /* Panel Lateral de Próximos Estrenos */
         .sidebar-estrenos { width: 340px; background: #0b0f19; border: 1px solid #1f2937; border-radius: 16px; padding: 22px; position: sticky; top: 90px; flex-shrink: 0; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
         .sidebar-badge { display: inline-block; color: #20e651; font-size: 0.65rem; font-weight: bold; letter-spacing: 1px; border: 1px solid rgba(239, 68, 68, 0.3); padding: 4px 8px; border-radius: 12px; background: rgba(239, 68, 68, 0.1); margin-bottom: 15px; text-transform: uppercase; }
         .sidebar-badge .dot-small { display: inline-block; width: 6px; height: 6px; background-color: #20e651; border-radius: 50%; margin-right: 4px; box-shadow: 0 0 6px #20e651; }
@@ -140,6 +132,7 @@
         .spotify-bg { background: #1db954; }
         .iptv-bg { background: #7c3aed; }
         .juegos-bg { background: #ea580c; }
+        .distri-bg { background: #eab308; color: #000; }
         
         .platform-title h3 { font-size: 1.2rem; color: white; margin-bottom: 2px; }
         .platform-title span { font-size: 0.75rem; color: #ef4444; text-transform: uppercase; letter-spacing: 0.5px; font-weight: bold; display: flex; align-items: center; gap: 4px; }
@@ -271,6 +264,7 @@
         <ul class="nav-links">
             <li><a href="#catalogo">OFERTAS</a></li>
             <li><a href="#catalogo">CATÁLOGO</a></li>
+            <li><a onclick="filtrar('distribuidores', document.querySelector('.btn-distri'))" href="#catalogo">DISTRIBUIDORES</a></li>
         </ul>
         <button class="btn-pedido" onclick="toggleCart()">🛒 MI PEDIDO (<span id="cart-count">0</span>)</button>
     </nav>
@@ -330,6 +324,7 @@
             <button class="filter-btn" onclick="filtrar('disenos', this)">💻 Diseños y Programas</button>
             <button class="filter-btn" onclick="filtrar('juegos', this)">🎮 Juegos</button>
             <button class="filter-btn" onclick="filtrar('giftcards', this)">🎁 Gift Cards</button>
+            <button class="filter-btn btn-distri" onclick="filtrar('distribuidores', this)">🤝 Distribuidores</button>
         </div>
 
         <!-- CONTENEDOR DE DOS COLUMNAS: CATÁLOGO + PRÓXIMOS ESTRENOS -->
@@ -804,6 +799,49 @@
                     <button class="btn-card-addplan" onclick="abrirModal('Gift Card Play Station USA', [{nombre: 'PSN Card 10USD', precio: 11.00}, {nombre: 'PSN Card 25USD', precio: 27.00}, {nombre: 'PSN Card 50USD', precio: 54.00}], 0, 'giftcards')">+ Añadir Plan</button>
                 </div>
 
+                <!-- SECCIÓN DISTRIBUIDORES -->
+                <div class="platform-card" data-categoria="distribuidores">
+                    <div class="platform-header">
+                        <div class="platform-logo distri-bg">🤝</div>
+                        <div class="platform-title">
+                            <h3>Pack Revendedor Streaming</h3>
+                            <span>💼 PRECIOS AL MAYOR</span>
+                        </div>
+                    </div>
+                    <div class="plans-list-box">
+                        <div class="card-plan-item" onclick="abrirModal('Pack Revendedor Streaming', [{nombre: 'Pack 10 Pantallas Variadas', precio: 18.00}, {nombre: 'Pack 25 Pantallas Variadas', precio: 40.00}], 0, 'distribuidores')">
+                            <span class="card-plan-name">Pack 10 Pantallas Variadas</span>
+                            <span class="card-plan-price" data-usd="18.00">$18.00</span>
+                        </div>
+                        <div class="card-plan-item" onclick="abrirModal('Pack Revendedor Streaming', [{nombre: 'Pack 10 Pantallas Variadas', precio: 18.00}, {nombre: 'Pack 25 Pantallas Variadas', precio: 40.00}], 1, 'distribuidores')">
+                            <span class="card-plan-name">Pack 25 Pantallas Variadas</span>
+                            <span class="card-plan-price" data-usd="40.00">$40.00</span>
+                        </div>
+                    </div>
+                    <button class="btn-card-addplan" onclick="abrirModal('Pack Revendedor Streaming', [{nombre: 'Pack 10 Pantallas Variadas', precio: 18.00}, {nombre: 'Pack 25 Pantallas Variadas', precio: 40.00}], 0, 'distribuidores')">+ Añadir Plan</button>
+                </div>
+
+                <div class="platform-card" data-categoria="distribuidores">
+                    <div class="platform-header">
+                        <div class="platform-logo distri-bg">👑</div>
+                        <div class="platform-title">
+                            <h3>Panel Reseller IPTV</h3>
+                            <span>📡 PANEL DE CRÉDITOS</span>
+                        </div>
+                    </div>
+                    <div class="plans-list-box">
+                        <div class="card-plan-item" onclick="abrirModal('Panel Reseller IPTV', [{nombre: 'Panel con 10 Créditos', precio: 15.00}, {nombre: 'Panel con 25 Créditos', precio: 32.00}], 0, 'distribuidores')">
+                            <span class="card-plan-name">Panel con 10 Créditos</span>
+                            <span class="card-plan-price" data-usd="15.00">$15.00</span>
+                        </div>
+                        <div class="card-plan-item" onclick="abrirModal('Panel Reseller IPTV', [{nombre: 'Panel con 10 Créditos', precio: 15.00}, {nombre: 'Panel con 25 Créditos', precio: 32.00}], 1, 'distribuidores')">
+                            <span class="card-plan-name">Panel con 25 Créditos</span>
+                            <span class="card-plan-price" data-usd="32.00">$32.00</span>
+                        </div>
+                    </div>
+                    <button class="btn-card-addplan" onclick="abrirModal('Panel Reseller IPTV', [{nombre: 'Panel con 10 Créditos', precio: 15.00}, {nombre: 'Panel con 25 Créditos', precio: 32.00}], 0, 'distribuidores')">+ Añadir Plan</button>
+                </div>
+
             </div>
 
             <!-- CUADRO LATERAL: PRÓXIMOS ESTRENOS -->
@@ -882,19 +920,15 @@
                 </div>
             </div>
             <div class="footer-socials">
-                <!-- Instagram -->
                 <a href="https://www.instagram.com/streamix.store/" target="_blank" class="social-icon-btn" title="Instagram">
                     <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
                 </a>
-                <!-- TikTok -->
                 <a href="https://tiktok.com" target="_blank" class="social-icon-btn" title="TikTok">
                     <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"></path></svg>
                 </a>
-                <!-- Telegram -->
                 <a href="https://t.me/sxstoreve" target="_blank" class="social-icon-btn" title="Telegram">
                     <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
                 </a>
-                <!-- WhatsApp -->
                 <a href="https://wa.me/584124405245" target="_blank" class="social-icon-btn" title="WhatsApp">
                     <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
                 </a>
@@ -912,8 +946,7 @@
             <h2 id="modal-titulo">Plataforma</h2>
             
             <div class="modal-section-title">1. Selecciona el Plan</div>
-            <select class="modal-select" id="modal-select-planes" onchange="actualizarSubtotalModal()">
-            </select>
+            <select class="modal-select" id="modal-select-planes" onchange="actualizarSubtotalModal()"></select>
 
             <div class="modal-section-title">2. Cantidad</div>
             <div class="qty-box">
@@ -981,7 +1014,6 @@
                 <strong>Paso 2:</strong> Selecciona abajo por dónde deseas enviar tu comprobante para activar tu servicio.
             </div>
 
-            <!-- Campo dinámico de Nombre de Pantalla / Juegos -->
             <div class="pantalla-input-box" id="pantalla-input-container" style="display: none;">
                 <label for="input-nombre-pantalla" id="label-input-dinamico">Nombre para la pantalla:</label>
                 <input type="text" id="input-nombre-pantalla" placeholder="Ej. Juan / Perfil 1">
@@ -1258,7 +1290,7 @@
 
         function filtrar(categoria, btn) {
             document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
+            if(btn) btn.classList.add('active');
 
             document.querySelectorAll('.platform-card').forEach(t => {
                 if (categoria === 'todos' || t.getAttribute('data-categoria') === categoria) {
