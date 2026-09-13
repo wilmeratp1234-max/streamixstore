@@ -1642,132 +1642,186 @@
         }
 
         // Lógica del Carrito de Compras
-        function agregarAlCarrito(nombre, precioUSD, cantidad) {
-            const index = carrito.findIndex(item => item.nombre === nombre);
-            if (index > -1) {
-                carrito[index].cantidad += cantidad;
+        function agregarAlPedidoDesdeModal() {
+            let plataforma = document.getElementById('modal-titulo').innerText;
+            let select = document.getElementById('modal-select-planes');
+            let planSeleccionado = planesActualesModal[select.value];
+            let qty = parseInt(document.getElementById('modal-qty').innerText);
+
+            let itemExistente = carrito.find(i => i.plataforma === plataforma && i.plan === planSeleccionado.nombre);
+            if (itemExistente) {
+                itemExistente.cantidad += qty;
             } else {
-                carrito.push({ nombre, precioUSD, cantidad });
+                carrito.push({
+                    plataforma: plataforma,
+                    plan: planSeleccionado.nombre,
+                    precioUSD: planSeleccionado.precio,
+                    cantidad: qty,
+                    categoria: categoriaModalActual
+                });
             }
+
+            cerrarModal();
             actualizarCarritoUI();
+            toggleCart();
         }
 
-        function eliminarDelCarrito(index) {
+        function agregarDirecto(nombreCompleto, precioUSD, categoria = 'cine') {
+            carrito.push({
+                plataforma: nombreCompleto,
+                plan: 'Oferta Especial',
+                precioUSD: precioUSD,
+                cantidad: 1,
+                categoria: categoria
+            });
+            actualizarCarritoUI();
+            toggleCart();
+        }
+
+        function toggleCart() {
+            document.getElementById('cart-sidebar').classList.toggle('open');
+        }
+
+        function eliminarItem(index) {
             carrito.splice(index, 1);
             actualizarCarritoUI();
         }
 
-        function toggleCart(forceOpen = false) {
-            const cartSidebar = document.getElementById('cart-sidebar');
-            if (forceOpen) {
-                cartSidebar.classList.add('open');
-            } else {
-                cartSidebar.classList.toggle('open');
-            }
-        }
-
         function actualizarCarritoUI() {
-            const cartBody = document.getElementById('cart-body');
-            const cartCount = document.getElementById('cart-count');
-            const cartTotal = document.getElementById('cart-total');
+            let container = document.getElementById('cart-items-container');
+            let countElem = document.getElementById('cart-count');
+            let totalValElem = document.getElementById('cart-total-val');
 
-            let totalItems = 0;
-            let totalUSD = 0;
-
-            cartBody.innerHTML = '';
+            let totalItems = carrito.reduce((sum, item) => sum + item.cantidad, 0);
+            countElem.innerText = totalItems;
 
             if (carrito.length === 0) {
-                cartBody.innerHTML = '<div class="cart-empty">El carrito está vacío.</div>';
-            } else {
-                carrito.forEach((item, index) => {
-                    totalItems += item.cantidad;
-                    const itemTotalUSD = item.precioUSD * item.cantidad;
-                    totalUSD += itemTotalUSD;
-
-                    let displayPrice = '';
-                    if (monedaActual === 'Bs') {
-                        let priceBs = itemTotalUSD * tasaCambio;
-                        displayPrice = 'Bs ' + priceBs.toLocaleString('es-VE', {minimumFractionDigits: 2, maximumFractionDigits: 2});
-                    } else {
-                        displayPrice = '$' + itemTotalUSD.toFixed(2);
-                    }
-
-                    const itemEl = document.createElement('div');
-                    itemEl.className = 'cart-item';
-                    itemEl.innerHTML = `
-                        <button class="cart-item-delete" onclick="eliminarDelCarrito(${index})">✕</button>
-                        <div class="cart-item-title">${item.nombre}</div>
-                        <div class="cart-item-sub">Unidades: ${item.cantidad} x $${item.precioUSD.toFixed(2)}</div>
-                        <div class="cart-item-footer">
-                            <span class="cart-item-qty">Cant: ${item.cantidad}</span>
-                            <span class="cart-item-price ${monedaActual === 'Bs' ? 'blue-price' : ''}">${displayPrice}</span>
-                        </div>
-                    `;
-                    cartBody.appendChild(itemEl);
-                });
-            }
-
-            cartCount.innerText = totalItems;
-
-            if (monedaActual === 'Bs') {
-                let totalBs = totalUSD * tasaCambio;
-                cartTotal.innerText = 'Bs ' + totalBs.toLocaleString('es-VE', {minimumFractionDigits: 2, maximumFractionDigits: 2});
-                cartTotal.classList.add('blue-price');
-            } else {
-                cartTotal.innerText = '$' + totalUSD.toFixed(2);
-                cartTotal.classList.remove('blue-price');
-            }
-        }
-
-        // Checkout y Enlaces de Envío
-        function abrirCheckoutModal() {
-            if (carrito.length === 0) {
-                alert("Tu carrito está vacío. Agrega productos antes de procesar.");
+                container.innerHTML = '<div class="cart-empty">Tu pedido está vacío</div>';
+                totalValElem.innerText = monedaActual === 'Bs' ? 'Bs. 0,00' : '$0.00';
+                totalValElem.classList.remove('blue-price');
                 return;
             }
 
-            let totalUSD = carrito.reduce((sum, item) => sum + (item.precioUSD * item.cantidad), 0);
-            let totalBs = totalUSD * tasaCambio;
+            container.innerHTML = '';
+            let totalGeneralUSD = 0;
 
-            document.getElementById('checkout-monto-usd').innerText = `$${totalUSD.toFixed(2)} USD`;
-            document.getElementById('checkout-monto-bs').innerText = `Bs ${totalBs.toLocaleString('es-VE', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+            carrito.forEach((item, index) => {
+                let subtotalItemUSD = item.precioUSD * item.cantidad;
+                totalGeneralUSD += subtotalItemUSD;
 
-            prepararEnlacesEnvio(totalUSD, totalBs);
-            document.getElementById('modal-checkout').style.display = 'flex';
+                let precioTexto = monedaActual === 'Bs' ? `Bs. ${formatearBs(subtotalItemUSD * tasaBs)}` : `$${subtotalItemUSD.toFixed(2)}`;
+                let claseColor = monedaActual === 'Bs' ? 'blue-price' : '';
+
+                let div = document.createElement('div');
+                div.className = 'cart-item';
+                div.innerHTML = `
+                    <button class="cart-item-delete" onclick="eliminarItem(${index})">🗑️</button>
+                    <div class="cart-item-title">${item.plataforma}</div>
+                    <div class="cart-item-sub">${item.plan}</div>
+                    <div class="cart-item-footer">
+                        <span class="cart-item-qty">Cant: ${item.cantidad}</span>
+                        <span class="cart-item-price ${claseColor}">${precioTexto}</span>
+                    </div>
+                `;
+                container.appendChild(div);
+            });
+
+            if (monedaActual === 'Bs') {
+                totalValElem.innerText = 'Bs. ' + formatearBs(totalGeneralUSD * tasaBs);
+                totalValElem.classList.add('blue-price');
+            } else {
+                totalValElem.innerText = '$' + totalGeneralUSD.toFixed(2);
+                totalValElem.classList.remove('blue-price');
+            }
         }
 
-        function cerrarCheckoutModal() {
+        function abrirModalCheckout() {
+            if (carrito.length === 0) {
+                alert("Tu carrito está vacío.");
+                return;
+            }
+
+            let totalGeneralUSD = carrito.reduce((sum, item) => sum + (item.precioUSD * item.cantidad), 0);
+            let totalBs = totalGeneralUSD * tasaBs;
+
+            document.getElementById('checkout-total-usd').innerText = `$${totalGeneralUSD.toFixed(2)} USD`;
+            document.getElementById('checkout-total-bs').innerText = `Bs. ${formatearBs(totalBs)}`;
+
+            let hayJuegos = carrito.some(item => item.categoria === 'juegos');
+            let hayNoJuegos = carrito.some(item => item.categoria !== 'juegos');
+            let pantallaContainer = document.getElementById('pantalla-input-container');
+            let labelInput = document.getElementById('label-input-dinamico');
+            let inputCamp = document.getElementById('input-nombre-pantalla');
+
+            if (hayJuegos && !hayNoJuegos) {
+                pantallaContainer.style.display = 'block';
+                labelInput.innerText = 'ID del Jugador / Correo y clave de la cuenta:';
+                inputCamp.placeholder = 'Ej. ID: 12345678 / correo@gmail.com - clave';
+                inputCamp.value = '';
+            } else if (hayNoJuegos) {
+                pantallaContainer.style.display = 'block';
+                labelInput.innerText = 'Nombre para la pantalla:';
+                inputCamp.placeholder = 'Ej. Juan / Perfil 1';
+                inputCamp.value = '';
+            } else {
+                pantallaContainer.style.display = 'none';
+            }
+
+            document.getElementById('modal-checkout').style.display = 'flex';
+            toggleCart();
+        }
+
+        function cerrarModalCheckout() {
             document.getElementById('modal-checkout').style.display = 'none';
         }
 
-        function prepararEnlacesEnvio(totalUSD, totalBs) {
-            const nombrePerfil = document.getElementById('input-nombre-perfil').value.trim();
+        function enviarPedido(plataformaEnvio) {
+            let totalGeneralUSD = carrito.reduce((sum, item) => sum + (item.precioUSD * item.cantidad), 0);
+            let totalBs = totalGeneralUSD * tasaBs;
 
-            let mensaje = `Hola Streamix Store, deseo realizar el siguiente pedido:\n\n`;
+            let mensaje = `Hola Streamix Store, quiero procesar el siguiente pedido:\n\n`;
+            
             carrito.forEach(item => {
-                mensaje += `• ${item.nombre} x${item.cantidad} - $${(item.precioUSD * item.cantidad).toFixed(2)}\n`;
+                let subtotalUSD = item.precioUSD * item.cantidad;
+                let subtotalBs = subtotalUSD * tasaBs;
+                mensaje += `• *${item.plataforma}* (${item.plan}) x${item.cantidad} - $${subtotalUSD.toFixed(2)} (Bs. ${formatearBs(subtotalBs)})\n`;
             });
 
-            if (nombrePerfil) {
-                mensaje += `\n👤 Nombre de Pantalla/Perfil: ${nombrePerfil}\n`;
+            let pantallaContainer = document.getElementById('pantalla-input-container');
+            if (pantallaContainer.style.display !== 'none') {
+                let valorInput = document.getElementById('input-nombre-pantalla').value.trim();
+                let etiquetaActual = document.getElementById('label-input-dinamico').innerText.replace(':', '');
+                if (valorInput) {
+                    mensaje += `\n*${etiquetaActual}:* ${valorInput}`;
+                }
             }
 
-            mensaje += `\n💰 Total USD: $${totalUSD.toFixed(2)}`;
-            mensaje += `\n🇻🇪 Total Bs (Tasa ${tasaCambio.toFixed(2)}): Bs ${totalBs.toLocaleString('es-VE', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
-            mensaje += `\n\nQuedo a la espera de los datos de pago.`;
+            mensaje += `\n\n*Total a pagar:* $${totalGeneralUSD.toFixed(2)} USD (Bs. ${formatearBs(totalBs)})`;
+            mensaje += `\n\nAdjunto mi comprobante de pago. Quedo a la espera de la activación.`;
 
-            const mensajeEncoded = encodeURIComponent(mensaje);
-
-            document.getElementById('btn-envio-wa').href = `https://wa.me/584124405245?text=${mensajeEncoded}`;
-            document.getElementById('btn-envio-tg').href = `https://t.me/sxstoreve?text=${mensajeEncoded}`;
+            if (plataformaEnvio === 'whatsapp') {
+                let tuNumeroWhatsApp = "584124405245";
+                let url = `https://wa.me/${tuNumeroWhatsApp}?text=${encodeURIComponent(mensaje)}`;
+                window.open(url, '_blank');
+            } else if (plataformaEnvio === 'telegram') {
+                let tuUserTelegram = "sxstoreve";
+                let url = `https://t.me/${tuUserTelegram}?text=${encodeURIComponent(mensaje)}`;
+                window.open(url, '_blank');
+            }
         }
 
-        // Actualizar enlace de mensajes si el usuario escribe el nombre del perfil
-        document.getElementById('input-nombre-perfil').addEventListener('input', () => {
-            let totalUSD = carrito.reduce((sum, item) => sum + (item.precioUSD * item.cantidad), 0);
-            let totalBs = totalUSD * tasaCambio;
-            prepararEnlacesEnvio(totalUSD, totalBs);
-        });
+        function filtrar(categoria, btn) {
+            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+
+            document.querySelectorAll('.platform-card').forEach(t => {
+                if (categoria === 'todos' || t.getAttribute('data-categoria') === categoria) {
+                    t.style.display = 'flex';
+                } else {
+                    t.style.display = 'none';
+                }
+            });
+        }
     </script>
 </body>
 </html>
