@@ -1406,44 +1406,35 @@
     <!-- MODAL DE PROCESAR PAGO / CHECKOUT -->
     <div class="modal-overlay" id="modal-checkout">
         <div class="checkout-modal-card">
-            <button class="modal-close" onclick="cerrarModalCheckout()">✕</button>
-            <h2 style="font-size: 1.4rem; color: white; margin-bottom: 15px;">Realizar Pago</h2>
+            <button class="modal-close" onclick="cerrarCheckoutModal()">🗑️</button>
+            <h2 style="font-size: 1.4rem; color: white; margin-bottom: 15px;">Finalizar Pedido</h2>
             
             <div class="checkout-total-box">
-                <div class="checkout-total-title">Total a transferir:</div>
-                <div class="checkout-total-usd" id="checkout-total-usd">$0.00</div>
-                <div class="checkout-total-conversions" id="checkout-total-bs">Bs. 0.00</div>
+                <div class="checkout-total-title">Monto Total a Pagar</div>
+                <div class="checkout-total-usd" id="checkout-monto-usd">$0.00 USD</div>
+                <div class="checkout-total-conversions" id="checkout-monto-bs">Bs 0.00</div>
             </div>
 
             <div class="payment-info-box">
-                <div class="payment-section-title">📱 Pago Móvil (Venezuela)</div>
+                <div class="payment-section-title">💳 MÉTODOS DE PAGO DISPONIBLES</div>
                 <div class="payment-details">
-                    <strong>Bancos:</strong> Bancamiga (0172) o Banco Nacional de Credito (0191)<br>
-                    <strong>Teléfono:</strong> 0412-2818460<br>
-                    <strong>Cédula:</strong> V-27178466
+                    • <strong>Pago Móvil Bs:</strong> 📱 Pago Móvil Bancos: Bancamiga (0172) o BNC (0191) Teléfono: 0412-2818460 Cédula: V-27178466.<br>
+                    • <strong>Binance Pay (USDT) wilmertorres123@gmail.com</strong>
                 </div>
+            </div>
 
-                <div class="payment-section-title" style="margin-top: 15px;">🟡 Binance Pay (USDT)</div>
-                <div class="payment-details">
-                    <strong>Correo:</strong> wilmertorres123@gmail.com<br>
-                    <strong>Pay ID:</strong> 152220009
-                </div>
+            <div class="pantalla-input-box">
+                <label for="input-nombre-perfil">Nombre de Pantalla / Perfil (Opcional):</label>
+                <input type="text" id="input-nombre-perfil" placeholder="Ej: Mi Nombre, Sala, etc.">
             </div>
 
             <div class="steps-box">
-                ℹ️ <strong>Paso 1:</strong> Realiza el pago a los datos mostrados y toma captura.<br>
-                <strong>Paso 2:</strong> Selecciona abajo por dónde deseas enviar tu comprobante para activar tu servicio.
-            </div>
-
-            <!-- Campo dinámico de Nombre de Pantalla / Juegos -->
-            <div class="pantalla-input-box" id="pantalla-input-container" style="display: none;">
-                <label for="input-nombre-pantalla" id="label-input-dinamico">Nombre para la pantalla:</label>
-                <input type="text" id="input-nombre-pantalla" placeholder="Ej. Juan / Perfil 1">
+                <strong>Paso final:</strong> Haz clic en uno de los botones para enviar el resumen detallado de tu orden por WhatsApp o Telegram a nuestro equipo de atención.
             </div>
 
             <div class="checkout-buttons-grid">
-                <button class="btn-wa-pay" onclick="enviarPedido('whatsapp')">💬 WhatsApp</button>
-                <button class="btn-tg-pay" onclick="enviarPedido('telegram')">✈️ Telegram</button>
+                <a id="btn-envio-wa" class="btn-wa-pay" target="_blank">📲 WhatsApp</a>
+                <a id="btn-envio-tg" class="btn-tg-pay" target="_blank">📲 Telegram</a>
             </div>
         </div>
     </div>
@@ -1642,186 +1633,132 @@
         }
 
         // Lógica del Carrito de Compras
-        function agregarAlPedidoDesdeModal() {
-            let plataforma = document.getElementById('modal-titulo').innerText;
-            let select = document.getElementById('modal-select-planes');
-            let planSeleccionado = planesActualesModal[select.value];
-            let qty = parseInt(document.getElementById('modal-qty').innerText);
-
-            let itemExistente = carrito.find(i => i.plataforma === plataforma && i.plan === planSeleccionado.nombre);
-            if (itemExistente) {
-                itemExistente.cantidad += qty;
+        function agregarAlCarrito(nombre, precioUSD, cantidad) {
+            const index = carrito.findIndex(item => item.nombre === nombre);
+            if (index > -1) {
+                carrito[index].cantidad += cantidad;
             } else {
-                carrito.push({
-                    plataforma: plataforma,
-                    plan: planSeleccionado.nombre,
-                    precioUSD: planSeleccionado.precio,
-                    cantidad: qty,
-                    categoria: categoriaModalActual
-                });
+                carrito.push({ nombre, precioUSD, cantidad });
             }
-
-            cerrarModal();
             actualizarCarritoUI();
-            toggleCart();
         }
 
-        function agregarDirecto(nombreCompleto, precioUSD, categoria = 'cine') {
-            carrito.push({
-                plataforma: nombreCompleto,
-                plan: 'Oferta Especial',
-                precioUSD: precioUSD,
-                cantidad: 1,
-                categoria: categoria
-            });
-            actualizarCarritoUI();
-            toggleCart();
-        }
-
-        function toggleCart() {
-            document.getElementById('cart-sidebar').classList.toggle('open');
-        }
-
-        function eliminarItem(index) {
+        function eliminarDelCarrito(index) {
             carrito.splice(index, 1);
             actualizarCarritoUI();
         }
 
-        function actualizarCarritoUI() {
-            let container = document.getElementById('cart-items-container');
-            let countElem = document.getElementById('cart-count');
-            let totalValElem = document.getElementById('cart-total-val');
+        function toggleCart(forceOpen = false) {
+            const cartSidebar = document.getElementById('cart-sidebar');
+            if (forceOpen) {
+                cartSidebar.classList.add('open');
+            } else {
+                cartSidebar.classList.toggle('open');
+            }
+        }
 
-            let totalItems = carrito.reduce((sum, item) => sum + item.cantidad, 0);
-            countElem.innerText = totalItems;
+        function actualizarCarritoUI() {
+            const cartBody = document.getElementById('cart-body');
+            const cartCount = document.getElementById('cart-count');
+            const cartTotal = document.getElementById('cart-total');
+
+            let totalItems = 0;
+            let totalUSD = 0;
+
+            cartBody.innerHTML = '';
 
             if (carrito.length === 0) {
-                container.innerHTML = '<div class="cart-empty">Tu pedido está vacío</div>';
-                totalValElem.innerText = monedaActual === 'Bs' ? 'Bs. 0,00' : '$0.00';
-                totalValElem.classList.remove('blue-price');
-                return;
+                cartBody.innerHTML = '<div class="cart-empty">El carrito está vacío.</div>';
+            } else {
+                carrito.forEach((item, index) => {
+                    totalItems += item.cantidad;
+                    const itemTotalUSD = item.precioUSD * item.cantidad;
+                    totalUSD += itemTotalUSD;
+
+                    let displayPrice = '';
+                    if (monedaActual === 'Bs') {
+                        let priceBs = itemTotalUSD * tasaCambio;
+                        displayPrice = 'Bs ' + priceBs.toLocaleString('es-VE', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+                    } else {
+                        displayPrice = '$' + itemTotalUSD.toFixed(2);
+                    }
+
+                    const itemEl = document.createElement('div');
+                    itemEl.className = 'cart-item';
+                    itemEl.innerHTML = `
+                        <button class="cart-item-delete" onclick="eliminarDelCarrito(${index})">✕</button>
+                        <div class="cart-item-title">${item.nombre}</div>
+                        <div class="cart-item-sub">Unidades: ${item.cantidad} x $${item.precioUSD.toFixed(2)}</div>
+                        <div class="cart-item-footer">
+                            <span class="cart-item-qty">Cant: ${item.cantidad}</span>
+                            <span class="cart-item-price ${monedaActual === 'Bs' ? 'blue-price' : ''}">${displayPrice}</span>
+                        </div>
+                    `;
+                    cartBody.appendChild(itemEl);
+                });
             }
 
-            container.innerHTML = '';
-            let totalGeneralUSD = 0;
-
-            carrito.forEach((item, index) => {
-                let subtotalItemUSD = item.precioUSD * item.cantidad;
-                totalGeneralUSD += subtotalItemUSD;
-
-                let precioTexto = monedaActual === 'Bs' ? `Bs. ${formatearBs(subtotalItemUSD * tasaBs)}` : `$${subtotalItemUSD.toFixed(2)}`;
-                let claseColor = monedaActual === 'Bs' ? 'blue-price' : '';
-
-                let div = document.createElement('div');
-                div.className = 'cart-item';
-                div.innerHTML = `
-                    <button class="cart-item-delete" onclick="eliminarItem(${index})">🗑️</button>
-                    <div class="cart-item-title">${item.plataforma}</div>
-                    <div class="cart-item-sub">${item.plan}</div>
-                    <div class="cart-item-footer">
-                        <span class="cart-item-qty">Cant: ${item.cantidad}</span>
-                        <span class="cart-item-price ${claseColor}">${precioTexto}</span>
-                    </div>
-                `;
-                container.appendChild(div);
-            });
+            cartCount.innerText = totalItems;
 
             if (monedaActual === 'Bs') {
-                totalValElem.innerText = 'Bs. ' + formatearBs(totalGeneralUSD * tasaBs);
-                totalValElem.classList.add('blue-price');
+                let totalBs = totalUSD * tasaCambio;
+                cartTotal.innerText = 'Bs ' + totalBs.toLocaleString('es-VE', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+                cartTotal.classList.add('blue-price');
             } else {
-                totalValElem.innerText = '$' + totalGeneralUSD.toFixed(2);
-                totalValElem.classList.remove('blue-price');
+                cartTotal.innerText = '$' + totalUSD.toFixed(2);
+                cartTotal.classList.remove('blue-price');
             }
         }
 
-        function abrirModalCheckout() {
+        // Checkout y Enlaces de Envío
+        function abrirCheckoutModal() {
             if (carrito.length === 0) {
-                alert("Tu carrito está vacío.");
+                alert("Tu carrito está vacío. Agrega productos antes de procesar.");
                 return;
             }
 
-            let totalGeneralUSD = carrito.reduce((sum, item) => sum + (item.precioUSD * item.cantidad), 0);
-            let totalBs = totalGeneralUSD * tasaBs;
+            let totalUSD = carrito.reduce((sum, item) => sum + (item.precioUSD * item.cantidad), 0);
+            let totalBs = totalUSD * tasaCambio;
 
-            document.getElementById('checkout-total-usd').innerText = `$${totalGeneralUSD.toFixed(2)} USD`;
-            document.getElementById('checkout-total-bs').innerText = `Bs. ${formatearBs(totalBs)}`;
+            document.getElementById('checkout-monto-usd').innerText = `$${totalUSD.toFixed(2)} USD`;
+            document.getElementById('checkout-monto-bs').innerText = `Bs ${totalBs.toLocaleString('es-VE', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
 
-            let hayJuegos = carrito.some(item => item.categoria === 'juegos');
-            let hayNoJuegos = carrito.some(item => item.categoria !== 'juegos');
-            let pantallaContainer = document.getElementById('pantalla-input-container');
-            let labelInput = document.getElementById('label-input-dinamico');
-            let inputCamp = document.getElementById('input-nombre-pantalla');
-
-            if (hayJuegos && !hayNoJuegos) {
-                pantallaContainer.style.display = 'block';
-                labelInput.innerText = 'ID del Jugador / Correo y clave de la cuenta:';
-                inputCamp.placeholder = 'Ej. ID: 12345678 / correo@gmail.com - clave';
-                inputCamp.value = '';
-            } else if (hayNoJuegos) {
-                pantallaContainer.style.display = 'block';
-                labelInput.innerText = 'Nombre para la pantalla:';
-                inputCamp.placeholder = 'Ej. Juan / Perfil 1';
-                inputCamp.value = '';
-            } else {
-                pantallaContainer.style.display = 'none';
-            }
-
+            prepararEnlacesEnvio(totalUSD, totalBs);
             document.getElementById('modal-checkout').style.display = 'flex';
-            toggleCart();
         }
 
-        function cerrarModalCheckout() {
+        function cerrarCheckoutModal() {
             document.getElementById('modal-checkout').style.display = 'none';
         }
 
-        function enviarPedido(plataformaEnvio) {
-            let totalGeneralUSD = carrito.reduce((sum, item) => sum + (item.precioUSD * item.cantidad), 0);
-            let totalBs = totalGeneralUSD * tasaBs;
+        function prepararEnlacesEnvio(totalUSD, totalBs) {
+            const nombrePerfil = document.getElementById('input-nombre-perfil').value.trim();
 
-            let mensaje = `Hola Streamix Store, quiero procesar el siguiente pedido:\n\n`;
-            
+            let mensaje = `Hola Streamix Store, deseo realizar el siguiente pedido:\n\n`;
             carrito.forEach(item => {
-                let subtotalUSD = item.precioUSD * item.cantidad;
-                let subtotalBs = subtotalUSD * tasaBs;
-                mensaje += `• *${item.plataforma}* (${item.plan}) x${item.cantidad} - $${subtotalUSD.toFixed(2)} (Bs. ${formatearBs(subtotalBs)})\n`;
+                mensaje += `• ${item.nombre} x${item.cantidad} - $${(item.precioUSD * item.cantidad).toFixed(2)}\n`;
             });
 
-            let pantallaContainer = document.getElementById('pantalla-input-container');
-            if (pantallaContainer.style.display !== 'none') {
-                let valorInput = document.getElementById('input-nombre-pantalla').value.trim();
-                let etiquetaActual = document.getElementById('label-input-dinamico').innerText.replace(':', '');
-                if (valorInput) {
-                    mensaje += `\n*${etiquetaActual}:* ${valorInput}`;
-                }
+            if (nombrePerfil) {
+                mensaje += `\n👤 Nombre de Pantalla/Perfil: ${nombrePerfil}\n`;
             }
 
-            mensaje += `\n\n*Total a pagar:* $${totalGeneralUSD.toFixed(2)} USD (Bs. ${formatearBs(totalBs)})`;
-            mensaje += `\n\nAdjunto mi comprobante de pago. Quedo a la espera de la activación.`;
+            mensaje += `\n💰 Total USD: $${totalUSD.toFixed(2)}`;
+            mensaje += `\n🇻🇪 Total Bs (Tasa ${tasaCambio.toFixed(2)}): Bs ${totalBs.toLocaleString('es-VE', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+            mensaje += `\n\nQuedo a la espera de los datos de pago.`;
 
-            if (plataformaEnvio === 'whatsapp') {
-                let tuNumeroWhatsApp = "584124405245";
-                let url = `https://wa.me/${tuNumeroWhatsApp}?text=${encodeURIComponent(mensaje)}`;
-                window.open(url, '_blank');
-            } else if (plataformaEnvio === 'telegram') {
-                let tuUserTelegram = "sxstoreve";
-                let url = `https://t.me/${tuUserTelegram}?text=${encodeURIComponent(mensaje)}`;
-                window.open(url, '_blank');
-            }
+            const mensajeEncoded = encodeURIComponent(mensaje);
+
+            document.getElementById('btn-envio-wa').href = `https://wa.me/584124405245?text=${mensajeEncoded}`;
+            document.getElementById('btn-envio-tg').href = `https://t.me/sxstoreve?text=${mensajeEncoded}`;
         }
 
-        function filtrar(categoria, btn) {
-            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-
-            document.querySelectorAll('.platform-card').forEach(t => {
-                if (categoria === 'todos' || t.getAttribute('data-categoria') === categoria) {
-                    t.style.display = 'flex';
-                } else {
-                    t.style.display = 'none';
-                }
-            });
-        }
+        // Actualizar enlace de mensajes si el usuario escribe el nombre del perfil
+        document.getElementById('input-nombre-perfil').addEventListener('input', () => {
+            let totalUSD = carrito.reduce((sum, item) => sum + (item.precioUSD * item.cantidad), 0);
+            let totalBs = totalUSD * tasaCambio;
+            prepararEnlacesEnvio(totalUSD, totalBs);
+        });
     </script>
 </body>
 </html>
