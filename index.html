@@ -1421,21 +1421,33 @@
     </div>
 
     <!-- PAGO MÓVIL -->
-    <div style="background: rgba(0, 0, 0, 0.2); padding: 10px; border-radius: 6px; margin-bottom: 10px;">
-        <div style="font-weight: bold; color: #4ade80; margin-bottom: 6px; display: flex; align-items: center; gap: 5px;">
+<div style="background: rgba(0, 0, 0, 0.2); padding: 10px; border-radius: 6px; margin-bottom: 10px; position: relative;">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+        <div style="font-weight: bold; color: #4ade80; display: flex; align-items: center; gap: 5px;">
             📱 Pago Móvil (Bs)
         </div>
-        <div style="display: grid; grid-template-columns: auto 1fr; gap: 4px 12px; font-size: 0.9rem;">
-            <span style="color: #9ca3af; font-weight: bold;">Bancos:</span>
-            <span>Bancamiga (0172) / BNC (0191)</span>
-
-            <span style="color: #9ca3af; font-weight: bold;">Teléfono:</span>
-            <span>0412-2818460</span>
-
-            <span style="color: #9ca3af; font-weight: bold;">Cédula:</span>
-            <span>V-27178466</span>
-        </div>
+        <!-- Botón para copiar datos -->
+        <button onclick="copiarPagoMovil()" title="Copiar datos de Pago Móvil" style="background: rgba(56, 189, 248, 0.2); border: 1px solid #38bdf8; color: #38bdf8; border-radius: 4px; padding: 3px 8px; font-size: 0.75rem; cursor: pointer; display: flex; align-items: center; gap: 4px; transition: all 0.2s;">
+            📋 Copiar datos
+        </button>
     </div>
+    
+    <div style="display: grid; grid-template-columns: auto 1fr; gap: 4px 12px; font-size: 0.9rem;">
+        <span style="color: #9ca3af; font-weight: bold;">Bancos:</span>
+        <span>Bancamiga (0172) / BNC (0191)</span>
+
+        <span style="color: #9ca3af; font-weight: bold;">Teléfono:</span>
+        <span>0412-2818460</span>
+
+        <span style="color: #9ca3af; font-weight: bold;">Cédula:</span>
+        <span>V-27178466</span>
+    </div>
+
+    <!-- Feedback visual al copiar -->
+    <small id="copiado-feedback" style="display: none; color: #4ade80; font-size: 0.75rem; text-align: right; margin-top: 4px;">
+        ✓ ¡Datos copiados al portapapeles!
+    </small>
+</div>
 
     <!-- BINANCE PAY -->
     <div style="background: rgba(0, 0, 0, 0.2); padding: 10px; border-radius: 6px;">
@@ -1813,6 +1825,44 @@
         document.getElementById('btn-envio-wa').href = `https://wa.me/584124405245?text=${mensajeEncoded}`;
         document.getElementById('btn-envio-tg').href = `https://t.me/sxstoreve?text=${mensajeEncoded}`;
     }
+        function copiarPagoMovil() {
+    // Texto estructurado listo para pegar en la app bancaria o notas
+    const datosPagoMovil = 
+`Bancos: Bancamiga (0172) / BNC (0191)
+Teléfono: 04122818460
+Cédula: V27178466`;
+
+    // Uso de la API del portapapeles con fallback para compatibilidad
+    if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(datosPagoMovil).then(mostrarFeedbackCopia);
+    } else {
+        // Método alternativo para navegadores o entornos HTTP antiguos
+        let textArea = document.createElement("textarea");
+        textArea.value = datosPagoMovil;
+        textArea.style.position = "fixed";
+        textArea.style.left = "-999999px";
+        document.body.appendChild(textArea);
+        textArea.focus();
+        textArea.select();
+        try {
+            document.execCommand('copy');
+            mostrarFeedbackCopia();
+        } catch (err) {
+            alert("No se pudo copiar automáticamente. Por favor copia los datos manualmente.");
+        }
+        document.body.removeChild(textArea);
+    }
+}
+
+function mostrarFeedbackCopia() {
+    const feedback = document.getElementById('copiado-feedback');
+    if (feedback) {
+        feedback.style.display = 'block';
+        setTimeout(() => {
+            feedback.style.display = 'none';
+        }, 2500);
+    }
+}
 
     // Actualizar enlace de mensajes si el usuario escribe el nombre del perfil
     document.getElementById('input-nombre-perfil').addEventListener('input', () => {
