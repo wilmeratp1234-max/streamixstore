@@ -1462,10 +1462,12 @@
 </div>
 
         <div class="pantalla-input-box">
-            <label for="input-nombre-perfil">Nombre de Pantalla / Perfil</label>
-            <input type="text" id="input-nombre-perfil" placeholder="Ej: Mi Nombre, Sala, etc.">
-            <small id="error-nombre-perfil" style="color: #ef4444; display: none; margin-top: 4px; font-size: 0.8rem;">Por favor, ingresa el nombre de pantalla para continuar.</small>
-        </div>
+    <label for="input-nombre-perfil" id="label-datos-cliente">Nombre de Pantalla / Perfil</label>
+    <input type="text" id="input-nombre-perfil" placeholder="Ej: Mi Nombre, Sala, etc.">
+    <small id="error-nombre-perfil" style="color: #ef4444; display: none; margin-top: 4px; font-size: 0.8rem;">
+        Por favor, ingresa los datos requeridos para continuar.
+    </small>
+</div>
 
         <div class="steps-box">
             <strong>Paso final:</strong> Haz clic en uno de los botones para enviar el resumen detallado de tu orden por WhatsApp o Telegram a nuestro equipo de atención.
@@ -1785,45 +1787,53 @@
     }
 
     function prepararEnlacesEnvio(totalUSD, totalBs) {
-        const inputNombre = document.getElementById('input-nombre-perfil');
-        const nombrePerfil = inputNombre.value.trim();
-        const errorMsg = document.getElementById('error-nombre-perfil');
+    const inputNombre = document.getElementById('input-nombre-perfil');
+    const datosCliente = inputNombre.value.trim();
+    const errorMsg = document.getElementById('error-nombre-perfil');
 
-        // Validación: si no colocan nombre, deshabilita el envío
-        if (!nombrePerfil) {
-            if (errorMsg) errorMsg.style.display = 'block';
-            inputNombre.style.borderColor = '#ef4444';
-            document.getElementById('btn-envio-wa').removeAttribute('href');
-            document.getElementById('btn-envio-tg').removeAttribute('href');
-            document.getElementById('btn-envio-wa').style.pointerEvents = 'none';
-            document.getElementById('btn-envio-tg').style.pointerEvents = 'none';
-            document.getElementById('btn-envio-wa').style.opacity = '0.5';
-            document.getElementById('btn-envio-tg').style.opacity = '0.5';
-            return;
-        }
+    // Identificar si el carrito contiene juegos para el texto final del mensaje
+    const palabrasJuegos = ['free fire', 'roblox', 'cod', 'call of duty', 'juegos', 'gems', 'robux', 'diamonds'];
+    const contieneJuego = carrito.some(item => 
+        palabrasJuegos.some(palabra => item.nombre.toLowerCase().includes(palabra))
+    );
+    const campoNombre = contieneJuego ? "ID/Datos de Cuenta" : "Nombre de Pantalla/Perfil";
 
-        // Si el usuario ingresó nombre de perfil, activa los botones
-        if (errorMsg) errorMsg.style.display = 'none';
-        inputNombre.style.borderColor = '#475569';
-        document.getElementById('btn-envio-wa').style.pointerEvents = 'auto';
-        document.getElementById('btn-envio-tg').style.pointerEvents = 'auto';
-        document.getElementById('btn-envio-wa').style.opacity = '1';
-        document.getElementById('btn-envio-tg').style.opacity = '1';
+    // Validación: si no colocan datos, deshabilita el envío
+    if (!datosCliente) {
+        if (errorMsg) errorMsg.style.display = 'block';
+        inputNombre.style.borderColor = '#ef4444';
+        document.getElementById('btn-envio-wa').removeAttribute('href');
+        document.getElementById('btn-envio-tg').removeAttribute('href');
+        document.getElementById('btn-envio-wa').style.pointerEvents = 'none';
+        document.getElementById('btn-envio-tg').style.pointerEvents = 'none';
+        document.getElementById('btn-envio-wa').style.opacity = '0.5';
+        document.getElementById('btn-envio-tg').style.opacity = '0.5';
+        return;
+    }
 
-        let mensaje = `Hola Streamix Store, ya he realizado el pago del siguiente pedido:\n\n`;
-        carrito.forEach(item => {
-            mensaje += `• ${item.nombre} x${item.cantidad} - $${(item.precioUSD * item.cantidad).toFixed(2)}\n`;
-        });
+    // Si el usuario ingresó los datos, activa los botones
+    if (errorMsg) errorMsg.style.display = 'none';
+    inputNombre.style.borderColor = '#475569';
+    document.getElementById('btn-envio-wa').style.pointerEvents = 'auto';
+    document.getElementById('btn-envio-tg').style.pointerEvents = 'auto';
+    document.getElementById('btn-envio-wa').style.opacity = '1';
+    document.getElementById('btn-envio-tg').style.opacity = '1';
 
-        mensaje += `\n👤 Nombre de Pantalla/Perfil: ${nombrePerfil}\n`;
-        mensaje += `\n💰 Total USD: $${totalUSD.toFixed(2)}`;
-        mensaje += `\n🇻🇪 Total Bs (Tasa ${tasaCambio.toFixed(2)}): Bs ${totalBs.toLocaleString('es-VE', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
-        mensaje += `\n\nAdjunto comprobante de mi pago. Quedo a la espera de los datos de pago.`;
+    let mensaje = `Hola Streamix Store, ya he realizado el pago del siguiente pedido:\n\n`;
+    carrito.forEach(item => {
+        mensaje += `• ${item.nombre} x${item.cantidad} - $${(item.precioUSD * item.cantidad).toFixed(2)}\n`;
+    });
 
-        const mensajeEncoded = encodeURIComponent(mensaje);
+    mensaje += `\n👤 ${campoNombre}: ${datosCliente}\n`;
+    mensaje += `\n💰 Total USD: $${totalUSD.toFixed(2)}`;
+    mensaje += `\n🇻🇪 Total Bs (Tasa ${tasaCambio.toFixed(2)}): Bs ${totalBs.toLocaleString('es-VE', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+    mensaje += `\n\nAdjunto comprobante de mi pago. Quedo a la espera de los datos de entrega.`;
 
-        document.getElementById('btn-envio-wa').href = `https://wa.me/584124405245?text=${mensajeEncoded}`;
-        document.getElementById('btn-envio-tg').href = `https://t.me/sxstoreve?text=${mensajeEncoded}`;
+    const mensajeEncoded = encodeURIComponent(mensaje);
+
+    document.getElementById('btn-envio-wa').href = `https://wa.me/584124405245?text=${mensajeEncoded}`;
+    document.getElementById('btn-envio-tg').href = `https://t.me/sxstoreve?text=${mensajeEncoded}`;
+}
     }
         function copiarPagoMovil() {
     // Texto estructurado listo para pegar en la app bancaria o notas
@@ -1851,6 +1861,42 @@ Cédula: V27178466`;
             alert("No se pudo copiar automáticamente. Por favor copia los datos manualmente.");
         }
         document.body.removeChild(textArea);
+    }
+}
+
+    function actualizarCamposCliente() {
+    const labelEl = document.getElementById('label-datos-cliente');
+    const inputEl = document.getElementById('input-nombre-perfil');
+    
+    if (!labelEl || !inputEl) return;
+	
+	if (cartCount) cartCount.innerText = totalItems;
+
+    if (monedaActual === 'Bs') {
+        let totalBs = totalUSD * tasaCambio;
+        cartTotal.innerText = 'Bs ' + totalBs.toLocaleString('es-VE', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+        cartTotal.classList.add('blue-price');
+    } else {
+        cartTotal.innerText = '$' + totalUSD.toFixed(2);
+        cartTotal.classList.remove('blue-price');
+    }
+
+    // <-- AGREGAR ESTA LÍNEA AQUÍ
+    actualizarCamposCliente();
+}
+
+    // Detecta palabras clave de juegos en los productos del carrito
+    const palabrasJuegos = ['free fire', 'roblox', 'cod', 'call of duty', 'juegos', 'gems', 'robux', 'diamonds'];
+    const contieneJuego = carrito.some(item => 
+        palabrasJuegos.some(palabra => item.nombre.toLowerCase().includes(palabra))
+    );
+
+    if (contieneJuego) {
+        labelEl.innerText = "ID de Jugador / Correo y Clave de la cuenta";
+        inputEl.placeholder = "Ej: ID: 12345678 o correo@ejemplo.com / clave123";
+    } else {
+        labelEl.innerText = "Nombre de Pantalla / Perfil";
+        inputEl.placeholder = "Ej: Mi Nombre, Sala, etc.";
     }
 }
 
