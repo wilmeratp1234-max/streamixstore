@@ -1,8 +1,3 @@
-Aquí tienes una página de Modo Mantenimiento diseñada con la misma línea gráfica y estética de Streamix Store (tema oscuro, detalles neón, diseño moderno y amigable).
-
-Puedes guardarla como un archivo independiente (por ejemplo, mantenimiento.html) o reemplazar temporalmente el contenido de tu index.html mientras haces cambios en tu servidor/hosting.
-
-HTML
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -23,13 +18,26 @@ HTML
             color: #f3f4f6;
         }
 
+        /* Custom Neon Green Utilities (#00FF7F) */
+        .bg-neon {
+            background-color: #00FF7F;
+        }
+
+        .text-neon {
+            color: #00FF7F;
+        }
+
+        .border-neon {
+            border-color: #00FF7F;
+        }
+
         /* Glowing Effects */
         .glow-effect {
-            box-shadow: 0 0 25px rgba(124, 58, 237, 0.35);
+            box-shadow: 0 0 25px rgba(0, 255, 127, 0.35);
         }
 
         .glow-text {
-            text-shadow: 0 0 15px rgba(168, 85, 247, 0.5);
+            text-shadow: 0 0 15px rgba(0, 255, 127, 0.6);
         }
 
         /* Continuous Pulse/Float Animation */
@@ -46,18 +54,18 @@ HTML
 <body class="min-h-screen flex flex-col justify-between items-center px-4 py-8 relative overflow-hidden">
 
     <!-- Ambient Background Glows -->
-    <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-purple-600/20 rounded-full blur-3xl pointer-events-none"></div>
-    <div class="absolute bottom-10 left-10 w-72 h-72 bg-indigo-600/15 rounded-full blur-3xl pointer-events-none"></div>
+    <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-[#00FF7F]/15 rounded-full blur-3xl pointer-events-none"></div>
+    <div class="absolute bottom-10 left-10 w-72 h-72 bg-[#00FF7F]/10 rounded-full blur-3xl pointer-events-none"></div>
 
     <!-- Header Logo -->
     <header class="w-full max-w-4xl flex justify-between items-center z-10 border-b border-gray-800/80 pb-4">
         <div class="flex items-center space-x-3">
-            <div class="bg-purple-600 text-white p-2.5 rounded-xl shadow-lg glow-effect">
+            <div class="bg-neon text-gray-950 p-2.5 rounded-xl shadow-lg glow-effect font-bold">
                 <i class="fa-solid fa-bolt text-xl"></i>
             </div>
             <div>
-                <h1 class="text-xl font-bold tracking-wider text-white">STREAMIX <span class="text-purple-400">STORE</span></h1>
-                <p class="text-xs text-gray-400">Entretenimiento Digital</p>
+                <h1 class="text-xl font-bold tracking-wider text-white">STREAMIX <span class="text-neon glow-text">STORE</span></h1>
+                <p class="text-xs text-gray-400">Líderes en Entretenimiento</p>
             </div>
         </div>
         <div class="hidden sm:flex items-center gap-2 bg-gray-900/80 border border-gray-800 px-3 py-1.5 rounded-full text-xs text-amber-400">
@@ -71,17 +79,17 @@ HTML
         
         <!-- Animated Icon Container -->
         <div class="relative mb-8 animate-float">
-            <div class="w-28 h-28 sm:w-36 sm:h-36 bg-gradient-to-tr from-purple-900/60 to-indigo-900/40 border-2 border-purple-500/40 rounded-3xl flex items-center justify-center glow-effect mx-auto">
-                <i class="fa-solid fa-screwdriver-wrench text-5xl sm:text-6xl text-purple-400 glow-text"></i>
+            <div class="w-28 h-28 sm:w-36 sm:h-36 bg-gradient-to-tr from-[#00FF7F]/20 to-emerald-900/30 border-2 border-[#00FF7F]/40 rounded-3xl flex items-center justify-center glow-effect mx-auto">
+                <i class="fa-solid fa-screwdriver-wrench text-5xl sm:text-6xl text-neon glow-text"></i>
             </div>
-            <div class="absolute -bottom-2 -right-2 bg-purple-600 text-white w-10 h-10 rounded-full flex items-center justify-center border-4 border-[#0d0f17] shadow-lg">
+            <div class="absolute -bottom-2 -right-2 bg-neon text-gray-950 w-10 h-10 rounded-full flex items-center justify-center border-4 border-[#0d0f17] shadow-lg">
                 <i class="fa-solid fa-gear animate-spin text-sm" style="animation-duration: 6s;"></i>
             </div>
         </div>
 
         <!-- Text Block -->
         <h2 class="text-3xl sm:text-4xl font-extrabold text-white mb-4 tracking-tight">
-            ¡Estamos haciendo <span class="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-indigo-400 glow-text">mejoras</span> para ti!
+            ¡Estamos haciendo <span class="text-neon glow-text">mejoras</span> para ti!
         </h2>
         
         <p class="text-gray-300 text-sm sm:text-base leading-relaxed max-w-lg mb-8">
@@ -92,7 +100,7 @@ HTML
         <div class="w-full bg-gray-900/90 border border-gray-800 rounded-2xl p-6 shadow-2xl backdrop-blur-sm mb-8 text-left">
             <div class="flex items-center justify-between mb-3 border-b border-gray-800 pb-3">
                 <span class="text-xs uppercase font-semibold text-gray-400 tracking-wider">Estado del Sistema</span>
-                <span class="text-xs bg-purple-500/10 text-purple-400 border border-purple-500/30 px-2.5 py-1 rounded-full font-medium">
+                <span class="text-xs bg-[#00FF7F]/10 text-neon border border-[#00FF7F]/30 px-2.5 py-1 rounded-full font-medium">
                     <i class="fa-solid fa-arrows-rotate mr-1 animate-spin"></i> Actualizando
                 </span>
             </div>
