@@ -30,190 +30,216 @@
         header p { color: #9ca3af; font-size: 1.1rem; }
         header .sub-desc { color: #9ca3af; font-size: 0.95rem; margin-top: 15px; max-width: 600px; margin-left: auto; margin-right: auto; }
 
-        /* Contenedor principal del Carrusel */
-.carousel-container {
+        /* Contenedor principal del Banner */
+.banner-carousel-container {
   position: relative;
-  max-width: 750px;
+  width: 100%;
+  max-width: 1200px;
   margin: 20px auto;
+  height: 400px; /* Altura ideal del banner en PC */
   overflow: hidden;
   border-radius: 16px;
-  background: #111827;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.8);
+  font-family: 'sans-serif', system-ui;
 }
 
 .carousel-track {
   display: flex;
-  transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+  height: 100%;
+  transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
   width: 100%;
 }
 
-.featured-card {
+/* Slides */
+.carousel-slide {
   min-width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
   box-sizing: border-box;
   display: flex;
-  flex-direction: column;
-  background: #0d1117;
-  overflow: hidden;
-}
-
-/* Imagen y Tag de la Tarjeta */
-.card-image-container {
+  align-items: center;
+  padding: 0 8%;
   position: relative;
-  width: 100%;
-  height: 200px; /* Ajusta la altura según la imagen que quieras */
-  overflow: hidden;
 }
 
-.card-bg-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
+/* Superposición de contenido */
+.slide-content {
+  z-index: 2;
+  max-width: 550px;
+  animation: fadeUp 0.6s ease;
 }
 
-.offer-tag {
-  position: absolute;
-  top: 12px;
-  left: 12px;
-  background: rgba(234, 179, 8, 0.9);
-  color: #000;
+/* Textos y Etiquetas */
+.slide-badge {
+  display: inline-block;
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  font-size: 0.8rem;
   font-weight: bold;
   padding: 6px 12px;
-  border-radius: 20px;
-  font-size: 0.85rem;
-  backdrop-filter: blur(4px);
-}
-
-/* Contenido de texto y precios */
-.featured-content {
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-  text-align: center;
-}
-
-.featured-info h3 {
-  margin: 0;
-  font-size: 0.9rem;
-  color: #a855f7;
+  border-radius: 6px;
+  letter-spacing: 1.5px;
+  margin-bottom: 15px;
   text-transform: uppercase;
-  letter-spacing: 1px;
 }
 
-.featured-info h2 {
-  margin: 5px 0 10px;
-  font-size: 1.6rem;
-  color: #ffffff;
+.slide-badge.label-promo {
+  background: #eab308;
+  color: #000;
 }
 
-.featured-info p {
-  margin: 0;
+.slide-title {
+  color: #fff;
+  font-size: 2.5rem;
+  font-weight: 900;
+  line-height: 1.1;
+  margin: 0 0 12px 0;
+  text-transform: uppercase;
+  letter-spacing: -0.5px;
+}
+
+/* Colores de resalte (como el verde de Roblox o azul de HBO) */
+.highlight-text {
+  color: #00ff87; /* Verde brillante */
+  text-shadow: 0 0 15px rgba(0, 255, 135, 0.4);
+}
+
+.highlight-text-blue {
+  color: #3b82f6; /* Azul brillante */
+  text-shadow: 0 0 15px rgba(59, 130, 246, 0.4);
+}
+
+.slide-description {
   color: #9ca3af;
-  font-size: 0.95rem;
+  font-size: 1.1rem;
+  margin: 0 0 25px 0;
+  line-height: 1.4;
 }
 
-.price-box {
+/* Precios en el banner */
+.slide-price-container {
   display: flex;
-  flex-direction: column;
   align-items: center;
-  gap: 6px;
+  gap: 15px;
+  margin-bottom: 20px;
 }
 
-.old-price {
+.old-price-banner {
   text-decoration: line-through;
   color: #6b7280;
-  font-size: 0.9rem;
+  font-size: 1.1rem;
 }
 
-.current-price {
-  font-size: 2rem;
+.new-price-banner {
+  color: #10b981;
+  font-size: 1.8rem;
   font-weight: bold;
-  color: #22c55e;
 }
 
-.currency-label {
-  font-size: 1rem;
-  color: #9ca3af;
-}
-
-/* Botón de compra */
-.btn-oferta {
-  background: #2563eb;
-  color: white;
+/* Botón de Llamado a la Acción (CTA) */
+.slide-btn {
+  background: #00ff87; /* Puedes cambiar a azul si prefieres */
+  color: #000;
   border: none;
-  padding: 12px 24px;
-  font-size: 1rem;
+  font-size: 0.95rem;
   font-weight: bold;
+  padding: 14px 28px;
   border-radius: 8px;
   cursor: pointer;
-  transition: background 0.3s, transform 0.2s;
-  margin-top: 10px;
-  width: 100%;
-  max-width: 280px;
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 255, 135, 0.3);
 }
 
-.btn-oferta:hover {
-  background: #1d4ed8;
+.slide-btn:hover {
+  background: #00e074;
   transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 255, 135, 0.5);
 }
 
-/* Botones del carrusel */
-.carousel-btn {
+/* Botones de navegación (Flechas) */
+.carousel-arrow {
   position: absolute;
-  top: 35%; /* Centrado relativo a la imagen */
+  top: 50%;
   transform: translateY(-50%);
-  background: rgba(0, 0, 0, 0.6);
-  color: white;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  font-size: 1.2rem;
-  width: 40px;
-  height: 40px;
+  background: rgba(0, 0, 0, 0.4);
+  color: rgba(255, 255, 255, 0.6);
+  border: none;
+  font-size: 1.5rem;
+  width: 48px;
+  height: 48px;
   border-radius: 50%;
   cursor: pointer;
   z-index: 10;
+  transition: all 0.3s;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: background 0.3s, transform 0.2s;
 }
 
-.carousel-btn:hover {
-  background: rgba(0, 0, 0, 0.9);
-  transform: translateY(-50%) scale(1.1);
+.carousel-arrow:hover {
+  background: rgba(0, 0, 0, 0.8);
+  color: #00ff87;
+  transform: translateY(-50%) scale(1.05);
 }
 
-.carousel-btn.prev { left: 12px; }
-.carousel-btn.next { right: 12px; }
+.carousel-arrow.prev { left: 20px; }
+.carousel-arrow.next { right: 20px; }
 
-/* Vista en Pantallas Grandes (PC/Laptop) */
-@media (min-width: 640px) {
-  .featured-card {
-    flex-direction: row;
-    align-items: center;
-  }
-  
-  .card-image-container {
-    width: 45%;
-    height: 250px;
-  }
+/* Puntos indicadores (Dots) */
+.carousel-dots {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 8px;
+  z-index: 10;
+}
 
-  .featured-content {
-    width: 55%;
-    text-align: left;
-  }
+.dot {
+  width: 12px;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 3px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
 
-  .price-box {
-    align-items: flex-start;
-  }
+.dot.active {
+  background: #00ff87;
+  width: 24px; /* Hace el punto activo más alargado */
+}
 
-  .btn-oferta {
-    width: auto;
+/* Animaciones */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
   }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 
-  .carousel-btn {
-    top: 50%;
+/* Adaptación para celulares (Responsive) */
+@media (max-width: 768px) {
+  .banner-carousel-container {
+    height: 320px;
+  }
+  .slide-title {
+    font-size: 1.8rem;
+  }
+  .slide-description {
+    font-size: 0.95rem;
+  }
+  .carousel-arrow {
+    width: 36px;
+    height: 36px;
+    font-size: 1rem;
   }
 }
 
@@ -487,56 +513,45 @@
             <div class="sub-desc">Cuentas y Perfiles Originales, renovables y sin caídas. Elige tu plan, paga y estará activo en minutos.</div>
         </header>
 
-        <div class="carousel-container">
+        <div class="banner-carousel-container">
   <div class="carousel-track" id="carouselTrack">
 
-    <!-- Diapositiva 1 -->
-    <div class="featured-card">
-      <div class="card-image-container">
-        <!-- Reemplaza la URL con la foto/banner que desees -->
-        <img src="https://images.unsplash.com/photo-1574375927938-d5a98e8ffe85?q=80&w=600" alt="HBO Max y ViX" class="card-bg-img">
-        <div class="offer-tag">🤩 Oferta Limitada</div>
-      </div>
-      <div class="featured-content">
-        <div class="featured-info">
-          <h3>Combo DUO</h3>
-          <h2>HBO MAX + VIX</h2>
-          <p>Llévate el DUO perfecto, disfruta de las mejores series y películas del momento.</p>
-        </div>
-        <div class="price-box">
-          <div class="old-price">$3.60 USD</div>
-          <div class="current-price" id="oferta-precio" data-usd="1.99">$1.99 <span class="currency-label">USD</span></div>
-          <button class="btn-oferta" onclick="agregarDirecto('Combo Streaming Pro (Oferta)', 1.99, 'cine')">¡Quiero esta oferta!</button>
-        </div>
+    <!-- Slide 1: Roblox (Ejemplo) -->
+    <div class="carousel-slide active" style="background-image: linear-gradient(to right, rgba(10, 15, 30, 0.95), rgba(10, 15, 30, 0.4)), url('https://images.unsplash.com/photo-1511512578047-dfb367046420?q=80&w=1200');">
+      <!-- NOTA: Cambia la URL de arriba por la imagen de fondo que desees o usa una etiqueta <img> si prefieres un banner ya diseñado -->
+      <div class="slide-content">
+        <span class="slide-badge">ROBLOX</span>
+        <h2 class="slide-title">ESTÁN DE VUELTA<br><span class="highlight-text">GIFT CARDS</span></h2>
+        <p class="slide-description">¡Las de 50 y 100 Robux que todos pedían!</p>
+        <button class="slide-btn" onclick="agregarDirecto('Roblox 50', 5, 'gaming')">RECARGA AHORA</button>
       </div>
     </div>
 
-    <!-- Diapositiva 2 -->
-    <div class="featured-card">
-      <div class="card-image-container">
-        <!-- Otra imagen personalizada -->
-        <img src="https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?q=80&w=600" alt="Combo Trío" class="card-bg-img">
-        <div class="offer-tag">🔥 Más Vendido</div>
-      </div>
-      <div class="featured-content">
-        <div class="featured-info">
-          <h3>Combo TRIO</h3>
-          <h2>DISNEY+ + STAR+ + HBO</h2>
-          <p>El entretenimiento completo para toda la familia sin interrupciones.</p>
+    <!-- Slide 2: HBO + VIX (Tu Combo original adaptado) -->
+    <div class="carousel-slide" style="background-image: linear-gradient(to right, rgba(10, 15, 30, 0.95), rgba(10, 15, 30, 0.4)), url('https://images.unsplash.com/photo-1574375927938-d5a98e8ffe85?q=80&w=1200');">
+      <div class="slide-content">
+        <span class="slide-badge label-promo">🤩 Oferta Limitada</span>
+        <h2 class="slide-title">COMBO DUO<br><span class="highlight-text-blue">HBO MAX + VIX</span></h2>
+        <p class="slide-description">Llévate el DUO perfecto, disfruta de las mejores series y películas del momento.</p>
+        <div class="slide-price-container">
+          <span class="old-price-banner">$3.60 USD</span>
+          <span class="new-price-banner">$1.99 USD</span>
         </div>
-        <div class="price-box">
-          <div class="old-price">$5.00 USD</div>
-          <div class="current-price" data-usd="2.99">$2.99 <span class="currency-label">USD</span></div>
-          <button class="btn-oferta" onclick="agregarDirecto('Combo Trio', 2.99, 'cine')">¡Quiero esta oferta!</button>
-        </div>
+        <button class="slide-btn" onclick="agregarDirecto('Combo HBO VIX', 1.99, 'cine')">¡QUIERO ESTA OFERTA!</button>
       </div>
     </div>
 
   </div>
 
-  <!-- Botones de navegación -->
-  <button class="carousel-btn prev" onclick="moveCarousel(-1)">&#10094;</button>
-  <button class="carousel-btn next" onclick="moveCarousel(1)">&#10095;</button>
+  <!-- Flechas de navegación -->
+  <button class="carousel-arrow prev" onclick="moveCarousel(-1)">&#10094;</button>
+  <button class="carousel-arrow next" onclick="moveCarousel(1)">&#10095;</button>
+
+  <!-- Puntos indicadores -->
+  <div class="carousel-dots" id="carouselDots">
+    <span class="dot active" onclick="goToSlide(0)"></span>
+    <span class="dot" onclick="goToSlide(1)"></span>
+  </div>
 </div>
 
         <!-- Cabecera de Catálogo y Tasa Fija -->
@@ -1644,13 +1659,40 @@
 
         let currentIndex = 0;
 
+function updateCarousel() {
+  const track = document.getElementById('carouselTrack');
+  const dots = document.querySelectorAll('.carousel-dots .dot');
+  
+  // Mueve el track de los slides
+  track.style.transform = `translateX(-${currentIndex * 100}%)`;
+  
+  // Actualiza los dots indicadores
+  dots.forEach((dot, index) => {
+    if (index === currentIndex) {
+      dot.classList.add('active');
+    } else {
+      dot.classList.remove('active');
+    }
+  });
+}
+
 function moveCarousel(direction) {
   const track = document.getElementById('carouselTrack');
   const totalSlides = track.children.length;
 
   currentIndex = (currentIndex + direction + totalSlides) % totalSlides;
-  track.style.transform = `translateX(-${currentIndex * 100}%)`;
+  updateCarousel();
 }
+
+function goToSlide(index) {
+  currentIndex = index;
+  updateCarousel();
+}
+
+// Auto-play (Opcional: se mueve cada 6 segundos automáticamente)
+setInterval(() => {
+  moveCarousel(1);
+}, 6000);
 
         actualizarCarritoUI();
         let modalSel = document.getElementById('modal-seleccion');
