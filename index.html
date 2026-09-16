@@ -58,121 +58,82 @@
   height: 38px;
 }
 
-        /* Oferta destacada con efecto de luz giratoria */
-        .featured-card { 
-            position: relative;
-            background: linear-gradient(145deg, #0f172a, #180d12); 
-            border-radius: 16px; 
-            padding: 30px; 
-            margin-bottom: 40px; 
-            box-shadow: 0 0 25px rgba(0, 255, 127, 0.15);
-            overflow: hidden;
-            z-index: 1;
-        }
-
-        .featured-card::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: conic-gradient(transparent, transparent, transparent, #00FF7F);
-            animation: rotarLuz 4s linear infinite;
-            z-index: -2;
-        }
-
-        .featured-card::after {
-            content: '';
-            position: absolute;
-            inset: 2px;
-            background: linear-gradient(145deg, #0f172a, #180d12);
-            border-radius: 14px;
-            z-index: -1;
-        }
-
-        @keyframes rotarLuz {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        .offer-tag {
-    position: absolute;
-    top: 15px; /* Ubicada dentro de la tarjeta para que no la corte ningún borde */
-    right: 20px;
-    background: #00FF7F;
-    color: #050811;
-    padding: 4px 12px;
-    border-radius: 8px;
-    font-size: 0.75rem;
-    font-weight: bold;
-    text-transform: uppercase;
-    z-index: 10;
-}
-
-.featured-content {
+/* Tarjeta Flyer con Luz Giratoria */
+.featured-card { 
+    position: relative;
+    background: #0f172a; 
+    border-radius: 16px; 
+    padding: 4px; /* Espacio para el borde luminoso */
+    margin-bottom: 40px; 
+    overflow: hidden;
+    z-index: 1;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
-    flex-wrap: wrap;
-    gap: 20px;
-    position: relative; /* Asegura que la tarjeta controle la posición interna */
-    padding-top: 10px; /* Espacio extra para que no choque con la etiqueta */
+    width: 100%;
 }
 
-.featured-info h3 {
-    color: #00FF7F;
-    font-size: 0.9rem;
-    text-transform: uppercase;
-    margin-bottom: 8px;
-    letter-spacing: 1px;
+/* Efecto de luz giratoria en el borde */
+.featured-card::before {
+    content: '';
+    position: absolute;
+    width: 150%;
+    height: 500%;
+    background: conic-gradient(
+        from 0deg,
+        transparent 0deg,
+        transparent 280deg,
+        #00FF7F 360deg
+    );
+    animation: rotateLight 4s linear infinite;
+    z-index: -1;
 }
 
-.featured-info h2 {
-    font-size: 2rem;
-    color: #ffffff;
-    margin-bottom: 8px;
+/* Animación de rotación */
+@keyframes rotateLight {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
 }
 
-.featured-info p {
-    color: #9ca3af;
-    font-size: 0.95rem;
+/* Contenedor interno que oculta el centro del gradiente */
+.flyer-container {
+    width: 100%;
+    height: 100%;
+    background: #0f172a;
+    border-radius: 12px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.price-box {
-    text-align: right;
+/* Ajuste necesario para el elemento picture */
+.flyer-container picture {
+    width: 100%;
+    display: block;
 }
 
-.old-price {
-    color: #FFFFFF;
-    text-decoration: line-through;
-    font-size: 0.9rem;
+/* Ajuste de la imagen del flyer */
+.flyer-img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: contain;
+    border-radius: 12px;
 }
 
-.current-price {
-    font-size: 2.2rem;
-    color: #00FF7F;
-    font-weight: bold;
-    margin-bottom: 10px;
-}
-
-.btn-oferta {
-    display: inline-block;
-    background: linear-gradient(90deg, #00FF7F, #00cc66);
-    color: #050811;
-    padding: 12px 24px;
-    border-radius: 8px;
-    text-decoration: none;
-    font-weight: bold;
-    text-transform: uppercase;
-    font-size: 0.85rem;
-    transition: opacity 0.2s;
-    cursor: pointer;
-    border: none;
-}
-
-.btn-oferta:hover {
-    opacity: 0.9;
+/* Ajuste de márgenes exclusivos para celulares */
+@media (max-width: 768px) {
+    .featured-card {
+        width: calc(100% - 16px); /* Espacio sutil a los lados */
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: 25px;
+    }
 }
 
         /* Estructura en 2 columnas */
@@ -444,22 +405,17 @@
             <p>Líderes en Entretenimiento</p>
         </header>
 
-        <!-- Tarjeta de Oferta Limitada con Luz Dinámica -->
-        <div class="featured-card">
-            <div class="offer-tag">🤩 Oferta Limitada</div>
-            <div class="featured-content">
-                <div class="featured-info">
-                    <h3>Combo DUO</h3>
-                    <h2>HBO MAX + VIX</h2>
-                    <p>Llévate el DUO perfecto, disfruta de las mejores series y películas del momento.</p>
-                </div>
-                <div class="price-box">
-                    <div class="old-price">$3.60 USD</div>
-                    <div class="current-price" id="oferta-precio" data-usd="1.99">$1.99 <span style="font-size: 1rem; color: #9ca3af;">USD</span></div>
-                    <button class="btn-oferta" onclick="agregarDirecto('Combo Streaming Pro (Oferta)', 1.99, 'cine')">¡Quiero esta oferta!</button>
-                </div>
-            </div>
-        </div>
+       <div class="featured-card">
+  <div class="flyer-container">
+    <picture>
+      <!-- Imagen ALTA para celulares (menos de 768px) -->
+      <source media="(max-width: 768px)" srcset="https://i.postimg.cc/cJBdswmc/Gemini-Generated-Image-hpvivhpvivhpvivh.jpg">
+      
+      <!-- Imagen PANORÁMICA para computadoras -->
+      <img src="https://i.postimg.cc/cJBdswmc/Gemini-Generated-Image-hpvivhpvivhpvivh.jpg" class="flyer-img" alt="Flyer Netflix Gift Cards">
+    </picture>
+  </div>
+</div>
 
 <!-- Botón flotante de WhatsApp con ícono oficial -->
 <a href="https://wa.me/584124405245?text=Hola,%20me%20gustaría%20obtener%20más%20información" 
@@ -471,7 +427,6 @@
     <path fill="#FFF" d="M26.41 5.59A14.67 14.67 0 0 0 16.05 1.25C7.94 1.25 1.34 7.85 1.34 15.96c0 2.59.68 5.12 1.96 7.34L1.5 29.75l6.63-1.74a14.67 14.67 0 0 0 7.92 2.22h.01c8.11 0 14.71-6.6 14.71-14.71 0-3.93-1.53-7.63-4.36-10.43zM16.06 27.7c-2.2 0-4.36-.59-6.25-1.71l-.45-.27-3.94 1.03 1.05-3.84-.29-.47a12.18 12.18 0 0 1-1.87-6.48c0-6.73 5.48-12.21 12.21-12.21 3.26 0 6.32 1.27 8.63 3.58 2.3 2.3 3.57 5.37 3.57 8.63 0 6.73-5.48 12.21-12.21 12.21zm6.7-9.14c-.37-.18-2.17-1.07-2.51-1.19-.34-.12-.59-.18-.84.18-.25.37-.96 1.19-1.18 1.44-.22.25-.44.28-.81.1-.37-.18-1.56-.58-2.97-1.83-1.1-1-.18-2.2-2.06-2.57-.22-.37-.02-.57.16-.75.17-.17.37-.44.56-.66.19-.22.25-.37.37-.62.12-.25.06-.47-.03-.65-.09-.18-.84-2.02-1.15-2.77-.3-.73-.61-.63-.84-.64l-.72-.01c-.25 0-.65.09-1 .46-.34.37-1.31 1.28-1.31 3.12 0 1.84 1.34 3.62 1.53 3.87.19.25 2.64 4.03 6.39 5.65.89.39 1.59.62 2.13.79.9.29 1.71.25 2.36.15.72-.11 2.21-.9 2.52-1.77.31-.87.31-1.62.22-1.77-.09-.16-.34-.25-.71-.44z"/>
   </svg>
 </a>
-
         <!-- Cabecera de Catálogo y Tasa Fija -->
         <div class="catalog-header" id="catalogo">
             <div class="catalog-title">
@@ -1365,6 +1320,14 @@
         </div>
     </div>
 
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-brand">
+                <div class="footer-logo-title">STREAMIX STORE</div>
+                <div class="footer-status">
+                </div>
+            </div>
             <div class="footer-socials">
                 <a href="https://www.instagram.com/streamix.store/" target="_blank" class="social-icon-btn" title="Instagram">
                     <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
@@ -1565,18 +1528,6 @@
             }
         });
 
-        // Actualizar oferta destacada
-        let ofertaEl = document.getElementById('oferta-precio');
-        if (ofertaEl) {
-            let usdOferta = parseFloat(ofertaEl.getAttribute('data-usd'));
-            if (moneda === 'Bs') {
-                let bsOferta = usdOferta * tasaCambio;
-                ofertaEl.innerHTML = 'Bs ' + bsOferta.toLocaleString('es-VE', {minimumFractionDigits: 2, maximumFractionDigits: 2});
-            } else {
-                ofertaEl.innerHTML = '$' + usdOferta.toFixed(2) + ' <span style="font-size: 1rem; color: #9ca3af;">USD</span>';
-            }
-        }
-
         actualizarCarritoUI();
         let modalSel = document.getElementById('modal-seleccion');
         if (modalSel && modalSel.style.display === 'flex') {
@@ -1629,7 +1580,7 @@
 
     function validarCodigoDistribuidor() {
         const inputCode = document.getElementById('distri-code-input').value.trim();
-        if (inputCode === "SXDISTRIVZ" || inputCode === "SXDISTRVE" ) {
+        if (inputCode === "DISTRI2026" || inputCode === "PRUEBA01" ) {
             distribuidorAutorizado = true;
             cerrarModalDistribuidores();
             document.getElementById('distri-code-input').value = "";
