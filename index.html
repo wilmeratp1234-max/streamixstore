@@ -30,47 +30,47 @@
         header p { color: #9ca3af; font-size: 1.1rem; }
         header .sub-desc { color: #9ca3af; font-size: 0.95rem; margin-top: 15px; max-width: 600px; margin-left: auto; margin-right: auto; }
 
-       /* --- TARJETA Y LUZ GIRATORIA ORIGINAL --- */
-.featured-card { 
-    position: relative;
-    background: linear-gradient(145deg, #0f172a, #180d12); 
-    border-radius: 16px; 
-    margin-bottom: 40px; 
-    box-shadow: 0 0 25px rgba(0, 255, 127, 0.15);
-    overflow: hidden;
-    z-index: 1;
-    padding: 0 !important; /* Importante para la animación del slider */
-}
+        /* Oferta destacada con efecto de luz giratoria */
+        .featured-card { 
+            position: relative;
+            background: linear-gradient(145deg, #0f172a, #180d12); 
+            border-radius: 16px; 
+            padding: 30px; 
+            margin-bottom: 40px; 
+            box-shadow: 0 0 25px rgba(0, 255, 127, 0.15);
+            overflow: hidden;
+            z-index: 1;
+        }
 
-.featured-card::before {
-    content: '';
+        .featured-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(transparent, transparent, transparent, #00FF7F);
+            animation: rotarLuz 4s linear infinite;
+            z-index: -2;
+        }
+
+        .featured-card::after {
+            content: '';
+            position: absolute;
+            inset: 2px;
+            background: linear-gradient(145deg, #0f172a, #180d12);
+            border-radius: 14px;
+            z-index: -1;
+        }
+
+        @keyframes rotarLuz {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .offer-tag {
     position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: conic-gradient(transparent, transparent, transparent, #00FF7F);
-    animation: rotarLuz 4s linear infinite;
-    z-index: -2;
-}
-
-.featured-card::after {
-    content: '';
-    position: absolute;
-    inset: 2px;
-    background: linear-gradient(145deg, #0f172a, #180d12);
-    border-radius: 14px;
-    z-index: -1;
-}
-
-@keyframes rotarLuz {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
-
-.offer-tag {
-    position: absolute;
-    top: 15px;
+    top: 15px; /* Ubicada dentro de la tarjeta para que no la corte ningún borde */
     right: 20px;
     background: #00FF7F;
     color: #050811;
@@ -88,8 +88,8 @@
     align-items: center;
     flex-wrap: wrap;
     gap: 20px;
-    position: relative;
-    padding-top: 10px;
+    position: relative; /* Asegura que la tarjeta controle la posición interna */
+    padding-top: 10px; /* Espacio extra para que no choque con la etiqueta */
 }
 
 .featured-info h3 {
@@ -145,56 +145,6 @@
 
 .btn-oferta:hover {
     opacity: 0.9;
-}
-
-/* --- ESTRUCTURA DEL CARRUSEL --- */
-.carousel-slides {
-    position: relative;
-    width: 100%;
-}
-
-.slide {
-    display: none;
-    padding: 30px;
-    box-sizing: border-box;
-    width: 100%;
-}
-
-.slide.active {
-    display: block;
-    animation: fadeIn 0.5s ease-in-out;
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-}
-
-/* Indicadores / Puntos inferior */
-.carousel-dots {
-    position: absolute;
-    bottom: 12px;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    gap: 8px;
-    z-index: 15;
-}
-
-.dot {
-    width: 10px;
-    height: 10px;
-    background-color: rgba(255, 255, 255, 0.25);
-    border-radius: 50%;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.dot.active {
-    background-color: #00FF7F;
-    width: 26px;
-    border-radius: 10px;
-    box-shadow: 0 0 8px #00FF7F;
 }
 
         /* Estructura en 2 columnas */
@@ -467,12 +417,8 @@
             <div class="sub-desc">Cuentas y Perfiles Originales, renovables y sin caídas. Elige tu plan, paga y estará activo en minutos.</div>
         </header>
 
-        <!-- Carrusel de Ofertas Destacadas -->
-<div class="featured-card carousel-container">
-    <div class="carousel-slides" id="carouselSlides">
-        
-        <!-- Diapositiva 1 -->
-        <div class="slide active">
+        <!-- Tarjeta de Oferta Limitada con Luz Dinámica -->
+        <div class="featured-card">
             <div class="offer-tag">🤩 Oferta Limitada</div>
             <div class="featured-content">
                 <div class="featured-info">
@@ -482,49 +428,11 @@
                 </div>
                 <div class="price-box">
                     <div class="old-price">$3.60 USD</div>
-                    <div class="current-price oferta-precio" data-usd="1.99">$1.99 <span style="font-size: 1rem; color: #9ca3af;">USD</span></div>
+                    <div class="current-price" id="oferta-precio" data-usd="1.99">$1.99 <span style="font-size: 1rem; color: #9ca3af;">USD</span></div>
                     <button class="btn-oferta" onclick="agregarDirecto('Combo Streaming Pro (Oferta)', 1.99, 'cine')">¡Quiero esta oferta!</button>
                 </div>
             </div>
         </div>
-
-        <!-- Diapositiva 2 (Canal WhatsApp) -->
-        <div class="slide">
-            <div class="offer-tag">📢 Comunidad</div>
-            <div class="featured-content">
-                <div class="featured-info">
-                    <h3>Únete a nuestro</h3>
-                    <h2>CANAL DE WHATSAPP</h2>
-                    <p>Entérate de los nuevos lanzamientos, sorteos y descuentos exclusivos.</p>
-                </div>
-                <div class="price-box">
-                    <a href="https://whatsapp.com" target="_blank" class="btn-oferta" style="text-align: center; text-decoration: none;">ENTRAR AL CANAL</a>
-                </div>
-            </div>
-        </div>
-
-        <!-- Diapositiva 3 -->
-        <div class="slide">
-            <div class="offer-tag">🔥 Promoción</div>
-            <div class="featured-content">
-                <div class="featured-info">
-                    <h3>Combo TRIPLE</h3>
-                    <h2>NETFLIX + DISNEY + STAR</h2>
-                    <p>Todo el entretenimiento en un solo paquete al mejor precio.</p>
-                </div>
-                <div class="price-box">
-                    <div class="old-price">$8.00 USD</div>
-                    <div class="current-price oferta-precio" data-usd="4.99">$4.99 <span style="font-size: 1rem; color: #9ca3af;">USD</span></div>
-                    <button class="btn-oferta" onclick="agregarDirecto('Combo Triple', 4.99, 'cine')">¡Comprar Ahora!</button>
-                </div>
-            </div>
-        </div>
-
-    </div>
-
-    <!-- Puntos de navegación (Dots) -->
-    <div class="carousel-dots" id="carouselDots"></div>
-</div>
 
         <!-- Cabecera de Catálogo y Tasa Fija -->
         <div class="catalog-header" id="catalogo">
@@ -1629,81 +1537,17 @@
             }
         });
 
-        document.addEventListener("DOMContentLoaded", function () {
-    let currentSlide = 0;
-    const slides = document.querySelectorAll('.slide');
-    const dotsContainer = document.getElementById('carouselDots');
-
-    if (slides.length > 0 && dotsContainer) {
-        // Crear puntos indicadores según la cantidad de slides
-        dotsContainer.innerHTML = '';
-        slides.forEach((_, index) => {
-            const dot = document.createElement('div');
-            dot.classList.add('dot');
-            if (index === 0) dot.classList.add('active');
-            dot.addEventListener('click', () => goToSlide(index));
-            dotsContainer.appendChild(dot);
-        });
-
-        const dots = document.querySelectorAll('.dot');
-
-        function updateCarousel() {
-            slides.forEach((slide, index) => {
-                slide.classList.remove('active');
-                if (dots[index]) dots[index].classList.remove('active');
-            });
-            
-            slides[currentSlide].classList.add('active');
-            if (dots[currentSlide]) dots[currentSlide].classList.add('active');
+        // Actualizar oferta destacada
+        let ofertaEl = document.getElementById('oferta-precio');
+        if (ofertaEl) {
+            let usdOferta = parseFloat(ofertaEl.getAttribute('data-usd'));
+            if (moneda === 'Bs') {
+                let bsOferta = usdOferta * tasaCambio;
+                ofertaEl.innerHTML = 'Bs ' + bsOferta.toLocaleString('es-VE', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+            } else {
+                ofertaEl.innerHTML = '$' + usdOferta.toFixed(2) + ' <span style="font-size: 1rem; color: #9ca3af;">USD</span>';
+            }
         }
-
-        function nextSlide() {
-            currentSlide = (currentSlide + 1) % slides.length;
-            updateCarousel();
-        }
-
-        function goToSlide(index) {
-            currentSlide = index;
-            updateCarousel();
-        }
-
-        // Cambio automático cada 5 segundos
-        setInterval(nextSlide, 5000);
-    }
-});
-
-// Compatibilidad para actualización de precios multi-moneda (USD/Bs)
-function actualizarPreciosOfertas() {
-    let ofertas = document.querySelectorAll('.oferta-precio');
-    ofertas.forEach(ofertaEl => {
-        let usdOferta = parseFloat(ofertaEl.getAttribute('data-usd'));
-        if (typeof moneda !== 'undefined' && moneda === 'Bs' && typeof tasaCambio !== 'undefined') {
-            let bsOferta = usdOferta * tasaCambio;
-            ofertaEl.innerHTML = 'Bs ' + bsOferta.toLocaleString('es-VE', {minimumFractionDigits: 2, maximumFractionDigits: 2});
-        } else {
-            ofertaEl.innerHTML = '$' + usdOferta.toFixed(2) + ' <span style="font-size: 1rem; color: #9ca3af;">USD</span>';
-        }
-    });
-}
-
-
-// --- ACTUALIZACIÓN DE PRECIOS MULTIMONEDA (Soporta múltiples ofertas) ---
-function actualizarPreciosOfertas() {
-    let ofertas = document.querySelectorAll('.oferta-precio');
-    
-    ofertas.forEach(ofertaEl => {
-        let usdOferta = parseFloat(ofertaEl.getAttribute('data-usd'));
-        if (moneda === 'Bs') {
-            let bsOferta = usdOferta * tasaCambio;
-            ofertaEl.innerHTML = 'Bs ' + bsOferta.toLocaleString('es-VE', {minimumFractionDigits: 2, maximumFractionDigits: 2});
-        } else {
-            ofertaEl.innerHTML = '$' + usdOferta.toFixed(2) + ' <span style="font-size: 1rem; color: #9ca3af;">USD</span>';
-        }
-    });
-}
-
-// Ejecutar la función cuando cambies la moneda en tu web
-actualizarPreciosOfertas();
 
         actualizarCarritoUI();
         let modalSel = document.getElementById('modal-seleccion');
