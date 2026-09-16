@@ -30,47 +30,192 @@
         header p { color: #9ca3af; font-size: 1.1rem; }
         header .sub-desc { color: #9ca3af; font-size: 0.95rem; margin-top: 15px; max-width: 600px; margin-left: auto; margin-right: auto; }
 
-        .carousel-container {
+        /* Contenedor principal del Carrusel */
+.carousel-container {
   position: relative;
-  max-width: 600px; /* Ajusta según el ancho deseado */
-  margin: auto;
+  max-width: 750px;
+  margin: 20px auto;
   overflow: hidden;
-  border-radius: 12px;
+  border-radius: 16px;
+  background: #111827;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
 }
 
 .carousel-track {
   display: flex;
-  transition: transform 0.4s ease-in-out;
+  transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
   width: 100%;
 }
 
 .featured-card {
   min-width: 100%;
   box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  background: #0d1117;
+  overflow: hidden;
 }
 
-/* Botones flotantes */
+/* Imagen y Tag de la Tarjeta */
+.card-image-container {
+  position: relative;
+  width: 100%;
+  height: 200px; /* Ajusta la altura según la imagen que quieras */
+  overflow: hidden;
+}
+
+.card-bg-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.offer-tag {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background: rgba(234, 179, 8, 0.9);
+  color: #000;
+  font-weight: bold;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  backdrop-filter: blur(4px);
+}
+
+/* Contenido de texto y precios */
+.featured-content {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  text-align: center;
+}
+
+.featured-info h3 {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #a855f7;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.featured-info h2 {
+  margin: 5px 0 10px;
+  font-size: 1.6rem;
+  color: #ffffff;
+}
+
+.featured-info p {
+  margin: 0;
+  color: #9ca3af;
+  font-size: 0.95rem;
+}
+
+.price-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.old-price {
+  text-decoration: line-through;
+  color: #6b7280;
+  font-size: 0.9rem;
+}
+
+.current-price {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #22c55e;
+}
+
+.currency-label {
+  font-size: 1rem;
+  color: #9ca3af;
+}
+
+/* Botón de compra */
+.btn-oferta {
+  background: #2563eb;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  font-size: 1rem;
+  font-weight: bold;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s;
+  margin-top: 10px;
+  width: 100%;
+  max-width: 280px;
+}
+
+.btn-oferta:hover {
+  background: #1d4ed8;
+  transform: translateY(-2px);
+}
+
+/* Botones del carrusel */
 .carousel-btn {
   position: absolute;
-  top: 50%;
+  top: 35%; /* Centrado relativo a la imagen */
   transform: translateY(-50%);
   background: rgba(0, 0, 0, 0.6);
   color: white;
-  border: none;
-  font-size: 1.5rem;
-  padding: 8px 14px;
-  cursor: pointer;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  font-size: 1.2rem;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
+  cursor: pointer;
   z-index: 10;
-  transition: background 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.3s, transform 0.2s;
 }
 
 .carousel-btn:hover {
   background: rgba(0, 0, 0, 0.9);
+  transform: translateY(-50%) scale(1.1);
 }
 
-.carousel-btn.prev { left: 10px; }
-.carousel-btn.next { right: 10px; }
+.carousel-btn.prev { left: 12px; }
+.carousel-btn.next { right: 12px; }
+
+/* Vista en Pantallas Grandes (PC/Laptop) */
+@media (min-width: 640px) {
+  .featured-card {
+    flex-direction: row;
+    align-items: center;
+  }
+  
+  .card-image-container {
+    width: 45%;
+    height: 250px;
+  }
+
+  .featured-content {
+    width: 55%;
+    text-align: left;
+  }
+
+  .price-box {
+    align-items: flex-start;
+  }
+
+  .btn-oferta {
+    width: auto;
+  }
+
+  .carousel-btn {
+    top: 50%;
+  }
+}
 
         /* Estructura en 2 columnas */
         .content-wrapper { display: flex; gap: 35px; align-items: flex-start; }
@@ -344,9 +489,14 @@
 
         <div class="carousel-container">
   <div class="carousel-track" id="carouselTrack">
-    <!-- Tarjeta 1 -->
+
+    <!-- Diapositiva 1 -->
     <div class="featured-card">
-      <div class="offer-tag">🤩 Oferta Limitada</div>
+      <div class="card-image-container">
+        <!-- Reemplaza la URL con la foto/banner que desees -->
+        <img src="https://images.unsplash.com/photo-1574375927938-d5a98e8ffe85?q=80&w=600" alt="HBO Max y ViX" class="card-bg-img">
+        <div class="offer-tag">🤩 Oferta Limitada</div>
+      </div>
       <div class="featured-content">
         <div class="featured-info">
           <h3>Combo DUO</h3>
@@ -355,28 +505,33 @@
         </div>
         <div class="price-box">
           <div class="old-price">$3.60 USD</div>
-          <div class="current-price" id="oferta-precio" data-usd="1.99">$1.99 <span style="font-size: 1rem; color: #9ca3af;">USD</span></div>
+          <div class="current-price" id="oferta-precio" data-usd="1.99">$1.99 <span class="currency-label">USD</span></div>
           <button class="btn-oferta" onclick="agregarDirecto('Combo Streaming Pro (Oferta)', 1.99, 'cine')">¡Quiero esta oferta!</button>
         </div>
       </div>
     </div>
 
-    <!-- Tarjeta 2 -->
+    <!-- Diapositiva 2 -->
     <div class="featured-card">
-      <div class="offer-tag">🔥 Más Vendido</div>
+      <div class="card-image-container">
+        <!-- Otra imagen personalizada -->
+        <img src="https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?q=80&w=600" alt="Combo Trío" class="card-bg-img">
+        <div class="offer-tag">🔥 Más Vendido</div>
+      </div>
       <div class="featured-content">
         <div class="featured-info">
           <h3>Combo TRIO</h3>
           <h2>DISNEY+ + STAR+ + HBO</h2>
-          <p>El entretenimiento completo para toda la familia.</p>
+          <p>El entretenimiento completo para toda la familia sin interrupciones.</p>
         </div>
         <div class="price-box">
           <div class="old-price">$5.00 USD</div>
-          <div class="current-price" data-usd="2.99">$2.99 <span style="font-size: 1rem; color: #9ca3af;">USD</span></div>
+          <div class="current-price" data-usd="2.99">$2.99 <span class="currency-label">USD</span></div>
           <button class="btn-oferta" onclick="agregarDirecto('Combo Trio', 2.99, 'cine')">¡Quiero esta oferta!</button>
         </div>
       </div>
     </div>
+
   </div>
 
   <!-- Botones de navegación -->
