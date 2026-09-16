@@ -30,6 +30,34 @@
         header p { color: #9ca3af; font-size: 1.1rem; }
         header .sub-desc { color: #9ca3af; font-size: 0.95rem; margin-top: 15px; max-width: 600px; margin-left: auto; margin-right: auto; }
 
+.whatsapp-float {
+  position: fixed;
+  width: 60px;
+  height: 60px;
+  bottom: 25px;
+  right: 25px;
+  background-color: #25d366; /* Verde oficial de WhatsApp */
+  border-radius: 50%;
+  text-align: center;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.25);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.whatsapp-float:hover {
+  transform: scale(1.08);
+  background-color: #20ba5a;
+}
+
+.whatsapp-icon {
+  width: 38px;
+  height: 38px;
+}
+
         /* Oferta destacada con efecto de luz giratoria */
         .featured-card { 
             position: relative;
@@ -433,6 +461,17 @@
                 </div>
             </div>
         </div>
+
+<!-- Botón flotante de WhatsApp con ícono oficial -->
+<a href="https://wa.me/584124405245?text=Hola,%20me%20gustaría%20obtener%20más%20información" 
+   class="whatsapp-float" 
+   target="_blank" 
+   rel="noopener noreferrer" 
+   aria-label="Chat en WhatsApp">
+  <svg viewBox="0 0 32 32" class="whatsapp-icon">
+    <path fill="#FFF" d="M26.41 5.59A14.67 14.67 0 0 0 16.05 1.25C7.94 1.25 1.34 7.85 1.34 15.96c0 2.59.68 5.12 1.96 7.34L1.5 29.75l6.63-1.74a14.67 14.67 0 0 0 7.92 2.22h.01c8.11 0 14.71-6.6 14.71-14.71 0-3.93-1.53-7.63-4.36-10.43zM16.06 27.7c-2.2 0-4.36-.59-6.25-1.71l-.45-.27-3.94 1.03 1.05-3.84-.29-.47a12.18 12.18 0 0 1-1.87-6.48c0-6.73 5.48-12.21 12.21-12.21 3.26 0 6.32 1.27 8.63 3.58 2.3 2.3 3.57 5.37 3.57 8.63 0 6.73-5.48 12.21-12.21 12.21zm6.7-9.14c-.37-.18-2.17-1.07-2.51-1.19-.34-.12-.59-.18-.84.18-.25.37-.96 1.19-1.18 1.44-.22.25-.44.28-.81.1-.37-.18-1.56-.58-2.97-1.83-1.1-1-.18-2.2-2.06-2.57-.22-.37-.02-.57.16-.75.17-.17.37-.44.56-.66.19-.22.25-.37.37-.62.12-.25.06-.47-.03-.65-.09-.18-.84-2.02-1.15-2.77-.3-.73-.61-.63-.84-.64l-.72-.01c-.25 0-.65.09-1 .46-.34.37-1.31 1.28-1.31 3.12 0 1.84 1.34 3.62 1.53 3.87.19.25 2.64 4.03 6.39 5.65.89.39 1.59.62 2.13.79.9.29 1.71.25 2.36.15.72-.11 2.21-.9 2.52-1.77.31-.87.31-1.62.22-1.77-.09-.16-.34-.25-.71-.44z"/>
+  </svg>
+</a>
 
         <!-- Cabecera de Catálogo y Tasa Fija -->
         <div class="catalog-header" id="catalogo">
