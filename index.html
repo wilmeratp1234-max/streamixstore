@@ -30,121 +30,69 @@
         header p { color: #9ca3af; font-size: 1.1rem; }
         header .sub-desc { color: #9ca3af; font-size: 0.95rem; margin-top: 15px; max-width: 600px; margin-left: auto; margin-right: auto; }
 
-        /* Oferta destacada con efecto de luz giratoria */
-        .featured-card { 
-            position: relative;
-            background: linear-gradient(145deg, #0f172a, #180d12); 
-            border-radius: 16px; 
-            padding: 30px; 
-            margin-bottom: 40px; 
-            box-shadow: 0 0 25px rgba(0, 255, 127, 0.15);
-            overflow: hidden;
-            z-index: 1;
-        }
+        /* Modificación de la tarjeta contenedor */
+.carousel-container {
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 40px;
+    padding: 0; /* Ajuste para el slider interno */
+}
 
-        .featured-card::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: conic-gradient(transparent, transparent, transparent, #00FF7F);
-            animation: rotarLuz 4s linear infinite;
-            z-index: -2;
-        }
+/* Contenedor de Diapositivas */
+.carousel-slides {
+    position: relative;
+    width: 100%;
+    min-height: 220px; /* Ancho/alto adaptativo */
+}
 
-        .featured-card::after {
-            content: '';
-            position: absolute;
-            inset: 2px;
-            background: linear-gradient(145deg, #0f172a, #180d12);
-            border-radius: 14px;
-            z-index: -1;
-        }
-
-        @keyframes rotarLuz {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        .offer-tag {
+/* Estilo de cada Slide */
+.slide {
     position: absolute;
-    top: 15px; /* Ubicada dentro de la tarjeta para que no la corte ningún borde */
-    right: 20px;
-    background: #00FF7F;
-    color: #050811;
-    padding: 4px 12px;
-    border-radius: 8px;
-    font-size: 0.75rem;
-    font-weight: bold;
-    text-transform: uppercase;
-    z-index: 10;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.6s ease-in-out, visibility 0.6s ease-in-out;
+    padding: 30px;
+    box-sizing: border-box;
 }
 
-.featured-content {
+.slide.active {
+    opacity: 1;
+    visibility: visible;
+    position: relative; /* Permite tomar la altura real del contenido */
+}
+
+/* Indicadores / Puntos abajo (Dots) */
+.carousel-dots {
+    position: absolute;
+    bottom: 15px;
+    left: 50%;
+    transform: translateX(-50%);
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 20px;
-    position: relative; /* Asegura que la tarjeta controle la posición interna */
-    padding-top: 10px; /* Espacio extra para que no choque con la etiqueta */
+    gap: 8px;
+    z-index: 20;
+    background: rgba(5, 8, 17, 0.6);
+    padding: 6px 12px;
+    border-radius: 20px;
 }
 
-.featured-info h3 {
-    color: #00FF7F;
-    font-size: 0.9rem;
-    text-transform: uppercase;
-    margin-bottom: 8px;
-    letter-spacing: 1px;
-}
-
-.featured-info h2 {
-    font-size: 2rem;
-    color: #ffffff;
-    margin-bottom: 8px;
-}
-
-.featured-info p {
-    color: #9ca3af;
-    font-size: 0.95rem;
-}
-
-.price-box {
-    text-align: right;
-}
-
-.old-price {
-    color: #FFFFFF;
-    text-decoration: line-through;
-    font-size: 0.9rem;
-}
-
-.current-price {
-    font-size: 2.2rem;
-    color: #00FF7F;
-    font-weight: bold;
-    margin-bottom: 10px;
-}
-
-.btn-oferta {
-    display: inline-block;
-    background: linear-gradient(90deg, #00FF7F, #00cc66);
-    color: #050811;
-    padding: 12px 24px;
-    border-radius: 8px;
-    text-decoration: none;
-    font-weight: bold;
-    text-transform: uppercase;
-    font-size: 0.85rem;
-    transition: opacity 0.2s;
+.dot {
+    width: 10px;
+    height: 10px;
+    background-color: rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
     cursor: pointer;
-    border: none;
+    transition: all 0.3s ease;
 }
 
-.btn-oferta:hover {
-    opacity: 0.9;
+.dot.active {
+    background-color: #00FF7F;
+    width: 25px; /* Efecto alargado estilo Neón */
+    border-radius: 10px;
+    box-shadow: 0 0 10px #00FF7F;
 }
 
         /* Estructura en 2 columnas */
@@ -418,7 +366,12 @@
         </header>
 
         <!-- Tarjeta de Oferta Limitada con Luz Dinámica -->
-        <div class="featured-card">
+       <!-- Carrusel Contenedor Principal -->
+<div class="carousel-container featured-card">
+    <div class="carousel-slides" id="carouselSlides">
+        
+        <!-- Diapositiva 1: Oferta Duo -->
+        <div class="slide active">
             <div class="offer-tag">🤩 Oferta Limitada</div>
             <div class="featured-content">
                 <div class="featured-info">
@@ -428,11 +381,49 @@
                 </div>
                 <div class="price-box">
                     <div class="old-price">$3.60 USD</div>
-                    <div class="current-price" id="oferta-precio" data-usd="1.99">$1.99 <span style="font-size: 1rem; color: #9ca3af;">USD</span></div>
+                    <div class="current-price oferta-precio" data-usd="1.99">$1.99 <span style="font-size: 1rem; color: #9ca3af;">USD</span></div>
                     <button class="btn-oferta" onclick="agregarDirecto('Combo Streaming Pro (Oferta)', 1.99, 'cine')">¡Quiero esta oferta!</button>
                 </div>
             </div>
         </div>
+
+        <!-- Diapositiva 2: Canal de WhatsApp (Ejemplo Imagen 2) -->
+        <div class="slide">
+            <div class="offer-tag">📢 Comunidad</div>
+            <div class="featured-content">
+                <div class="featured-info">
+                    <h3>Únete a nuestro</h3>
+                    <h2>CANAL DE WHATSAPP</h2>
+                    <p>Enterate de los nuevos lanzamientos, sorteos y descuentos exclusivos.</p>
+                </div>
+                <div class="price-box">
+                    <a href="https://whatsapp.com" target="_blank" class="btn-oferta" style="text-align: center; display: inline-block;">ENTRAR AL CANAL</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Diapositiva 3: Otra Oferta -->
+        <div class="slide">
+            <div class="offer-tag">🔥 Promoción</div>
+            <div class="featured-content">
+                <div class="featured-info">
+                    <h3>Combo TRIPLE</h3>
+                    <h2>NETFLIX + DISNEY + STAR</h2>
+                    <p>Todo el entretenimiento en un solo paquete al mejor precio.</p>
+                </div>
+                <div class="price-box">
+                    <div class="old-price">$8.00 USD</div>
+                    <div class="current-price oferta-precio" data-usd="4.99">$4.99 <span style="font-size: 1rem; color: #9ca3af;">USD</span></div>
+                    <button class="btn-oferta" onclick="agregarDirecto('Combo Triple', 4.99, 'cine')">¡Comprar Ahora!</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Indicadores / Puntos de navegación (Dots como Imagen 2) -->
+    <div class="carousel-dots" id="carouselDots"></div>
+</div>
 
         <!-- Cabecera de Catálogo y Tasa Fija -->
         <div class="catalog-header" id="catalogo">
@@ -1537,17 +1528,63 @@
             }
         });
 
-        // Actualizar oferta destacada
-        let ofertaEl = document.getElementById('oferta-precio');
-        if (ofertaEl) {
-            let usdOferta = parseFloat(ofertaEl.getAttribute('data-usd'));
-            if (moneda === 'Bs') {
-                let bsOferta = usdOferta * tasaCambio;
-                ofertaEl.innerHTML = 'Bs ' + bsOferta.toLocaleString('es-VE', {minimumFractionDigits: 2, maximumFractionDigits: 2});
-            } else {
-                ofertaEl.innerHTML = '$' + usdOferta.toFixed(2) + ' <span style="font-size: 1rem; color: #9ca3af;">USD</span>';
-            }
+        // --- LÓGICA DEL CARRUSEL ---
+let currentSlide = 0;
+const slides = document.querySelectorAll('.slide');
+const dotsContainer = document.getElementById('carouselDots');
+
+// Crear los dots automáticamente según el número de slides
+slides.forEach((_, index) => {
+    const dot = document.createElement('div');
+    dot.classList.add('dot');
+    if (index === 0) dot.classList.add('active');
+    dot.addEventListener('click', () => goToSlide(index));
+    dotsContainer.appendChild(dot);
+});
+
+const dots = document.querySelectorAll('.dot');
+
+function updateCarousel() {
+    slides.forEach((slide, index) => {
+        slide.classList.remove('active');
+        dots[index].classList.remove('active');
+    });
+    
+    slides[currentSlide].classList.add('active');
+    dots[currentSlide].classList.add('active');
+}
+
+function nextSlide() {
+    currentSlide = (currentSlide + 1) % slides.length;
+    updateCarousel();
+}
+
+function goToSlide(index) {
+    currentSlide = index;
+    updateCarousel();
+}
+
+// Transición automática cada 5 segundos
+setInterval(nextSlide, 5000);
+
+
+// --- ACTUALIZACIÓN DE PRECIOS MULTIMONEDA (Soporta múltiples ofertas) ---
+function actualizarPreciosOfertas() {
+    let ofertas = document.querySelectorAll('.oferta-precio');
+    
+    ofertas.forEach(ofertaEl => {
+        let usdOferta = parseFloat(ofertaEl.getAttribute('data-usd'));
+        if (moneda === 'Bs') {
+            let bsOferta = usdOferta * tasaCambio;
+            ofertaEl.innerHTML = 'Bs ' + bsOferta.toLocaleString('es-VE', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+        } else {
+            ofertaEl.innerHTML = '$' + usdOferta.toFixed(2) + ' <span style="font-size: 1rem; color: #9ca3af;">USD</span>';
         }
+    });
+}
+
+// Ejecutar la función cuando cambies la moneda en tu web
+actualizarPreciosOfertas();
 
         actualizarCarritoUI();
         let modalSel = document.getElementById('modal-seleccion');
