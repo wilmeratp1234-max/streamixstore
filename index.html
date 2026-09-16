@@ -30,137 +30,88 @@
         header p { color: #9ca3af; font-size: 1.1rem; }
         header .sub-desc { color: #9ca3af; font-size: 0.95rem; margin-top: 15px; max-width: 600px; margin-left: auto; margin-right: auto; }
 
-        /* Oferta destacada con efecto de luz giratoria */
-        .featured-card { 
-            position: relative;
-            background: linear-gradient(145deg, #0f172a, #180d12); 
-            border-radius: 16px; 
-            padding: 30px; 
-            margin-bottom: 40px; 
-            box-shadow: 0 0 25px rgba(0, 255, 127, 0.15);
-            overflow: hidden;
-            z-index: 1;
-        }
-
-        .featured-card::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: conic-gradient(transparent, transparent, transparent, #00FF7F);
-            animation: rotarLuz 4s linear infinite;
-            z-index: -2;
-        }
-
-        .featured-card::after {
-            content: '';
-            position: absolute;
-            inset: 2px;
-            background: linear-gradient(145deg, #0f172a, #180d12);
-            border-radius: 14px;
-            z-index: -1;
-        }
-
-        @keyframes rotarLuz {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        .offer-tag {
-    position: absolute;
-    top: 15px; /* Ubicada dentro de la tarjeta para que no la corte ningún borde */
-    right: 20px;
-    background: #00FF7F;
-    color: #050811;
-    padding: 4px 12px;
-    border-radius: 8px;
-    font-size: 0.75rem;
-    font-weight: bold;
-    text-transform: uppercase;
-    z-index: 10;
+        .carousel-container {
+  position: relative;
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto 2rem auto;
+  overflow: hidden;
+  border-radius: 16px;
+  border: 1px solid rgba(0, 255, 127, 0.2);
+  box-shadow: 0 0 20px rgba(0, 255, 127, 0.1);
 }
 
-.featured-content {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 20px;
-    position: relative; /* Asegura que la tarjeta controle la posición interna */
-    padding-top: 10px; /* Espacio extra para que no choque con la etiqueta */
+.carousel-track {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+  width: 100%;
 }
 
-.featured-info h3 {
-    color: #00FF7F;
-    font-size: 0.9rem;
-    text-transform: uppercase;
-    margin-bottom: 8px;
-    letter-spacing: 1px;
+.carousel-slide {
+  min-width: 100%;
+  box-sizing: border-box;
 }
 
-.featured-info h2 {
-    font-size: 2rem;
-    color: #ffffff;
-    margin-bottom: 8px;
+.carousel-slide img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+  border-radius: 16px;
 }
 
-.featured-info p {
-    color: #9ca3af;
-    font-size: 0.95rem;
+/* Puntos indicadores */
+.carousel-dots {
+  position: absolute;
+  bottom: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 8px;
+  background: rgba(10, 15, 29, 0.6);
+  padding: 6px 12px;
+  border-radius: 20px;
+  backdrop-filter: blur(4px);
 }
 
-.price-box {
-    text-align: right;
+.dot {
+  width: 10px;
+  height: 6px;
+  background: #374151;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
 
-.old-price {
-    color: #FFFFFF;
-    text-decoration: line-through;
-    font-size: 0.9rem;
-}
-
-.current-price {
-    font-size: 2.2rem;
-    color: #00FF7F;
-    font-weight: bold;
-    margin-bottom: 10px;
-}
-
-.btn-oferta {
-    display: inline-block;
-    background: linear-gradient(90deg, #00FF7F, #00cc66);
-    color: #050811;
-    padding: 12px 24px;
-    border-radius: 8px;
-    text-decoration: none;
-    font-weight: bold;
-    text-transform: uppercase;
-    font-size: 0.85rem;
-    transition: opacity 0.2s;
-    cursor: pointer;
-    border: none;
-}
-
-.btn-oferta:hover {
-    opacity: 0.9;
+.dot.active {
+  width: 24px;
+  background: #00FF7F;
+  box-shadow: 0 0 8px #00FF7F;
 }
 
         /* Estructura en 2 columnas */
         .content-wrapper { display: flex; gap: 35px; align-items: flex-start; }
         .content-wrapper .grid { flex: 1; }
 
-        /* Panel Lateral de Próximos Estrenos */
+        /* Panel Lateral de Próximos Estrenos / Carrusel */
         .sidebar-estrenos { width: 340px; background: #0b0f19; border: 1px solid #1f2937; border-radius: 16px; padding: 22px; position: sticky; top: 90px; flex-shrink: 0; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
         .sidebar-badge { display: inline-block; color: #20e651; font-size: 0.65rem; font-weight: bold; letter-spacing: 1px; border: 1px solid rgba(0, 255, 127, 0.3); padding: 4px 8px; border-radius: 12px; background: rgba(0, 255, 127, 0.1); margin-bottom: 15px; text-transform: uppercase; }
         .sidebar-badge .dot-small { display: inline-block; width: 6px; height: 6px; background-color: #20e651; border-radius: 50%; margin-right: 4px; box-shadow: 0 0 6px #20e651; }
         .sidebar-title { color: #FFFFFF; font-size: 1.4rem; margin-bottom: 20px; font-weight: bold; letter-spacing: 0.5px; }
         
-        .sidebar-featured { position: relative; border-radius: 12px; overflow: hidden; margin-bottom: 20px; border: 1px solid #1f2937; background: #111827; }
-        .sidebar-featured img { width: 100%; height: 380px; object-fit: cover; display: block; }
-        .sidebar-featured-info { position: absolute; bottom: 0; left: 0; width: 100%; background: linear-gradient(transparent, #000000 95%); padding: 35px 15px 15px 15px; }
-        .sidebar-featured-title { color: white; font-size: 0.95rem; font-weight: bold; text-transform: uppercase; }
+        /* Contenedor Carrusel Estrenos */
+        .carousel-container { position: relative; border-radius: 12px; overflow: hidden; margin-bottom: 20px; border: 1px solid #1f2937; background: #111827; height: 380px; }
+        .carousel-slide { display: none; width: 100%; height: 100%; position: absolute; top: 0; left: 0; transition: opacity 0.5s ease-in-out; }
+        .carousel-slide.active { display: block; }
+        .carousel-slide img { width: 100%; height: 100%; object-fit: cover; display: block; }
+        .carousel-info { position: absolute; bottom: 0; left: 0; width: 100%; background: linear-gradient(transparent, #000000 95%); padding: 35px 15px 15px 15px; }
+        .carousel-title { color: white; font-size: 0.95rem; font-weight: bold; text-transform: uppercase; }
+
+        /* Controles Carrusel */
+        .carousel-btn { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.6); color: white; border: none; padding: 10px 12px; cursor: pointer; border-radius: 50%; font-weight: bold; z-index: 5; transition: background 0.2s; }
+        .carousel-btn:hover { background: #00FF7F; color: #050811; }
+        .carousel-btn.prev { left: 10px; }
+        .carousel-btn.next { right: 10px; }
 
         .estrenos-list { display: flex; flex-direction: column; gap: 15px; }
         .estreno-item { display: flex; align-items: center; gap: 15px; border-radius: 8px; padding: 4px; }
@@ -418,21 +369,30 @@
         </header>
 
         <!-- Tarjeta de Oferta Limitada con Luz Dinámica -->
-        <div class="featured-card">
-            <div class="offer-tag">🤩 Oferta Limitada</div>
-            <div class="featured-content">
-                <div class="featured-info">
-                    <h3>Combo DUO</h3>
-                    <h2>HBO MAX + VIX</h2>
-                    <p>Llévate el DUO perfecto, disfruta de las mejores series y películas del momento.</p>
-                </div>
-                <div class="price-box">
-                    <div class="old-price">$3.60 USD</div>
-                    <div class="current-price" id="oferta-precio" data-usd="1.99">$1.99 <span style="font-size: 1rem; color: #9ca3af;">USD</span></div>
-                    <button class="btn-oferta" onclick="agregarDirecto('Combo Streaming Pro (Oferta)', 1.99, 'cine')">¡Quiero esta oferta!</button>
-                </div>
-            </div>
-        </div>
+        <!-- CARRUSEL DE BANNERS -->
+<div class="carousel-container">
+  <div class="carousel-track" id="carouselTrack">
+    <!-- Slide 1 -->
+    <div class="carousel-slide active">
+      <img src="URL_DE_TU_BANNER_1.jpg" alt="Promoción 1">
+    </div>
+    <!-- Slide 2 -->
+    <div class="carousel-slide">
+      <img src="URL_DE_TU_BANNER_2.jpg" alt="Promoción 2">
+    </div>
+    <!-- Slide 3 -->
+    <div class="carousel-slide">
+      <img src="URL_DE_TU_BANNER_3.jpg" alt="Promoción 3">
+    </div>
+  </div>
+
+  <!-- Indicadores inferiores -->
+  <div class="carousel-dots" id="carouselDots">
+    <span class="dot active" onclick="goToSlide(0)"></span>
+    <span class="dot" onclick="goToSlide(1)"></span>
+    <span class="dot" onclick="goToSlide(2)"></span>
+  </div>
+</div>
 
         <!-- Cabecera de Catálogo y Tasa Fija -->
         <div class="catalog-header" id="catalogo">
@@ -1041,7 +1001,7 @@
                             <span class="card-plan-name">1 Pantalla</span>
                             <span class="card-plan-price" data-usd="0.85">$0.85</span>
                         </div>
-                        <div class="card-plan-item" onclick="abrirModal('Crunchyroll (Mayorista)', [{nombre: '1 Pantalla', precio: 0.80}, {nombre: 'Cuenta Completa', precio: 4.50}], 1, 'distribuidores')">
+                        <div class="card-plan-item" onclick="abrirModal('Crunchyroll (Mayorista)', [{nombre: '1 Pantalla', precio: 0.85}, {nombre: 'Cuenta Completa', precio: 4.50}], 1, 'distribuidores')">
                             <span class="card-plan-name">Cuenta Completa</span>
                             <span class="card-plan-price" data-usd="4.50">$4.50</span>
                         </div>
@@ -1260,17 +1220,36 @@
                     </div>
                     <button class="btn-card-addplan" onclick="abrirModal('Capcut (Mayorista)', [{nombre: '1 Mes (No Renovable)', precio: 6.00}], 0, 'distribuidores')">+ Añadir Plan</button>
                 </div>
+
             </div>
 
-            <!-- CUADRO LATERAL: PRÓXIMOS ESTRENOS -->
-            <aside class="sidebar-estrenos">
-                <div class="sidebar-badge"><span class="dot-small"></span> PRONTO</div>
-                <h2 class="sidebar-title">Próximos Estrenos</h2>
+            <!-- Sidebar Próximos Estrenos con Carrusel -->
+            <div class="sidebar-estrenos">
+                <div class="sidebar-badge"><span class="dot-small"></span> PRÓXIMOS ESTRENOS</div>
+                <div class="sidebar-title">Cartelera</div>
+                
+                <!-- Carrusel -->
+                <div class="carousel-container">
+                    <button class="carousel-btn prev" onclick="moveSlide(-1)">&#10094;</button>
+                    <button class="carousel-btn next" onclick="moveSlide(1)">&#10095;</button>
 
-                <div class="sidebar-featured">
-                    <img src="https://i.blogs.es/5da05d/lupin-temporada-3-poster/650_1200.jpeg" alt="Estreno Destacado">
-                    <div class="sidebar-featured-info">
-                        <div class="sidebar-featured-title">LUPIN T3 (Netflix)</div>
+                    <div class="carousel-slide active">
+                        <img src="https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=600&auto=format&fit=crop" alt="Estreno 1">
+                        <div class="carousel-info">
+                            <div class="carousel-title">Stranger Things S5</div>
+                        </div>
+                    </div>
+                    <div class="carousel-slide">
+                        <img src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=600&auto=format&fit=crop" alt="Estreno 2">
+                        <div class="carousel-info">
+                            <div class="carousel-title">House of the Dragon S3</div>
+                        </div>
+                    </div>
+                    <div class="carousel-slide">
+                        <img src="https://images.unsplash.com/photo-1578632767115-351597cf2477?w=600&auto=format&fit=crop" alt="Estreno 3">
+                        <div class="carousel-info">
+                            <div class="carousel-title">Avatar: The Last Airbender</div>
+                        </div>
                     </div>
                 </div>
 
@@ -1278,95 +1257,41 @@
                     <div class="estreno-item">
                         <div class="estreno-number">1</div>
                         <div class="estreno-info">
-                            <div class="estreno-name">Reina Roja (Temporada 2))</div>
-                            <div class="estreno-plat"><span>▲</span> Prime Video • 02 de Octubre</div>
+                            <div class="estreno-name">Stranger Things 5</div>
+                            <div class="estreno-plat">Netflix <span>● Próximamente</span></div>
                         </div>
                     </div>
-
                     <div class="estreno-item">
                         <div class="estreno-number">2</div>
                         <div class="estreno-info">
-                            <div class="estreno-name">Kill Jackie</div>
-                            <div class="estreno-plat"><span>▲</span> HBO MAX • 02 de Octubre</div>
+                            <div class="estreno-name">House of the Dragon T3</div>
+                            <div class="estreno-plat">HBO Max <span>● Próximamente</span></div>
                         </div>
                     </div>
-
-                    <div class="sidebar-featured">
-                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSulZKB_oAtMPJUsSabzBXMcECUGyRq02wkzhS5s52Q-w&s=10" alt="Estreno Destacado">
-                        <div class="sidebar-featured-info">
-                            <div class="sidebar-featured-title">Reina Roja T2 (Prime Video)</div>
-                        </div>
-                    </div>
-
                     <div class="estreno-item">
                         <div class="estreno-number">3</div>
                         <div class="estreno-info">
-                            <div class="estreno-name">Temporada de amor</div>
-                            <div class="estreno-plat"><span>▲</span> Disney+ • 07 de Octubre</div>
-                        </div>
-                    </div>
-
-                    <div class="estreno-item">
-                        <div class="estreno-number">4</div>
-                        <div class="estreno-info">
-                            <div class="estreno-name">Avatar: Seven Havens </div>
-                            <div class="estreno-plat"><span>▲</span> Paramount+ • 09 de Octubre</div>
-                        </div>
-                    </div>
-
-                    <div class="estreno-item">
-                        <div class="estreno-number">5</div>
-                        <div class="estreno-info">
-                            <div class="estreno-name">La última gran escalada: El K2 en invierno</div>
-                            <div class="estreno-plat"><span>▲</span> AppleTV • 02 de Octubre</div>
+                            <div class="estreno-name">The Mandalorian T4</div>
+                            <div class="estreno-plat">Disney+ <span>● Próximamente</span></div>
                         </div>
                     </div>
                 </div>
-            </aside>
+            </div>
 
         </div>
+
     </div>
 
-    <!-- FOOTER -->
-    <footer>
-        <div class="footer-content">
-            <div class="footer-brand">
-                <div class="footer-logo-title">STREAMIX STORE</div>
-                <div class="footer-status">
-                    <div class="footer-status-dot"></div>
-                    Soporte en Linea
-                </div>
-            </div>
-            <div class="footer-socials">
-                <a href="https://www.instagram.com/streamix.store/" target="_blank" class="social-icon-btn" title="Instagram">
-                    <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
-                </a>
-                <a href="https://tiktok.com" target="_blank" class="social-icon-btn" title="TikTok">
-                    <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"></path></svg>
-                </a>
-                <a href="https://t.me/sxstoreve" target="_blank" class="social-icon-btn" title="Telegram">
-                    <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
-                </a>
-                <a href="https://wa.me/584124405245" target="_blank" class="social-icon-btn" title="WhatsApp">
-                    <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
-                </a>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            © 2026 Streamix Venezuela.
-        </div>
-    </footer>
-
     <!-- MODAL DE SELECCIÓN DE PLAN -->
-    <div class="modal-overlay" id="modal-seleccion">
+    <div class="modal-overlay" id="modal-plan">
         <div class="modal-card">
             <button class="modal-close" onclick="cerrarModal()">✕</button>
-            <h2 id="modal-titulo">Plataforma</h2>
+            <h2 id="modal-titulo">Seleccionar Plan</h2>
             
-            <div class="modal-section-title">1. Selecciona el Plan</div>
-            <select class="modal-select" id="modal-select-planes" onchange="actualizarSubtotalModal()"></select>
+            <div class="modal-section-title">Elige una opción:</div>
+            <select class="modal-select" id="modal-select-plan" onchange="actualizarSubtotalModal()"></select>
 
-            <div class="modal-section-title">2. Cantidad</div>
+            <div class="modal-section-title">Cantidad:</div>
             <div class="qty-box">
                 <button class="qty-btn" onclick="cambiarCantidadModal(-1)">-</button>
                 <span class="qty-value" id="modal-qty">1</span>
@@ -1378,498 +1303,441 @@
                 <span class="modal-subtotal-val" id="modal-subtotal">$0.00</span>
             </div>
 
-            <button class="btn-modal-agregar" onclick="agregarAlPedidoDesdeModal()">Agregar al pedido</button>
+            <button class="btn-modal-agregar" onclick="confirmarAgregarModal()">Añadir al Carrito</button>
         </div>
     </div>
 
-    <!-- MODAL ÁREA VIP MAYORISTAS (DISTRIBUIDORES) -->
+    <!-- MODAL DISTRIBUIDORES -->
     <div class="modal-overlay" id="modal-distribuidores">
         <div class="distri-modal-card">
             <div class="distri-modal-header">
-                <div class="distri-modal-title">Zona Exclusiva <span>Distribuidores</span></div>
+                <div class="distri-modal-title">Acceso <span>VIP</span></div>
                 <button class="distri-modal-close" onclick="cerrarModalDistribuidores()">✕</button>
             </div>
+            <div class="distri-modal-subtext">Ingresa tu código de distribuidor para desbloquear las tarifas al mayor.</div>
             
-            <p class="distri-modal-subtext">Bienvenido al area única para distribuidores de STREAMIX STORE.</p>
-
             <div class="distri-alert-box">
-                <div>🚨 <strong>Atención:</strong> Para acceder al area de Distribuidores Oficial, por favor ingresa tu código único.</div>
+                🔒 <span><strong>Área Restringida:</strong> Si eres cliente frecuente o revendedor, solicita tu código de acceso con el soporte.</span>
             </div>
 
-            <label class="distri-input-label" for="distri-code-input">Código de Distribuidor Oficial</label>
-            <input type="password" id="distri-code-input" class="distri-input-code" placeholder="Escribe el código aquí">
+            <label class="distri-input-label">Código de Distribuidor</label>
+            <input type="password" id="distri-code" class="distri-input-code" placeholder="Ingrese su código aquí...">
 
-            <button class="btn-distri-verify" onclick="validarCodigoDistribuidor()">VERIFICAR CÓDIGO</button>
+            <button class="btn-distri-verify" onclick="verificarCodigoDistribuidor()">VERIFICAR CÓDIGO</button>
         </div>
     </div>
 
-    <!-- MODAL DE PROCESAR PAGO / CHECKOUT -->
-<div class="modal-overlay" id="modal-checkout">
-    <div class="checkout-modal-card">
-        <button class="modal-close" onclick="cerrarCheckoutModal()">✕</button>
-        <h2 style="font-size: 1.4rem; color: white; margin-bottom: 15px;">Finalizar Pedido</h2>
-        
-        <div class="checkout-total-box">
-            <div class="checkout-total-title">Monto Total a Pagar</div>
-            <div class="checkout-total-usd" id="checkout-monto-usd">$0.00 USD</div>
-            <div class="checkout-total-conversions" id="checkout-monto-bs">Bs 0.00</div>
+    <!-- CARRITO LATERAL -->
+    <div class="cart-sidebar" id="cart-sidebar">
+        <div class="cart-header">
+            <h3>🛒 Tu Pedido</h3>
+            <button class="cart-close" onclick="toggleCart()">✕</button>
         </div>
-
-        <div class="payment-info-box" style="background: rgba(255, 255, 255, 0.05); padding: 15px; border-radius: 8px; margin-bottom: 15px; border: 1px solid rgba(255, 255, 255, 0.1);">
-    <div class="payment-section-title" style="font-weight: bold; margin-bottom: 10px; color: #38bdf8; text-align: center;">
-        💳 MÉTODOS DE PAGO DISPONIBLES
-    </div>
-
-    <!-- PAGO MÓVIL -->
-<div style="background: rgba(0, 0, 0, 0.2); padding: 10px; border-radius: 6px; margin-bottom: 10px; position: relative;">
-    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
-        <div style="font-weight: bold; color: #4ade80; display: flex; align-items: center; gap: 5px;">
-            📱 Pago Móvil (Bs)
+        <div class="cart-body" id="cart-items">
+            <div class="cart-empty">Tu carrito está vacío</div>
         </div>
-        <!-- Botón para copiar datos -->
-        <button onclick="copiarPagoMovil()" title="Copiar datos de Pago Móvil" style="background: rgba(56, 189, 248, 0.2); border: 1px solid #38bdf8; color: #38bdf8; border-radius: 4px; padding: 3px 8px; font-size: 0.75rem; cursor: pointer; display: flex; align-items: center; gap: 4px; transition: all 0.2s;">
-            📄 Copiar datos
-        </button>
-    </div>
-    
-    <div style="display: grid; grid-template-columns: auto 1fr; gap: 4px 12px; font-size: 0.9rem;">
-        <span style="color: #9ca3af; font-weight: bold;">Bancos:</span>
-        <span>Bancamiga (0172) / BNC (0191)</span>
-
-        <span style="color: #9ca3af; font-weight: bold;">Teléfono:</span>
-        <span>0412-2818460</span>
-
-        <span style="color: #9ca3af; font-weight: bold;">Cédula:</span>
-        <span>V-27178466</span>
-    </div>
-
-    <!-- Feedback visual al copiar -->
-    <small id="copiado-feedback" style="display: none; color: #4ade80; font-size: 0.75rem; text-align: right; margin-top: 4px;">
-        ✓ ¡Datos copiados al portapapeles!
-    </small>
-</div>
-
-    <!-- BINANCE PAY -->
-    <div style="background: rgba(0, 0, 0, 0.2); padding: 10px; border-radius: 6px;">
-        <div style="font-weight: bold; color: #facc15; margin-bottom: 6px; display: flex; align-items: center; gap: 5px;">
-            🟡 Binance Pay (USDT)
-        </div>
-        <div style="display: grid; grid-template-columns: auto 1fr; gap: 4px 12px; font-size: 0.9rem;">
-            <span style="color: #9ca3af; font-weight: bold;">ID PAY:</span>
-            <span>559760306</span>
+        <div class="cart-footer">
+            <div class="cart-total-row">
+                <span>Total:</span>
+                <span id="cart-total-val">$0.00</span>
+            </div>
+            <button class="btn-procesar" onclick="abrirCheckout()">Procesar Pedido ➔</button>
         </div>
     </div>
-</div>
 
-        <div class="pantalla-input-box">
-            <label for="input-nombre-perfil">Nombre de Pantalla / Perfil</label>
-            <input type="text" id="input-nombre-perfil" placeholder="Ej: Mi Nombre, Sala, etc.">
-            <small id="error-nombre-perfil" style="color: #ef4444; display: none; margin-top: 4px; font-size: 0.8rem;">Por favor, ingresa el nombre de pantalla para continuar.</small>
-        </div>
+    <!-- MODAL CHECKOUT -->
+    <div class="modal-overlay" id="modal-checkout">
+        <div class="checkout-modal-card">
+            <button class="modal-close" onclick="cerrarCheckout()">✕</button>
+            <h2 style="color: white; margin-bottom: 15px;">Resumen de Compra</h2>
+            
+            <div class="checkout-total-box">
+                <div class="checkout-total-title">Monto Total a Pagar</div>
+                <div class="checkout-total-usd" id="checkout-total-usd">$0.00 USD</div>
+                <div class="checkout-total-conversions" id="checkout-total-bs">0.00 Bs</div>
+            </div>
 
-        <div class="steps-box">
-            <strong>Paso final:</strong> Haz clic en uno de los botones para enviar el resumen detallado de tu orden por WhatsApp o Telegram a nuestro equipo de atención.
-        </div>
+            <div class="pantalla-input-box">
+                <label>Nombre de Perfil / Titular (Opcional):</label>
+                <input type="text" id="nombre-perfil" placeholder="Ej: Juan Perez">
+            </div>
 
-        <div class="checkout-buttons-grid">
-            <a id="btn-envio-wa" class="btn-wa-pay" target="_blank">WhatsApp</a>
-            <a id="btn-envio-tg" class="btn-tg-pay" target="_blank">Telegram</a>
+            <div class="payment-info-box">
+                <div class="payment-section-title">💳 Métodos de Pago</div>
+                <div class="payment-details">
+                    ● <strong>Pago Móvil (Venezuela):</strong> Tasa Fija del Día.<br>
+                    ● <strong>Binance / USDT / Cripto:</strong> Pago Directo.<br>
+                    ● <strong>Zinli / Wally / El Dorado:</strong> Transferencias inmediatas.
+                </div>
+            </div>
+
+            <div class="steps-box">
+                <strong>¿Cómo finalizar tu compra?</strong><br>
+                1. Selecciona tu canal de atención abajo.<br>
+                2. Enviarás un mensaje automático con tu pedido.<br>
+                3. Recibirás los datos de pago e instrucciones al instante.
+            </div>
+
+            <div class="checkout-buttons-grid">
+                <a class="btn-wa-pay" id="link-wa" target="_blank">WhatsApp 📱</a>
+                <a class="btn-tg-pay" id="link-tg" target="_blank">Telegram ✈️</a>
+            </div>
         </div>
     </div>
-</div>
 
-<!-- CARRITO LATERAL -->
-<div class="cart-sidebar" id="cart-sidebar">
-    <div class="cart-header">
-        <h3>🛒 Tu Pedido</h3>
-        <button class="cart-close" onclick="toggleCart()">✕</button>
-    </div>
-    <div class="cart-body" id="cart-body">
-        <div class="cart-empty">El carrito está vacío.</div>
-    </div>
-    <div class="cart-footer">
-        <div class="cart-total-row">
-            <span>Total:</span>
-            <span id="cart-total">$0.00</span>
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-brand">
+                <div class="footer-logo-title">STREAMIX STORE</div>
+                <div class="footer-status"><div class="footer-status-dot"></div> Sistemas Operativos 24/7</div>
+            </div>
+            <div class="footer-socials">
+                <a href="#" class="social-icon-btn" title="WhatsApp">
+                    <svg fill="currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/></svg>
+                </a>
+                <a href="#" class="social-icon-btn" title="Telegram">
+                    <svg fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.446 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.121l-6.871 4.326-2.962-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.128.832.942z"/></svg>
+                </a>
+            </div>
         </div>
-        <button class="btn-procesar" onclick="abrirCheckoutModal()">⚡ PROCESAR PEDIDO</button>
-    </div>
-</div>
+        <div class="footer-bottom">
+            © 2026 Streamix Store - Todos los derechos reservados.
+        </div>
+    </footer>
 
-<!-- LÓGICA JAVASCRIPT -->
-<script>
-    // Variables globales del estado
-    let tasaCambio = 960.00;
-    let monedaActual = 'USD';
-    let carrito = [];
-    let distribuidorAutorizado = false;
+    <!-- LÓGICA JAVASCRIPT -->
+    <script>
+        // Variables Globales
+        let tasaBs = 960.00;
+        let monedaActual = 'USD';
+        let carrito = [];
+        let planModalActuales = [];
+        let plataformaModalNombre = '';
+        let categoriaModalActual = 'cine';
+        let cantidadModal = 1;
+        let distribuidorAutenticado = false;
 
-    // Estado del Modal de Producto
-    let modalPlataformaActual = '';
-    let modalPlanesActuales = [];
-    let modalCantidadActual = 1;
-    let modalCategoriaActual = '';
+        // Carrusel
+        let currentSlide = 0;
+        function showSlide(index) {
+            const slides = document.querySelectorAll('.carousel-slide');
+            if (slides.length === 0) return;
+            if (index >= slides.length) currentSlide = 0;
+            else if (index < 0) currentSlide = slides.length - 1;
+            else currentSlide = index;
 
-    // Inicialización
-    document.addEventListener('DOMContentLoaded', () => {
-        let tasaEl = document.getElementById('tasa-mostrada');
-        if (tasaEl) tasaEl.innerText = tasaCambio.toFixed(2);
-        let filterBtnActive = document.querySelector('.filter-btn.active');
-        if (filterBtnActive) filtrar('todos', filterBtnActive);
-    });
+            slides.forEach((slide, i) => {
+                slide.classList.remove('active');
+                if (i === currentSlide) slide.classList.add('active');
+            });
+        }
 
-    // Cambio de Moneda (USD <-> Bs)
-    function cambiarMoneda(moneda, btn) {
-        monedaActual = moneda;
-        document.querySelectorAll('.curr-btn').forEach(b => b.classList.remove('active'));
-        if(btn) btn.classList.add('active');
+        function moveSlide(direction) {
+            showSlide(currentSlide + direction);
+        }
 
-        // Actualizar precios en tarjetas
-        document.querySelectorAll('.card-plan-price').forEach(el => {
-            let usdPrice = parseFloat(el.getAttribute('data-usd'));
-            if (moneda === 'Bs') {
-                let bsPrice = usdPrice * tasaCambio;
-                el.innerText = 'Bs ' + bsPrice.toLocaleString('es-VE', {minimumFractionDigits: 2, maximumFractionDigits: 2});
-                el.classList.add('blue-price');
-            } else {
-                el.innerText = '$' + usdPrice.toFixed(2);
-                el.classList.remove('blue-price');
+        setInterval(() => {
+            moveSlide(1);
+        }, 4000);
+
+        // Cambiar Moneda
+        function cambiarMoneda(moneda, btn) {
+            monedaActual = moneda;
+            document.querySelectorAll('.curr-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+
+            // Actualizar precios de tarjetas
+            document.querySelectorAll('.card-plan-price, #oferta-precio').forEach(el => {
+                let usd = parseFloat(el.getAttribute('data-usd'));
+                if (moneda === 'Bs') {
+                    let bs = (usd * tasaBs).toFixed(2);
+                    el.innerText = `${bs} Bs`;
+                    el.classList.add('blue-price');
+                } else {
+                    el.innerText = `$${usd.toFixed(2)}`;
+                    el.classList.remove('blue-price');
+                }
+            });
+
+            renderCart();
+        }
+
+        // Filtros
+        function filtrar(categoria, btn) {
+            if (categoria === 'distribuidores' && !distribuidorAutenticado) {
+                solicitarAccesoDistribuidores(btn);
+                return;
             }
-        });
 
-        // Actualizar oferta destacada
-        let ofertaEl = document.getElementById('oferta-precio');
-        if (ofertaEl) {
-            let usdOferta = parseFloat(ofertaEl.getAttribute('data-usd'));
-            if (moneda === 'Bs') {
-                let bsOferta = usdOferta * tasaCambio;
-                ofertaEl.innerHTML = 'Bs ' + bsOferta.toLocaleString('es-VE', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+
+            document.querySelectorAll('.platform-card').forEach(card => {
+                let catCard = card.getAttribute('data-categoria');
+                if (categoria === 'todos') {
+                    if (catCard === 'distribuidores') {
+                        card.style.display = 'none';
+                    } else {
+                        card.style.display = 'flex';
+                    }
+                } else {
+                    if (catCard === categoria) {
+                        card.style.display = 'flex';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                }
+            });
+        }
+
+        // Distribuidores
+        function solicitarAccesoDistribuidores(btn) {
+            if (distribuidorAutenticado) {
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                document.querySelectorAll('.platform-card').forEach(card => {
+                    if (card.getAttribute('data-categoria') === 'distribuidores') {
+                        card.style.display = 'flex';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
             } else {
-                ofertaEl.innerHTML = '$' + usdOferta.toFixed(2) + ' <span style="font-size: 1rem; color: #9ca3af;">USD</span>';
+                document.getElementById('modal-distribuidores').style.display = 'flex';
             }
         }
 
-        actualizarCarritoUI();
-        let modalSel = document.getElementById('modal-seleccion');
-        if (modalSel && modalSel.style.display === 'flex') {
+        function cerrarModalDistribuidores() {
+            document.getElementById('modal-distribuidores').style.display = 'none';
+        }
+
+        function verificarCodigoDistribuidor() {
+            let code = document.getElementById('distri-code').value;
+            if (code === 'DISTRI2026' || code === 'VIP123') {
+                distribuidorAutenticado = true;
+                cerrarModalDistribuidores();
+                alert('¡Acceso Mayorista Concedido!');
+                solicitarAccesoDistribuidores(document.querySelector('.btn-distri'));
+            } else {
+                alert('Código incorrecto. Solicita tu acceso con soporte.');
+            }
+        }
+
+        // Modales de Selección de Plan
+        function abrirModal(plataforma, planes, indexDefault, categoria) {
+            plataformaModalNombre = plataforma;
+            planModalActuales = planes;
+            categoriaModalActual = categoria;
+            cantidadModal = 1;
+
+            document.getElementById('modal-titulo').innerText = plataforma;
+            let select = document.getElementById('modal-select-plan');
+            select.innerHTML = '';
+
+            planes.forEach((plan, i) => {
+                let option = document.createElement('option');
+                option.value = i;
+                option.innerText = `${plan.nombre} - $${plan.precio.toFixed(2)}`;
+                select.appendChild(option);
+            });
+
+            select.value = indexDefault;
+            document.getElementById('modal-qty').innerText = cantidadModal;
+            document.getElementById('modal-plan').style.display = 'flex';
+
             actualizarSubtotalModal();
         }
-    }
 
-    // Filtro de Categorías
-    function filtrar(categoria, btn) {
-        if (categoria === 'distribuidores' && !distribuidorAutorizado) {
-            solicitarAccesoDistribuidores(btn);
-            return;
+        function cerrarModal() {
+            document.getElementById('modal-plan').style.display = 'none';
         }
 
-        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-        if(btn) btn.classList.add('active');
+        function cambiarCantidadModal(val) {
+            cantidadModal += val;
+            if (cantidadModal < 1) cantidadModal = 1;
+            document.getElementById('modal-qty').innerText = cantidadModal;
+            actualizarSubtotalModal();
+        }
 
-        const tarjetas = document.querySelectorAll('.platform-card');
-        tarjetas.forEach(card => {
-            const catCard = card.getAttribute('data-categoria');
-            if (categoria === 'todos') {
-                card.style.display = (catCard === 'distribuidores') ? 'none' : 'flex';
+        function actualizarSubtotalModal() {
+            let selectIndex = document.getElementById('modal-select-plan').value;
+            let precio = planModalActuales[selectIndex].precio;
+            let totalUSD = precio * cantidadModal;
+
+            let elem = document.getElementById('modal-subtotal');
+            if (monedaActual === 'Bs') {
+                elem.innerText = `${(totalUSD * tasaBs).toFixed(2)} Bs`;
+                elem.classList.add('blue-price');
             } else {
-                card.style.display = (catCard === categoria) ? 'flex' : 'none';
+                elem.innerText = `$${totalUSD.toFixed(2)} USD`;
+                elem.classList.remove('blue-price');
             }
-        });
-    }
+        }
 
-    // Control del Modal de Revendedores
-    function solicitarAccesoDistribuidores(btn) {
-        if (distribuidorAutorizado) {
-            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-            const btnDist = document.querySelector('.filter-btn.btn-distri');
-            if(btnDist) btnDist.classList.add('active');
+        function confirmarAgregarModal() {
+            let selectIndex = document.getElementById('modal-select-plan').value;
+            let planObj = planModalActuales[selectIndex];
             
-            const tarjetas = document.querySelectorAll('.platform-card');
-            tarjetas.forEach(card => {
-                card.style.display = (card.getAttribute('data-categoria') === 'distribuidores') ? 'flex' : 'none';
-            });
-        } else {
-            let modalDist = document.getElementById('modal-distribuidores');
-            if (modalDist) modalDist.style.display = 'flex';
+            let item = {
+                id: Date.now(),
+                plataforma: plataformaModalNombre,
+                plan: planObj.nombre,
+                precioUSD: planObj.precio,
+                cantidad: cantidadModal
+            };
+
+            carrito.push(item);
+            cerrarModal();
+            renderCart();
+            toggleCart(true);
         }
-    }
 
-    function cerrarModalDistribuidores() {
-        let modalDist = document.getElementById('modal-distribuidores');
-        if (modalDist) modalDist.style.display = 'none';
-    }
-
-    function validarCodigoDistribuidor() {
-        const inputCode = document.getElementById('distri-code-input').value.trim();
-        if (inputCode === "DISTRI2026" || inputCode === "PRUEBA01" ) {
-            distribuidorAutorizado = true;
-            cerrarModalDistribuidores();
-            document.getElementById('distri-code-input').value = "";
-            solicitarAccesoDistribuidores();
-        } else {
-            alert("Código de distribuidor incorrecto. Solicita tu código a soporte.");
+        function agregarDirecto(nombre, precio, categoria) {
+            let item = {
+                id: Date.now(),
+                plataforma: nombre,
+                plan: 'Oferta Especial',
+                precioUSD: precio,
+                cantidad: 1
+            };
+            carrito.push(item);
+            renderCart();
+            toggleCart(true);
         }
-    }
 
-    // Modal de Selección de Plan
-    function abrirModal(plataforma, planes, indexSeleccionado = 0, categoria = 'cine') {
-        modalPlataformaActual = plataforma;
-        modalPlanesActuales = planes;
-        modalCantidadActual = 1;
-        modalCategoriaActual = categoria;
-
-        document.getElementById('modal-titulo').innerText = plataforma;
-        document.getElementById('modal-qty').innerText = modalCantidadActual;
-
-        const select = document.getElementById('modal-select-planes');
-        select.innerHTML = '';
-        planes.forEach((plan, idx) => {
-            const option = document.createElement('option');
-            option.value = idx;
-            option.innerText = `${plan.nombre} - $${plan.precio.toFixed(2)}`;
-            select.appendChild(option);
-        });
-
-        select.value = indexSeleccionado;
-        actualizarSubtotalModal();
-        document.getElementById('modal-seleccion').style.display = 'flex';
-    }
-
-    function cerrarModal() {
-        let modalSel = document.getElementById('modal-seleccion');
-        if (modalSel) modalSel.style.display = 'none';
-    }
-
-    function cambiarCantidadModal(delta) {
-        modalCantidadActual += delta;
-        if (modalCantidadActual < 1) modalCantidadActual = 1;
-        document.getElementById('modal-qty').innerText = modalCantidadActual;
-        actualizarSubtotalModal();
-    }
-
-    function actualizarSubtotalModal() {
-        const select = document.getElementById('modal-select-planes');
-        const planSel = modalPlanesActuales[select.value];
-        if (!planSel) return;
-
-        const subtotalUSD = planSel.precio * modalCantidadActual;
-        const subtotalEl = document.getElementById('modal-subtotal');
-
-        if (monedaActual === 'Bs') {
-            const subtotalBs = subtotalUSD * tasaCambio;
-            subtotalEl.innerText = 'Bs ' + subtotalBs.toLocaleString('es-VE', {minimumFractionDigits: 2, maximumFractionDigits: 2});
-            subtotalEl.classList.add('blue-price');
-        } else {
-            subtotalEl.innerText = '$' + subtotalUSD.toFixed(2);
-            subtotalEl.classList.remove('blue-price');
+        // Carrito
+        function toggleCart(forceOpen = false) {
+            let sidebar = document.getElementById('cart-sidebar');
+            if (forceOpen) {
+                sidebar.classList.add('open');
+            } else {
+                sidebar.classList.toggle('open');
+            }
         }
-    }
 
-    function agregarAlPedidoDesdeModal() {
-        const select = document.getElementById('modal-select-planes');
-        const planSel = modalPlanesActuales[select.value];
-        
-        agregarAlCarrito(`${modalPlataformaActual} - ${planSel.nombre}`, planSel.precio, modalCantidadActual);
-        cerrarModal();
-        toggleCart(true);
-    }
+        let currentSlide = 0;
+const slides = document.querySelectorAll('.carousel-slide');
+const dots = document.querySelectorAll('.dot');
+const totalSlides = slides.length;
 
-    function agregarDirecto(nombreCompleto, precioUSD, categoria) {
-        agregarAlCarrito(nombreCompleto, precioUSD, 1);
-        toggleCart(true);
-    }
+function updateCarousel() {
+  const track = document.getElementById('carouselTrack');
+  if(!track) return;
+  track.style.transform = `translateX(-${currentSlide * 100}%)`;
+  
+  dots.forEach((dot, index) => {
+    dot.classList.toggle('active', index === currentSlide);
+  });
+}
 
-    // Lógica del Carrito de Compras
-    function agregarAlCarrito(nombre, precioUSD, cantidad) {
-        const index = carrito.findIndex(item => item.nombre === nombre);
-        if (index > -1) {
-            carrito[index].cantidad += cantidad;
-        } else {
-            carrito.push({ nombre, precioUSD, cantidad });
+function goToSlide(index) {
+  currentSlide = index;
+  updateCarousel();
+}
+
+// Autoplay cada 5 segundos
+setInterval(() => {
+  currentSlide = (currentSlide + 1) % totalSlides;
+  updateCarousel();
+}, 5000);  
+
+        function eliminarItem(id) {
+            carrito = carrito.filter(i => i.id !== id);
+            renderCart();
         }
-        actualizarCarritoUI();
-    }
 
-    function eliminarDelCarrito(index) {
-        carrito.splice(index, 1);
-        actualizarCarritoUI();
-    }
+        function renderCart() {
+            let container = document.getElementById('cart-items');
+            let countElem = document.getElementById('cart-count');
+            let totalValElem = document.getElementById('cart-total-val');
 
-    function toggleCart(forceOpen = false) {
-        const cartSidebar = document.getElementById('cart-sidebar');
-        if (forceOpen) {
-            cartSidebar.classList.add('open');
-        } else {
-            cartSidebar.classList.toggle('open');
+            let totalCount = 0;
+            let totalUSD = 0;
+
+            if (carrito.length === 0) {
+                container.innerHTML = '<div class="cart-empty">Tu carrito está vacío</div>';
+            } else {
+                container.innerHTML = '';
+                carrito.forEach(item => {
+                    totalCount += item.cantidad;
+                    let itemTotal = item.precioUSD * item.cantidad;
+                    totalUSD += itemTotal;
+
+                    let div = document.createElement('div');
+                    div.className = 'cart-item';
+                    
+                    let precioTexto = monedaActual === 'Bs' 
+                        ? `${(itemTotal * tasaBs).toFixed(2)} Bs` 
+                        : `$${itemTotal.toFixed(2)}`;
+
+                    let classBlue = monedaActual === 'Bs' ? 'blue-price' : '';
+
+                    div.innerHTML = `
+                        <button class="cart-item-delete" onclick="eliminarItem(${item.id})">✕</button>
+                        <div class="cart-item-title">${item.plataforma}</div>
+                        <div class="cart-item-sub">${item.plan}</div>
+                        <div class="cart-item-footer">
+                            <span class="cart-item-qty">Cant: ${item.cantidad}</span>
+                            <span class="cart-item-price ${classBlue}">${precioTexto}</span>
+                        </div>
+                    `;
+                    container.appendChild(div);
+                });
+            }
+
+            countElem.innerText = totalCount;
+
+            if (monedaActual === 'Bs') {
+                totalValElem.innerText = `${(totalUSD * tasaBs).toFixed(2)} Bs`;
+                totalValElem.classList.add('blue-price');
+            } else {
+                totalValElem.innerText = `$${totalUSD.toFixed(2)}`;
+                totalValElem.classList.remove('blue-price');
+            }
         }
-    }
 
-    function actualizarCarritoUI() {
-        const cartBody = document.getElementById('cart-body');
-        const cartCount = document.getElementById('cart-count');
-        const cartTotal = document.getElementById('cart-total');
+        // Checkout
+        function abrirCheckout() {
+            if (carrito.length === 0) {
+                alert('Añade al menos un producto al carrito');
+                return;
+            }
 
-        let totalItems = 0;
-        let totalUSD = 0;
+            let totalUSD = carrito.reduce((acc, i) => acc + (i.precioUSD * i.cantidad), 0);
+            let totalBs = totalUSD * tasaBs;
 
-        cartBody.innerHTML = '';
+            document.getElementById('checkout-total-usd').innerText = `$${totalUSD.toFixed(2)} USD`;
+            document.getElementById('checkout-total-bs').innerText = `${totalBs.toFixed(2)} Bs`;
 
-        if (carrito.length === 0) {
-            cartBody.innerHTML = '<div class="cart-empty">El carrito está vacío.</div>';
-        } else {
+            // Construir Mensaje
+            let msg = `*NUEVO PEDIDO - STREAMIX STORE*\n\n`;
             carrito.forEach((item, index) => {
-                totalItems += item.cantidad;
-                const itemTotalUSD = item.precioUSD * item.cantidad;
-                totalUSD += itemTotalUSD;
-
-                let displayPrice = '';
-                if (monedaActual === 'Bs') {
-                    let priceBs = itemTotalUSD * tasaCambio;
-                    displayPrice = 'Bs ' + priceBs.toLocaleString('es-VE', {minimumFractionDigits: 2, maximumFractionDigits: 2});
-                } else {
-                    displayPrice = '$' + itemTotalUSD.toFixed(2);
-                }
-
-                const itemEl = document.createElement('div');
-                itemEl.className = 'cart-item';
-                itemEl.innerHTML = `
-                    <button class="cart-item-delete" onclick="eliminarDelCarrito(${index})">✕</button>
-                    <div class="cart-item-title">${item.nombre}</div>
-                    <div class="cart-item-sub">Unidades: ${item.cantidad} x $${item.precioUSD.toFixed(2)}</div>
-                    <div class="cart-item-footer">
-                        <span class="cart-item-qty">Cant: ${item.cantidad}</span>
-                        <span class="cart-item-price ${monedaActual === 'Bs' ? 'blue-price' : ''}">${displayPrice}</span>
-                    </div>
-                `;
-                cartBody.appendChild(itemEl);
+                msg += `*${index + 1}. ${item.plataforma}*\n`;
+                msg += `   Plan: ${item.plan}\n`;
+                msg += `   Cant: ${item.cantidad} | Sub: $${(item.precioUSD * item.cantidad).toFixed(2)}\n\n`;
             });
+            msg += `*TOTAL USD:* $${totalUSD.toFixed(2)}\n`;
+            msg += `*TOTAL BS:* ${totalBs.toFixed(2)} Bs (Tasa: ${tasaBs})\n\n`;
+            msg += `¡Hola! Quisiera procesar este pedido.`;
+
+            let waUrl = `https://wa.me/584120000000?text=${encodeURIComponent(msg)}`;
+            let tgUrl = `https://t.me/streamixsupport?text=${encodeURIComponent(msg)}`;
+
+            document.getElementById('link-wa').href = waUrl;
+            document.getElementById('link-tg').href = tgUrl;
+
+            document.getElementById('modal-checkout').style.display = 'flex';
         }
 
-        if (cartCount) cartCount.innerText = totalItems;
-
-        if (monedaActual === 'Bs') {
-            let totalBs = totalUSD * tasaCambio;
-            cartTotal.innerText = 'Bs ' + totalBs.toLocaleString('es-VE', {minimumFractionDigits: 2, maximumFractionDigits: 2});
-            cartTotal.classList.add('blue-price');
-        } else {
-            cartTotal.innerText = '$' + totalUSD.toFixed(2);
-            cartTotal.classList.remove('blue-price');
-        }
-    }
-
-    // Checkout y Enlaces de Envío
-    function abrirCheckoutModal() {
-        if (carrito.length === 0) {
-            alert("Tu carrito está vacío. Agrega productos antes de procesar.");
-            return;
+        function cerrarCheckout() {
+            document.getElementById('modal-checkout').style.display = 'none';
         }
 
-        let totalUSD = carrito.reduce((sum, item) => sum + (item.precioUSD * item.cantidad), 0);
-        let totalBs = totalUSD * tasaCambio;
-
-        document.getElementById('checkout-monto-usd').innerText = `$${totalUSD.toFixed(2)} USD`;
-        document.getElementById('checkout-monto-bs').innerText = `Bs ${totalBs.toLocaleString('es-VE', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
-
-        prepararEnlacesEnvio(totalUSD, totalBs);
-        
-        // Cierra la barra lateral del carrito si está visible
-        const cartSidebar = document.getElementById('cart-sidebar');
-        if (cartSidebar) cartSidebar.classList.remove('open');
-
-        // Despliega inmediatamente la ventana de checkout
-        document.getElementById('modal-checkout').style.display = 'flex';
-    }
-
-    function cerrarCheckoutModal() {
-        document.getElementById('modal-checkout').style.display = 'none';
-    }
-
-    function prepararEnlacesEnvio(totalUSD, totalBs) {
-        const inputNombre = document.getElementById('input-nombre-perfil');
-        const nombrePerfil = inputNombre.value.trim();
-        const errorMsg = document.getElementById('error-nombre-perfil');
-
-        // Validación: si no colocan nombre, deshabilita el envío
-        if (!nombrePerfil) {
-            if (errorMsg) errorMsg.style.display = 'block';
-            inputNombre.style.borderColor = '#ef4444';
-            document.getElementById('btn-envio-wa').removeAttribute('href');
-            document.getElementById('btn-envio-tg').removeAttribute('href');
-            document.getElementById('btn-envio-wa').style.pointerEvents = 'none';
-            document.getElementById('btn-envio-tg').style.pointerEvents = 'none';
-            document.getElementById('btn-envio-wa').style.opacity = '0.5';
-            document.getElementById('btn-envio-tg').style.opacity = '0.5';
-            return;
-        }
-
-        // Si el usuario ingresó nombre de perfil, activa los botones
-        if (errorMsg) errorMsg.style.display = 'none';
-        inputNombre.style.borderColor = '#475569';
-        document.getElementById('btn-envio-wa').style.pointerEvents = 'auto';
-        document.getElementById('btn-envio-tg').style.pointerEvents = 'auto';
-        document.getElementById('btn-envio-wa').style.opacity = '1';
-        document.getElementById('btn-envio-tg').style.opacity = '1';
-
-        let mensaje = `Hola Streamix Store, ya he realizado el pago del siguiente pedido:\n\n`;
-        carrito.forEach(item => {
-            mensaje += `• ${item.nombre} x${item.cantidad} - $${(item.precioUSD * item.cantidad).toFixed(2)}\n`;
+        // Inicializar Filtros
+        document.addEventListener('DOMContentLoaded', () => {
+            filtrar('todos', document.querySelector('.filter-btn.active'));
         });
-
-        mensaje += `\n👤 Nombre de Pantalla/Perfil: ${nombrePerfil}\n`;
-        mensaje += `\n💰 Total USD: $${totalUSD.toFixed(2)}`;
-        mensaje += `\n🇻🇪 Total Bs (Tasa ${tasaCambio.toFixed(2)}): Bs ${totalBs.toLocaleString('es-VE', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
-        mensaje += `\n\nAdjunto comprobante de mi pago. Quedo a la espera de los datos de pago.`;
-
-        const mensajeEncoded = encodeURIComponent(mensaje);
-
-        document.getElementById('btn-envio-wa').href = `https://wa.me/584124405245?text=${mensajeEncoded}`;
-        document.getElementById('btn-envio-tg').href = `https://t.me/sxstoreve?text=${mensajeEncoded}`;
-    }
-        function copiarPagoMovil() {
-    // Texto estructurado listo para pegar en la app bancaria o notas
-    const datosPagoMovil = 
-`Bancos: Bancamiga (0172) / BNC (0191)
-Teléfono: 04122818460
-Cédula: V27178466`;
-
-    // Uso de la API del portapapeles con fallback para compatibilidad
-    if (navigator.clipboard && window.isSecureContext) {
-        navigator.clipboard.writeText(datosPagoMovil).then(mostrarFeedbackCopia);
-    } else {
-        // Método alternativo para navegadores o entornos HTTP antiguos
-        let textArea = document.createElement("textarea");
-        textArea.value = datosPagoMovil;
-        textArea.style.position = "fixed";
-        textArea.style.left = "-999999px";
-        document.body.appendChild(textArea);
-        textArea.focus();
-        textArea.select();
-        try {
-            document.execCommand('copy');
-            mostrarFeedbackCopia();
-        } catch (err) {
-            alert("No se pudo copiar automáticamente. Por favor copia los datos manualmente.");
-        }
-        document.body.removeChild(textArea);
-    }
-}
-
-function mostrarFeedbackCopia() {
-    const feedback = document.getElementById('copiado-feedback');
-    if (feedback) {
-        feedback.style.display = 'block';
-        setTimeout(() => {
-            feedback.style.display = 'none';
-        }, 2500);
-    }
-}
-
-    // Actualizar enlace de mensajes si el usuario escribe el nombre del perfil
-    document.getElementById('input-nombre-perfil').addEventListener('input', () => {
-        let totalUSD = carrito.reduce((sum, item) => sum + (item.precioUSD * item.cantidad), 0);
-        let totalBs = totalUSD * tasaCambio;
-        prepararEnlacesEnvio(totalUSD, totalBs);
-    });
-</script>
+    </script>
 </body>
 </html>
