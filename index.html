@@ -30,59 +30,161 @@
         header p { color: #9ca3af; font-size: 1.1rem; }
         header .sub-desc { color: #9ca3af; font-size: 0.95rem; margin-top: 15px; max-width: 600px; margin-left: auto; margin-right: auto; }
 
-        /* Modificación de la tarjeta contenedor */
-.carousel-container {
+       /* --- TARJETA Y LUZ GIRATORIA ORIGINAL --- */
+.featured-card { 
     position: relative;
+    background: linear-gradient(145deg, #0f172a, #180d12); 
+    border-radius: 16px; 
+    margin-bottom: 40px; 
+    box-shadow: 0 0 25px rgba(0, 255, 127, 0.15);
     overflow: hidden;
-    margin-bottom: 40px;
-    padding: 0; /* Ajuste para el slider interno */
+    z-index: 1;
+    padding: 0 !important; /* Importante para la animación del slider */
 }
 
-/* Contenedor de Diapositivas */
+.featured-card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: conic-gradient(transparent, transparent, transparent, #00FF7F);
+    animation: rotarLuz 4s linear infinite;
+    z-index: -2;
+}
+
+.featured-card::after {
+    content: '';
+    position: absolute;
+    inset: 2px;
+    background: linear-gradient(145deg, #0f172a, #180d12);
+    border-radius: 14px;
+    z-index: -1;
+}
+
+@keyframes rotarLuz {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.offer-tag {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    background: #00FF7F;
+    color: #050811;
+    padding: 4px 12px;
+    border-radius: 8px;
+    font-size: 0.75rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    z-index: 10;
+}
+
+.featured-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    position: relative;
+    padding-top: 10px;
+}
+
+.featured-info h3 {
+    color: #00FF7F;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    letter-spacing: 1px;
+}
+
+.featured-info h2 {
+    font-size: 2rem;
+    color: #ffffff;
+    margin-bottom: 8px;
+}
+
+.featured-info p {
+    color: #9ca3af;
+    font-size: 0.95rem;
+}
+
+.price-box {
+    text-align: right;
+}
+
+.old-price {
+    color: #FFFFFF;
+    text-decoration: line-through;
+    font-size: 0.9rem;
+}
+
+.current-price {
+    font-size: 2.2rem;
+    color: #00FF7F;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.btn-oferta {
+    display: inline-block;
+    background: linear-gradient(90deg, #00FF7F, #00cc66);
+    color: #050811;
+    padding: 12px 24px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    transition: opacity 0.2s;
+    cursor: pointer;
+    border: none;
+}
+
+.btn-oferta:hover {
+    opacity: 0.9;
+}
+
+/* --- ESTRUCTURA DEL CARRUSEL --- */
 .carousel-slides {
     position: relative;
     width: 100%;
-    min-height: 220px; /* Ancho/alto adaptativo */
 }
 
-/* Estilo de cada Slide */
 .slide {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.6s ease-in-out, visibility 0.6s ease-in-out;
+    display: none;
     padding: 30px;
     box-sizing: border-box;
+    width: 100%;
 }
 
 .slide.active {
-    opacity: 1;
-    visibility: visible;
-    position: relative; /* Permite tomar la altura real del contenido */
+    display: block;
+    animation: fadeIn 0.5s ease-in-out;
 }
 
-/* Indicadores / Puntos abajo (Dots) */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* Indicadores / Puntos inferior */
 .carousel-dots {
     position: absolute;
-    bottom: 15px;
+    bottom: 12px;
     left: 50%;
     transform: translateX(-50%);
     display: flex;
     gap: 8px;
-    z-index: 20;
-    background: rgba(5, 8, 17, 0.6);
-    padding: 6px 12px;
-    border-radius: 20px;
+    z-index: 15;
 }
 
 .dot {
     width: 10px;
     height: 10px;
-    background-color: rgba(255, 255, 255, 0.3);
+    background-color: rgba(255, 255, 255, 0.25);
     border-radius: 50%;
     cursor: pointer;
     transition: all 0.3s ease;
@@ -90,9 +192,9 @@
 
 .dot.active {
     background-color: #00FF7F;
-    width: 25px; /* Efecto alargado estilo Neón */
+    width: 26px;
     border-radius: 10px;
-    box-shadow: 0 0 10px #00FF7F;
+    box-shadow: 0 0 8px #00FF7F;
 }
 
         /* Estructura en 2 columnas */
@@ -365,12 +467,11 @@
             <div class="sub-desc">Cuentas y Perfiles Originales, renovables y sin caídas. Elige tu plan, paga y estará activo en minutos.</div>
         </header>
 
-        <!-- Tarjeta de Oferta Limitada con Luz Dinámica -->
-       <!-- Carrusel Contenedor Principal -->
-<div class="carousel-container featured-card">
+        <!-- Carrusel de Ofertas Destacadas -->
+<div class="featured-card carousel-container">
     <div class="carousel-slides" id="carouselSlides">
         
-        <!-- Diapositiva 1: Oferta Duo -->
+        <!-- Diapositiva 1 -->
         <div class="slide active">
             <div class="offer-tag">🤩 Oferta Limitada</div>
             <div class="featured-content">
@@ -387,22 +488,22 @@
             </div>
         </div>
 
-        <!-- Diapositiva 2: Canal de WhatsApp (Ejemplo Imagen 2) -->
+        <!-- Diapositiva 2 (Canal WhatsApp) -->
         <div class="slide">
             <div class="offer-tag">📢 Comunidad</div>
             <div class="featured-content">
                 <div class="featured-info">
                     <h3>Únete a nuestro</h3>
                     <h2>CANAL DE WHATSAPP</h2>
-                    <p>Enterate de los nuevos lanzamientos, sorteos y descuentos exclusivos.</p>
+                    <p>Entérate de los nuevos lanzamientos, sorteos y descuentos exclusivos.</p>
                 </div>
                 <div class="price-box">
-                    <a href="https://whatsapp.com" target="_blank" class="btn-oferta" style="text-align: center; display: inline-block;">ENTRAR AL CANAL</a>
+                    <a href="https://whatsapp.com" target="_blank" class="btn-oferta" style="text-align: center; text-decoration: none;">ENTRAR AL CANAL</a>
                 </div>
             </div>
         </div>
 
-        <!-- Diapositiva 3: Otra Oferta -->
+        <!-- Diapositiva 3 -->
         <div class="slide">
             <div class="offer-tag">🔥 Promoción</div>
             <div class="featured-content">
@@ -421,7 +522,7 @@
 
     </div>
 
-    <!-- Indicadores / Puntos de navegación (Dots como Imagen 2) -->
+    <!-- Puntos de navegación (Dots) -->
     <div class="carousel-dots" id="carouselDots"></div>
 </div>
 
@@ -1528,44 +1629,62 @@
             }
         });
 
-        // --- LÓGICA DEL CARRUSEL ---
-let currentSlide = 0;
-const slides = document.querySelectorAll('.slide');
-const dotsContainer = document.getElementById('carouselDots');
+        document.addEventListener("DOMContentLoaded", function () {
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.slide');
+    const dotsContainer = document.getElementById('carouselDots');
 
-// Crear los dots automáticamente según el número de slides
-slides.forEach((_, index) => {
-    const dot = document.createElement('div');
-    dot.classList.add('dot');
-    if (index === 0) dot.classList.add('active');
-    dot.addEventListener('click', () => goToSlide(index));
-    dotsContainer.appendChild(dot);
+    if (slides.length > 0 && dotsContainer) {
+        // Crear puntos indicadores según la cantidad de slides
+        dotsContainer.innerHTML = '';
+        slides.forEach((_, index) => {
+            const dot = document.createElement('div');
+            dot.classList.add('dot');
+            if (index === 0) dot.classList.add('active');
+            dot.addEventListener('click', () => goToSlide(index));
+            dotsContainer.appendChild(dot);
+        });
+
+        const dots = document.querySelectorAll('.dot');
+
+        function updateCarousel() {
+            slides.forEach((slide, index) => {
+                slide.classList.remove('active');
+                if (dots[index]) dots[index].classList.remove('active');
+            });
+            
+            slides[currentSlide].classList.add('active');
+            if (dots[currentSlide]) dots[currentSlide].classList.add('active');
+        }
+
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % slides.length;
+            updateCarousel();
+        }
+
+        function goToSlide(index) {
+            currentSlide = index;
+            updateCarousel();
+        }
+
+        // Cambio automático cada 5 segundos
+        setInterval(nextSlide, 5000);
+    }
 });
 
-const dots = document.querySelectorAll('.dot');
-
-function updateCarousel() {
-    slides.forEach((slide, index) => {
-        slide.classList.remove('active');
-        dots[index].classList.remove('active');
+// Compatibilidad para actualización de precios multi-moneda (USD/Bs)
+function actualizarPreciosOfertas() {
+    let ofertas = document.querySelectorAll('.oferta-precio');
+    ofertas.forEach(ofertaEl => {
+        let usdOferta = parseFloat(ofertaEl.getAttribute('data-usd'));
+        if (typeof moneda !== 'undefined' && moneda === 'Bs' && typeof tasaCambio !== 'undefined') {
+            let bsOferta = usdOferta * tasaCambio;
+            ofertaEl.innerHTML = 'Bs ' + bsOferta.toLocaleString('es-VE', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+        } else {
+            ofertaEl.innerHTML = '$' + usdOferta.toFixed(2) + ' <span style="font-size: 1rem; color: #9ca3af;">USD</span>';
+        }
     });
-    
-    slides[currentSlide].classList.add('active');
-    dots[currentSlide].classList.add('active');
 }
-
-function nextSlide() {
-    currentSlide = (currentSlide + 1) % slides.length;
-    updateCarousel();
-}
-
-function goToSlide(index) {
-    currentSlide = index;
-    updateCarousel();
-}
-
-// Transición automática cada 5 segundos
-setInterval(nextSlide, 5000);
 
 
 // --- ACTUALIZACIÓN DE PRECIOS MULTIMONEDA (Soporta múltiples ofertas) ---
