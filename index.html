@@ -782,74 +782,139 @@
                 </div>
 
                 <!-- FREE FIRE -->
-                <div class="platform-card" data-categoria="juegos">
-                    <div class="platform-header">
-                        <div class="platform-logo" style="background: #b45309;">FF</div>
-                        <div class="platform-title">
-                            <h3>Free Fire</h3>
-                            <span>💎 RECARGA DE DIAMANTES</span>
-                        </div>
-                    </div>
-                    <div class="plans-list-box">
-                        <div class="card-plan-item" onclick="abrirModal('Free Fire', [{nombre: '100 Diamantes', precio: 0.95}, {nombre: '310 Diamantes', precio: 3.05}, {nombre: '520 Diamantes', precio: 4.10}], 0, 'juegos')">
-                            <span class="card-plan-name">100 Diamantes</span>
-                            <span class="card-plan-price" data-usd="0.95">$0.95</span>
-                        </div>
-                        <div class="card-plan-item" onclick="abrirModal('Free Fire', [{nombre: '100 Diamantes', precio: 0.95}, {nombre: '310 Diamantes', precio: 3.05}, {nombre: '520 Diamantes', precio: 4.10}], 1, 'juegos')">
-                            <span class="card-plan-name">310 Diamantes</span>
-                            <span class="card-plan-price" data-usd="3.05">$3.05</span>
-                        </div>
-                        <div class="card-plan-item" onclick="abrirModal('Free Fire', [{nombre: '100 Diamantes', precio: 0.95}, {nombre: '310 Diamantes', precio: 3.05}, {nombre: '520 Diamantes', precio: 4.10}], 2, 'juegos')">
-                            <span class="card-plan-name">520 Diamantes</span>
-                            <span class="card-plan-price" data-usd="4.10">$4.10</span>
-                        </div>
-                    </div>
-                    <button class="btn-card-addplan" onclick="abrirModal('Free Fire', [{nombre: '100 Diamantes', precio: 0.95}, {nombre: '310 Diamantes', precio: 3.05}, {nombre: '520 Diamantes', precio: 4.10}], 0, 'juegos')">+ Añadir Plan</button>
-                </div>
+<div class="platform-card" data-categoria="juegos">
+    <div class="platform-header">
+        <!-- Logo estilo oficial Free Fire (Icono F con llama/fuego SVG) -->
+        <div class="platform-logo" style="background: linear-gradient(135deg, #ff4500, #b45309); color: #ffffff; display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 8px; padding: 5px; box-sizing: border-box; box-shadow: 0 2px 8px rgba(255, 69, 0, 0.4);">
+            <svg viewBox="0 0 100 100" fill="currentColor" style="width: 100%; height: 100%;">
+                <!-- Trazo estilizado de la llama 'FF' -->
+                <path d="M 25 15 L 80 15 L 70 30 L 42 30 L 38 45 L 70 45 L 60 60 L 34 60 L 22 85 L 10 85 L 25 15 Z" fill="#ffffff" />
+                <path d="M 45 22 C 55 10, 70 12, 70 12 C 60 25, 68 35, 58 45 C 50 35, 48 28, 45 22 Z" fill="#ffd700" opacity="0.9" />
+            </svg>
+        </div>
+        <div class="platform-title">
+            <h3>Free Fire</h3>
+            <span>💎 RECARGA DE DIAMANTES</span>
+        </div>
+    </div>
+    <div class="plans-list-box">
+        <!-- Producto 1: 100 Diamantes -->
+        <div class="card-plan-item" onclick="abrirModal('Free Fire', [{nombre: '100 Diamantes', precio: 1.05}, {nombre: '310 Diamantes', precio: 3.40}, {nombre: '520 Diamantes', precio: 5.30}, {nombre: '1060 Diamantes', precio: 10.30}, {nombre: '2180 Diamantes', precio: 19.90}], 0, 'juegos')">
+            <span class="card-plan-name">100 Diamantes</span>
+            <span class="card-plan-price" data-usd="1.05">$1.05</span>
+        </div>
+        <!-- Producto 2: 310 Diamantes -->
+        <div class="card-plan-item" onclick="abrirModal('Free Fire', [{nombre: '100 Diamantes', precio: 1.05}, {nombre: '310 Diamantes', precio: 3.40}, {nombre: '520 Diamantes', precio: 5.30}, {nombre: '1060 Diamantes', precio: 10.30}, {nombre: '2180 Diamantes', precio: 19.90}], 1, 'juegos')">
+            <span class="card-plan-name">310 Diamantes</span>
+            <span class="card-plan-price" data-usd="3.40">$3.40</span>
+        </div>
+        <!-- Producto 3: 520 Diamantes -->
+        <div class="card-plan-item" onclick="abrirModal('Free Fire', [{nombre: '100 Diamantes', precio: 1.05}, {nombre: '310 Diamantes', precio: 3.40}, {nombre: '520 Diamantes', precio: 5.30}, {nombre: '1060 Diamantes', precio: 10.30}, {nombre: '2180 Diamantes', precio: 19.90}], 2, 'juegos')">
+            <span class="card-plan-name">520 Diamantes</span>
+            <span class="card-plan-price" data-usd="5.30">$5.30</span>
+        </div>
+        <!-- Producto 4: 1060 Diamantes -->
+        <div class="card-plan-item" onclick="abrirModal('Free Fire', [{nombre: '100 Diamantes', precio: 1.05}, {nombre: '310 Diamantes', precio: 3.40}, {nombre: '520 Diamantes', precio: 5.30}, {nombre: '1060 Diamantes', precio: 10.30}, {nombre: '2180 Diamantes', precio: 19.90}], 3, 'juegos')">
+            <span class="card-plan-name">1060 Diamantes</span>
+            <span class="card-plan-price" data-usd="10.30">$10.30</span>
+        </div>
+        <!-- Producto 5: 2180 Diamantes -->
+        <div class="card-plan-item" onclick="abrirModal('Free Fire', [{nombre: '100 Diamantes', precio: 1.05}, {nombre: '310 Diamantes', precio: 3.40}, {nombre: '520 Diamantes', precio: 5.30}, {nombre: '1060 Diamantes', precio: 10.30}, {nombre: '2180 Diamantes', precio: 19.90}], 4, 'juegos')">
+            <span class="card-plan-name">2180 Diamantes</span>
+            <span class="card-plan-price" data-usd="19.90">$19.90</span>
+        </div>
+    </div>
+    <button class="btn-card-addplan" onclick="abrirModal('Free Fire', [{nombre: '100 Diamantes', precio: 1.05}, {nombre: '310 Diamantes', precio: 3.40}, {nombre: '520 Diamantes', precio: 5.30}, {nombre: '1060 Diamantes', precio: 10.30}, {nombre: '2180 Diamantes', precio: 19.90}], 0, 'juegos')">+ Añadir Plan</button>
+</div>
 
                 <!-- CALL OF DUTY MOBILE -->
-                <div class="platform-card" data-categoria="juegos">
-                    <div class="platform-header">
-                        <div class="platform-logo" style="background: #334155;">COD</div>
-                        <div class="platform-title">
-                            <h3>Call Of Duty Mobile</h3>
-                            <span>🎮 CP PUNTOS COD</span>
-                        </div>
-                    </div>
-                    <div class="plans-list-box">
-                        <div class="card-plan-item" onclick="abrirModal('Call Of Duty Mobile', [{nombre: '80 CP', precio: 1.20}, {nombre: '420 CP', precio: 6.03}], 0, 'juegos')">
-                            <span class="card-plan-name">80 CP</span>
-                            <span class="card-plan-price" data-usd="1.20">$1.20</span>
-                        </div>
-                        <div class="card-plan-item" onclick="abrirModal('Call Of Duty Mobile', [{nombre: '80 CP', precio: 1.20}, {nombre: '420 CP', precio: 6.03}], 1, 'juegos')">
-                            <span class="card-plan-name">420 CP</span>
-                            <span class="card-plan-price" data-usd="6.03">$6.03</span>
-                        </div>
-                    </div>
-                    <button class="btn-card-addplan" onclick="abrirModal('Call Of Duty Mobile', [{nombre: '80 CP', precio: 1.20}, {nombre: '420 CP', precio: 6.03}], 0, 'juegos')">+ Añadir Plan</button>
-                </div>
+<div class="platform-card" data-categoria="juegos">
+    <div class="platform-header">
+        <!-- Logo estilo oficial de Call of Duty Mobile (SVG en línea) -->
+        <div class="platform-logo" style="background: #111827; color: #f59e0b; display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 8px; padding: 5px; box-sizing: border-box; border: 1px solid rgba(245, 158, 11, 0.3);">
+            <svg viewBox="0 0 100 100" fill="currentColor" style="width: 100%; height: 100%;">
+                <!-- Calavera táctica estilo COD -->
+                <path d="M 50 15 C 30 15 20 28 20 45 C 20 56 25 65 30 72 L 30 82 C 30 84 32 85 34 85 L 42 85 L 42 77 L 46 77 L 46 85 L 54 85 L 54 77 L 58 77 L 58 85 L 66 85 C 68 85 70 84 70 82 L 70 72 C 75 65 80 56 80 45 C 80 28 70 15 50 15 Z" fill="#f59e0b"/>
+                <!-- Ojos y detalles oscuros -->
+                <ellipse cx="37" cy="48" rx="7" ry="10" fill="#111827"/>
+                <ellipse cx="63" cy="48" rx="7" ry="10" fill="#111827"/>
+                <polygon points="50,58 45,67 55,67" fill="#111827"/>
+            </svg>
+        </div>
+        <div class="platform-title">
+            <h3>Call Of Duty Mobile</h3>
+            <span>🎮 CP PUNTOS COD</span>
+        </div>
+    </div>
+    <div class="plans-list-box">
+        <div class="card-plan-item" onclick="abrirModal('Call Of Duty Mobile', [{nombre: '80 CP', precio: 1.20}, {nombre: '160 CP', precio: 2.40}, {nombre: '240 CP', precio: 3.60}, {nombre: '320 CP', precio: 4.80}, {nombre: '420 CP', precio: 6.03}], 0, 'juegos')">
+            <span class="card-plan-name">80 CP</span>
+            <span class="card-plan-price" data-usd="1.20">$1.20</span>
+        </div>
+        <div class="card-plan-item" onclick="abrirModal('Call Of Duty Mobile', [{nombre: '80 CP', precio: 1.20}, {nombre: '160 CP', precio: 2.40}, {nombre: '240 CP', precio: 3.60}, {nombre: '320 CP', precio: 4.80}, {nombre: '420 CP', precio: 6.03}], 1, 'juegos')">
+            <span class="card-plan-name">160 CP</span>
+            <span class="card-plan-price" data-usd="2.40">$2.40</span>
+        </div>
+        <div class="card-plan-item" onclick="abrirModal('Call Of Duty Mobile', [{nombre: '80 CP', precio: 1.20}, {nombre: '160 CP', precio: 2.40}, {nombre: '240 CP', precio: 3.60}, {nombre: '320 CP', precio: 4.80}, {nombre: '420 CP', precio: 6.03}], 2, 'juegos')">
+            <span class="card-plan-name">240 CP</span>
+            <span class="card-plan-price" data-usd="3.60">$3.60</span>
+        </div>
+        <div class="card-plan-item" onclick="abrirModal('Call Of Duty Mobile', [{nombre: '80 CP', precio: 1.20}, {nombre: '160 CP', precio: 2.40}, {nombre: '240 CP', precio: 3.60}, {nombre: '320 CP', precio: 4.80}, {nombre: '420 CP', precio: 6.03}], 3, 'juegos')">
+            <span class="card-plan-name">320 CP</span>
+            <span class="card-plan-price" data-usd="4.80">$4.80</span>
+        </div>
+        <div class="card-plan-item" onclick="abrirModal('Call Of Duty Mobile', [{nombre: '80 CP', precio: 1.20}, {nombre: '160 CP', precio: 2.40}, {nombre: '240 CP', precio: 3.60}, {nombre: '320 CP', precio: 4.80}, {nombre: '420 CP', precio: 6.03}], 4, 'juegos')">
+            <span class="card-plan-name">420 CP</span>
+            <span class="card-plan-price" data-usd="6.03">$6.03</span>
+        </div>
+    </div>
+    <button class="btn-card-addplan" onclick="abrirModal('Call Of Duty Mobile', [{nombre: '80 CP', precio: 1.20}, {nombre: '160 CP', precio: 2.40}, {nombre: '240 CP', precio: 3.60}, {nombre: '320 CP', precio: 4.80}, {nombre: '420 CP', precio: 6.03}], 0, 'juegos')">+ Añadir Plan</button>
+</div>
 
                 <!-- ROBLOX -->
-                <div class="platform-card" data-categoria="juegos">
-                    <div class="platform-header">
-                        <div class="platform-logo" style="background: #00FF7F; color: #050811;">RBX</div>
-                        <div class="platform-title">
-                            <h3>Roblox</h3>
-                            <span>🔳 ROBUX</span>
-                        </div>
-                    </div>
-                    <div class="plans-list-box">
-                        <div class="card-plan-item" onclick="abrirModal('Roblox', [{nombre: '270 Robux', precio: 3.99}, {nombre: '500 Robux', precio: 6.10}], 0, 'juegos')">
-                            <span class="card-plan-name">270 Robux</span>
-                            <span class="card-plan-price" data-usd="3.99">$3.99</span>
-                        </div>
-                        <div class="card-plan-item" onclick="abrirModal('Roblox', [{nombre: '270 Robux', precio: 3.99}, {nombre: '500 Robux', precio: 6.10}], 1, 'juegos')">
-                            <span class="card-plan-name">500 Robux</span>
-                            <span class="card-plan-price" data-usd="6.10">$6.10</span>
-                        </div>
-                    </div>
-                    <button class="btn-card-addplan" onclick="abrirModal('Roblox', [{nombre: '270 Robux', precio: 3.99}, {nombre: '500 Robux', precio: 6.10}], 0, 'juegos')">+ Añadir Plan</button>
-                </div>
+<div class="platform-card" data-categoria="juegos">
+    <div class="platform-header">
+        <!-- Logo original de Roblox (SVG en línea) -->
+        <div class="platform-logo" style="background: #050811; color: #ffffff; display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 8px; padding: 6px; box-sizing: border-box;">
+            <svg viewBox="0 0 100 100" fill="currentColor" style="width: 100%; height: 100%; transform: rotate(-5deg);">
+                <path d="M 15,15 L 85,15 L 85,85 L 15,85 Z" fill="#ffffff" />
+                <path d="M 38,38 L 62,38 L 62,62 L 38,62 Z" fill="#050811" />
+            </svg>
+        </div>
+        <div class="platform-title">
+            <h3>Roblox</h3>
+            <span>🔳 ROBUX</span>
+        </div>
+    </div>
+    <div class="plans-list-box">
+        <!-- Producto 1: 40 Robux -->
+        <div class="card-plan-item" onclick="abrirModal('Roblox', [{nombre: '40 Robux', precio: 0.70}, {nombre: '270 Robux', precio: 3.99}, {nombre: '500 Robux', precio: 6.10}, {nombre: '1,000 Robux', precio: 12}, {nombre: '2500 Robux', precio: 23.90}], 0, 'juegos')">
+            <span class="card-plan-name">40 Robux</span>
+            <span class="card-plan-price" data-usd="0.70">$0.70</span>
+        </div>
+        <!-- Producto 2: 270 Robux -->
+        <div class="card-plan-item" onclick="abrirModal('Roblox', [{nombre: '40 Robux', precio: 0.70}, {nombre: '270 Robux', precio: 3.99}, {nombre: '500 Robux', precio: 6.10}, {nombre: '1,000 Robux', precio: 12}, {nombre: '2500 Robux', precio: 23.90}], 1, 'juegos')">
+            <span class="card-plan-name">270 Robux</span>
+            <span class="card-plan-price" data-usd="3.99">$3.99</span>
+        </div>
+        <!-- Producto 3: 500 Robux -->
+        <div class="card-plan-item" onclick="abrirModal('Roblox', [{nombre: '40 Robux', precio: 0.70}, {nombre: '270 Robux', precio: 3.99}, {nombre: '500 Robux', precio: 6.10}, {nombre: '1,000 Robux', precio: 12}, {nombre: '2500 Robux', precio: 23.90}], 2, 'juegos')">
+            <span class="card-plan-name">500 Robux</span>
+            <span class="card-plan-price" data-usd="6.10">$6.10</span>
+        </div>
+        <!-- Producto 4: 1000 Robux -->
+        <div class="card-plan-item" onclick="abrirModal('Roblox', [{nombre: '40 Robux', precio: 0.70}, {nombre: '270 Robux', precio: 3.99}, {nombre: '500 Robux', precio: 6.10}, {nombre: '1,000 Robux', precio: 12}, {nombre: '2500 Robux', precio: 23.90}], 3, 'juegos')">
+            <span class="card-plan-name">1000 Robux</span>
+            <span class="card-plan-price" data-usd="12">$12</span>
+        </div>
+        <!-- Producto 5: 2500 Robux -->
+        <div class="card-plan-item" onclick="abrirModal('Roblox', [{nombre: '40 Robux', precio: 0.70}, {nombre: '270 Robux', precio: 3.99}, {nombre: '500 Robux', precio: 6.10}, {nombre: '1,000 Robux', precio: 12}, {nombre: '2500 Robux', precio: 23.90}], 4, 'juegos')">
+            <span class="card-plan-name">2500 Robux</span>
+            <span class="card-plan-price" data-usd="23.90">$23.90</span>
+        </div>
+    </div>
+    <button class="btn-card-addplan" onclick="abrirModal('Roblox', [{nombre: '40 Robux', precio: 0.70}, {nombre: '270 Robux', precio: 3.99}, {nombre: '500 Robux', precio: 6.10}, {nombre: '1,000 Robux', precio: 12}, {nombre: '2500 Robux', precio: 23.90}], 0, 'juegos')">+ Añadir Plan</button>
+</div>
 
                 <!-- GIFT CARD NETFLIX -->
                 <div class="platform-card" data-categoria="giftcards">
