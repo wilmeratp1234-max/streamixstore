@@ -136,6 +136,53 @@
     }
 }
 
+/* Contenedor principal flotante */
+  .whatsapp-float {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 60px;
+    height: 60px;
+    background-color: #25d366;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    text-decoration: none;
+    /* Animación de pulso */
+    animation: whatsapp-pulse 2s infinite;
+  }
+
+  /* Tamaño del ícono SVG */
+  .whatsapp-icon {
+    width: 35px;
+    height: 35px;
+  }
+
+  /* Definición de la animación del pulso */
+  @keyframes whatsapp-pulse {
+    0% {
+      /* Sombra sin distancia y del color verde de WhatsApp (#25D366) */
+      box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7);
+    }
+    70% {
+      /* Expansión de la onda con transparencia gradual */
+      box-shadow: 0 0 0 20px rgba(37, 211, 102, 0);
+    }
+    100% {
+      /* Finaliza la onda para reiniciar el ciclo */
+      box-shadow: 0 0 0 0 rgba(37, 211, 102, 0);
+    }
+  }
+
+  /* Efecto al pasar el cursor (opcional) */
+  .whatsapp-float:hover {
+    transform: scale(1.08);
+    transition: transform 0.2s ease;
+  }
+
         /* Estructura en 2 columnas */
         .content-wrapper { display: flex; gap: 35px; align-items: flex-start; }
         .content-wrapper .grid { flex: 1; }
