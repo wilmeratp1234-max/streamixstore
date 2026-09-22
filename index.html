@@ -768,7 +768,7 @@
             <span class="card-plan-price" data-usd="5.50">$5.50</span>
         </div>
         <!-- 12 Meses -->
-        <div class="card-plan-item" onclick="abrirModal('Canva', [{nombre: 'Cuenta Pro (1 Mes A tu correo)', precio: 1.50}, {nombre: 'Cuenta Pro (3 Meses A tu correo)', precio: 3.00}, {nombre: 'Cuenta Pro (6 Meses A tu correo)', precio: 5.50}, {nombre: 'Cuenta Pro (12 Meses A tu correo)', precio: 10.00}], 3, 'disenos')">
+        <div class="card-plan-item" onclick="abrirModal('Canva', [{nombre: 'Cuenta Pro (12 Meses A tu correo)', precio: 10.00}, {nombre: 'Cuenta Pro (1 Mes A tu correo)', precio: 1.50}, {nombre: 'Cuenta Pro (3 Meses A tu correo)', precio: 3.00}, {nombre: 'Cuenta Pro (6 Meses A tu correo)', precio: 5.50}], 3, 'disenos')">
             <span class="card-plan-name">Cuenta Pro (12 Meses A tu correo)</span>
             <span class="card-plan-price" data-usd="10.00">$10.00</span>
         </div>
@@ -1377,38 +1377,26 @@
                 </div>
 
                  <!-- CANVA (DISTRIBUIDOR) -->
-                <div class="platform-card" data-categoria="disenos">
-    <div class="platform-header">
-        <div class="platform-logo" style="background: linear-gradient(135deg, #00c4cc , #7d2ae8);">C</div>
-        <div class="platform-title">
-            <h3>Canva</h3>
-            <span>💻📱 DISEÑO GRÁFICO PRO</span>
-        </div>
-    </div>
-    <div class="plans-list-box">
-        <!-- 1 Mes -->
-        <div class="card-plan-item" onclick="abrirModal('Canva', [{nombre: 'Cuenta Pro (1 Mes A tu correo)', precio: 1.50}, {nombre: 'Cuenta Pro (3 Meses A tu correo)', precio: 3.00}, {nombre: 'Cuenta Pro (6 Meses A tu correo)', precio: 5.50}, {nombre: 'Cuenta Pro (12 Meses A tu correo)', precio: 7.50}], 0, 'disenos')">
-            <span class="card-plan-name">Cuenta Pro (1 Mes A tu correo)</span>
-            <span class="card-plan-price" data-usd="1.50">$1.50</span>
-        </div>
-        <!-- 3 Meses -->
-        <div class="card-plan-item" onclick="abrirModal('Canva', [{nombre: 'Cuenta Pro (1 Mes A tu correo)', precio: 1.50}, {nombre: 'Cuenta Pro (3 Meses A tu correo)', precio: 3.00}, {nombre: 'Cuenta Pro (6 Meses A tu correo)', precio: 5.50}, {nombre: 'Cuenta Pro (12 Meses A tu correo)', precio: 7.50}], 1, 'disenos')">
-            <span class="card-plan-name">Cuenta Pro (3 Meses A tu correo)</span>
-            <span class="card-plan-price" data-usd="3.00">$3.00</span>
-        </div>
-        <!-- 6 Meses -->
-        <div class="card-plan-item" onclick="abrirModal('Canva', [{nombre: 'Cuenta Pro (1 Mes A tu correo)', precio: 1.50}, {nombre: 'Cuenta Pro (3 Meses A tu correo)', precio: 3.00}, {nombre: 'Cuenta Pro (6 Meses A tu correo)', precio: 5.50}, {nombre: 'Cuenta Pro (12 Meses A tu correo)', precio: 7.50}], 2, 'disenos')">
-            <span class="card-plan-name">Cuenta Pro (6 Meses A tu correo)</span>
-            <span class="card-plan-price" data-usd="5.50">$5.50</span>
-        </div>
-        <!-- 12 Meses -->
-        <div class="card-plan-item" onclick="abrirModal('Canva', [{nombre: 'Cuenta Pro (1 Mes A tu correo)', precio: 1.50}, {nombre: 'Cuenta Pro (3 Meses A tu correo)', precio: 3.00}, {nombre: 'Cuenta Pro (6 Meses A tu correo)', precio: 5.50}, {nombre: 'Cuenta Pro (12 Meses A tu correo)', precio: 7.50}], 3, 'disenos')">
-            <span class="card-plan-name">Cuenta Pro (12 Meses A tu correo)</span>
-            <span class="card-plan-price" data-usd="7.50">$7.50</span>
-        </div>
-    </div>
-    <button class="btn-card-addplan" onclick="abrirModal('Canva', [{nombre: 'Cuenta Pro (1 Mes A tu correo)', precio: 1.50}, {nombre: 'Cuenta Pro (3 Meses A tu correo)', precio: 3.00}, {nombre: 'Cuenta Pro (6 Meses A tu correo)', precio: 5.50}, {nombre: 'Cuenta Pro (12 Meses A tu correo)', precio: 10.00}], 0, 'disenos')">+ Añadir Plan</button>
-</div>
+                <div class="platform-card" data-categoria="distribuidores">
+                    <div class="platform-header">
+                        <div class="platform-logo" style="background: linear-gradient(135deg, #00c4cc , #7d2ae8);">C</div>
+                        <div class="platform-title">
+                            <h3>Canva (Mayorista)</h3>
+                            <span>💼 PRECIO DISTRIBUIDOR</span>
+                        </div>
+                    </div>
+                    <div class="plans-list-box">
+                        <div class="card-plan-item" onclick="abrirModal('Canva (Mayorista)', [{nombre: 'Cuenta Pro (1 Mes A tu correo)', precio: 1.50}, {nombre: 'Cuenta Pro (1 Año A tu correo)', precio: 7.50}], 0, 'distribuidores')">
+                            <span class="card-plan-name">Cuenta Pro (1 Mes A tu correo)</span>
+                            <span class="card-plan-price" data-usd="1.50">$1.50</span>
+                        </div>
+                        <div class="card-plan-item" onclick="abrirModal('Canva (Mayorista)', [{nombre: 'Cuenta Pro (1 Mes A tu correo)', precio: 1.50}, {nombre: 'Cuenta Pro (1 Año A tu correo)', precio: 7.50}], 1, 'distribuidores')">
+                            <span class="card-plan-name">Cuenta Pro (1 Año A tu correo)</span>
+                            <span class="card-plan-price" data-usd="7.50">$7.50</span>
+                        </div>
+                    </div>
+                    <button class="btn-card-addplan" onclick="abrirModal('Canva (Mayorista)', [{nombre: 'Cuenta Pro (1 Mes A tu correo)', precio: 1.50}, {nombre: 'Cuenta Pro (1 Año A tu correo)', precio: 7.50}], 0, 'distribuidores')">+ Añadir Plan</button>
+                </div>
 
                 <!-- CAPCUT (DISTRIBUIDOR) -->
                 <div class="platform-card" data-categoria="distribuidores">
