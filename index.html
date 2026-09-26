@@ -2023,42 +2023,91 @@
 
 // Abrir el modal desde la opción del menú "BÚSQUEDA DE DATOS"
 function abrirModalBusqueda() {
-  document.getElementById('modalBusqueda').style.display = 'flex';
-  document.getElementById('resultadoBusqueda').style.display = 'none';
+  const modal = document.getElementById('modalBusqueda');
+  const resultDiv = document.getElementById('resultadoBusqueda');
+  if (modal) modal.style.display = 'flex';
+  if (resultDiv) resultDiv.style.display = 'none';
 }
 
 // Cerrar el modal
 function cerrarModalBusqueda() {
-  document.getElementById('modalBusqueda').style.display = 'none';
+  const modal = document.getElementById('modalBusqueda');
+  if (modal) modal.style.display = 'none';
 }
 
-// Función para consultar a la API de Google Apps Script
+// Función principal de búsqueda con seguridad anti-spam
 function buscarDatos() {
-  const email = document.getElementById('searchEmail').value.trim();
-  const profile = document.getElementById('searchProfile').value.trim();
+  const emailInput = document.getElementById('searchEmail');
+  const profileInput = document.getElementById('searchProfile');
   const resultDiv = document.getElementById('resultadoBusqueda');
+  const submitBtn = document.querySelector('.modal-submit-btn');
 
+  const email = emailInput ? emailInput.value.trim() : "";
+  const profile = profileInput ? profileInput.value.trim() : "";
+
+  // --- CONTROL DE SEGURIDAD (LÍMITE DE 1 MINUTO) ---
+  const ULTIMA_CONSULTA_KEY = 'streamix_last_search_time';
+  const TIEMPO_ESPERA_MS = 60 * 1000; // 1 minuto
+  const ahora = Date.now();
+  const ultimaConsulta = localStorage.getItem(ULTIMA_CONSULTA_KEY);
+
+  if (ultimaConsulta) {
+    const tiempoTranscurrido = ahora - parseInt(ultimaConsulta, 10);
+    if (tiempoTranscurrido < TIEMPO_ESPERA_MS) {
+      const segundosRestantes = Math.ceil((TIEMPO_ESPERA_MS - tiempoTranscurrido) / 1000);
+      
+      if (resultDiv) {
+        resultDiv.style.display = 'block';
+        resultDiv.style.background = '#371b1b';
+        resultDiv.style.color = '#ff6b6b';
+        resultDiv.style.border = '1px solid #ff4444';
+        resultDiv.innerText = `⚠️ Por seguridad, debes esperar ${segundosRestantes} segundo(s) antes de realizar otra búsqueda.`;
+      }
+      return;
+    }
+  }
+
+  // --- VALIDACIÓN DE CAMPOS VACÍOS ---
   if (!email || !profile) {
-    resultDiv.style.display = 'block';
-    resultDiv.style.background = '#371b1b';
-    resultDiv.style.color = '#ff6b6b';
-    resultDiv.style.border = '1px solid #ff4444';
-    resultDiv.innerText = 'Por favor, llena ambos campos.';
+    if (resultDiv) {
+      resultDiv.style.display = 'block';
+      resultDiv.style.background = '#371b1b';
+      resultDiv.style.color = '#ff6b6b';
+      resultDiv.style.border = '1px solid #ff4444';
+      resultDiv.innerText = 'Por favor, llena ambos campos.';
+    }
     return;
   }
 
-  resultDiv.style.display = 'block';
-  resultDiv.style.background = '#1f2937';
-  resultDiv.style.color = '#ffffff';
-  resultDiv.style.border = '1px solid #374151';
-  resultDiv.innerText = 'Buscando datos...';
+  // Deshabilitar botón durante la búsqueda
+  if (submitBtn) {
+    submitBtn.disabled = true;
+    submitBtn.style.opacity = '0.5';
+  }
 
-  // COLOCA AQUÍ TU URL DESPLEGADA DE GOOGLE APPS SCRIPT
+  if (resultDiv) {
+    resultDiv.style.display = 'block';
+    resultDiv.style.background = '#1f2937';
+    resultDiv.style.color = '#ffffff';
+    resultDiv.style.border = '1px solid #374151';
+    resultDiv.innerText = 'Buscando datos...';
+  }
+
+  // REGISTRAR MARCA DE TIEMPO
+  localStorage.setItem(ULTIMA_CONSULTA_KEY, Date.now().toString());
+
+  // URL DE TU GOOGLE APPS SCRIPT
   const scriptUrl = 'https://script.google.com/macros/s/AKfycbxIvB3X33d6MkjU_3aMRMlvJ-w00ZVLnuhmXEk_iB9yCT_WQtXD-ucDC8x-C0YlRtWk/exec'; 
 
   fetch(`${scriptUrl}?correo=${encodeURIComponent(email)}&perfil=${encodeURIComponent(profile)}`)
     .then(response => response.json())
     .then(data => {
+      // Recomponer botón
+      if (submitBtn) {
+        submitBtn.disabled = false;
+        submitBtn.style.opacity = '1';
+      }
+
       if (data.status === 'success') {
         resultDiv.style.background = '#062d1b';
         resultDiv.style.color = '#ffffff';
@@ -2081,10 +2130,16 @@ function buscarDatos() {
       }
     })
     .catch(error => {
-      resultDiv.style.background = '#371b1b';
-      resultDiv.style.color = '#ff6b6b';
-      resultDiv.style.border = '1px solid #ff4444';
-      resultDiv.innerText = 'Error al conectar con el servidor.';
+      if (submitBtn) {
+        submitBtn.disabled = false;
+        submitBtn.style.opacity = '1';
+      }
+      if (resultDiv) {
+        resultDiv.style.background = '#371b1b';
+        resultDiv.style.color = '#ff6b6b';
+        resultDiv.style.border = '1px solid #ff4444';
+        resultDiv.innerText = 'Error al conectar con el servidor.';
+      }
       console.error('Error:', error);
     });
 }
