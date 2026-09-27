@@ -1874,6 +1874,18 @@
         <div class="cart-empty">El carrito está vacío.</div>
     </div>
     <div class="cart-footer">
+        <!-- SECCIÓN CÓDIGO DE CUPÓN -->
+        <div class="coupon-box" style="display: flex; gap: 6px; margin-bottom: 12px;">
+            <input type="text" id="coupon-code" placeholder="Código de descuento" style="flex: 1; padding: 8px; border-radius: 6px; border: 1px solid #374151; background: #1f2937; color: #fff; font-size: 0.85rem; uppercase;" />
+            <button onclick="aplicarCupon()" style="padding: 8px 12px; background: #00ff88; color: #000; font-weight: bold; border: none; border-radius: 6px; cursor: pointer;">Aplicar</button>
+        </div>
+        
+        <!-- DETALLE DE DESCUENTO EN TOTAL -->
+        <div id="discount-row" style="display: none; justify-content: space-between; color: #00ff88; font-size: 0.9rem; margin-bottom: 6px;">
+            <span>Descuento (20%):</span>
+            <span id="cart-discount">-$0.00</span>
+        </div>
+
         <div class="cart-total-row">
             <span>Total:</span>
             <span id="cart-total">$0.00</span>
@@ -1890,6 +1902,10 @@
     let carrito = [];
     let distribuidorAutorizado = false;
 
+    // Estado de Cupones de Descuento
+    let cuponAplicado = false;
+    let porcentajeDescuento = 0; // Se activará a 0.20 (20%)
+
     // Estado del Modal de Producto
     let modalPlataformaActual = '';
     let modalPlanesActuales = [];
@@ -1903,6 +1919,32 @@
         let filterBtnActive = document.querySelector('.filter-btn.active');
         if (filterBtnActive) filtrar('todos', filterBtnActive);
     });
+
+    // Función para Aplicar Cupón
+    function aplicarCupon() {
+        const input = document.getElementById('coupon-code');
+        const codigo = input ? input.value.trim().toUpperCase() : '';
+
+        if (!codigo) {
+            alert("Por favor ingresa un código de descuento.");
+            return;
+        }
+
+        if (cuponAplicado) {
+            alert("Ya has aplicado un cupón a este pedido.");
+            return;
+        }
+
+        // Puedes cambiar los códigos válidos aquí (ejemplo: PROMO20 o DESCUENTO20)
+        if (codigo === "STREAMIX20" || codigo === "STREAMIX20" || codigo === "STREAMIX20") {
+            porcentajeDescuento = 0.20; // 20%
+            cuponAplicado = true;
+            alert("¡Cupón del 20% aplicado correctamente!");
+            actualizarCarritoUI();
+        } else {
+            alert("El código ingresado no es válido.");
+        }
+    }
 
     // Cambio de Moneda (USD <-> Bs)
     function cambiarMoneda(moneda, btn) {
@@ -2021,128 +2063,119 @@
         document.getElementById('modal-seleccion').style.display = 'flex';
     }
 
-// Abrir el modal desde la opción del menú "BÚSQUEDA DE DATOS"
-function abrirModalBusqueda() {
-  const modal = document.getElementById('modalBusqueda');
-  const resultDiv = document.getElementById('resultadoBusqueda');
-  if (modal) modal.style.display = 'flex';
-  if (resultDiv) resultDiv.style.display = 'none';
-}
-
-// Cerrar el modal
-function cerrarModalBusqueda() {
-  const modal = document.getElementById('modalBusqueda');
-  if (modal) modal.style.display = 'none';
-}
-
-// Función principal de búsqueda con seguridad anti-spam
-function buscarDatos() {
-  const emailInput = document.getElementById('searchEmail');
-  const profileInput = document.getElementById('searchProfile');
-  const resultDiv = document.getElementById('resultadoBusqueda');
-  const submitBtn = document.querySelector('.modal-submit-btn');
-
-  const email = emailInput ? emailInput.value.trim() : "";
-  const profile = profileInput ? profileInput.value.trim() : "";
-
-  // --- CONTROL DE SEGURIDAD (LÍMITE DE 1 MINUTO) ---
-  const ULTIMA_CONSULTA_KEY = 'streamix_last_search_time';
-  const TIEMPO_ESPERA_MS = 60 * 1000; // 1 minuto
-  const ahora = Date.now();
-  const ultimaConsulta = localStorage.getItem(ULTIMA_CONSULTA_KEY);
-
-  if (ultimaConsulta) {
-    const tiempoTranscurrido = ahora - parseInt(ultimaConsulta, 10);
-    if (tiempoTranscurrido < TIEMPO_ESPERA_MS) {
-      const segundosRestantes = Math.ceil((TIEMPO_ESPERA_MS - tiempoTranscurrido) / 1000);
-      
-      if (resultDiv) {
-        resultDiv.style.display = 'block';
-        resultDiv.style.background = '#371b1b';
-        resultDiv.style.color = '#ff6b6b';
-        resultDiv.style.border = '1px solid #ff4444';
-        resultDiv.innerText = `⚠️ Por seguridad, debes esperar ${segundosRestantes} segundo(s) antes de realizar otra búsqueda.`;
-      }
-      return;
+    // Búsqueda de datos
+    function abrirModalBusqueda() {
+        const modal = document.getElementById('modalBusqueda');
+        const resultDiv = document.getElementById('resultadoBusqueda');
+        if (modal) modal.style.display = 'flex';
+        if (resultDiv) resultDiv.style.display = 'none';
     }
-  }
 
-  // --- VALIDACIÓN DE CAMPOS VACÍOS ---
-  if (!email || !profile) {
-    if (resultDiv) {
-      resultDiv.style.display = 'block';
-      resultDiv.style.background = '#371b1b';
-      resultDiv.style.color = '#ff6b6b';
-      resultDiv.style.border = '1px solid #ff4444';
-      resultDiv.innerText = 'Por favor, llena ambos campos.';
+    function cerrarModalBusqueda() {
+        const modal = document.getElementById('modalBusqueda');
+        if (modal) modal.style.display = 'none';
     }
-    return;
-  }
 
-  // Deshabilitar botón durante la búsqueda
-  if (submitBtn) {
-    submitBtn.disabled = true;
-    submitBtn.style.opacity = '0.5';
-  }
+    function buscarDatos() {
+        const emailInput = document.getElementById('searchEmail');
+        const profileInput = document.getElementById('searchProfile');
+        const resultDiv = document.getElementById('resultadoBusqueda');
+        const submitBtn = document.querySelector('.modal-submit-btn');
 
-  if (resultDiv) {
-    resultDiv.style.display = 'block';
-    resultDiv.style.background = '#1f2937';
-    resultDiv.style.color = '#ffffff';
-    resultDiv.style.border = '1px solid #374151';
-    resultDiv.innerText = 'Buscando datos...';
-  }
+        const email = emailInput ? emailInput.value.trim() : "";
+        const profile = profileInput ? profileInput.value.trim() : "";
 
-  // REGISTRAR MARCA DE TIEMPO
-  localStorage.setItem(ULTIMA_CONSULTA_KEY, Date.now().toString());
+        const ULTIMA_CONSULTA_KEY = 'streamix_last_search_time';
+        const TIEMPO_ESPERA_MS = 60 * 1000;
+        const ahora = Date.now();
+        const ultimaConsulta = localStorage.getItem(ULTIMA_CONSULTA_KEY);
 
-  // URL DE TU GOOGLE APPS SCRIPT
-  const scriptUrl = 'https://script.google.com/macros/s/AKfycbxIvB3X33d6MkjU_3aMRMlvJ-w00ZVLnuhmXEk_iB9yCT_WQtXD-ucDC8x-C0YlRtWk/exec'; 
+        if (ultimaConsulta) {
+            const tiempoTranscurrido = ahora - parseInt(ultimaConsulta, 10);
+            if (tiempoTranscurrido < TIEMPO_ESPERA_MS) {
+                const segundosRestantes = Math.ceil((TIEMPO_ESPERA_MS - tiempoTranscurrido) / 1000);
+                if (resultDiv) {
+                    resultDiv.style.display = 'block';
+                    resultDiv.style.background = '#371b1b';
+                    resultDiv.style.color = '#ff6b6b';
+                    resultDiv.style.border = '1px solid #ff4444';
+                    resultDiv.innerText = `⚠️ Por seguridad, debes esperar ${segundosRestantes} segundo(s) antes de realizar otra búsqueda.`;
+                }
+                return;
+            }
+        }
 
-  fetch(`${scriptUrl}?correo=${encodeURIComponent(email)}&perfil=${encodeURIComponent(profile)}`)
-    .then(response => response.json())
-    .then(data => {
-      // Recomponer botón
-      if (submitBtn) {
-        submitBtn.disabled = false;
-        submitBtn.style.opacity = '1';
-      }
+        if (!email || !profile) {
+            if (resultDiv) {
+                resultDiv.style.display = 'block';
+                resultDiv.style.background = '#371b1b';
+                resultDiv.style.color = '#ff6b6b';
+                resultDiv.style.border = '1px solid #ff4444';
+                resultDiv.innerText = 'Por favor, llena ambos campos.';
+            }
+            return;
+        }
 
-      if (data.status === 'success') {
-        resultDiv.style.background = '#062d1b';
-        resultDiv.style.color = '#ffffff';
-        resultDiv.style.border = '1px solid #00ff88';
-        resultDiv.innerHTML = `
-          <h4 style="color: #00ff88; margin: 0 0 8px 0; font-size: 14px;">¡DATOS ENCONTRADOS!</h4>
-          <p style="margin: 3px 0;"><strong>Servicio:</strong> ${data.data.servicio}</p>
-          <p style="margin: 3px 0;"><strong>Cuenta:</strong> ${data.data.correo}</p>
-          <p style="margin: 3px 0;"><strong>Clave:</strong> ${data.data.password}</p>
-          <p style="margin: 3px 0;"><strong>Perfil:</strong> ${data.data.perfil}</p>
-          <p style="margin: 3px 0;"><strong>PIN:</strong> ${data.data.pin}</p>
-          <p style="margin: 3px 0;"><strong>Vencimiento:</strong> ${data.data.vencimiento}</p>
-          <p style="margin: 3px 0;"><strong>Estado:</strong> ${data.data.estado}</p>
-        `;
-      } else {
-        resultDiv.style.background = '#371b1b';
-        resultDiv.style.color = '#ff6b6b';
-        resultDiv.style.border = '1px solid #ff4444';
-        resultDiv.innerText = data.message || 'No se encontraron datos coincidentes.';
-      }
-    })
-    .catch(error => {
-      if (submitBtn) {
-        submitBtn.disabled = false;
-        submitBtn.style.opacity = '1';
-      }
-      if (resultDiv) {
-        resultDiv.style.background = '#371b1b';
-        resultDiv.style.color = '#ff6b6b';
-        resultDiv.style.border = '1px solid #ff4444';
-        resultDiv.innerText = 'Error al conectar con el servidor.';
-      }
-      console.error('Error:', error);
-    });
-}
+        if (submitBtn) {
+            submitBtn.disabled = true;
+            submitBtn.style.opacity = '0.5';
+        }
+
+        if (resultDiv) {
+            resultDiv.style.display = 'block';
+            resultDiv.style.background = '#1f2937';
+            resultDiv.style.color = '#ffffff';
+            resultDiv.style.border = '1px solid #374151';
+            resultDiv.innerText = 'Buscando datos...';
+        }
+
+        localStorage.setItem(ULTIMA_CONSULTA_KEY, Date.now().toString());
+
+        const scriptUrl = 'https://script.google.com/macros/s/AKfycbxIvB3X33d6MkjU_3aMRMlvJ-w00ZVLnuhmXEk_iB9yCT_WQtXD-ucDC8x-C0YlRtWk/exec'; 
+
+        fetch(`${scriptUrl}?correo=${encodeURIComponent(email)}&perfil=${encodeURIComponent(profile)}`)
+            .then(response => response.json())
+            .then(data => {
+                if (submitBtn) {
+                    submitBtn.disabled = false;
+                    submitBtn.style.opacity = '1';
+                }
+
+                if (data.status === 'success') {
+                    resultDiv.style.background = '#062d1b';
+                    resultDiv.style.color = '#ffffff';
+                    resultDiv.style.border = '1px solid #00ff88';
+                    resultDiv.innerHTML = `
+                        <h4 style="color: #00ff88; margin: 0 0 8px 0; font-size: 14px;">¡DATOS ENCONTRADOS!</h4>
+                        <p style="margin: 3px 0;"><strong>Servicio:</strong> ${data.data.servicio}</p>
+                        <p style="margin: 3px 0;"><strong>Cuenta:</strong> ${data.data.correo}</p>
+                        <p style="margin: 3px 0;"><strong>Clave:</strong> ${data.data.password}</p>
+                        <p style="margin: 3px 0;"><strong>Perfil:</strong> ${data.data.perfil}</p>
+                        <p style="margin: 3px 0;"><strong>PIN:</strong> ${data.data.pin}</p>
+                        <p style="margin: 3px 0;"><strong>Vencimiento:</strong> ${data.data.vencimiento}</p>
+                        <p style="margin: 3px 0;"><strong>Estado:</strong> ${data.data.estado}</p>
+                    `;
+                } else {
+                    resultDiv.style.background = '#371b1b';
+                    resultDiv.style.color = '#ff6b6b';
+                    resultDiv.style.border = '1px solid #ff4444';
+                    resultDiv.innerText = data.message || 'No se encontraron datos coincidentes.';
+                }
+            })
+            .catch(error => {
+                if (submitBtn) {
+                    submitBtn.disabled = false;
+                    submitBtn.style.opacity = '1';
+                }
+                if (resultDiv) {
+                    resultDiv.style.background = '#371b1b';
+                    resultDiv.style.color = '#ff6b6b';
+                    resultDiv.style.border = '1px solid #ff4444';
+                    resultDiv.innerText = 'Error al conectar con el servidor.';
+                }
+                console.error('Error:', error);
+            });
+    }
 
     function cerrarModal() {
         let modalSel = document.getElementById('modal-seleccion');
@@ -2201,6 +2234,13 @@ function buscarDatos() {
 
     function eliminarDelCarrito(index) {
         carrito.splice(index, 1);
+        // Si borra todos los ítems, reseteamos el estado del cupón
+        if (carrito.length === 0) {
+            cuponAplicado = false;
+            porcentajeDescuento = 0;
+            const input = document.getElementById('coupon-code');
+            if (input) input.value = '';
+        }
         actualizarCarritoUI();
     }
 
@@ -2217,9 +2257,11 @@ function buscarDatos() {
         const cartBody = document.getElementById('cart-body');
         const cartCount = document.getElementById('cart-count');
         const cartTotal = document.getElementById('cart-total');
+        const discountRow = document.getElementById('discount-row');
+        const cartDiscount = document.getElementById('cart-discount');
 
         let totalItems = 0;
-        let totalUSD = 0;
+        let subtotalUSD = 0;
 
         cartBody.innerHTML = '';
 
@@ -2229,7 +2271,7 @@ function buscarDatos() {
             carrito.forEach((item, index) => {
                 totalItems += item.cantidad;
                 const itemTotalUSD = item.precioUSD * item.cantidad;
-                totalUSD += itemTotalUSD;
+                subtotalUSD += itemTotalUSD;
 
                 let displayPrice = '';
                 if (monedaActual === 'Bs') {
@@ -2256,6 +2298,24 @@ function buscarDatos() {
 
         if (cartCount) cartCount.innerText = totalItems;
 
+        // Cálculo de descuento
+        let descuentoUSD = subtotalUSD * porcentajeDescuento;
+        let totalUSD = subtotalUSD - descuentoUSD;
+
+        // Renderizado del desglose de descuento
+        if (cuponAplicado && subtotalUSD > 0) {
+            discountRow.style.display = 'flex';
+            if (monedaActual === 'Bs') {
+                let descuentoBs = descuentoUSD * tasaCambio;
+                cartDiscount.innerText = '-Bs ' + descuentoBs.toLocaleString('es-VE', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+            } else {
+                cartDiscount.innerText = '-$' + descuentoUSD.toFixed(2);
+            }
+        } else {
+            discountRow.style.display = 'none';
+        }
+
+        // Mostrar Total Final
         if (monedaActual === 'Bs') {
             let totalBs = totalUSD * tasaCambio;
             cartTotal.innerText = 'Bs ' + totalBs.toLocaleString('es-VE', {minimumFractionDigits: 2, maximumFractionDigits: 2});
@@ -2273,7 +2333,8 @@ function buscarDatos() {
             return;
         }
 
-        let totalUSD = carrito.reduce((sum, item) => sum + (item.precioUSD * item.cantidad), 0);
+        let subtotalUSD = carrito.reduce((sum, item) => sum + (item.precioUSD * item.cantidad), 0);
+        let totalUSD = subtotalUSD * (1 - porcentajeDescuento);
         let totalBs = totalUSD * tasaCambio;
 
         document.getElementById('checkout-monto-usd').innerText = `$${totalUSD.toFixed(2)} USD`;
@@ -2281,11 +2342,9 @@ function buscarDatos() {
 
         prepararEnlacesEnvio(totalUSD, totalBs);
         
-        // Cierra la barra lateral del carrito si está visible
         const cartSidebar = document.getElementById('cart-sidebar');
         if (cartSidebar) cartSidebar.classList.remove('open');
 
-        // Despliega inmediatamente la ventana de checkout
         document.getElementById('modal-checkout').style.display = 'flex';
     }
 
@@ -2298,7 +2357,6 @@ function buscarDatos() {
         const nombrePerfil = inputNombre.value.trim();
         const errorMsg = document.getElementById('error-nombre-perfil');
 
-        // Validación: si no colocan nombre, deshabilita el envío
         if (!nombrePerfil) {
             if (errorMsg) errorMsg.style.display = 'block';
             inputNombre.style.borderColor = '#ef4444';
@@ -2311,7 +2369,6 @@ function buscarDatos() {
             return;
         }
 
-        // Si el usuario ingresó nombre de perfil, activa los botones
         if (errorMsg) errorMsg.style.display = 'none';
         inputNombre.style.borderColor = '#475569';
         document.getElementById('btn-envio-wa').style.pointerEvents = 'auto';
@@ -2324,6 +2381,10 @@ function buscarDatos() {
             mensaje += `• ${item.nombre} x${item.cantidad} - $${(item.precioUSD * item.cantidad).toFixed(2)}\n`;
         });
 
+        if (cuponAplicado) {
+            mensaje += `\n🏷️ Cupón Aplicado: 20% OFF\n`;
+        }
+
         mensaje += `\n👤 Nombre de Pantalla/Perfil: ${nombrePerfil}\n`;
         mensaje += `\n💰 Total USD: $${totalUSD.toFixed(2)}`;
         mensaje += `\n🇻🇪 Total Bs (Tasa ${tasaCambio.toFixed(2)}): Bs ${totalBs.toLocaleString('es-VE', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
@@ -2334,48 +2395,46 @@ function buscarDatos() {
         document.getElementById('btn-envio-wa').href = `https://wa.me/584124405245?text=${mensajeEncoded}`;
         document.getElementById('btn-envio-tg').href = `https://t.me/sxstoreve?text=${mensajeEncoded}`;
     }
-        function copiarPagoMovil() {
-    // Texto estructurado listo para pegar en la app bancaria o notas
-    const datosPagoMovil = 
+
+    function copiarPagoMovil() {
+        const datosPagoMovil = 
 `Bancos: Bancamiga (0172) / BNC (0191)
 Teléfono: 04122818460
 Cédula: V27178466`;
 
-    // Uso de la API del portapapeles con fallback para compatibilidad
-    if (navigator.clipboard && window.isSecureContext) {
-        navigator.clipboard.writeText(datosPagoMovil).then(mostrarFeedbackCopia);
-    } else {
-        // Método alternativo para navegadores o entornos HTTP antiguos
-        let textArea = document.createElement("textarea");
-        textArea.value = datosPagoMovil;
-        textArea.style.position = "fixed";
-        textArea.style.left = "-999999px";
-        document.body.appendChild(textArea);
-        textArea.focus();
-        textArea.select();
-        try {
-            document.execCommand('copy');
-            mostrarFeedbackCopia();
-        } catch (err) {
-            alert("No se pudo copiar automáticamente. Por favor copia los datos manualmente.");
+        if (navigator.clipboard && window.isSecureContext) {
+            navigator.clipboard.writeText(datosPagoMovil).then(mostrarFeedbackCopia);
+        } else {
+            let textArea = document.createElement("textarea");
+            textArea.value = datosPagoMovil;
+            textArea.style.position = "fixed";
+            textArea.style.left = "-999999px";
+            document.body.appendChild(textArea);
+            textArea.focus();
+            textArea.select();
+            try {
+                document.execCommand('copy');
+                mostrarFeedbackCopia();
+            } catch (err) {
+                alert("No se pudo copiar automáticamente. Por favor copia los datos manualmente.");
+            }
+            document.body.removeChild(textArea);
         }
-        document.body.removeChild(textArea);
     }
-}
 
-function mostrarFeedbackCopia() {
-    const feedback = document.getElementById('copiado-feedback');
-    if (feedback) {
-        feedback.style.display = 'block';
-        setTimeout(() => {
-            feedback.style.display = 'none';
-        }, 2500);
+    function mostrarFeedbackCopia() {
+        const feedback = document.getElementById('copiado-feedback');
+        if (feedback) {
+            feedback.style.display = 'block';
+            setTimeout(() => {
+                feedback.style.display = 'none';
+            }, 2500);
+        }
     }
-}
 
-    // Actualizar enlace de mensajes si el usuario escribe el nombre del perfil
     document.getElementById('input-nombre-perfil').addEventListener('input', () => {
-        let totalUSD = carrito.reduce((sum, item) => sum + (item.precioUSD * item.cantidad), 0);
+        let subtotalUSD = carrito.reduce((sum, item) => sum + (item.precioUSD * item.cantidad), 0);
+        let totalUSD = subtotalUSD * (1 - porcentajeDescuento);
         let totalBs = totalUSD * tasaCambio;
         prepararEnlacesEnvio(totalUSD, totalBs);
     });
