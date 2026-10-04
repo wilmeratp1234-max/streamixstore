@@ -35,6 +35,60 @@
         header p { color: #9ca3af; font-size: 1.1rem; }
         header .sub-desc { color: #9ca3af; font-size: 0.95rem; margin-top: 15px; max-width: 600px; margin-left: auto; margin-right: auto; }
 
+.carousel-container {
+  position: relative;
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  overflow: hidden;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  background-color: #0d0d11;
+}
+
+.carousel-track {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+  width: 100%;
+}
+
+.carousel-slide {
+  min-width: 100%;
+  box-sizing: border-box;
+}
+
+.carousel-slide img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+}
+
+/* Indicadores */
+.carousel-indicators {
+  position: absolute;
+  bottom: 15px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 8px;
+  z-index: 10;
+}
+
+.dot {
+  width: 24px;
+  height: 4px;
+  background-color: rgba(255, 255, 255, 0.3);
+  border-radius: 2px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, width 0.3s ease;
+}
+
+.dot.active {
+  background-color: #ff003c; /* Color rojo de énfasis */
+  width: 32px;
+}
+
 .whatsapp-float {
   position: fixed;
   width: 60px;
@@ -582,22 +636,33 @@
             <p>Líderes en Entretenimiento</p>
         </header>
 
-        <!-- Tarjeta de Oferta Limitada con Luz Dinámica -->
-        <div class="featured-card">
-            <div class="offer-tag">Oferta Limitada</div>
-            <div class="featured-content">
-                <div class="featured-info">
-                    <h3>OFERTA ANUAL</h3>
-                    <h2>NETFLIX + HBO MAX + PRIME VIDEO 12 MESES</h2>
-                    <p>Llévate 12 meses de este SUPER COMBO a un precio de regalo, oferta disponible hasta el 03/10/2026.</p>
-                </div>
-                <div class="price-box">
-                    <div class="old-price">$70.00 USD</div>
-                    <div class="current-price" id="oferta-precio" data-usd="19.99">$19.99 <span style="font-size: 1rem; color: #9ca3af;">USD</span></div>
-                    <button class="btn-oferta" onclick="agregarDirecto('Oferta anual', 19.99, 'cine')">¡Quiero esta oferta!</button>
-                </div>
-            </div>
-        </div>
+        <div class="carousel-container">
+  <div class="carousel-track">
+    
+    <!-- Diapositiva 1 -->
+    <div class="carousel-slide">
+      <img src="https://i.imgur.com/wMd8QmY.jpeg" alt="Banner 1"> <!-- Reemplaza con tu URL -->
+    </div>
+
+    <!-- Diapositiva 2 -->
+    <div class="carousel-slide">
+      <img src="https://i.imgur.com/QLg6Fnl.png" alt="Banner 2"> <!-- Reemplaza con tu URL -->
+    </div>
+
+    <!-- Diapositiva 3 -->
+    <div class="carousel-slide">
+      <img src="https://i.imgur.com/i6K1rEH.png alt="Banner 3"> <!-- Reemplaza con tu URL -->
+    </div>
+
+  </div>
+
+  <!-- Indicadores -->
+  <div class="carousel-indicators">
+    <span class="dot active" onclick="goToSlide(0)"></span>
+    <span class="dot" onclick="goToSlide(1)"></span>
+    <span class="dot" onclick="goToSlide(2)"></span>
+  </div>
+</div>
 
 <!-- Botón flotante de WhatsApp con ícono oficial -->
 <a href="https://wa.me/584124405245?text=Hola,%20me%20gustaría%20obtener%20más%20información" 
@@ -1341,20 +1406,20 @@
                         </div>
                     </div>
                     <div class="plans-list-box">
-                        <div class="card-plan-item" onclick="abrirModal('Netflix (Mayorista)', [{nombre: '1 Pantalla (Con código de viaje)', precio: 2.60}, {nombre: '1 Pantalla (Personalizada)', precio: 4.00}, {nombre: 'Cuenta Completa', precio: 13.50}], 0, 'distribuidores')">
+                        <div class="card-plan-item" onclick="abrirModal('Netflix (Mayorista)', [{nombre: '1 Pantalla (Con código de viaje)', precio: 3.30}, {nombre: '1 Pantalla (Personalizada)', precio: 4.00}, {nombre: 'Cuenta Completa', precio: 13.50}], 0, 'distribuidores')">
                             <span class="card-plan-name">1 Pantalla (Con código de Viaje)</span>
-                            <span class="card-plan-price" data-usd="2.60">$2.600</span>
+                            <span class="card-plan-price" data-usd="3.30">$3.30</span>
                         </div>
-                        <div class="card-plan-item" onclick="abrirModal('Netflix (Mayorista)', [{nombre: '1 Pantalla (Con código de viaje)', precio: 2.60}, {nombre: '1 Pantalla (Personalizada)', precio: 4.00}, {nombre: 'Cuenta Completa', precio: 13.50}], 1, 'distribuidores')">
+                        <div class="card-plan-item" onclick="abrirModal('Netflix (Mayorista)', [{nombre: '1 Pantalla (Con código de viaje)', precio: 3.30}, {nombre: '1 Pantalla (Personalizada)', precio: 4.00}, {nombre: 'Cuenta Completa', precio: 13.50}], 1, 'distribuidores')">
                             <span class="card-plan-name">1 Pantalla (Personalizada)</span>
                             <span class="card-plan-price" data-usd="4.00">$4.00</span>
                         </div>
-                        <div class="card-plan-item" onclick="abrirModal('Netflix (Mayorista)', [{nombre: '1 Pantalla (Con código de viaje)', precio: 2.60}, {nombre: '1 Pantalla (Personalizada)', precio: 4.00}, {nombre: 'Cuenta Completa', precio: 13.50}], 2, 'distribuidores')">
+                        <div class="card-plan-item" onclick="abrirModal('Netflix (Mayorista)', [{nombre: '1 Pantalla (Con código de viaje)', precio: 3.30}, {nombre: '1 Pantalla (Personalizada)', precio: 4.00}, {nombre: 'Cuenta Completa', precio: 13.50}], 2, 'distribuidores')">
                             <span class="card-plan-name">Cuenta Completa</span>
                             <span class="card-plan-price" data-usd="13.50">$13.50</span>
                         </div>
                     </div>
-                    <button class="btn-card-addplan" onclick="abrirModal('Netflix (Mayorista)', [{nombre: '1 Pantalla (Con código de viaje)', precio: 2.60}, {nombre: '1 Pantalla (Personalizada)', precio: 4.00}, {nombre: 'Cuenta Completa', precio: 13.50}], 0, 'distribuidores')">+ Añadir Plan</button>
+                    <button class="btn-card-addplan" onclick="abrirModal('Netflix (Mayorista)', [{nombre: '1 Pantalla (Con código de viaje)', precio: 3.30}, {nombre: '1 Pantalla (Personalizada)', precio: 4.00}, {nombre: 'Cuenta Completa', precio: 13.50}], 0, 'distribuidores')">+ Añadir Plan</button>
                 </div>
 
                 <!-- DISNEY+ (DISTRIBUIDOR) -->
@@ -1389,16 +1454,16 @@
                         </div>
                     </div>
                     <div class="plans-list-box">
-                        <div class="card-plan-item" onclick="abrirModal('Prime Video (Mayorista)', [{nombre: '1 Pantalla', precio: 0.90}, {nombre: 'Cuenta Completa', precio: 4.00}], 0, 'distribuidores')">
+                        <div class="card-plan-item" onclick="abrirModal('Prime Video (Mayorista)', [{nombre: '1 Pantalla', precio: 1.00}, {nombre: 'Cuenta Completa', precio: 4.00}], 0, 'distribuidores')">
                             <span class="card-plan-name">1 Pantalla</span>
-                            <span class="card-plan-price" data-usd="0.90">$0.90</span>
+                            <span class="card-plan-price" data-usd="1.00">$1.00</span>
                         </div>
-                        <div class="card-plan-item" onclick="abrirModal('Prime Video (Mayorista)', [{nombre: '1 Pantalla', precio: 0.90}, {nombre: 'Cuenta Completa', precio: 4.00}], 1, 'distribuidores')">
+                        <div class="card-plan-item" onclick="abrirModal('Prime Video (Mayorista)', [{nombre: '1 Pantalla', precio: 1.00}, {nombre: 'Cuenta Completa', precio: 4.00}], 1, 'distribuidores')">
                             <span class="card-plan-name">Cuenta Completa</span>
                             <span class="card-plan-price" data-usd="4.00">$4.00</span>
                         </div>
                     </div>
-                    <button class="btn-card-addplan" onclick="abrirModal('Prime Video (Mayorista)', [{nombre: '1 Pantalla', precio: 0.90}, {nombre: 'Cuenta Completa', precio: 4.00}], 0, 'distribuidores')">+ Añadir Plan</button>
+                    <button class="btn-card-addplan" onclick="abrirModal('Prime Video (Mayorista)', [{nombre: '1 Pantalla', precio: 1.00}, {nombre: 'Cuenta Completa', precio: 4.00}], 0, 'distribuidores')">+ Añadir Plan</button>
                 </div>
 
                 <!-- HBO MAX (DISTRIBUIDOR) -->
@@ -1411,16 +1476,16 @@
                         </div>
                     </div>
                     <div class="plans-list-box">
-                        <div class="card-plan-item" onclick="abrirModal('Hbo Max (Mayorista)', [{nombre: '1 Pantalla', precio: 1.00}, {nombre: 'Cuenta Completa', precio: 4.00}], 0, 'distribuidores')">
+                        <div class="card-plan-item" onclick="abrirModal('Hbo Max (Mayorista)', [{nombre: '1 Pantalla', precio: 1.50}, {nombre: 'Cuenta Completa', precio: 4.00}], 0, 'distribuidores')">
                             <span class="card-plan-name">1 Pantalla</span>
-                            <span class="card-plan-price" data-usd="1.00">$1.00</span>
+                            <span class="card-plan-price" data-usd="1.50">$1.50</span>
                         </div>
-                        <div class="card-plan-item" onclick="abrirModal('Hbo Max (Mayorista)', [{nombre: '1 Pantalla', precio: 1.00}, {nombre: 'Cuenta Completa', precio: 4.00}], 1, 'distribuidores')">
+                        <div class="card-plan-item" onclick="abrirModal('Hbo Max (Mayorista)', [{nombre: '1 Pantalla', precio: 1.50}, {nombre: 'Cuenta Completa', precio: 4.00}], 1, 'distribuidores')">
                             <span class="card-plan-name">Cuenta Completa</span>
                             <span class="card-plan-price" data-usd="4.00">$4.00</span>
                         </div>
                     </div>
-                    <button class="btn-card-addplan" onclick="abrirModal('Hbo Max (Mayorista)', [{nombre: '1 Pantalla', precio: 1.00}, {nombre: 'Cuenta Completa', precio: 4.00}], 0, 'distribuidores')">+ Añadir Plan</button>
+                    <button class="btn-card-addplan" onclick="abrirModal('Hbo Max (Mayorista)', [{nombre: '1 Pantalla', precio: 1.50}, {nombre: 'Cuenta Completa', precio: 4.00}], 0, 'distribuidores')">+ Añadir Plan</button>
                 </div>
 
                 <!-- CRUNCHYROLL (DISTRIBUIDOR) -->
@@ -1605,16 +1670,16 @@
                         </div>
                     </div>
                     <div class="plans-list-box">
-                        <div class="card-plan-item" onclick="abrirModal('FlujoTV (Mayorista)', [{nombre: '1 Mes de Servicio', precio: 1.50}, {nombre: 'Cuenta Completa', precio: 5.00}], 0, 'distribuidores')">
+                        <div class="card-plan-item" onclick="abrirModal('FlujoTV (Mayorista)', [{nombre: '1 Mes de Servicio', precio: 2.00}, {nombre: 'Cuenta Completa', precio: 5.00}], 0, 'distribuidores')">
                             <span class="card-plan-name">1 Mes de Servicio</span>
-                            <span class="card-plan-price" data-usd="1.50">$1.50</span>
+                            <span class="card-plan-price" data-usd="2.00">$2.00</span>
                         </div>
-                        <div class="card-plan-item" onclick="abrirModal('FlujoTV (Mayorista)', [{nombre: '1 Mes de Servicio', precio: 1.50}, {nombre: 'Cuenta Completa', precio: 5.00}], 1, 'distribuidores')">
+                        <div class="card-plan-item" onclick="abrirModal('FlujoTV (Mayorista)', [{nombre: '1 Mes de Servicio', precio: 2.00}, {nombre: 'Cuenta Completa', precio: 5.00}], 1, 'distribuidores')">
                             <span class="card-plan-name">Cuenta Completa</span>
                             <span class="card-plan-price" data-usd="5.50">$5.50</span>
                         </div>
                     </div>
-                    <button class="btn-card-addplan" onclick="abrirModal('FlujoTV (Mayorista)', [{nombre: '1 Mes de Servicio', precio: 1.50}, {nombre: 'Cuenta Completa', precio: 5.00}], 0, 'distribuidores')">+ Añadir Plan</button>
+                    <button class="btn-card-addplan" onclick="abrirModal('FlujoTV (Mayorista)', [{nombre: '1 Mes de Servicio', precio: 2.00}, {nombre: 'Cuenta Completa', precio: 5.00}], 0, 'distribuidores')">+ Añadir Plan</button>
                 </div>
 
                 <!-- CANVA (DISTRIBUIDOR) -->
@@ -1627,16 +1692,16 @@
                         </div>
                     </div>
                     <div class="plans-list-box">
-                        <div class="card-plan-item" onclick="abrirModal('Canva (Mayorista)', [{nombre: 'Cuenta Pro (1 Mes A tu correo)', precio: 0.50}, {nombre: 'Cuenta Pro (1 Año A tu correo)', precio: 6.00}], 0, 'distribuidores')">
+                        <div class="card-plan-item" onclick="abrirModal('Canva (Mayorista)', [{nombre: 'Cuenta Pro (1 Mes A tu correo)', precio: 1.50}, {nombre: 'Cuenta Pro (1 Año A tu correo)', precio: 7.50}], 0, 'distribuidores')">
                             <span class="card-plan-name">Cuenta Pro (1 Mes A tu correo)</span>
-                            <span class="card-plan-price" data-usd="0.50">$0.50</span>
+                            <span class="card-plan-price" data-usd="1.50">$1.50</span>
                         </div>
-                        <div class="card-plan-item" onclick="abrirModal('Canva (Mayorista)', [{nombre: 'Cuenta Pro (1 Mes A tu correo)', precio: 0.50}, {nombre: 'Cuenta Pro (1 Año A tu correo)', precio: 6.00}], 1, 'distribuidores')">
+                        <div class="card-plan-item" onclick="abrirModal('Canva (Mayorista)', [{nombre: 'Cuenta Pro (1 Mes A tu correo)', precio: 1.50}, {nombre: 'Cuenta Pro (1 Año A tu correo)', precio: 7.50}], 1, 'distribuidores')">
                             <span class="card-plan-name">Cuenta Pro (1 Año A tu correo)</span>
-                            <span class="card-plan-price" data-usd="6.00">$6.00</span>
+                            <span class="card-plan-price" data-usd="7.50">$7.50</span>
                         </div>
                     </div>
-                    <button class="btn-card-addplan" onclick="abrirModal('Canva (Mayorista)', [{nombre: 'Cuenta Pro (1 Mes A tu correo)', precio: 0.50}, {nombre: 'Cuenta Pro (1 Año A tu correo)', precio: 6.00}], 0, 'distribuidores')">+ Añadir Plan</button>
+                    <button class="btn-card-addplan" onclick="abrirModal('Canva (Mayorista)', [{nombre: 'Cuenta Pro (1 Mes A tu correo)', precio: 1.50}, {nombre: 'Cuenta Pro (1 Año A tu correo)', precio: 7.50}], 0, 'distribuidores')">+ Añadir Plan</button>
                 </div>
 
                 <!-- CAPCUT (DISTRIBUIDOR) -->
@@ -2431,6 +2496,44 @@ Cédula: V27178466`;
             }, 2500);
         }
     }
+
+let currentSlide = 0;
+const slides = document.querySelectorAll('.carousel-slide');
+const dots = document.querySelectorAll('.dot');
+const totalSlides = slides.length;
+let autoSlideInterval;
+
+function updateCarousel() {
+  const track = document.querySelector('.carousel-track');
+  track.style.transform = `translateX(-${currentSlide * 100}%)`;
+
+  dots.forEach((dot, index) => {
+    dot.classList.toggle('active', index === currentSlide);
+  });
+}
+
+function nextSlide() {
+  currentSlide = (currentSlide + 1) % totalSlides;
+  updateCarousel();
+}
+
+function goToSlide(index) {
+  currentSlide = index;
+  updateCarousel();
+  resetAutoSlide();
+}
+
+function startAutoSlide() {
+  autoSlideInterval = setInterval(nextSlide, 4000); // Cambia cada 4 segundos
+}
+
+function resetAutoSlide() {
+  clearInterval(autoSlideInterval);
+  startAutoSlide();
+}
+
+// Iniciar carrusel automático
+startAutoSlide();
 
     document.getElementById('input-nombre-perfil').addEventListener('input', () => {
         let subtotalUSD = carrito.reduce((sum, item) => sum + (item.precioUSD * item.cantidad), 0);
