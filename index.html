@@ -2327,58 +2327,63 @@ function verDetalleCuenta(index) {
             </button>
         </div>
 
-        <div class="service-header-badge">
+        <div style="background: #1a100c; border: 1px solid #ff6600; color: #ff6600; padding: 6px 14px; border-radius: 20px; font-size: 0.8rem; font-weight: 800; text-transform: uppercase; display: inline-block; margin-bottom: 12px;">
             SERVICIO: ${item.servicio}
         </div>
 
-        <div class="detail-account-grid">
-            <div class="detail-card-field">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; width: 100%; margin-top: 5px;">
+            <!-- CORREO -->
+            <div style="background: #0b0f19; border: 1px solid #1f2937; border-radius: 14px; padding: 14px 16px; display: flex; justify-content: space-between; align-items: center;">
                 <div>
-                    <div class="detail-field-label">CORREO / USUARIO</div>
-                    <div class="detail-field-val">${item.correo || 'N/A'}</div>
+                    <div style="font-size: 0.68rem; color: #6b7280; font-weight: 800; text-transform: uppercase; margin-bottom: 4px;">CORREO / USUARIO</div>
+                    <div style="font-size: 0.95rem; font-weight: 800; color: #ffffff; word-break: break-all;">${item.correo || 'N/A'}</div>
                 </div>
-                <button class="btn-copy-detail" onclick="copiarTexto('${item.correo}', 'Correo')">
-                    <svg viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+                <button onclick="copiarTexto('${item.correo}', 'Correo')" style="background: transparent; border: none; color: #6b7280; cursor: pointer; padding: 6px; flex-shrink: 0;">
+                    <svg style="width: 16px; height: 16px; fill: currentColor;" viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
                 </button>
             </div>
 
-            <div class="detail-card-field">
+            <!-- CONTRASEÑA -->
+            <div style="background: #0b0f19; border: 1px solid #1f2937; border-radius: 14px; padding: 14px 16px; display: flex; justify-content: space-between; align-items: center;">
                 <div>
-                    <div class="detail-field-label">CONTRASEÑA</div>
-                    <div class="detail-field-val">${item.clave || 'N/A'}</div>
+                    <div style="font-size: 0.68rem; color: #6b7280; font-weight: 800; text-transform: uppercase; margin-bottom: 4px;">CONTRASEÑA</div>
+                    <div style="font-size: 0.95rem; font-weight: 800; color: #ffffff; word-break: break-all;">${item.clave || 'N/A'}</div>
                 </div>
-                <button class="btn-copy-detail" onclick="copiarTexto('${item.clave}', 'Contraseña')">
-                    <svg viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+                <button onclick="copiarTexto('${item.clave}', 'Contraseña')" style="background: transparent; border: none; color: #6b7280; cursor: pointer; padding: 6px; flex-shrink: 0;">
+                    <svg style="width: 16px; height: 16px; fill: currentColor;" viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
                 </button>
             </div>
 
-            <div class="detail-card-field">
+            <!-- PERFIL -->
+            <div style="background: #0b0f19; border: 1px solid #1f2937; border-radius: 14px; padding: 14px 16px; display: flex; justify-content: space-between; align-items: center;">
                 <div>
-                    <div class="detail-field-label">PERFIL / CLIENTE</div>
-                    <div class="detail-field-val">${item.perfil || 'Principal'}</div>
+                    <div style="font-size: 0.68rem; color: #6b7280; font-weight: 800; text-transform: uppercase; margin-bottom: 4px;">PERFIL / CLIENTE</div>
+                    <div style="font-size: 0.95rem; font-weight: 800; color: #ffffff; word-break: break-all;">${item.perfil || 'Principal'}</div>
                 </div>
-                <button class="btn-copy-detail" onclick="copiarTexto('${item.perfil}', 'Perfil')">
-                    <svg viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+                <button onclick="copiarTexto('${item.perfil}', 'Perfil')" style="background: transparent; border: none; color: #6b7280; cursor: pointer; padding: 6px; flex-shrink: 0;">
+                    <svg style="width: 16px; height: 16px; fill: currentColor;" viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
                 </button>
             </div>
 
-            <div class="detail-card-field">
+            <!-- PIN -->
+            <div style="background: #0b0f19; border: 1px solid #1f2937; border-radius: 14px; padding: 14px 16px; display: flex; justify-content: space-between; align-items: center;">
                 <div>
-                    <div class="detail-field-label">PIN</div>
-                    <div class="detail-field-val">${item.pin || 'Sin PIN'}</div>
+                    <div style="font-size: 0.68rem; color: #6b7280; font-weight: 800; text-transform: uppercase; margin-bottom: 4px;">PIN</div>
+                    <div style="font-size: 0.95rem; font-weight: 800; color: #ffffff; word-break: break-all;">${item.pin || 'Sin PIN'}</div>
                 </div>
-                <button class="btn-copy-detail" onclick="copiarTexto('${item.pin}', 'PIN')">
-                    <svg viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+                <button onclick="copiarTexto('${item.pin}', 'PIN')" style="background: transparent; border: none; color: #6b7280; cursor: pointer; padding: 6px; flex-shrink: 0;">
+                    <svg style="width: 16px; height: 16px; fill: currentColor;" viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
                 </button>
             </div>
 
-            <div class="detail-card-field" style="grid-column: span 2;">
+            <!-- FECHA DE VENCIMIENTO -->
+            <div style="background: #0b0f19; border: 1px solid #1f2937; border-radius: 14px; padding: 14px 16px; display: flex; justify-content: space-between; align-items: center; grid-column: span 2;">
                 <div>
-                    <div class="detail-field-label">FECHA DE CORTE / VENCIMIENTO</div>
-                    <div class="detail-field-val" style="color: #ff6600;">${item.fechaCorte || 'Sin fecha'} (${item.dias} días restantes)</div>
+                    <div style="font-size: 0.68rem; color: #6b7280; font-weight: 800; text-transform: uppercase; margin-bottom: 4px;">FECHA DE CORTE / VENCIMIENTO</div>
+                    <div style="font-size: 0.95rem; font-weight: 800; color: #ff6600; word-break: break-all;">${item.fechaCorte || 'Sin fecha'} (${item.dias} días restantes)</div>
                 </div>
-                <button class="btn-copy-detail" onclick="copiarTexto('${item.fechaCorte}', 'Fecha Corte')">
-                    <svg viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+                <button onclick="copiarTexto('${item.fechaCorte}', 'Fecha Corte')" style="background: transparent; border: none; color: #6b7280; cursor: pointer; padding: 6px; flex-shrink: 0;">
+                    <svg style="width: 16px; height: 16px; fill: currentColor;" viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
                 </button>
             </div>
         </div>
