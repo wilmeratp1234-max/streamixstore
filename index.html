@@ -66,60 +66,47 @@
             50% { transform: translateY(-8px) rotate(5deg); }
         }
 		
-		/* DISEÑO DE DETALLE EN RECTÁNGULOS ESTILO PASARELA */
-.detail-account-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
-    width: 100%;
-    margin-top: 15px;
+		/* Elementos flotantes decorativos de Halloween */
+.halloween-decorations {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 999;
+    overflow: hidden;
 }
-.detail-card-field {
-    background: #0b0f19;
-    border: 1px solid #1f2937;
-    border-radius: 14px;
-    padding: 14px 16px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-.detail-field-label {
-    font-size: 0.68rem;
-    color: #6b7280;
-    font-weight: 800;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    margin-bottom: 4px;
-}
-.detail-field-val {
-    font-size: 0.95rem;
-    font-weight: 800;
-    color: #ffffff;
-    word-break: break-all;
-}
-.btn-copy-detail {
-    background: transparent;
-    border: none;
-    color: #6b7280;
-    cursor: pointer;
-    padding: 6px;
-    transition: color 0.2s;
-    flex-shrink: 0;
-}
-.btn-copy-detail:hover { color: #ff6600; }
-.btn-copy-detail svg { width: 16px; height: 16px; fill: currentColor; }
 
-.service-header-badge {
-    background: #1a100c;
-    border: 1px solid #ff6600;
-    color: #ff6600;
-    padding: 6px 14px;
-    border-radius: 20px;
-    font-size: 0.8rem;
-    font-weight: 800;
-    text-transform: uppercase;
-    display: inline-block;
-    margin-bottom: 12px;
+.floating-spider {
+    position: absolute;
+    top: -20px;
+    animation: swingSpider 4s ease-in-out infinite alternate;
+    font-size: 24px;
+    opacity: 0.8;
+}
+.spider-1 { left: 10%; animation-duration: 5s; }
+.spider-2 { left: 85%; animation-duration: 3.8s; }
+
+@keyframes swingSpider {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(60px); }
+}
+
+.floating-pumpkin-corner {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    font-size: 2.5rem;
+    z-index: 998;
+    pointer-events: none;
+    filter: drop-shadow(0 0 10px rgba(255, 102, 0, 0.6));
+    animation: bouncePumpkin 3s ease-in-out infinite;
+}
+
+@keyframes bouncePumpkin {
+    0%, 100% { transform: translateY(0) rotate(-5deg); }
+    50% { transform: translateY(-8px) rotate(5deg); }
 }
 		
         /* NAVEGACIÓN DESKTOP CON TOQUE HALLOWEEN */
@@ -519,6 +506,13 @@
                 <span id="label-moneda-mob">VES</span>
             </button>
         </div>
+
+    <!-- Elementos decorativos de Halloween -->
+    <div class="halloween-decorations">
+        <div class="floating-spider spider-1">🕷️</div>
+        <div class="floating-spider spider-2">🕸️</div>
+    </div>
+    <div class="floating-pumpkin-corner" title="¡Feliz Halloween!">🎃</div>
 
         <nav class="nav-bar">
             <button class="mobile-menu-btn" onclick="toggleDrawer()">☰</button>
@@ -2318,10 +2312,8 @@ function renderizarPaquetes() {
             window.open(url, '_blank');
         }
 
-        // Coloca aquí la URL que te dio Google Apps Script al implementar
-const URL_GOOGLE_APPS_SCRIPT = "https://script.google.com/macros/s/AKfycbzVZ9hzj3qw8sspc-UmY-pqmcKgV-cwtNue9GDV-ZOYlGenz8PuPHzndGr5ubOofK60ow/exec";
-
-let cuentasEncontradasCache = [];
+        const URL_GOOGLE_APPS_SCRIPT = "https://script.google.com/macros/s/AKfycbxFKRtSV9_Z5uIeCVz9FTzcf6Q7FqOqlfnmXxe_nSyue4cMCqgDpNBTvX6xJEJJp4gTuQ/exec";
+const TOKEN_SECRETO = "S482146POJEHSTY125WUEHWAS"; //
 
 function ejecutarBusquedaDatos() {
     const phoneInput = document.getElementById('search-phone-input');
@@ -2337,14 +2329,18 @@ function ejecutarBusquedaDatos() {
     const resultsBox = document.getElementById('search-results-box');
     const list = document.getElementById('search-accounts-list');
 
-    // Estado de Carga
     emptyBox.style.display = 'none';
     resultsBox.style.display = 'flex';
-    list.innerHTML = `<div style="text-align: center; color: #ff6600; padding: 40px 0; font-weight: bold;">🔍 Consultando...</div>`;
+    list.innerHTML = `<div style="text-align: center; color: #ff6600; padding: 40px 0; font-weight: bold;">🔍 Consultando hoja de cálculo...</div>`;
 
-    fetch(`${URL_GOOGLE_APPS_SCRIPT}?telefono=${num}`)
+    fetch(`${URL_GOOGLE_APPS_SCRIPT}?telefono=${num}&token=${TOKEN_SECRETO}`)
         .then(res => res.json())
         .then(data => {
+            if (data.error) {
+                list.innerHTML = `<div style="text-align: center; color: #ff4d4d; padding: 30px 0;">❌ Error de seguridad: ${data.error}</div>`;
+                return;
+            }
+
             if (!data.resultados || data.resultados.length === 0) {
                 list.innerHTML = `
                     <div style="text-align: center; color: #9ca3af; padding: 40px 0;">
