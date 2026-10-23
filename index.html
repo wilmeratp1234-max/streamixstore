@@ -2331,7 +2331,7 @@ function ejecutarBusquedaDatos() {
 
     emptyBox.style.display = 'none';
     resultsBox.style.display = 'flex';
-    list.innerHTML = `<div style="text-align: center; color: #ff6600; padding: 40px 0; font-weight: bold;">🔍 Consultando hoja de cálculo...</div>`;
+    list.innerHTML = `<div style="text-align: center; color: #ff6600; padding: 40px 0; font-weight: bold;">🔍 Consultando...</div>`;
 
     fetch(`${URL_GOOGLE_APPS_SCRIPT}?telefono=${num}&token=${TOKEN_SECRETO}`)
         .then(res => res.json())
