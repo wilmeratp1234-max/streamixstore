@@ -23,29 +23,59 @@
             background-size: auto, auto, 400px 400px;
         }
 		
-		.service-card.agotado {
-    opacity: 0.35;
-    filter: grayscale(0.8);
-    pointer-events: none;
-    position: relative;
-    cursor: not-allowed;
+		.badge-estado-wrapper {
+    text-align: center;
+    width: 100%;
+    margin: 15px 0 20px 0;
 }
-.service-card.agotado::after {
-    content: "AGOTADO";
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) rotate(-12deg);
-    background: rgba(20, 20, 20, 0.85);
-    color: #9ca3af;
-    border: 2px solid #6b7280;
+
+.badge-estado-tienda {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
     padding: 6px 18px;
-    font-size: 0.8rem;
-    font-weight: 900;
-    letter-spacing: 1.5px;
     border-radius: 20px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.8);
-    z-index: 10;
+    font-size: 0.85rem;
+    font-weight: bold;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+
+.badge-estado-tienda.abierto {
+    background: rgba(37, 211, 102, 0.12);
+    color: #25d366;
+    border-color: rgba(37, 211, 102, 0.3);
+}
+
+.badge-estado-tienda.cerrado {
+    background: rgba(255, 77, 77, 0.12);
+    color: #ff4d4d;
+    border-color: rgba(255, 77, 77, 0.3);
+}
+
+/* Animación de parpadeo (prender y apagar) */
+@keyframes parpadeoPunto {
+    0% { opacity: 0.2; transform: scale(0.8); }
+    50% { opacity: 1; transform: scale(1.2); }
+    100% { opacity: 0.2; transform: scale(0.8); }
+}
+
+.punto-estado {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    display: inline-block;
+    animation: parpadeoPunto 1.5s infinite ease-in-out;
+}
+
+.abierto .punto-estado { 
+    background-color: #25d366; 
+    box-shadow: 0 0 10px #25d366; 
+}
+
+.cerrado .punto-estado { 
+    background-color: #ff4d4d; 
+    box-shadow: 0 0 10px #ff4d4d; 
 }
 
 /* ==================== CORRECCIÓN DE CURSOR Y SELECCIÓN EN MENÚS ==================== */
@@ -659,6 +689,13 @@
     </div>
 
     <div class="container">
+	
+	<div class="badge-estado-wrapper">
+    <div id="estado-tienda-container" class="badge-estado-tienda cerrado">
+        <span class="punto-estado"></span>
+        <span id="texto-estado-tienda">Verificando horario...</span>
+    </div>
+</div>
 
         <!-- ==================== VISTA 1: SERVICIOS ==================== -->
         <div id="vista-servicios" class="view-section active">
@@ -2678,6 +2715,67 @@ document.addEventListener("DOMContentLoaded", function() {
             }
         }
     });
+});
+
+function actualizarEstadoTienda() {
+    // Obtiene la hora actual ajustada estrictamente a la zona horaria de Venezuela (America/Caracas)
+    const opciones = { timeZone: 'America/Caracas', hour12: false, hour: 'numeric', minute: 'numeric' };
+    const formatter = new Intl.DateTimeFormat([], opciones);
+    const partesHora = formatter.formatToParts(new Date());
+    
+    let horaVzla = 0;
+    let minutoVzla = 0;
+
+    partesHora.forEach(part => {
+        if (part.type === 'hour') horaVzla = parseInt(part.value);
+        if (part.type === 'minute') minutoVzla = parseInt(part.value);
+    });
+
+    // El horario de apertura es de 9:00 AM (9) a 10:00 PM (22)
+    const horaActualMinutos = (horaVzla * 60) + minutoVzla;
+    const aperturaMinutos = 9 * 60;   // 09:00 AM
+    const cierreMinutos = 22 * 60;     // 10:00 PM
+
+    const contenedor = document.getElementById('estado-tienda-container');
+    const texto = document.getElementById('texto-estado-tienda');
+    const btnCheckout = document.getElementById('btn-main-action'); // El botón principal de compra/verificar pedido
+
+    const estaAbierto = horaActualMinutos >= aperturaMinutos && horaActualMinutos < cierreMinutos;
+
+    if (estaAbierto) {
+        if (contenedor) {
+            contenedor.className = "badge-estado-tienda abierto";
+        }
+        if (texto) {
+            texto.innerHTML = "Abierto ahora: 9:00 AM - 10:00 PM";
+        }
+        // Habilita el botón de compra si existe
+        if (btnCheckout) {
+            btnCheckout.disabled = false;
+            btnCheckout.style.opacity = "1";
+            btnCheckout.style.cursor = "pointer";
+        }
+    } else {
+        if (contenedor) {
+            contenedor.className = "badge-estado-tienda cerrado";
+        }
+        if (texto) {
+            texto.innerHTML = "Cerrado ahora (Horario: 9 AM - 10 PM)";
+        }
+        // Bloquea las compras y cambia el texto del botón
+        if (btnCheckout) {
+            btnCheckout.disabled = true;
+            btnCheckout.style.opacity = "0.5";
+            btnCheckout.style.cursor = "not-allowed";
+            btnCheckout.innerText = "TIENDA CERRADA HASTA LAS 9 AM";
+        }
+    }
+}
+
+// Ejecutar al cargar la página y actualizar cada 30 segundos
+document.addEventListener("DOMContentLoaded", function() {
+    actualizarEstadoTienda();
+    setInterval(actualizarEstadoTienda, 30000);
 });
 
         let currentSlide = 0;
