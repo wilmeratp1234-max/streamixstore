@@ -22,6 +22,31 @@
             background-repeat: repeat;
             background-size: auto, auto, 400px 400px;
         }
+		
+		.service-card.agotado {
+    opacity: 0.35;
+    filter: grayscale(0.8);
+    pointer-events: none;
+    position: relative;
+    cursor: not-allowed;
+}
+.service-card.agotado::after {
+    content: "AGOTADO";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(-12deg);
+    background: rgba(20, 20, 20, 0.85);
+    color: #9ca3af;
+    border: 2px solid #6b7280;
+    padding: 6px 18px;
+    font-size: 0.8rem;
+    font-weight: 900;
+    letter-spacing: 1.5px;
+    border-radius: 20px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.8);
+    z-index: 10;
+}
 
 /* ==================== CORRECCIÓN DE CURSOR Y SELECCIÓN EN MENÚS ==================== */
 .nav-links a, 
@@ -1946,8 +1971,9 @@
         }
 
 // ==================== CONTROL DE STOCK / INVENTARIO ====================
-// Cambia a 0 para mostrar la tarjeta automáticamente como AGOTADO.
+// (0 = Agotado / >0 = Stock disponible)
 const CONTROL_DE_STOCK = {
+    // --- CLIENTES FINALES (Catálogo Normal) ---
     "netflix": 0,
     "disney+ premium": 0,
     "prime video": 10,
@@ -1957,6 +1983,7 @@ const CONTROL_DE_STOCK = {
     "vix": 8,
     "appletv": 0,
     "universal+": 0,
+    "viki rakuten": 5,
     "streamix tv": 15,
     "flujotv": 12,
     "spotify premium": 20,
@@ -1970,7 +1997,22 @@ const CONTROL_DE_STOCK = {
     "blood strike": 0,
     "mobile legends": 0,
     "call of duty mobile": 30,
-    "roblox": 10
+    "roblox": 10,
+
+    // --- MAYORISTAS (Área de Distribuidores con sufijo -vip) ---
+    "netflix-vip": 0,
+    "disney+ premium-vip": 0,
+    "prime video-vip": 5,
+    "hbo max standar-vip": 2,
+    "crunchyroll-vip": 4,
+    "paramount+-vip": 5,
+    "vix-vip": 5,
+    "streamix tv-vip": 10,
+    "flujotv-vip": 10,
+    "spotify premium-vip": 10,
+    "youtube premium-vip": 10,
+    "canva pro edu-vip": 20,
+    "capcut-vip": 5
 };
         function abrirProducto(nombre, tag, imagen) {
             productoNombreActual = nombre;
@@ -2586,6 +2628,57 @@ function verDetalleCuenta(index) {
             if(productoActualData) renderizarPaquetes();
             cerrarModalRegion();
         }
+		
+		document.addEventListener("DOMContentLoaded", function() {
+    // Busca todas las tarjetas de servicio en la ventana principal
+    const tarjetas = document.querySelectorAll('.view-section .service-card');
+    
+    tarjetas.forEach(card => {
+        // Extrae el nombre del producto desde la función onclick
+        const onclickAttr = card.getAttribute('onclick');
+        if (onclickAttr && onclickAttr.includes('abrirProducto')) {
+            const match = onclickAttr.match(/abrirProducto\(['"]([^'"]+)['"]/);
+            if (match && match[1]) {
+                const nombreProducto = match[1].toLowerCase().trim();
+                // Revisa si el producto tiene stock 0 en tu objeto CONTROL_DE_STOCK
+                if (CONTROL_DE_STOCK[nombreProducto] !== undefined && CONTROL_DE_STOCK[nombreProducto] <= 0) {
+                    card.classList.add('agotado');
+                }
+            }
+        }
+    });
+});
+
+document.addEventListener("DOMContentLoaded", function() {
+    const tarjetas = document.querySelectorAll('.service-card');
+    
+    tarjetas.forEach(card => {
+        const onclickAttr = card.getAttribute('onclick');
+        if (onclickAttr) {
+            let nombreProducto = "";
+            let esMayorista = onclickAttr.includes('abrirProductoDistri');
+
+            if (esMayorista) {
+                const match = onclickAttr.match(/abrirProductoDistri\(['"]([^'"]+)['"]\)/);
+                if (match && match[1]) {
+                    // Si es mayorista, busca la clave con el sufijo -vip
+                    nombreProducto = match[1].toLowerCase().trim() + "-vip";
+                }
+            } else if (onclickAttr.includes('abrirProducto')) {
+                const match = onclickAttr.match(/abrirProducto\(['"]([^'"]+)['"]\)/);
+                if (match && match[1]) {
+                    nombreProducto = match[1].toLowerCase().trim();
+                }
+            }
+
+            if (nombreProducto && CONTROL_DE_STOCK[nombreProducto] !== undefined) {
+                if (CONTROL_DE_STOCK[nombreProducto] <= 0) {
+                    card.classList.add('agotado');
+                }
+            }
+        }
+    });
+});
 
         let currentSlide = 0;
         function goToSlide(index) {
