@@ -715,10 +715,16 @@
                 <a href="#" class="btn-ver-todos">Ver todos</a>
             </div>
 
-            <div class="services-grid">
+            <<div class="services-grid">
     <div class="service-card" onclick="abrirProducto('Netflix', 'Streaming', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0cMo-_nUdZeTFpq-DtJpYjfxcodMcWpU1GlzFugCSGIuYH7z1bRq21V9a&s=10')">
         <div class="service-image-box"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0cMo-_nUdZeTFpq-DtJpYjfxcodMcWpU1GlzFugCSGIuYH7z1bRq21V9a&s=10" alt="Netflix"></div>
         <div class="service-content"><span class="service-tag">Streaming</span><div class="service-name">Netflix</div></div>
+    </div>
+
+    <!-- NUEVO: Netflix Personal -->
+    <div class="service-card" onclick="abrirProducto('Netflix Personal', 'Streaming', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0cMo-_nUdZeTFpq-DtJpYjfxcodMcWpU1GlzFugCSGIuYH7z1bRq21V9a&s=10')">
+        <div class="service-image-box"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0cMo-_nUdZeTFpq-DtJpYjfxcodMcWpU1GlzFugCSGIuYH7z1bRq21V9a&s=10" alt="Netflix Personal"></div>
+        <div class="service-content"><span class="service-tag">Streaming</span><div class="service-name">Netflix Personal (BAJO RESERVA)</div></div>
     </div>
 
     <div class="service-card" onclick="abrirProducto('Disney+ Premium', 'Streaming', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSqq1cMuB1cYRHSa6tNkK7nf_DRk8drwjF1lvYHPltlUiwl1Pwzthbiu3E-&s=10')">
@@ -853,6 +859,12 @@
                 <div class="service-card" onclick="abrirProductoDistri('Netflix', 'Streaming Mayorista', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0cMo-_nUdZeTFpq-DtJpYjfxcodMcWpU1GlzFugCSGIuYH7z1bRq21V9a&s=10')">
                     <div class="service-image-box"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0cMo-_nUdZeTFpq-DtJpYjfxcodMcWpU1GlzFugCSGIuYH7z1bRq21V9a&s=10" alt="Netflix"></div>
                     <div class="service-content"><span class="service-tag">PRECIO MAYORISTA</span><div class="service-name">Netflix VIP</div></div>
+                </div>
+
+                <!-- NUEVO: Netflix Personal VIP -->
+                <div class="service-card" onclick="abrirProductoDistri('Netflix Personal', 'Streaming Mayorista', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0cMo-_nUdZeTFpq-DtJpYjfxcodMcWpU1GlzFugCSGIuYH7z1bRq21V9a&s=10')">
+                    <div class="service-image-box"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0cMo-_nUdZeTFpq-DtJpYjfxcodMcWpU1GlzFugCSGIuYH7z1bRq21V9a&s=10" alt="Netflix Personal"></div>
+                    <div class="service-content"><span class="service-tag">PRECIO MAYORISTA</span><div class="service-name">Netflix Personal (BAJO RESERVA)</div></div>
                 </div>
 
                 <div class="service-card" onclick="abrirProductoDistri('Disney+ Premium', 'Streaming Mayorista', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSqq1cMuB1cYRHSa6tNkK7nf_DRk8drwjF1lvYHPltlUiwl1Pwzthbiu3E-&s=10')">
@@ -1495,6 +1507,19 @@
             { monto: "Cuenta Completa", extra: "Ilimitada", precioUSD: 14.99 }
         ]
     },
+    "netflix personal": {
+        categoria: "streaming",
+        tab1Nombre: "Planes Personales",
+        tab2Nombre: "Cuentas",
+        idLabel: "CORREO O USUARIO",
+        idPlaceholder: "Ingresa los datos para tu cuenta personal",
+        paquetesTab1: [
+            { monto: "1 Mes", extra: "Netflix Personal", precioUSD: 5.50, active: true }
+        ],
+        paquetesTab2: [
+            { monto: "1 Mes", extra: "Netflix Personal", precioUSD: 5.50 }
+        ]
+    },
     "disney+ premium": {
         categoria: "streaming",
         tab1Nombre: "Planes Pantallas",
@@ -1607,7 +1632,7 @@
             { monto: "Cuenta Completa", extra: "Privada", precioUSD: 5.00 }
         ]
     },
-	"viki rakuten": {
+    "viki rakuten": {
         categoria: "streaming",
         tab1Nombre: "Planes Pantallas",
         tab2Nombre: "Cuentas Completa",
@@ -1798,179 +1823,192 @@
     }
 };
 
-        const baseDeDatosPreciosDistri = {
-            "netflix": {
-                categoria: "distribuidores",
-                tab1Nombre: "Planes Mayoristas",
-                tab2Nombre: "Cuentas Mayoristas",
-                idLabel: "NOMBRE PARA LA PANTALLA",
-                idPlaceholder: "Ingresa el nombre para tu pantalla",
-                paquetesTab1: [
-                    { monto: "1 Pantalla", extra: "Lote Mayorista", precioUSD: 3.30, active: true },
-                ],
-                paquetesTab2: [
-                    { monto: "Cuenta Completa", extra: "Panel VIP", precioUSD: 14.50 }
-                ]
-            },
-            "disney+ premium": {
-                categoria: "distribuidores",
-                tab1Nombre: "Pantallas Mayoristas",
-                tab2Nombre: "Cuentas Mayoristas",
-                idLabel: "NOMBRE PARA LA PANTALLA",
-                idPlaceholder: "Ingresa el nombre para tu pantalla",
-                paquetesTab1: [
-                    { monto: "1 Pantalla", extra: "Precio Revendedor", precioUSD: 3.00, active: true },
-                ],
-                paquetesTab2: [
-                    { monto: "Cuenta Completa", extra: "Pack Mayorista", precioUSD: 17.00 }
-                ]
-            },
-            "prime video": {
-                categoria: "distribuidores",
-                tab1Nombre: "Opciones Mayoristas",
-                tab2Nombre: "Cuenta Mayorista",
-                idLabel: "NOMBRE PARA LA PANTALLA",
-                idPlaceholder: "Ingresa el nombre para tu pantalla",
-                paquetesTab1: [
-                    { monto: "1 Pantalla", extra: "Revendedor", precioUSD: 1.20, active: true },
-                ],
-                paquetesTab2: [
-                    { monto: "Cuenta Completa", extra: "Pack VIP", precioUSD: 4.00 }
-                ]
-            },
-            "hbo max standar": {
-                categoria: "distribuidores",
-                tab1Nombre: "Pantallas Mayoristas",
-                tab2Nombre: "Cuentas Mayoristas",
-                idLabel: "NOMBRE PARA LA PANTALLA",
-                idPlaceholder: "Ingresa el nombre para tu pantalla",
-                paquetesTab1: [
-                    { monto: "1 Pantalla", extra: "Revendedor", precioUSD: 1.00, active: true },
-                ],
-                paquetesTab2: [
-                    { monto: "Cuenta Completa", extra: "Privada VIP", precioUSD: 4.00 }
-                ]
-            },
-            "crunchyroll": {
-                categoria: "distribuidores",
-                tab1Nombre: "Mega Fan Revendedor",
-                tab2Nombre: "Cuenta Completa VIP",
-                idLabel: "NOMBRE PARA LA PANTALLA",
-                idPlaceholder: "Ingresa el nombre para tu pantalla",
-                paquetesTab1: [
-                    { monto: "1 Pantalla", extra: "Mayorista", precioUSD: 1.00, active: true },
-                ],
-                paquetesTab2: [
-                    { monto: "Cuenta Completa", extra: "Lote Revendedores", precioUSD: 4.00 }
-                ]
-            },
-            "paramount+": {
-                categoria: "distribuidores",
-                tab1Nombre: "Planes VIP",
-                tab2Nombre: "Cuentas VIP",
-                idLabel: "NOMBRE PARA LA PANTALLA",
-                idPlaceholder: "Ingresa el nombre para tu pantalla",
-                paquetesTab1: [
-                    { monto: "1 Pantalla", extra: "Precio Mayorista", precioUSD: 1.50, active: true },
-                ],
-                paquetesTab2: [
-                    { monto: "Cuenta Completa", extra: "Lote Mayorista", precioUSD: 5.00 }
-                ]
-            },
-            "vix": {
-                categoria: "distribuidores",
-                tab1Nombre: "Planes Mayoristas",
-                tab2Nombre: "Cuentas Mayoristas",
-                idLabel: "NOMBRE PARA LA PANTALLA",
-                idPlaceholder: "Ingresa el nombre para tu pantalla",
-                paquetesTab1: [
-                    { monto: "1 Pantalla", extra: "Revendedor", precioUSD: 1.00, active: true },
-                ],
-                paquetesTab2: [
-                    { monto: "Cuenta Completa", extra: "Lote Mayorista", precioUSD: 3.00 }
-                ]
-            },
-            "streamix tv": {
-                categoria: "distribuidores",
-                tab1Nombre: "IPTV Mayorista",
-                tab2Nombre: "Pack Anual VIP",
-                idLabel: "NOMBRE O DISPOSITIVO",
-                idPlaceholder: "Ej: Smart TV / Mi Nombre",
-                paquetesTab1: [
-                    { monto: "1 Mes VIP", extra: "Revendedor", precioUSD: 2.00, active: true },
-                    { monto: "3 Meses", extra: "Mayorista", precioUSD: 5.00 }
-                ],
-                paquetesTab2: [
-                    { monto: "12 Meses", extra: "Anual VIP", precioUSD: 15.00 }
-                ]
-            },
-            "flujotv": {
-                categoria: "distribuidores",
-                tab1Nombre: "IPTV Mayorista",
-                tab2Nombre: "Pack Anual VIP",
-                idLabel: "NOMBRE O DISPOSITIVO",
-                idPlaceholder: "Ej: Firestick / Mi Nombre",
-                paquetesTab1: [
-                    { monto: "1 Mes VIP", extra: "Revendedor", precioUSD: 2.00, active: true },
-                    { monto: "3 Meses", extra: "Mayorista", precioUSD: 6.00 }
-                ],
-                paquetesTab2: [
-                    { monto: "12 Meses", extra: "Anual VIP", precioUSD: 22.00 }
-                ]
-            },
-            "spotify premium": {
-                categoria: "distribuidores",
-                tab1Nombre: "Mayorista Correo",
-                tab2Nombre: "Lote",
-                idLabel: "CORREO DE TU CUENTA SPOTIFY",
-                idPlaceholder: "Ingresa el correo",
-                paquetesTab1: [
-                    { monto: "1 Mes", extra: "Revendedor", precioUSD: 4.00, active: true },
-                ],
-                paquetesTab2: [
-                    { monto: "3 Meses", extra: "Mayorista", precioUSD: 12.00 }
-                ]
-            },
-            "youtube premium": {
-                categoria: "distribuidores",
-                tab1Nombre: "Individual Mayorista",
-                tab2Nombre: "Renovable VIP",
-                idLabel: "CORREO DE TU CUENTA YOUTUBE",
-                idPlaceholder: "Tu correo para invitarte",
-                paquetesTab1: [
-                    { monto: "1 Mes", extra: "Revendedor", precioUSD: 4.00, active: true }
-                ],
-                paquetesTab2: [
-                    { monto: "12 Mes", extra: "Revendedor", precioUSD: 22.00 }
-                ]
-            },
-            "canva pro edu": {
-                categoria: "distribuidores",
-                tab1Nombre: "Canva Pro Mayorista",
-                tab2Nombre: "Anual",
-                idLabel: "CORREO DE TU CUENTA CANVA",
-                idPlaceholder: "Correo para invitación Pro",
-                paquetesTab1: [
-                    { monto: "1 Mes Pro", extra: "Revendedor", precioUSD: 0.50, active: true },
-                ],
-                paquetesTab2: [
-                    { monto: "12 Meses Pro", extra: "Mayorista", precioUSD: 8.00 }
-                ]
-            },
-            "capcut": {
-                categoria: "distribuidores",
-                tab1Nombre: "CapCut Pro Mayorista",
-                tab2Nombre: "Suscripción",
-                idLabel: "CORREO DE CONTACTO",
-                idPlaceholder: "Tu correo electrónico",
-                paquetesTab1: [
-                    { monto: "1 Mes Pro", extra: "Revendedor", precioUSD: 6.50, active: true }
-                ],
-                paquetesTab2: [
-                    { monto: "1 Mes Pro", extra: "Revendedor", precioUSD: 0.00 }
-                ]
-            }
-        };
+const baseDeDatosPreciosDistri = {
+    "netflix": {
+        categoria: "distribuidores",
+        tab1Nombre: "Planes Mayoristas",
+        tab2Nombre: "Cuentas Mayoristas",
+        idLabel: "NOMBRE PARA LA PANTALLA",
+        idPlaceholder: "Ingresa el nombre para tu pantalla",
+        paquetesTab1: [
+            { monto: "1 Pantalla", extra: "Lote Mayorista", precioUSD: 3.30, active: true },
+        ],
+        paquetesTab2: [
+            { monto: "Cuenta Completa", extra: "Panel VIP", precioUSD: 14.50 }
+        ]
+    },
+    "netflix personal": {
+        categoria: "distribuidores",
+        tab1Nombre: "Planes Mayoristas",
+        tab2Nombre: "Cuentas Mayoristas",
+        idLabel: "CORREO O USUARIO",
+        idPlaceholder: "Ingresa los datos para tu cuenta personal",
+        paquetesTab1: [
+            { monto: "1 Mes", extra: "Personal VIP", precioUSD: 5.20, active: true }
+        ],
+        paquetesTab2: [
+            { monto: "1 Mes", extra: "Personal VIP", precioUSD: 5.20 }
+        ]
+    },
+    "disney+ premium": {
+        categoria: "distribuidores",
+        tab1Nombre: "Pantallas Mayoristas",
+        tab2Nombre: "Cuentas Mayoristas",
+        idLabel: "NOMBRE PARA LA PANTALLA",
+        idPlaceholder: "Ingresa el nombre para tu pantalla",
+        paquetesTab1: [
+            { monto: "1 Pantalla", extra: "Precio Revendedor", precioUSD: 3.00, active: true },
+        ],
+        paquetesTab2: [
+            { monto: "Cuenta Completa", extra: "Pack Mayorista", precioUSD: 17.00 }
+        ]
+    },
+    "prime video": {
+        categoria: "distribuidores",
+        tab1Nombre: "Opciones Mayoristas",
+        tab2Nombre: "Cuenta Mayorista",
+        idLabel: "NOMBRE PARA LA PANTALLA",
+        idPlaceholder: "Ingresa el nombre para tu pantalla",
+        paquetesTab1: [
+            { monto: "1 Pantalla", extra: "Revendedor", precioUSD: 1.20, active: true },
+        ],
+        paquetesTab2: [
+            { monto: "Cuenta Completa", extra: "Pack VIP", precioUSD: 4.00 }
+        ]
+    },
+    "hbo max standar": {
+        categoria: "distribuidores",
+        tab1Nombre: "Pantallas Mayoristas",
+        tab2Nombre: "Cuentas Mayoristas",
+        idLabel: "NOMBRE PARA LA PANTALLA",
+        idPlaceholder: "Ingresa el nombre para tu pantalla",
+        paquetesTab1: [
+            { monto: "1 Pantalla", extra: "Revendedor", precioUSD: 1.00, active: true },
+        ],
+        paquetesTab2: [
+            { monto: "Cuenta Completa", extra: "Privada VIP", precioUSD: 4.00 }
+        ]
+    },
+    "crunchyroll": {
+        categoria: "distribuidores",
+        tab1Nombre: "Mega Fan Revendedor",
+        tab2Nombre: "Cuenta Completa VIP",
+        idLabel: "NOMBRE PARA LA PANTALLA",
+        idPlaceholder: "Ingresa el nombre para tu pantalla",
+        paquetesTab1: [
+            { monto: "1 Pantalla", extra: "Mayorista", precioUSD: 1.00, active: true },
+        ],
+        paquetesTab2: [
+            { monto: "Cuenta Completa", extra: "Lote Revendedores", precioUSD: 4.00 }
+        ]
+    },
+    "paramount+": {
+        categoria: "distribuidores",
+        tab1Nombre: "Planes VIP",
+        tab2Nombre: "Cuentas VIP",
+        idLabel: "NOMBRE PARA LA PANTALLA",
+        idPlaceholder: "Ingresa el nombre para tu pantalla",
+        paquetesTab1: [
+            { monto: "1 Pantalla", extra: "Precio Mayorista", precioUSD: 1.50, active: true },
+        ],
+        paquetesTab2: [
+            { monto: "Cuenta Completa", extra: "Lote Mayorista", precioUSD: 5.00 }
+        ]
+    },
+    "vix": {
+        categoria: "distribuidores",
+        tab1Nombre: "Planes Mayoristas",
+        tab2Nombre: "Cuentas Mayoristas",
+        idLabel: "NOMBRE PARA LA PANTALLA",
+        idPlaceholder: "Ingresa el nombre para tu pantalla",
+        paquetesTab1: [
+            { monto: "1 Pantalla", extra: "Revendedor", precioUSD: 1.00, active: true },
+        ],
+        paquetesTab2: [
+            { monto: "Cuenta Completa", extra: "Lote Mayorista", precioUSD: 3.00 }
+        ]
+    },
+    "streamix tv": {
+        categoria: "distribuidores",
+        tab1Nombre: "IPTV Mayorista",
+        tab2Nombre: "Pack Anual VIP",
+        idLabel: "NOMBRE O DISPOSITIVO",
+        idPlaceholder: "Ej: Smart TV / Mi Nombre",
+        paquetesTab1: [
+            { monto: "1 Mes VIP", extra: "Revendedor", precioUSD: 2.00, active: true },
+            { monto: "3 Meses", extra: "Mayorista", precioUSD: 5.00 }
+        ],
+        paquetesTab2: [
+            { monto: "12 Meses", extra: "Anual VIP", precioUSD: 15.00 }
+        ]
+    },
+    "flujotv": {
+        categoria: "distribuidores",
+        tab1Nombre: "IPTV Mayorista",
+        tab2Nombre: "Pack Anual VIP",
+        idLabel: "NOMBRE O DISPOSITIVO",
+        idPlaceholder: "Ej: Firestick / Mi Nombre",
+        paquetesTab1: [
+            { monto: "1 Mes VIP", extra: "Revendedor", precioUSD: 2.00, active: true },
+            { monto: "3 Meses", extra: "Mayorista", precioUSD: 6.00 }
+        ],
+        paquetesTab2: [
+            { monto: "12 Meses", extra: "Anual VIP", precioUSD: 22.00 }
+        ]
+    },
+    "spotify premium": {
+        categoria: "distribuidores",
+        tab1Nombre: "Mayorista Correo",
+        tab2Nombre: "Lote",
+        idLabel: "CORREO DE TU CUENTA SPOTIFY",
+        idPlaceholder: "Ingresa el correo",
+        paquetesTab1: [
+            { monto: "1 Mes", extra: "Revendedor", precioUSD: 4.00, active: true },
+        ],
+        paquetesTab2: [
+            { monto: "3 Meses", extra: "Mayorista", precioUSD: 12.00 }
+        ]
+    },
+    "youtube premium": {
+        categoria: "distribuidores",
+        tab1Nombre: "Individual Mayorista",
+        tab2Nombre: "Renovable VIP",
+        idLabel: "CORREO DE TU CUENTA YOUTUBE",
+        idPlaceholder: "Tu correo para invitarte",
+        paquetesTab1: [
+            { monto: "1 Mes", extra: "Revendedor", precioUSD: 4.00, active: true }
+        ],
+        paquetesTab2: [
+            { monto: "12 Mes", extra: "Revendedor", precioUSD: 22.00 }
+        ]
+    },
+    "canva pro edu": {
+        categoria: "distribuidores",
+        tab1Nombre: "Canva Pro Mayorista",
+        tab2Nombre: "Anual",
+        idLabel: "CORREO DE TU CUENTA CANVA",
+        idPlaceholder: "Correo para invitación Pro",
+        paquetesTab1: [
+            { monto: "1 Mes Pro", extra: "Revendedor", precioUSD: 0.50, active: true },
+        ],
+        paquetesTab2: [
+            { monto: "12 Meses Pro", extra: "Mayorista", precioUSD: 8.00 }
+        ]
+    },
+    "capcut": {
+        categoria: "distribuidores",
+        tab1Nombre: "CapCut Pro Mayorista",
+        tab2Nombre: "Suscripción",
+        idLabel: "CORREO DE CONTACTO",
+        idPlaceholder: "Tu correo electrónico",
+        paquetesTab1: [
+            { monto: "1 Mes Pro", extra: "Revendedor", precioUSD: 6.50, active: true }
+        ],
+        paquetesTab2: [
+            { monto: "1 Mes Pro", extra: "Revendedor", precioUSD: 0.00 }
+        ]
+    }
+};
 
         let productoNombreActual = "Netflix";
         let productoActualData = null;
@@ -2010,6 +2048,7 @@
 const CONTROL_DE_STOCK = {
     // --- CLIENTES FINALES (Catálogo Normal) ---
     "netflix": 1,
+    "netflix personal": 1,
     "disney+ premium": 0,
     "prime video": 10,
     "hbo max standar": 1,
@@ -2036,6 +2075,7 @@ const CONTROL_DE_STOCK = {
 
     // --- MAYORISTAS (Área de Distribuidores con sufijo -vip) ---
     "netflix-vip": 1,
+    "netflix personal-vip": 1,
     "disney+ premium-vip": 0,
     "prime video-vip": 5,
     "hbo max standar-vip": 2,
