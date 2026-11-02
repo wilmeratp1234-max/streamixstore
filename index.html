@@ -3138,6 +3138,89 @@ window.addEventListener('popstate', function() {
     verificarHashUrl();
 });
 
+// Función para enviar la reseña
+function enviarResena(event) {
+  if (event) event.preventDefault();
+
+  const nombre = document.getElementById("nombre-resena") ? document.getElementById("nombre-resena").value : "Anónimo";
+  const plataforma = document.getElementById("plataforma-resena") ? document.getElementById("plataforma-resena").value : "General";
+  const estrellas = document.getElementById("estrellas-resena") ? document.getElementById("estrellas-resena").value : "5";
+  const comentario = document.getElementById("comentario-resena") ? document.getElementById("comentario-resena").value : "";
+
+  const urlEnvio = `${URL_GOOGLE_APPS_SCRIPT}?accion=guardarResena&token=${TOKEN_SECRETO}&nombre=${encodeURIComponent(nombre)}&plataforma=${encodeURIComponent(plataforma)}&estrellas=${encodeURIComponent(estrellas)}&comentario=${encodeURIComponent(comentario)}`;
+
+  fetch(urlEnvio)
+    .then(res => res.json())
+    .then(data => {
+      if (data.estado === "success") {
+        alert("¡Gracias por tu reseña! Ha sido publicada con éxito.");
+        // Limpiar formulario si existe
+        if (document.getElementById("form-resena")) {
+          document.getElementById("form-resena").reset();
+        }
+        // Volver a cargar las reseñas inmediatamente para que aparezca la nueva
+        cargarResenas();
+      } else {
+        alert("Hubo un error al guardar la reseña.");
+      }
+    })
+    .catch(err => {
+      console.error(err);
+      alert("Error de conexión al enviar la reseña.");
+    });
+}
+
+// Función para cargar y pintar las reseñas en la web
+function cargarResenas() {
+  const contenedorResenas = document.getElementById("lista-resenas-container");
+  if (!contenedorResenas) return;
+
+  contenedorResenas.innerHTML = `<div style="text-align: center; color: #00FFEF; padding: 30px 0; font-weight: bold;">Cargando reseñas...</div>`;
+
+  fetch(`${URL_GOOGLE_APPS_SCRIPT}?accion=obtenerResenas&token=${TOKEN_SECRETO}`)
+    .then(res => res.json())
+    .then(data => {
+      if (!Array.isArray(data) || data.length === 0) {
+        contenedorResenas.innerHTML = `<div style="text-align: center; color: #9ca3af; padding: 30px 0;">Aún no hay reseñas registradas. ¡Sé el primero en dejar una!</div>`;
+        return;
+      }
+
+      let html = "";
+      data.forEach(item => {
+        let estrellasHTML = "";
+        const numEstrellas = parseInt(item.estrellas) || 5;
+        for (let i = 0; i < numEstrellas; i++) {
+          estrellasHTML += "★";
+        }
+
+        html += `
+          <div style="background: #121824; border: 1px solid #1f293d; border-radius: 12px; padding: 20px; margin-bottom: 15px; color: #fff;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+              <div>
+                <strong style="font-size: 1.05rem; color: #00FFEF;">${item.nombre || "Anónimo"}</strong>
+                <span style="background: #1a2332; color: #00FFEF; font-size: 0.75rem; padding: 2px 8px; border-radius: 6px; margin-left: 8px;">${item.plataforma || "General"}</span>
+              </div>
+              <span style="color: #9ca3af; font-size: 0.85rem;">${item.fecha || ""}</span>
+            </div>
+            <div style="color: #fbbf24; font-size: 1rem; margin-bottom: 8px;">${estrellasHTML}</div>
+            <p style="color: #d1d5db; font-size: 0.95rem; margin: 0; line-height: 1.4;">${item.comentario || ""}</p>
+          </div>
+        `;
+      });
+
+      contenedorResenas.innerHTML = html;
+    })
+    .catch(err => {
+      console.error(err);
+      contenedorResenas.innerHTML = `<div style="text-align: center; color: #ff4d4d; padding: 30px 0;">Error al cargar las reseñas.</div>`;
+    });
+}
+
+// Cargar las reseñas automáticamente al abrir la sección
+document.addEventListener("DOMContentLoaded", () => {
+  cargarResenas();
+});
+
         let currentSlide = 0;
         function goToSlide(index) {
             currentSlide = index;
