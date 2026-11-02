@@ -631,12 +631,13 @@
 
             <!-- Menú Principal Desktop -->
             <ul class="nav-links">
-                <li><a id="nav-recargas" onclick="mostrarVista('recargas')">Recargas</a></li>
-                <li><a id="nav-servicios" class="active" onclick="mostrarVista('servicios')">Servicios</a></li>
-                <li><a id="nav-distribuidores" onclick="solicitarAccesoDistribuidores()">👑 Distribuidores</a></li>
-                <li><a id="nav-buscar" onclick="mostrarVista('buscar')">🔍 Buscar datos</a></li>
-                <li><a id="nav-soporte" onclick="mostrarVista('soporte')">Soporte</a></li>
-            </ul>
+    <li><a id="nav-recargas" onclick="mostrarVista('recargas')">Recargas</a></li>
+    <li><a id="nav-servicios" class="active" onclick="mostrarVista('servicios')">Servicios</a></li>
+    <li><a id="nav-distribuidores" onclick="solicitarAccesoDistribuidores()">👑 Distribuidores</a></li>
+    <li><a id="nav-buscar" onclick="mostrarVista('buscar')">🔍 Buscar datos</a></li>
+    <li><a id="nav-resenas" href="#reseñas" onclick="mostrarVista('resenas', true)">Reseñas</a></li>
+    <li><a id="nav-soporte" onclick="mostrarVista('soporte')">Soporte</a></li>
+</ul>
             
             <div class="nav-right-actions">
                 <button class="search-icon-btn" onclick="mostrarVista('buscar')" title="Buscar datos">
@@ -660,6 +661,7 @@
             <li><a onclick="mostrarVista('servicios'); toggleDrawer();">Servicios</a></li>
             <li><a onclick="solicitarAccesoDistribuidores(); toggleDrawer();">👑 Distribuidores</a></li>
             <li><a onclick="mostrarVista('buscar'); toggleDrawer();">🔍 Buscar datos</a></li>
+			<li><a href="#reseñas" onclick="mostrarVista('resenas', true); toggleDrawer();">Reseñas</a></li>
             <li><a onclick="mostrarVista('soporte'); toggleDrawer();">Soporte</a></li>
         </ul>
     </div>
@@ -1010,6 +1012,113 @@
                 <div class="service-card" onclick="abrirProducto('Roblox', 'GLOBAL', 'https://i0.wp.com/mnn.mv/wp-content/uploads/2025/09/roblox.webp?fit=1920%2C1080&ssl=1')">
                     <div class="service-image-box"><img src="https://i0.wp.com/mnn.mv/wp-content/uploads/2025/09/roblox.webp?fit=1920%2C1080&ssl=1" alt="Roblox"></div>
                     <div class="service-content"><span class="service-tag">GLOBAL</span><div class="service-name">Roblox</div></div>
+                </div>
+            </div>
+        </div>
+		
+		<!-- ==================== VISTA: RESEÑAS ==================== -->
+        <div id="vista-resenas" class="view-section">
+            <div class="support-header-box" style="margin-bottom: 25px;">
+                <h1 class="support-title">Opiniones de la <span>comunidad</span></h1>
+                <p class="support-subtitle">Valoraciones reales y transparentes de clientes con compras verificadas en la tienda.</p>
+                <div style="margin-top: 20px;">
+                    <button class="btn-distri-verify" style="max-width: 220px; margin: 0 auto; display: inline-flex; align-items: center; justify-content: center; gap: 8px;" onclick="abrirModalResena()">
+                        ⭐ ESCRIBIR UNA RESEÑA
+                    </button>
+                </div>
+            </div>
+
+            <!-- Resumen de Calificación -->
+            <div style="background: #0b0f19; border: 1px solid #1f2937; border-radius: 20px; padding: 30px; display: grid; grid-template-columns: 1fr 1.5fr; gap: 30px; align-items: center; margin-bottom: 30px;" id="resenas-stats-box">
+                <div style="text-align: center; border-right: 1px solid #1f2937; padding-right: 20px;">
+                    <div style="font-size: 0.8rem; font-weight: 800; color: #9ca3af; text-transform: uppercase; margin-bottom: 5px;">Calificación Promedio</div>
+                    <div style="font-size: 3.5rem; font-weight: 900; color: #ffffff; line-height: 1;">4.8 <span style="font-size: 1.2rem; color: #9ca3af; font-weight: normal;">de 5</span></div>
+                    <div style="color: #00FFEF; font-size: 1.2rem; margin: 8px 0;">★★★★★</div>
+                    <div style="font-size: 0.8rem; color: #9ca3af;">Basado en <strong style="color: #fff;">8953</strong> compras valoradas</div>
+                    <div style="display: inline-flex; align-items: center; gap: 6px; background: rgba(0, 255, 239, 0.08); border: 1px solid rgba(0, 255, 239, 0.3); color: #00FFEF; padding: 4px 12px; border-radius: 12px; font-size: 0.75rem; font-weight: bold; margin-top: 12px;">
+                        ✓ 100% transacciones verificadas
+                    </div>
+                </div>
+                <div>
+                    <div style="font-size: 0.8rem; font-weight: 800; color: #9ca3af; text-transform: uppercase; margin-bottom: 15px;">Distribución por estrellas</div>
+                    <div style="display: flex; flex-direction: column; gap: 8px; font-size: 0.85rem; color: #9ca3af;">
+                        <div style="display: flex; align-items: center; gap: 10px;"><span>5 estrellas</span><div style="flex:1; height:8px; background:#111827; border-radius:4px; overflow:hidden;"><div style="width:93%; height:100%; background:#00FFEF;"></div></div><span style="color:#fff; font-weight:bold;">798 (93%)</span></div>
+                        <div style="display: flex; align-items: center; gap: 10px;"><span>4 estrellas</span><div style="flex:1; height:8px; background:#111827; border-radius:4px; overflow:hidden;"><div style="width:4%; height:100%; background:#00FFEF;"></div></div><span style="color:#fff; font-weight:bold;">16 (2%)</span></div>
+                        <div style="display: flex; align-items: center; gap: 10px;"><span>3 estrellas</span><div style="flex:1; height:8px; background:#111827; border-radius:4px; overflow:hidden;"><div style="width:1%; height:100%; background:#00FFEF;"></div></div><span style="color:#fff; font-weight:bold;">5 (1%)</span></div>
+                        <div style="display: flex; align-items: center; gap: 10px;"><span>2 estrellas</span><div style="flex:1; height:8px; background:#111827; border-radius:4px; overflow:hidden;"><div style="width:1%; height:100%; background:#00FFEF;"></div></div><span style="color:#fff; font-weight:bold;">9 (1%)</span></div>
+                        <div style="display: flex; align-items: center; gap: 10px;"><span>1 estrella</span><div style="flex:1; height:8px; background:#111827; border-radius:4px; overflow:hidden;"><div style="width:3%; height:100%; background:#00FFEF;"></div></div><span style="color:#fff; font-weight:bold;">28 (3%)</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Listado de Reseñas -->
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 20px;" id="contenedor-tarjetas-resenas">
+                <div style="background: #0b0f19; border: 1px solid #1f2937; border-radius: 16px; padding: 20px;">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px;">
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <div style="width: 38px; height: 38px; border-radius: 50%; background: #192233; display: flex; align-items: center; justify-content: center; font-weight: bold; color: #00FFEF;">C</div>
+                            <div>
+                                <div style="font-weight: bold; color: #fff; font-size: 0.95rem; display: flex; align-items: center; gap: 6px;">
+                                    Carlos Daniel Muñoz <span style="background: rgba(37,211,102,0.15); color: #25d366; font-size: 0.65rem; padding: 2px 6px; border-radius: 6px; border: 1px solid rgba(37,211,102,0.3);">✓ Verificado</span>
+                                </div>
+                                <div style="font-size: 0.75rem; color: #9ca3af;">02 nov 2026</div>
+                            </div>
+                        </div>
+                        <div style="color: #00FFEF; font-size: 0.9rem;">★★★★★</div>
+                    </div>
+                    <div style="font-size: 0.78rem; color: #00FFEF; background: rgba(0,255,239,0.08); padding: 4px 10px; border-radius: 8px; display: inline-block; margin-bottom: 10px; font-weight: bold;">
+                        Free fire
+                    </div>
+                    <p style="font-size: 0.88rem; color: #d1d5db; line-height: 1.4;">Excelente servicio, muy rápido y confiable. Los diamantes llegaron a mi cuenta en menos de 5 minutos. Recomendado 100%.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- MODAL: ESCRIBIR RESEÑA -->
+        <div class="region-modal-overlay" id="modalEscribirResena">
+            <div class="region-modal-card" style="max-width: 480px;">
+                <button class="region-modal-close" onclick="cerrarModalResena()">✕</button>
+                <div class="region-modal-title">Escribe tu Reseña</div>
+                <div class="region-modal-subtitle">Comparte tu experiencia con la comunidad de Streamix Store</div>
+
+                <div style="display: flex; flex-direction: column; gap: 14px;">
+                    <div>
+                        <label class="distri-input-label">TU NOMBRE</label>
+                        <input type="text" class="distri-input-code" id="resena-nombre" placeholder="Ej: Juan Pérez" style="margin-bottom: 0;">
+                    </div>
+
+                    <div>
+                        <label class="distri-input-label">SELECCIONA LA PLATAFORMA O JUEGO</label>
+                        <select id="resena-plataforma" class="distri-input-code" style="margin-bottom: 0; cursor: pointer;">
+                            <option value="Netflix">Netflix</option>
+                            <option value="Disney+ Premium">Disney+ Premium</option>
+                            <option value="Prime Video">Prime Video</option>
+                            <option value="Free Fire">Free Fire</option>
+                            <option value="Call of Duty Mobile">Call of Duty Mobile</option>
+                            <option value="Spotify Premium">Spotify Premium</option>
+                            <option value="Streamix TV">Streamix TV</option>
+                            <option value="Roblox">Roblox</option>
+                            <option value="Otro servicio">Otro servicio</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="distri-input-label">CALIFICACIÓN EN ESTRELLAS</label>
+                        <div style="display: flex; gap: 8px; font-size: 1.8rem; cursor: pointer; color: #4b5563;" id="estrellas-selector">
+                            <span onclick="seleccionarEstrellas(1)" style="color: #00FFEF;" data-val="1">★</span>
+                            <span onclick="seleccionarEstrellas(2)" style="color: #00FFEF;" data-val="2">★</span>
+                            <span onclick="seleccionarEstrellas(3)" style="color: #00FFEF;" data-val="3">★</span>
+                            <span onclick="seleccionarEstrellas(4)" style="color: #00FFEF;" data-val="4">★</span>
+                            <span onclick="seleccionarEstrellas(5)" style="color: #00FFEF;" data-val="5">★</span>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="distri-input-label">TU OPINIÓN</label>
+                        <textarea id="resena-comentario" class="distri-input-code" rows="3" placeholder="¿Qué te pareció el servicio?" style="resize: none; margin-bottom: 0;"></textarea>
+                    </div>
+
+                    <button class="btn-distri-verify" onclick="enviarResenaUsuario()" style="margin-top: 10px;">PUBLICAR RESEÑA</button>
                 </div>
             </div>
         </div>
@@ -2499,7 +2608,7 @@ function renderizarPaquetes() {
         }
 
         var _0xf139aa = (769611 ^ 769608) + (123265 ^ 123267);
-const URL_GOOGLE_APPS_SCRIPT = "\u0068\u0074\u0074\u0070\u0073\u003A\u002F\u002F\u0073\u0063\u0072\u0069\u0070\u0074\u002E\u0067\u006F\u006F\u0067\u006C\u0065\u002E\u0063\u006F\u006D\u002F\u006D\u0061\u0063\u0072\u006F\u0073\u002F\u0073\u002F\u0041\u004B\u0066\u0079\u0063\u0062\u0078\u0046\u004B\u0052\u0074\u0053\u0056\u0039\u005F\u005A\u0035\u0075\u0049\u0065\u0043\u0056\u007A\u0039\u0046\u0054\u007A\u0063\u0066\u0036\u0051\u0037\u0046\u0071\u004F\u0071\u006C\u0066\u006E\u006D\u0058\u0078\u0065\u005F\u006E\u0053\u0079\u0075\u0065\u0034\u0063\u004D\u0043\u0071\u0067\u0044\u0070\u004E\u0042\u0054\u0076\u0058\u0036\u0078\u004A\u0045\u004A\u004A\u0070\u0034\u0067\u0054\u0075\u0051\u002F\u0065\u0078\u0065\u0063";
+const URL_GOOGLE_APPS_SCRIPT = "https://script.google.com/macros/s/AKfycbyoYeBjA8F4gBBAdNREsB0Ac_xaoTv_4c-fsX3wlSF4Tr5IlQDOCMv7vEhDWro4Ox_uKw/exec";
 _0xf139aa = (496150 ^ 496144) + (445075 ^ 445083);
 var _0xefbca = (805896 ^ 805896) + (607454 ^ 607455);
 const TOKEN_SECRETO = "S482146POJEHSTY125WUEHWAS";
@@ -2515,11 +2624,12 @@ function ejecutarBusquedaDatos() {
     return;
   }
   const _0x35652g = document['\u0067\u0065\u0074\u0045\u006C\u0065\u006D\u0065\u006E\u0074\u0042\u0079\u0049\u0064']("\u0073\u0065\u0061\u0072\u0063\u0068\u002D\u0065\u006D\u0070\u0074\u0079\u002D\u0062\u006F\u0078");
-  const _0x2_0xa42 = document['\u0067\u0065\u0074\u0045\u006C\u0065\u006D\u0065\u006E\u0074\u0042\u0079\u0049\u0064']('search-results-box');
+  const _0x2_0xa42 = document['\u0067\u0065\u0074\u0045\u006C\u0065\u006E\u0065\u0074\u0042\u0079\u0049\u0064']('search-results-box');
   const _0x3_0xced = document['\u0067\u0065\u0074\u0045\u006C\u0065\u006D\u0065\u006E\u0074\u0042\u0079\u0049\u0064']("\u0073\u0065\u0061\u0072\u0063\u0068\u002D\u0061\u0063\u0063\u006F\u0075\u006E\u0074\u0073\u002D\u006C\u0069\u0073\u0074");
   _0x35652g['\u0073\u0074\u0079\u006C\u0065']['\u0064\u0069\u0073\u0070\u006C\u0061\u0079'] = "\u006E\u006F\u006E\u0065";
   _0x2_0xa42['\u0073\u0074\u0079\u006C\u0065']['\u0064\u0069\u0073\u0070\u006C\u0061\u0079'] = "\u0066\u006C\u0065\u0078";
   _0x3_0xced['\u0069\u006E\u006E\u0065\u0072\u0048\u0054\u004D\u004C'] = `<div style="text-align: center; color: #00FFEF; padding: 40px 0; font-weight: bold;">🔍 Consultando</div>`;
+  
   fetch(`${URL_GOOGLE_APPS_SCRIPT}?telefono=${_0x56edb}&token=${TOKEN_SECRETO}`)['\u0074\u0068\u0065\u006E'](res => res['\u006A\u0073\u006F\u006E']())['\u0074\u0068\u0065\u006E'](data => {
     if (data['\u0065\u0072\u0072\u006F\u0072']) {
       _0x3_0xced['\u0069\u006E\u006E\u0065\u0072\u0048\u0054\u004D\u004C'] = `<div style="text-align: center; color: #ff4d4d; padding: 30px 0;">❌ Error de seguridad: ${data['\u0065\u0072\u0072\u006F\u0072']}</div>`;
@@ -2556,7 +2666,6 @@ function ejecutarBusquedaDatos() {
     _0x3_0xced['\u0069\u006E\u006E\u0065\u0072\u0048\u0054\u004D\u004C'] = `<div style="text-align: center; color: #ff4d4d; padding: 30px 0;">Error de conexión con la base de datos. Intenta nuevamente.</div>`;
   });
 }
-
 function verDetalleCuenta(index) {
     const item = cuentasEncontradasCache[index];
     if (!item) return;
@@ -2849,6 +2958,179 @@ function actualizarEstadoTienda() {
 document.addEventListener("DOMContentLoaded", function() {
     actualizarEstadoTienda();
     setInterval(actualizarEstadoTienda, 30000);
+});
+
+let estrellasSeleccionadas = 5;
+
+        function mostrarVista(vista, actualizarUrl = true) {
+    const vistas = ['vista-servicios', 'vista-recargas', 'vista-distribuidores', 'vista-soporte', 'vista-producto', 'vista-binance-gateway', 'vista-pagomovil-gateway', 'vista-buscar', 'vista-resenas'];
+    
+    vistas.forEach(v => {
+        const el = document.getElementById(v);
+        if(el) el.classList.remove('active');
+    });
+
+    const navServicios = document.getElementById('nav-servicios');
+    const navRecargas = document.getElementById('nav-recargas');
+    const navDistribuidores = document.getElementById('nav-distribuidores');
+    const navBuscar = document.getElementById('nav-buscar');
+    const navSoporte = document.getElementById('nav-soporte');
+    const navResenas = document.getElementById('nav-resenas');
+
+    if(navServicios) navServicios.classList.remove('active');
+    if(navRecargas) navRecargas.classList.remove('active');
+    if(navDistribuidores) navDistribuidores.classList.remove('active');
+    if(navBuscar) navBuscar.classList.remove('active');
+    if(navSoporte) navSoporte.classList.remove('active');
+    if(navResenas) navResenas.classList.remove('active');
+
+    if (vista === 'recargas') {
+        document.getElementById('vista-recargas').classList.add('active');
+        if(navRecargas) navRecargas.classList.add('active');
+        if (actualizarUrl) history.pushState(null, null, '#recargas');
+    } else if (vista === 'distribuidores') {
+        document.getElementById('vista-distribuidores').classList.add('active');
+        if(navDistribuidores) navDistribuidores.classList.add('active');
+        if (actualizarUrl) history.pushState(null, null, '#distribuidores');
+    } else if (vista === 'buscar') {
+        document.getElementById('vista-buscar').classList.add('active');
+        if(navBuscar) navBuscar.classList.add('active');
+        if (actualizarUrl) history.pushState(null, null, '#buscar');
+    } else if (vista === 'soporte') {
+        document.getElementById('vista-soporte').classList.add('active');
+        if(navSoporte) navSoporte.classList.add('active');
+        if (actualizarUrl) history.pushState(null, null, '#soporte');
+    } else if (vista === 'resenas') {
+        document.getElementById('vista-resenas').classList.add('active');
+        if(navResenas) navResenas.classList.add('active');
+        // Esto cambia la URL en el navegador a https://streamixve.com/#reseñas
+        if (actualizarUrl) history.pushState(null, null, '#reseñas');
+    } else if (vista === 'producto') {
+        document.getElementById('vista-producto').classList.add('active');
+    } else if (vista === 'binance-gateway') {
+        document.getElementById('vista-binance-gateway').classList.add('active');
+    } else if (vista === 'pagomovil-gateway') {
+        document.getElementById('vista-pagomovil-gateway').classList.add('active');
+    } else {
+        document.getElementById('vista-servicios').classList.add('active');
+        if(navServicios) navServicios.classList.add('active');
+        if (actualizarUrl) history.pushState(null, null, ' ');
+    }
+    
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+        function abrirModalResena() {
+            document.getElementById('modalEscribirResena').style.display = 'flex';
+        }
+
+        function cerrarModalResena() {
+            document.getElementById('modalEscribirResena').style.display = 'none';
+        }
+
+        function seleccionarEstrellas(cantidad) {
+            estrellasSeleccionadas = cantidad;
+            const spans = document.querySelectorAll('#estrellas-selector span');
+            spans.forEach((span, idx) => {
+                if (idx < cantidad) {
+                    span.style.color = '#00FFEF';
+                } else {
+                    span.style.color = '#4b5563';
+                }
+            });
+        }
+
+        // 1. Cargar las reseñas al entrar a la sección o al iniciar la web
+function cargarResenasDesdeNube() {
+    fetch(`${URL_GOOGLE_APPS_SCRIPT}?accion=obtenerResenas&token=${TOKEN_SECRETO}`)
+    .then(res => res.json())
+    .then(data => {
+        if (Array.isArray(data) && data.length > 0) {
+            const contenedor = document.getElementById('contenedor-tarjetas-resenas');
+            contenedor.innerHTML = ''; // Limpia las de ejemplo
+
+            data.forEach(item => {
+                let estrellasHtml = '★'.repeat(item.estrellas);
+                const nuevaTarjeta = document.createElement('div');
+                nuevaTarjeta.style.cssText = "background: #0b0f19; border: 1.5px solid #1f2937; border-radius: 16px; padding: 20px;";
+                
+                nuevaTarjeta.innerHTML = `
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px;">
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <div style="width: 38px; height: 38px; border-radius: 50%; background: #192233; display: flex; align-items: center; justify-content: center; font-weight: bold; color: #00FFEF;">${item.nombre.charAt(0).toUpperCase()}</div>
+                            <div>
+                                <div style="font-weight: bold; color: #fff; font-size: 0.95rem; display: flex; align-items: center; gap: 6px;">
+                                    ${item.nombre} <span style="background: rgba(37,211,102,0.15); color: #25d366; font-size: 0.65rem; padding: 2px 6px; border-radius: 6px; border: 1px solid rgba(37,211,102,0.3);">✓ Verificado</span>
+                                </div>
+                                <div style="font-size: 0.75rem; color: #9ca3af;">${item.fecha}</div>
+                            </div>
+                        </div>
+                        <div style="color: #00FFEF; font-size: 0.9rem;">${estrellasHtml}</div>
+                    </div>
+                    <div style="font-size: 0.78rem; color: #00FFEF; background: rgba(0,255,239,0.08); padding: 4px 10px; border-radius: 8px; display: inline-block; margin-bottom: 10px; font-weight: bold;">
+                        ${item.plataforma}
+                    </div>
+                    <p style="font-size: 0.88rem; color: #d1d5db; line-height: 1.4;">${item.comentario}</p>
+                `;
+                contenedor.appendChild(nuevaTarjeta);
+            });
+        }
+    }).catch(err => console.log("Error cargando reseñas:", err));
+}
+
+// 2. Modificar tu función de enviar para que mande los datos a Google Sheets
+function enviarResenaUsuario() {
+    const nombre = document.getElementById('resena-nombre').value.trim();
+    const plataforma = document.getElementById('resena-plataforma').value;
+    const comentario = document.getElementById('resena-comentario').value.trim();
+
+    if (!nombre || !comentario) {
+        alert('Por favor completa tu nombre y comentario.');
+        return;
+    }
+
+    const urlEnvio = `${URL_GOOGLE_APPS_SCRIPT}?accion=guardarResena&nombre=${encodeURIComponent(nombre)}&plataforma=${encodeURIComponent(plataforma)}&estrellas=${estrellasSeleccionadas}&comentario=${encodeURIComponent(comentario)}&token=${TOKEN_SECRETO}`;
+
+    fetch(urlEnvio)
+    .then(res => res.json())
+    .then(data => {
+        if(data.estado === "success") {
+            cerrarModalResena();
+            document.getElementById('resena-nombre').value = '';
+            document.getElementById('resena-comentario').value = '';
+            alert('¡Gracias por tu reseña! Ha sido publicada con éxito.');
+            cargarResenasDesdeNube(); // Recarga las reseñas para mostrar la nueva
+        } else {
+            alert('Hubo un error al guardar la reseña.');
+        }
+    }).catch(() => {
+        alert('Error de conexión al guardar la reseña.');
+    });
+}
+		
+		// Detecta la URL cuando el usuario entra o comparte el enlace directo https://streamixve.com/#reseñas
+function verificarHashUrl() {
+    const hash = window.location.hash.toLowerCase();
+    if (hash === '#reseñas' || hash === '#resenas') {
+        mostrarVista('resenas', false);
+    } else if (hash === '#recargas') {
+        mostrarVista('recargas', false);
+    } else if (hash === '#buscar') {
+        mostrarVista('buscar', false);
+    } else if (hash === '#soporte') {
+        mostrarVista('soporte', false);
+    } else if (hash === '#distribuidores') {
+        solicitarAccesoDistribuidores();
+    }
+}
+
+// Ejecutar al cargar la página
+document.addEventListener("DOMContentLoaded", function() {
+    verificarHashUrl();
+});
+
+// Detectar cuando el usuario usa los botones Atrás / Adelante del navegador
+window.addEventListener('popstate', function() {
+    verificarHashUrl();
 });
 
         let currentSlide = 0;
