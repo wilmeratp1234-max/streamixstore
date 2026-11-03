@@ -3181,14 +3181,31 @@ window.addEventListener('popstate', function() {
     verificarHashUrl();
 });
 
-// Función para enviar la reseña
+// Función para enviar la reseña desde la ventana modal
 function enviarResena(event) {
   if (event) event.preventDefault();
 
-  const nombre = document.getElementById("nombre-resena") ? document.getElementById("nombre-resena").value : "Anónimo";
-  const plataforma = document.getElementById("plataforma-resena") ? document.getElementById("plataforma-resena").value : "General";
-  const estrellas = document.getElementById("estrellas-resena") ? document.getElementById("estrellas-resena").value : "5";
-  const comentario = document.getElementById("comentario-resena") ? document.getElementById("comentario-resena").value : "";
+  // Capturamos los valores de los inputs del modal
+  const inputNombre = document.querySelector("#nombre-resena, input[name='nombre'], #nombre, .modal-resena input[type='text']");
+  const selectPlataforma = document.querySelector("#plataforma-resena, select[name='plataforma'], #plataforma");
+  const inputComentario = document.querySelector("#comentario-resena, textarea[name='comentario'], #comentario, textarea");
+  
+  // Capturamos las estrellas seleccionadas (si usas radio buttons o estrellas interactivas)
+  const inputEstrellas = document.querySelector("input[name='estrellas']:checked") || { value: "5" };
+
+  const nombre = inputNombre ? inputNombre.value.trim() : "Anónimo";
+  const plataforma = selectPlataforma ? selectPlataforma.value : "General";
+  const estrellas = inputEstrellas ? inputEstrellas.value : "5";
+  const comentario = inputComentario ? inputComentario.value.trim() : "";
+
+  if (!comentario) {
+    alert("Por favor, escribe tu opinión antes de publicar.");
+    return;
+  }
+
+  // Indicamos visualmente que se está enviando
+  const btnPublicar = document.querySelector(".modal-resena button, form button[type='submit'], #btn-publicar-resena");
+  if (btnPublicar) btnPublicar.innerText = "Publicando...";
 
   const urlEnvio = `${URL_GOOGLE_APPS_SCRIPT}?accion=guardarResena&token=${TOKEN_SECRETO}&nombre=${encodeURIComponent(nombre)}&plataforma=${encodeURIComponent(plataforma)}&estrellas=${encodeURIComponent(estrellas)}&comentario=${encodeURIComponent(comentario)}`;
 
@@ -3197,19 +3214,31 @@ function enviarResena(event) {
     .then(data => {
       if (data.estado === "success") {
         alert("¡Gracias por tu reseña! Ha sido publicada con éxito.");
-        // Limpiar formulario si existe
-        if (document.getElementById("form-resena")) {
-          document.getElementById("form-resena").reset();
+        
+        // Limpiar el campo de comentario
+        if (inputComentario) inputComentario.value = "";
+        
+        // Cerrar el modal si tienes una función para ello (ej. cerrarModalResena())
+        if (typeof cerrarModalResena === "function") {
+          cerrarModalResena();
+        } else {
+          // Ocultar el modal manualmente si no hay función global
+          const modal = document.querySelector(".modal-resena, #modal-resena, .modal");
+          if (modal) modal.style.display = "none";
         }
-        // Volver a cargar las reseñas inmediatamente para que aparezca la nueva
+
+        // Recargar las reseñas para que aparezca la nueva de inmediato
         cargarResenas();
       } else {
-        alert("Hubo un error al guardar la reseña.");
+        alert("Hubo un error al guardar la reseña en la base de datos.");
       }
     })
     .catch(err => {
       console.error(err);
-      alert("Error de conexión al enviar la reseña.");
+      alert("Error de conexión al intentar publicar la reseña.");
+    })
+    .finally(() => {
+      if (btnPublicar) btnPublicar.innerText = "PUBLICAR RESEÑA";
     });
 }
 
