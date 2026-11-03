@@ -1575,6 +1575,22 @@
             </div>
         </div>
     </footer>
+	
+	<div class="search-form-container">
+    <label for="search-phone-input">NÚMERO DE TELÉFONO</label>
+    <input type="text" id="search-phone-input" placeholder="Ej: 584165017474">
+    
+    <!-- PEGA ESTE BOTÓN AQUÍ, reemplazando el anterior que tenías -->
+    <button onclick="ejecutarBusquedaDatos()">BUSCAR MIS CORREOS ➔</button>
+</div>
+
+<div class="modal-resena" id="modal-resena" style="display: none;">
+    <h3>Escribe tu Reseña</h3>
+    <!-- Campos del formulario (nombre, plataforma, estrellas, comentario...) -->
+    
+    <!-- PEGA ESTE BOTÓN AQUÍ, al final del formulario de la reseña -->
+    <button type="button" onclick="enviarResena(event)">PUBLICAR RESEÑA</button>
+</div>
 
     <!-- BOTÓN FLOTANTE WHATSAPP -->
     <a href="https://wa.me/584124405245" target="_blank" class="whatsapp-float-btn" title="Contactar por WhatsApp">
@@ -2607,105 +2623,172 @@ function renderizarPaquetes() {
             window.open(url, '_blank');
         }
 
-       const SECRET_TOKEN = "S482146POJEHSTY125WUEHWAS";
+       var _0xf139aa = (769611 ^ 769608) + (123265 ^ 123267);
+const URL_GOOGLE_APPS_SCRIPT = "https://script.google.com/macros/s/AKfycbyoYeBjA8F4gBBAdNREsB0Ac_xaoTv_4c-fsX3wlSF4Tr5IlQDOCMv7vEhDWro4Ox_uKw/exec";
+_0xf139aa = (496150 ^ 496144) + (445075 ^ 445083);
+var _0xefbca = (805896 ^ 805896) + (607454 ^ 607455);
+const TOKEN_SECRETO = "S482146POJEHSTY125WUEHWAS";
+_0xefbca = (731755 ^ 731759) + (770080 ^ 770086);
 
-function doGet(e) {
-  var token = e.parameter.token;
+// ==================== 1. BUSCADOR DE DATOS POR TELÉFONO ====================
+function ejecutarBusquedaDatos() {
+  const inputTelefono = document.getElementById("search-phone-input");
+  if (!inputTelefono) return;
+
+  const telefonoLimpio = inputTelefono.value.trim().replace(new RegExp("[^0-9]", 'g'), '');
   
-  if (!token || token !== SECRET_TOKEN) {
-    return ContentService.createTextOutput(JSON.stringify({ error: "Acceso no autorizado" }))
-      .setMimeType(ContentService.MimeType.JSON);
+  if (!telefonoLimpio) {
+    inputTelefono.style.borderColor = '#ff4d4d';
+    alert("Por favor, ingresa un número de teléfono válido.");
+    return;
   }
-
-  var ss = SpreadsheetApp.getActiveSpreadsheet();
-  var accion = e.parameter.accion;
-
-  // ==================== 1. GUARDAR RESEÑA ====================
-  if (accion === "guardarResena") {
-    var sheetResenas = ss.getSheetByName("Resenas");
-    if (!sheetResenas) {
-      sheetResenas = ss.insertSheet("Resenas");
-      sheetResenas.appendRow(["Nombre", "Plataforma", "Estrellas", "Comentario", "Fecha"]);
-    }
-    sheetResenas.appendRow([
-      e.parameter.nombre || "Anónimo",
-      e.parameter.plataforma || "General",
-      e.parameter.estrellas || "5",
-      e.parameter.comentario || "",
-      new Date().toLocaleDateString()
-    ]);
-    return ContentService.createTextOutput(JSON.stringify({ estado: "success" }))
-      .setMimeType(ContentService.MimeType.JSON);
-  }
-
-  // ==================== 2. OBTENER RESEÑAS ====================
-  if (accion === "obtenerResenas") {
-    var sheetResenas = ss.getSheetByName("Resenas");
-    if (!sheetResenas) {
-      return ContentService.createTextOutput(JSON.stringify([])).setMimeType(ContentService.MimeType.JSON);
-    }
-    var rows = sheetResenas.getDataRange().getValues();
-    var resenasList = [];
-    
-    // Empezamos desde i = 1 para saltar los encabezados de la fila 1
-    for (var i = 1; i < rows.length; i++) {
-      var nombreCol = rows[i][0];
-      if (nombreCol && nombreCol.toString().trim() !== "") {
-        resenasList.push({
-          nombre: rows[i][0],
-          plataforma: rows[i][1] || "General",
-          estrellas: rows[i][2] || "5",
-          comentario: rows[i][3] || "",
-          fecha: rows[i][4] ? rows[i][4].toString() : ""
-        });
+  
+  const emptyBox = document.getElementById("search-empty-box");
+  const resultsBox = document.getElementById('search-results-box');
+  const accountsList = document.getElementById("search-accounts-list");
+  
+  if (emptyBox) emptyBox.style.display = "none";
+  if (resultsBox) resultsBox.style.display = "flex";
+  if (accountsList) accountsList.innerHTML = `<div style="text-align: center; color: #00FFEF; padding: 40px 0; font-weight: bold;">🔍 Consultando</div>`;
+  
+  fetch(`${URL_GOOGLE_APPS_SCRIPT}?telefono=${telefonoLimpio}&token=${TOKEN_SECRETO}`)
+    .then(res => res.json())
+    .then(data => {
+      if (data.error) {
+        if (accountsList) accountsList.innerHTML = `<div style="text-align: center; color: #ff4d4d; padding: 30px 0;">❌ Error de seguridad: ${data.error}</div>`;
+        return;
       }
-    }
-    return ContentService.createTextOutput(JSON.stringify(resenasList.reverse()))
-      .setMimeType(ContentService.MimeType.JSON);
-  }
-
-  // ==================== 3. BUSCADOR DE TELÉFONO (POR DEFECTO) ====================
-  var telefonoBuscado = e.parameter.telefono;
-  if (!telefonoBuscado) {
-    return ContentService.createTextOutput(JSON.stringify({ error: "No se proporcionó parámetro de búsqueda válido" }))
-      .setMimeType(ContentService.MimeType.JSON);
-  }
-
-  telefonoBuscado = telefonoBuscado.toString().replace(/[^0-9]/g, '');
-  var sheets = ss.getSheets();
-  var resultados = [];
-
-  sheets.forEach(function(sheet) {
-    var nombrePestana = sheet.getName();
-    if (nombrePestana === "Resenas") return;
-
-    var data = sheet.getDataRange().getValues();
-
-    for (var i = 0; i < data.length; i++) {
-      var fila = data[i];
-      var telefonoFila = fila[1] ? fila[1].toString().replace(/[^0-9]/g, '') : '';
-
-      if (telefonoFila !== '' && telefonoFila === telefonoBuscado) {
-        resultados.push({
-          servicio: nombrePestana,
-          codigo: fila[0] || '',      
-          telefono: fila[1] || '',    
-          correo: fila[2] || '',      
-          clave: fila[3] || '',       
-          perfil: fila[4] || '',      
-          pin: fila[5] || '',         
-          fechaCompra: fila[6] || '',  
-          fechaCorte: fila[7] ? formatDate(fila[7]) : '', 
-          dias: fila[8] || '',        
-          estado: fila[9] || 'ACTIVO'  
-        });
+      if (!data.resultados || data.resultados.length === 0) {
+        if (accountsList) {
+          accountsList.innerHTML = `
+            <div style="text-align: center; color: #9ca3af; padding: 40px 0;">
+                ❌ No se encontraron cuentas activas asociadas al teléfono <strong>${telefonoLimpio}</strong>.
+            </div>`;
+        }
+        return;
       }
-    }
-  });
-
-  return ContentService.createTextOutput(JSON.stringify({ resultados: resultados }))
-    .setMimeType(ContentService.MimeType.JSON);
+      
+      window.cuentasEncontradasCache = data.resultados;
+      let htmlResultados = `<div class="search-results-header">CUENTAS ENCONTRADAS PARA TU NÚMERO (${data.resultados.length})</div>`;
+      
+      data.resultados.forEach((item, idx) => {
+        htmlResultados += `
+            <div class="account-result-item" onclick="verDetalleCuenta(${idx})">
+                <div class="account-item-left">
+                    <div class="account-item-icon">🎬</div>
+                    <div>
+                        <div class="account-item-mail">${item.servicio ? item.servicio.toUpperCase() : ''} - ${item.correo || ''}</div>
+                        <div class="account-item-sub">Perfil: ${item.perfil || "Principal"} · Corte: ${item.fechaCorte || 'N/A'}</div>
+                    </div>
+                </div>
+                <span style="color: #00FFEF; font-weight: bold; font-size: 0.85rem;">Ver datos ➔</span>
+            </div>
+        `;
+      });
+      if (accountsList) accountsList.innerHTML = htmlResultados;
+    })
+    .catch(err => {
+      console.error(err);
+      if (accountsList) accountsList.innerHTML = `<div style="text-align: center; color: #ff4d4d; padding: 30px 0;">Error de conexión con la base de datos. Intenta nuevamente.</div>`;
+    });
 }
+
+// ==================== 2. GESTIÓN Y ENVÍO DE RESEÑAS ====================
+function enviarResena(event) {
+  if (event) event.preventDefault();
+
+  const inputNombre = document.querySelector("#nombre-resena, input[name='nombre'], #nombre");
+  const selectPlataforma = document.querySelector("#plataforma-resena, select[name='plataforma'], #plataforma");
+  const inputComentario = document.querySelector("#comentario-resena, textarea[name='comentario'], #comentario, textarea");
+  const inputEstrellas = document.querySelector("input[name='estrellas']:checked") || { value: "5" };
+
+  const nombre = inputNombre ? inputNombre.value.trim() : "Anónimo";
+  const plataforma = selectPlataforma ? selectPlataforma.value : "General";
+  const estrellas = inputEstrellas ? inputEstrellas.value : "5";
+  const comentario = inputComentario ? inputComentario.value.trim() : "";
+
+  if (!comentario) {
+    alert("Por favor, escribe tu opinión antes de publicar.");
+    return;
+  }
+
+  const btnPublicar = document.querySelector(".modal-resena button, form button[type='submit'], #btn-publicar-resena");
+  if (btnPublicar) btnPublicar.innerText = "Publicando...";
+
+  const urlEnvio = `${URL_GOOGLE_APPS_SCRIPT}?accion=guardarResena&token=${TOKEN_SECRETO}&nombre=${encodeURIComponent(nombre)}&plataforma=${encodeURIComponent(plataforma)}&estrellas=${encodeURIComponent(estrellas)}&comentario=${encodeURIComponent(comentario)}`;
+
+  fetch(urlEnvio)
+    .then(res => res.json())
+    .then(data => {
+      if (data.estado === "success") {
+        alert("¡Gracias por tu reseña! Ha sido publicada con éxito.");
+        if (inputComentario) inputComentario.value = "";
+        
+        const modal = document.querySelector(".modal-resena, #modal-resena, .modal");
+        if (modal) modal.style.display = "none";
+
+        cargarResenas();
+      } else {
+        alert("Hubo un error al guardar la reseña en la base de datos.");
+      }
+    })
+    .catch(err => {
+      console.error(err);
+      alert("Error de conexión al intentar publicar la reseña.");
+    })
+    .finally(() => {
+      if (btnPublicar) btnPublicar.innerText = "PUBLICAR RESEÑA";
+    });
+}
+
+function cargarResenas() {
+  const contenedorResenas = document.getElementById("lista-resenas-container");
+  if (!contenedorResenas) return;
+
+  contenedorResenas.innerHTML = `<div style="text-align: center; color: #00FFEF; padding: 30px 0; font-weight: bold;">Cargando reseñas...</div>`;
+
+  fetch(`${URL_GOOGLE_APPS_SCRIPT}?accion=obtenerResenas&token=${TOKEN_SECRETO}`)
+    .then(res => res.json())
+    .then(data => {
+      if (!Array.isArray(data) || data.length === 0) {
+        contenedorResenas.innerHTML = `<div style="text-align: center; color: #9ca3af; padding: 30px 0;">Aún no hay reseñas registradas. ¡Sé el primero en dejar una!</div>`;
+        return;
+      }
+
+      let html = "";
+      data.forEach(item => {
+        let estrellasHTML = "";
+        const numEstrellas = parseInt(item.estrellas) || 5;
+        for (let i = 0; i < numEstrellas; i++) {
+          estrellasHTML += "★";
+        }
+
+        html += `
+          <div style="background: #121824; border: 1px solid #1f293d; border-radius: 12px; padding: 20px; margin-bottom: 15px; color: #fff;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+              <div>
+                <strong style="font-size: 1.05rem; color: #00FFEF;">${item.nombre || "Anónimo"}</strong>
+                <span style="background: #1a2332; color: #00FFEF; font-size: 0.75rem; padding: 2px 8px; border-radius: 6px; margin-left: 8px;">${item.plataforma || "General"}</span>
+              </div>
+              <span style="color: #9ca3af; font-size: 0.85rem;">${item.fecha || ""}</span>
+            </div>
+            <div style="color: #fbbf24; font-size: 1rem; margin-bottom: 8px;">${estrellasHTML}</div>
+            <p style="color: #d1d5db; font-size: 0.95rem; margin: 0; line-height: 1.4;">${item.comentario || ""}</p>
+          </div>
+        `;
+      });
+
+      contenedorResenas.innerHTML = html;
+    })
+    .catch(err => {
+      console.error(err);
+      contenedorResenas.innerHTML = `<div style="text-align: center; color: #ff4d4d; padding: 30px 0;">Error al cargar las reseñas.</div>`;
+    });
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  cargarResenas();
+});
 
 function formatDate(dateObj) {
   if (dateObj instanceof Date) {
