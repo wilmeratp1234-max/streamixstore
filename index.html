@@ -3264,16 +3264,13 @@ window.addEventListener('popstate', function() {
     verificarHashUrl();
 });
 
-// Función para enviar la reseña desde la ventana modal
+// ==================== GESTIÓN Y CARGA DE RESEÑAS ====================
 function enviarResena(event) {
   if (event) event.preventDefault();
 
-  // Capturamos los valores de los inputs del modal
-  const inputNombre = document.querySelector("#nombre-resena, input[name='nombre'], #nombre, .modal-resena input[type='text']");
+  const inputNombre = document.querySelector("#nombre-resena, input[name='nombre'], #nombre");
   const selectPlataforma = document.querySelector("#plataforma-resena, select[name='plataforma'], #plataforma");
   const inputComentario = document.querySelector("#comentario-resena, textarea[name='comentario'], #comentario, textarea");
-  
-  // Capturamos las estrellas seleccionadas (si usas radio buttons o estrellas interactivas)
   const inputEstrellas = document.querySelector("input[name='estrellas']:checked") || { value: "5" };
 
   const nombre = inputNombre ? inputNombre.value.trim() : "Anónimo";
@@ -3286,7 +3283,6 @@ function enviarResena(event) {
     return;
   }
 
-  // Indicamos visualmente que se está enviando
   const btnPublicar = document.querySelector(".modal-resena button, form button[type='submit'], #btn-publicar-resena");
   if (btnPublicar) btnPublicar.innerText = "Publicando...";
 
@@ -3297,20 +3293,11 @@ function enviarResena(event) {
     .then(data => {
       if (data.estado === "success") {
         alert("¡Gracias por tu reseña! Ha sido publicada con éxito.");
-        
-        // Limpiar el campo de comentario
         if (inputComentario) inputComentario.value = "";
         
-        // Cerrar el modal si tienes una función para ello (ej. cerrarModalResena())
-        if (typeof cerrarModalResena === "function") {
-          cerrarModalResena();
-        } else {
-          // Ocultar el modal manualmente si no hay función global
-          const modal = document.querySelector(".modal-resena, #modal-resena, .modal");
-          if (modal) modal.style.display = "none";
-        }
+        const modal = document.querySelector(".modal-resena, #modal-resena, .modal");
+        if (modal) modal.style.display = "none";
 
-        // Recargar las reseñas para que aparezca la nueva de inmediato
         cargarResenas();
       } else {
         alert("Hubo un error al guardar la reseña en la base de datos.");
@@ -3324,6 +3311,64 @@ function enviarResena(event) {
       if (btnPublicar) btnPublicar.innerText = "PUBLICAR RESEÑA";
     });
 }
+
+function cargarResenas() {
+  const contenedorResenas = document.getElementById("contenedor-tarjetas-resenas");
+  if (!contenedorResenas) return;
+
+  contenedorResenas.innerHTML = `<div style="text-align: center; color: #00FFEF; padding: 30px 0; font-weight: bold; grid-column: 1 / -1;">Cargando reseñas...</div>`;
+
+  fetch(`${URL_GOOGLE_APPS_SCRIPT}?accion=obtenerResenas&token=${TOKEN_SECRETO}`)
+    .then(res => res.json())
+    .then(data => {
+      if (!Array.isArray(data) || data.length === 0) {
+        contenedorResenas.innerHTML = `<div style="text-align: center; color: #9ca3af; padding: 30px 0; grid-column: 1 / -1;">Aún no hay reseñas registradas. ¡Sé el primero en dejar una!</div>`;
+        return;
+      }
+
+      let html = "";
+      data.forEach(item => {
+        const letraInicial = item.nombre ? item.nombre.charAt(0).toUpperCase() : "A";
+        const numEstrellas = parseInt(item.estrellas) || 5;
+        let estrellasTexto = "★★★★★";
+        if (numEstrellas === 4) estrellasTexto = "★★★★☆";
+        else if (numEstrellas === 3) estrellasTexto = "★★★☆☆";
+        else if (numEstrellas === 2) estrellasTexto = "★★☆☆☆";
+        else if (numEstrellas === 1) estrellasTexto = "★☆☆☆☆";
+
+        html += `
+          <div style="background: #0b0f19; border: 1px solid #1f2937; border-radius: 16px; padding: 20px;">
+              <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px;">
+                  <div style="display: flex; align-items: center; gap: 10px;">
+                      <div style="width: 38px; height: 38px; border-radius: 50%; background: #192233; display: flex; align-items: center; justify-content: center; font-weight: bold; color: #00FFEF;">${letraInicial}</div>
+                      <div>
+                          <div style="font-weight: bold; color: #fff; font-size: 0.95rem; display: flex; align-items: center; gap: 6px;">
+                              ${item.nombre || "Anónimo"} <span style="background: rgba(37,211,102,0.15); color: #25d366; font-size: 0.65rem; padding: 2px 6px; border-radius: 6px; border: 1px solid rgba(37,211,102,0.3);">✓ Verificado</span>
+                          </div>
+                          <div style="font-size: 0.75rem; color: #9ca3af;">${item.fecha || ""}</div>
+                      </div>
+                  </div>
+                  <div style="color: #00FFEF; font-size: 0.9rem;">${estrellasTexto}</div>
+              </div>
+              <div style="font-size: 0.78rem; color: #00FFEF; background: rgba(0,255,239,0.08); padding: 4px 10px; border-radius: 8px; display: inline-block; margin-bottom: 10px; font-weight: bold;">
+                  ${item.plataforma || "General"}
+              </div>
+              <p style="font-size: 0.88rem; color: #d1d5db; line-height: 1.4; margin: 0;">${item.comentario || ""}</p>
+          </div>
+        `;
+      });
+
+      contenedorResenas.innerHTML = html;
+    })
+    .catch(err => {
+      console.error(err);
+      contenedorResenas.innerHTML = `<div style="text-align: center; color: #ff4d4d; padding: 30px 0; grid-column: 1 / -1;">Error al cargar las reseñas.</div>`;
+    });
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  cargarResenas();
+});
 
 // Función para cargar y pintar las reseñas en la web
 function cargarResenas() {
@@ -3370,6 +3415,11 @@ function cargarResenas() {
       contenedorResenas.innerHTML = `<div style="text-align: center; color: #ff4d4d; padding: 30px 0;">Error al cargar las reseñas.</div>`;
     });
 }
+
+// Cargar automáticamente al abrir la página
+document.addEventListener("DOMContentLoaded", () => {
+  cargarResenas();
+});
 
 // Cargar las reseñas automáticamente al abrir la sección
 document.addEventListener("DOMContentLoaded", () => {
