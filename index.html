@@ -3314,14 +3314,18 @@ function enviarResena(event) {
 
 function cargarResenas() {
   const contenedorResenas = document.getElementById("contenedor-tarjetas-resenas");
-  if (!contenedorResenas) return;
+  if (!contenedorResenas) {
+    console.warn("No se encontró el contenedor #contenedor-tarjetas-resenas en el HTML.");
+    return;
+  }
 
-  contenedorResenas.innerHTML = `<div style="text-align: center; color: #00FFEF; padding: 30px 0; font-weight: bold; grid-column: 1 / -1;">Cargando reseñas...</div>`;
+  contenedorResenas.innerHTML = `<div style="text-align: center; color: #00FFEF; padding: 30px 0; grid-column: 1 / -1;">Cargando reseñas...</div>`;
 
   fetch(`${URL_GOOGLE_APPS_SCRIPT}?accion=obtenerResenas&token=${TOKEN_SECRETO}`)
     .then(res => res.json())
     .then(data => {
-      // Si no hay datos en la hoja, mostramos un mensaje o dejamos la estática de respaldo
+      console.log("Reseñas recibidas desde Apps Script:", data); // Revisa esto en F12
+
       if (!Array.isArray(data) || data.length === 0) {
         contenedorResenas.innerHTML = `<div style="text-align: center; color: #9ca3af; padding: 30px 0; grid-column: 1 / -1;">Aún no hay reseñas registradas.</div>`;
         return;
@@ -3359,12 +3363,11 @@ function cargarResenas() {
         `;
       });
 
-      // Sobrescribimos el contenedor por completo con los datos reales de la base de datos
       contenedorResenas.innerHTML = html;
     })
     .catch(err => {
-      console.error(err);
-      contenedorResenas.innerHTML = `<div style="text-align: center; color: #ff4d4d; padding: 30px 0; grid-column: 1 / -1;">Error al cargar las reseñas.</div>`;
+      console.error("Error al cargar reseñas:", err);
+      contenedorResenas.innerHTML = `<div style="text-align: center; color: #ff4d4d; padding: 30px 0; grid-column: 1 / -1;">Error al conectar con la base de datos.</div>`;
     });
 }
 
