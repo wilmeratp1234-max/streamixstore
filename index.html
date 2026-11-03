@@ -3321,8 +3321,9 @@ function cargarResenas() {
   fetch(`${URL_GOOGLE_APPS_SCRIPT}?accion=obtenerResenas&token=${TOKEN_SECRETO}`)
     .then(res => res.json())
     .then(data => {
+      // Si no hay datos en la hoja, mostramos un mensaje o dejamos la estática de respaldo
       if (!Array.isArray(data) || data.length === 0) {
-        contenedorResenas.innerHTML = `<div style="text-align: center; color: #9ca3af; padding: 30px 0; grid-column: 1 / -1;">Aún no hay reseñas registradas. ¡Sé el primero en dejar una!</div>`;
+        contenedorResenas.innerHTML = `<div style="text-align: center; color: #9ca3af; padding: 30px 0; grid-column: 1 / -1;">Aún no hay reseñas registradas.</div>`;
         return;
       }
 
@@ -3358,6 +3359,7 @@ function cargarResenas() {
         `;
       });
 
+      // Sobrescribimos el contenedor por completo con los datos reales de la base de datos
       contenedorResenas.innerHTML = html;
     })
     .catch(err => {
