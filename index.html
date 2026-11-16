@@ -79,6 +79,201 @@
             background-color: #ff4d4d; 
             box-shadow: 0 0 10px #ff4d4d; 
         }
+		
+		.promo-card-gold {
+        background: radial-gradient(circle at center, #111827 0%, #060910 100%);
+        border: 1.5px solid #ffcc00;
+        border-radius: 24px;
+        padding: 35px 25px;
+        text-align: center;
+        max-width: 420px;
+        margin: 30px auto;
+        box-shadow: 0 0 30px rgba(255, 204, 0, 0.2), inset 0 0 20px rgba(255, 204, 0, 0.05);
+        font-family: inherit;
+        box-sizing: border-box;
+    }
+
+    .promo-logos {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 6px;
+        background: #080b13;
+        border: 1px solid #1f2937;
+        padding: 10px 12px;
+        border-radius: 16px;
+        margin-bottom: 25px;
+        flex-wrap: wrap;
+    }
+
+    .p-logo {
+        font-size: 0.6rem;
+        font-weight: 800;
+        padding: 4px 7px;
+        border-radius: 6px;
+        background: #111827;
+        letter-spacing: 0.5px;
+        text-transform: uppercase;
+    }
+	
+	/* ==================== GORRO DE NAVIDAD EN EL LOGO ==================== */
+.logo-s-wrapper {
+    position: relative;
+    display: inline-block;
+    color: #ffffff !important; /* Mantiene la 'S' blanca */
+}
+
+.santa-hat-svg {
+    position: absolute;
+    top: -13px;      /* Ajusta la altura sobre la S */
+    left: -9px;      /* Ajusta la posición horizontal */
+    width: 27px;     /* Tamaño del gorro */
+    height: auto;
+    transform: rotate(-18deg); /* Inclinación natural hacia la izquierda */
+    pointer-events: none;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.6));
+    z-index: 2;
+}
+
+    /* Colores oficiales de cada plataforma */
+    .p-logo.netflix {
+        color: #e50914;
+        border: 1px solid rgba(229, 9, 20, 0.4);
+        box-shadow: 0 0 6px rgba(229, 9, 20, 0.2);
+    }
+    .p-logo.disney {
+        color: #113ccf;
+        border: 1px solid rgba(17, 60, 207, 0.4);
+        box-shadow: 0 0 6px rgba(17, 60, 207, 0.2);
+    }
+    .p-logo.max {
+        color: #9146ff;
+        border: 1px solid rgba(145, 70, 255, 0.4);
+        box-shadow: 0 0 6px rgba(145, 70, 255, 0.2);
+    }
+    .p-logo.prime {
+        color: #00a8e1;
+        border: 1px solid rgba(0, 168, 225, 0.4);
+        box-shadow: 0 0 6px rgba(0, 168, 225, 0.2);
+    }
+    .p-logo.tv {
+        color: #ffffff;
+        border: 1px solid rgba(255, 255, 255, 0.4);
+        box-shadow: 0 0 6px rgba(255, 255, 255, 0.2);
+    }
+
+    .promo-badge {
+        background: rgba(255, 204, 0, 0.1);
+        border: 1px solid rgba(255, 204, 0, 0.35);
+        color: #ffcc00;
+        font-size: 0.7rem;
+        font-weight: 700;
+        padding: 6px 16px;
+        border-radius: 20px;
+        display: inline-block;
+        margin-bottom: 20px;
+        letter-spacing: 1.5px;
+    }
+
+    .promo-title {
+        font-size: 2.2rem;
+        font-weight: 900;
+        font-style: italic;
+        line-height: 1.1;
+        margin-bottom: 20px;
+        text-transform: uppercase;
+    }
+
+    .title-white {
+        color: #ffffff;
+        display: block;
+    }
+
+    .title-gold {
+        color: #ffcc00;
+        display: block;
+        margin-top: 4px;
+    }
+
+    .promo-discount-box {
+        background: #0b0f19;
+        border: 1px solid #ffcc00;
+        border-radius: 40px;
+        padding: 12px 20px;
+        margin-bottom: 25px;
+        box-shadow: 0 0 15px rgba(255, 204, 0, 0.15);
+    }
+
+    .disc-text {
+        color: #e5e7eb;
+        font-size: 0.95rem;
+        font-style: italic;
+    }
+
+    .disc-highlight {
+        color: #ffcc00;
+        font-size: 0.95rem;
+        font-weight: 800;
+        font-style: italic;
+    }
+
+    .promo-btn {
+        background: linear-gradient(135deg, #ffdd33, #f59e0b);
+        color: #0b0f19;
+        border: none;
+        width: 100%;
+        padding: 15px 20px;
+        border-radius: 14px;
+        font-size: 0.9rem;
+        font-weight: 800;
+        cursor: pointer;
+        text-decoration: none;
+        display: inline-block;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 20px rgba(255, 204, 0, 0.4);
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        box-sizing: border-box;
+    }
+
+    .promo-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 25px rgba(255, 204, 0, 0.6);
+        background: linear-gradient(135deg, #ffee55, #fbbf24);
+    }
+	
+	/* Estilos para asegurar que la nieve cubra toda la pantalla sin bloquear clics */
+    #snow-container {
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        width: 100vw !important;
+        height: 100vh !important;
+        pointer-events: none !important;
+        z-index: 9999 !important;
+        overflow: hidden !important;
+    }
+
+    .snowflake {
+        position: absolute;
+        top: -30px;
+        color: rgba(255, 255, 255, 0.7);
+        user-select: none;
+        z-index: 9999;
+        animation: globalFall linear infinite;
+        text-shadow: 0 0 6px rgba(0, 255, 239, 0.5);
+    }
+
+    @keyframes globalFall {
+        0% {
+            transform: translateY(-30px) translateX(0px);
+            opacity: 1;
+        }
+        100% {
+            transform: translateY(105vh) translateX(25px);
+            opacity: 0.1;
+        }
+    }
 
         /* ==================== CORRECCIÓN DE CURSOR Y SELECCIÓN ==================== */
         .nav-links a, 
@@ -97,6 +292,63 @@
         .btn-region {
             cursor: pointer !important;
         }
+		
+		/* ==================== ESTILOS DE LA BARRA DE CATEGORÍAS ==================== */
+    .category-pills-bar {
+        display: flex;
+        flex-wrap: wrap; /* Permite que bajen en varias filas como en tu referencia */
+        gap: 10px;
+        padding: 5px 0 15px 0;
+        margin-bottom: 15px;
+    }
+    .pill-btn {
+        background: #0b0f19;
+        border: 1px solid #1f2937;
+        color: #9ca3af;
+        padding: 9px 16px;
+        border-radius: 30px;
+        font-size: 0.85rem;
+        font-weight: 700;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        white-space: nowrap;
+        transition: all 0.2s ease;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        user-select: none;
+    }
+    .pill-btn:hover {
+        border-color: #00FFEF;
+        color: #ffffff;
+        background: #0e1320;
+    }
+    .pill-btn.active {
+        background: #0e1320;
+        border: 1.5px solid #00FFEF;
+        color: #00FFEF;
+        box-shadow: 0 0 12px rgba(0, 255, 239, 0.25);
+    }
+    .pill-icon {
+        font-size: 0.95rem;
+    }
+
+    /* ==================== AJUSTE COMPACTO PARA CELULARES ==================== */
+    @media (max-width: 768px) {
+        .category-pills-bar {
+            gap: 8px;
+            padding: 0 0 12px 0;
+            margin-bottom: 10px;
+        }
+        .pill-btn {
+            padding: 6px 12px; /* Mucho más delgados y compactos */
+            font-size: 0.75rem; /* Letra más pequeña como en la imagen 2 */
+            gap: 5px;
+        }
+        .pill-icon {
+            font-size: 0.85rem;
+        }
+    }
 		
         /* ==================== NAVEGACIÓN TRANSLÚCIDA Y MINIMALISTA ==================== */
         header.main-header { 
@@ -623,11 +875,27 @@
 
         <nav class="nav-bar">
             <button class="mobile-menu-btn" onclick="toggleDrawer()">☰</button>
+			
+					<!-- ==================== EFECTO DE NIEVE GLOBAL ==================== -->
+<div id="snow-container"></div>
 
-            <!-- Logo STREAMIX -->
-            <div class="logo-nav" onclick="mostrarVista('servicios')">
-                STREA<span>MIX</span>
-            </div>
+			<!-- Logo STREAMIX con Gorro de Navidad -->
+<div class="logo-nav" onclick="mostrarVista('servicios')">
+    <span class="logo-s-wrapper">
+        S
+        <!-- SVG Gorro de Navidad -->
+        <svg class="santa-hat-svg" viewBox="0 0 64 54" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Cuerpo rojo del gorro -->
+            <path d="M12 36C12 20 24 8 40 8C48 8 54 13 56 18C52 16 46 17 43 21C41 25 43 32 45 36H12Z" fill="#E61919"/>
+            <!-- Sombra sutil del gorro -->
+            <path d="M36 8C45 8 53 13 56 18C52 16 46 17 43 21C42 23 42 26 43 29C39 22 36 14 36 8Z" fill="#B81010"/>
+            <!-- Pompón blanco -->
+            <circle cx="56" cy="19" r="6.5" fill="#FFFFFF"/>
+            <!-- Borde de felpa blanco -->
+            <rect x="8" y="33" width="40" height="10" rx="5" fill="#FFFFFF"/>
+        </svg>
+    </span>TREA<span>MIX</span>
+</div>
 
             <!-- Menú Principal Desktop -->
             <ul class="nav-links">
@@ -736,9 +1004,9 @@
         <div id="vista-servicios" class="view-section active">
             <div class="carousel-container">
                 <div class="carousel-track" id="carouselTrack">
-                    <div class="carousel-slide"><img src="https://i.imgur.com/I9Q9g1P.jpeg" alt="Banner 1"></div>
-					<div class="carousel-slide"><img src="https://i.imgur.com/FkQpvcZ.jpeg" alt="Banner 1"></div>
-					<div class="carousel-slide"><img src="https://i.imgur.com/ZO5DO8r.jpeg" alt="Banner 1"></div>
+                    <div class="carousel-slide"><img src="https://i.imgur.com/SPxom3Z.jpeg" alt="Banner 1"></div>
+                    <div class="carousel-slide"><img src="https://i.imgur.com/SPxom3Z.jpeg" alt="Banner 1"></div>
+                    <div class="carousel-slide"><img src="https://i.imgur.com/SPxom3Z.jpeg" alt="Banner 1"></div>
                 </div>
                 <div class="carousel-indicators">
                     <span class="dot active" onclick="goToSlide(0)"></span>
@@ -746,6 +1014,81 @@
                     <span class="dot" onclick="goToSlide(2)"></span>
                 </div>
             </div>
+			
+			<!-- ==================== TARJETA DORADA CON COLORES OFICIALES ==================== -->
+<div class="promo-card-gold">
+    <!-- Fila de logotipos con sus colores -->
+    <div class="promo-logos">
+        <span class="p-logo netflix">NETFLIX</span>
+        <span class="p-logo disney">Disney+</span>
+        <span class="p-logo max">max</span>
+        <span class="p-logo prime">prime video</span>
+    </div>
+
+    <!-- Insignia -->
+    <div class="promo-badge">✦ OFERTA ESPECIAL ✦</div>
+
+    <!-- Título Principal -->
+    <h3 class="promo-title">
+        <span class="title-white">RENUEVA 2</span>
+        <span class="title-gold">MESES</span>
+    </h3>
+
+    <!-- Caja interna de beneficio -->
+    <div class="promo-discount-box">
+        <span class="disc-text">y recibe</span> <strong class="disc-highlight">10% de descuento</strong>
+    </div>
+
+    <!-- Botón de WhatsApp -->
+    <a href="https://wa.me/584124405245?text=Hola,%20quiero%20renovar%20por%202%20meses%20con%20el%2010%25%20de%20descuento" target="_blank" class="promo-btn">
+        RENOVAR CON DESCUENTO
+    </a>
+</div>
+			
+			<!-- ==================== BARRA DE CATEGORÍAS RÁPIDAS ==================== -->
+    <div class="category-pills-bar">
+        <button class="pill-btn active" onclick="filtrarSeccion('cines', this)">
+            <span class="pill-icon">🎬</span> Cines y Series
+        </button>
+        <button class="pill-btn" onclick="filtrarSeccion('iptv', this)">
+            <span class="pill-icon">📺</span> TV en Vivo & IPTV
+        </button>
+        <button class="pill-btn" onclick="filtrarSeccion('musica', this)">
+            <span class="pill-icon">🎵</span> Música
+        </button>
+        <button class="pill-btn" onclick="filtrarSeccion('ia', this)">
+            <span class="pill-icon">✨</span> IA & Diseño
+        </button>
+        <button class="pill-btn" onclick="filtrarSeccion('giftcards', this)">
+            <span class="pill-icon">🎁</span> Gift Cards
+        </button>
+        <button class="pill-btn" onclick="filtrarSeccion('otros', this)">
+            <span class="pill-icon">⚡</span> Otros Servicios
+        </button>
+    </div>
+	
+	<!-- Menú Lateral Móvil -->
+    <div class="mobile-drawer-overlay" id="drawerOverlay" onclick="toggleDrawer()"></div>
+    <div class="mobile-drawer" id="mobileDrawer">
+        <button class="drawer-close" onclick="toggleDrawer()">✕</button>
+        <ul class="drawer-links">
+            <li><a onclick="mostrarVista('recargas'); toggleDrawer();">Recargas</a></li>
+            <li><a onclick="mostrarVista('servicios'); toggleDrawer();">Servicios</a></li>
+            <li><a onclick="solicitarAccesoDistribuidores(); toggleDrawer();">👑 Distribuidores</a></li>
+            <li><a onclick="mostrarVista('buscar'); toggleDrawer();">🔍 Buscar datos</a></li>
+            <li><a href="#reseñas" onclick="mostrarVista('resenas', true); toggleDrawer();">Reseñas</a></li>
+            <li><a onclick="mostrarVista('soporte'); toggleDrawer();">Soporte</a></li>
+            
+            <!-- Separador visual y categorías -->
+            <hr style="border-color: #1f2937; margin: 5px 0;">
+            <li><a onclick="mostrarVista('servicios'); filtrarSeccion('cines', this); toggleDrawer();">🎬 Cines y Series</a></li>
+            <li><a onclick="mostrarVista('servicios'); filtrarSeccion('iptv', this); toggleDrawer();">📺 TV en Vivo & IPTV</a></li>
+            <li><a onclick="mostrarVista('servicios'); filtrarSeccion('musica', this); toggleDrawer();">🎵 Música</a></li>
+            <li><a onclick="mostrarVista('servicios'); filtrarSeccion('ia', this); toggleDrawer();">✨ IA & Diseño</a></li>
+            <li><a onclick="mostrarVista('servicios'); filtrarSeccion('giftcards', this); toggleDrawer();">🎁 Gift Cards</a></li>
+            <li><a onclick="mostrarVista('servicios'); filtrarSeccion('otros', this); toggleDrawer();">⚡ Otros Servicios</a></li>
+        </ul>
+    </div>
 
             <div class="section-header">
                 <h2 class="section-title">Cines y <span>Series</span></h2>
@@ -753,62 +1096,62 @@
             </div>
 
             <div class="services-grid">
-    <div class="service-card" onclick="abrirProducto('Netflix', 'Streaming', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0cMo-_nUdZeTFpq-DtJpYjfxcodMcWpU1GlzFugCSGIuYH7z1bRq21V9a&s=10')">
-        <div class="service-image-box"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0cMo-_nUdZeTFpq-DtJpYjfxcodMcWpU1GlzFugCSGIuYH7z1bRq21V9a&s=10" alt="Netflix"></div>
-        <div class="service-content"><span class="service-tag">Streaming</span><div class="service-name">Netflix</div></div>
-    </div>
+                <div class="service-card" onclick="abrirProducto('Netflix', 'Streaming', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0cMo-_nUdZeTFpq-DtJpYjfxcodMcWpU1GlzFugCSGIuYH7z1bRq21V9a&s=10')">
+                    <div class="service-image-box"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0cMo-_nUdZeTFpq-DtJpYjfxcodMcWpU1GlzFugCSGIuYH7z1bRq21V9a&s=10" alt="Netflix"></div>
+                    <div class="service-content"><span class="service-tag">Streaming</span><div class="service-name">Netflix</div></div>
+                </div>
 
-    <!-- NUEVO: Netflix Personal -->
-    <div class="service-card" onclick="abrirProducto('Netflix Personal', 'Streaming', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0cMo-_nUdZeTFpq-DtJpYjfxcodMcWpU1GlzFugCSGIuYH7z1bRq21V9a&s=10')">
-        <div class="service-image-box"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0cMo-_nUdZeTFpq-DtJpYjfxcodMcWpU1GlzFugCSGIuYH7z1bRq21V9a&s=10" alt="Netflix Personal"></div>
-        <div class="service-content"><span class="service-tag">Streaming</span><div class="service-name">Netflix Personal (BAJO RESERVA)</div></div>
-    </div>
+                <!-- NUEVO: Netflix Personal -->
+                <div class="service-card" onclick="abrirProducto('Netflix Personal', 'Streaming', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0cMo-_nUdZeTFpq-DtJpYjfxcodMcWpU1GlzFugCSGIuYH7z1bRq21V9a&s=10')">
+                    <div class="service-image-box"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0cMo-_nUdZeTFpq-DtJpYjfxcodMcWpU1GlzFugCSGIuYH7z1bRq21V9a&s=10" alt="Netflix Personal"></div>
+                    <div class="service-content"><span class="service-tag">Streaming</span><div class="service-name">Netflix Personal (BAJO RESERVA)</div></div>
+                </div>
 
-    <div class="service-card" onclick="abrirProducto('Disney+ Premium', 'Streaming', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSqq1cMuB1cYRHSa6tNkK7nf_DRk8drwjF1lvYHPltlUiwl1Pwzthbiu3E-&s=10')">
-        <div class="service-image-box"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSqq1cMuB1cYRHSa6tNkK7nf_DRk8drwjF1lvYHPltlUiwl1Pwzthbiu3E-&s=10" alt="Disney+"></div>
-        <div class="service-content"><span class="service-tag">Streaming</span><div class="service-name">Disney+ Premium</div></div>
-    </div>
+                <div class="service-card" onclick="abrirProducto('Disney+ Premium', 'Streaming', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSqq1cMuB1cYRHSa6tNkK7nf_DRk8drwjF1lvYHPltlUiwl1Pwzthbiu3E-&s=10')">
+                    <div class="service-image-box"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSqq1cMuB1cYRHSa6tNkK7nf_DRk8drwjF1lvYHPltlUiwl1Pwzthbiu3E-&s=10" alt="Disney+"></div>
+                    <div class="service-content"><span class="service-tag">Streaming</span><div class="service-name">Disney+ Premium</div></div>
+                </div>
 
-    <div class="service-card" onclick="abrirProducto('Prime Video', 'Streaming', 'https://i.vimeocdn.com/video/1590426600-b43c27725781caa7572d1f17045a2020b1ae8fe443c33a0f4536aa70fdb5fd2c-d?f=webp')">
-        <div class="service-image-box"><img src="https://i.vimeocdn.com/video/1590426600-b43c27725781caa7572d1f17045a2020b1ae8fe443c33a0f4536aa70fdb5fd2c-d?f=webp" alt="Prime Video"></div>
-        <div class="service-content"><span class="service-tag">Streaming</span><div class="service-name">Prime Video</div></div>
-    </div>
+                <div class="service-card" onclick="abrirProducto('Prime Video', 'Streaming', 'https://i.vimeocdn.com/video/1590426600-b43c27725781caa7572d1f17045a2020b1ae8fe443c33a0f4536aa70fdb5fd2c-d?f=webp')">
+                    <div class="service-image-box"><img src="https://i.vimeocdn.com/video/1590426600-b43c27725781caa7572d1f17045a2020b1ae8fe443c33a0f4536aa70fdb5fd2c-d?f=webp" alt="Prime Video"></div>
+                    <div class="service-content"><span class="service-tag">Streaming</span><div class="service-name">Prime Video</div></div>
+                </div>
 
-    <div class="service-card" onclick="abrirProducto('HBO Max Standar', 'Streaming', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTEkRUatyP1GHB1SqGF4-JyztKwUtyizuzIPdUi2xQrTA&s=10')">
-        <div class="service-image-box"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTEkRUatyP1GHB1SqGF4-JyztKwUtyizuzIPdUi2xQrTA&s=10" alt="HBO Max"></div>
-        <div class="service-content"><span class="service-tag">Streaming</span><div class="service-name">HBO Max Standar</div></div>
-    </div>
+                <div class="service-card" onclick="abrirProducto('HBO Max Standar', 'Streaming', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTEkRUatyP1GHB1SqGF4-JyztKwUtyizuzIPdUi2xQrTA&s=10')">
+                    <div class="service-image-box"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTEkRUatyP1GHB1SqGF4-JyztKwUtyizuzIPdUi2xQrTA&s=10" alt="HBO Max"></div>
+                    <div class="service-content"><span class="service-tag">Streaming</span><div class="service-name">HBO Max Standar</div></div>
+                </div>
 
-    <div class="service-card" onclick="abrirProducto('Crunchyroll', 'Anime / Streaming', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSXllnU1aiJFYK2NCFWhp5_TGhSABokIZuYM8jvg3_EoKBJbygbUlk70vuE&s=10')">
-        <div class="service-image-box"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSXllnU1aiJFYK2NCFWhp5_TGhSABokIZuYM8jvg3_EoKBJbygbUlk70vuE&s=10" alt="Crunchyroll"></div>
-        <div class="service-content"><span class="service-tag">Anime / Streaming</span><div class="service-name">Crunchyroll</div></div>
-    </div>
+                <div class="service-card" onclick="abrirProducto('Crunchyroll', 'Anime / Streaming', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSXllnU1aiJFYK2NCFWhp5_TGhSABokIZuYM8jvg3_EoKBJbygbUlk70vuE&s=10')">
+                    <div class="service-image-box"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSXllnU1aiJFYK2NCFWhp5_TGhSABokIZuYM8jvg3_EoKBJbygbUlk70vuE&s=10" alt="Crunchyroll"></div>
+                    <div class="service-content"><span class="service-tag">Anime / Streaming</span><div class="service-name">Crunchyroll</div></div>
+                </div>
 
-    <div class="service-card" onclick="abrirProducto('Paramount+', 'Streaming', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTdeIhuogFGWiTszR89JHiqipisx8iD5V_UlA_ZTp5e5w&s')">
-        <div class="service-image-box"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTdeIhuogFGWiTszR89JHiqipisx8iD5V_UlA_ZTp5e5w&s" alt="Paramount+"></div>
-        <div class="service-content"><span class="service-tag">Streaming</span><div class="service-name">Paramount+</div></div>
-    </div>
+                <div class="service-card" onclick="abrirProducto('Paramount+', 'Streaming', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTdeIhuogFGWiTszR89JHiqipisx8iD5V_UlA_ZTp5e5w&s')">
+                    <div class="service-image-box"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTdeIhuogFGWiTszR89JHiqipisx8iD5V_UlA_ZTp5e5w&s" alt="Paramount+"></div>
+                    <div class="service-content"><span class="service-tag">Streaming</span><div class="service-name">Paramount+</div></div>
+                </div>
 
-    <div class="service-card" onclick="abrirProducto('Vix', 'Streaming', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRUsaChItHlPmIGsKcinQkCKo_zwiaoIKzMVKDI8lH7PEYkYQ4CPACctsg&s=10')">
-        <div class="service-image-box"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRUsaChItHlPmIGsKcinQkCKo_zwiaoIKzMVKDI8lH7PEYkYQ4CPACctsg&s=10" alt="Vix"></div>
-        <div class="service-content"><span class="service-tag">Streaming</span><div class="service-name">Vix</div></div>
-    </div>
+                <div class="service-card" onclick="abrirProducto('Vix', 'Streaming', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRUsaChItHlPmIGsKcinQkCKo_zwiaoIKzMVKDI8lH7PEYkYQ4CPACctsg&s=10')">
+                    <div class="service-image-box"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRUsaChItHlPmIGsKcinQkCKo_zwiaoIKzMVKDI8lH7PEYkYQ4CPACctsg&s=10" alt="Vix"></div>
+                    <div class="service-content"><span class="service-tag">Streaming</span><div class="service-name">Vix</div></div>
+                </div>
 
-    <div class="service-card" onclick="abrirProducto('AppleTV', 'Streaming', 'https://www.apple.com/v/apple-tv/c/images/meta/apple-tv__ft1nltyknfmi_og.png')">
-        <div class="service-image-box"><img src="https://www.apple.com/v/apple-tv/c/images/meta/apple-tv__ft1nltyknfmi_og.png" alt="AppleTV"></div>
-        <div class="service-content"><span class="service-tag">Streaming</span><div class="service-name">AppleTV</div></div>
-    </div>
+                <div class="service-card" onclick="abrirProducto('AppleTV', 'Streaming', 'https://www.apple.com/v/apple-tv/c/images/meta/apple-tv__ft1nltyknfmi_og.png')">
+                    <div class="service-image-box"><img src="https://www.apple.com/v/apple-tv/c/images/meta/apple-tv__ft1nltyknfmi_og.png" alt="AppleTV"></div>
+                    <div class="service-content"><span class="service-tag">Streaming</span><div class="service-name">AppleTV</div></div>
+                </div>
 
-    <div class="service-card" onclick="abrirProducto('Universal+', 'Streaming', 'https://img.utdstc.com/screen/c4d/e10/c4de1000ebc7ca811c484501071d831b203228ea210844787a40341a0ff36e6c:600')">
-        <div class="service-image-box"><img src="https://img.utdstc.com/screen/c4d/e10/c4de1000ebc7ca811c484501071d831b203228ea210844787a40341a0ff36e6c:600" alt="Universal+"></div>
-        <div class="service-content"><span class="service-tag">Streaming</span><div class="service-name">Universal+</div></div>
-    </div>
+                <div class="service-card" onclick="abrirProducto('Universal+', 'Streaming', 'https://img.utdstc.com/screen/c4d/e10/c4de1000ebc7ca811c484501071d831b203228ea210844787a40341a0ff36e6c:600')">
+                    <div class="service-image-box"><img src="https://img.utdstc.com/screen/c4d/e10/c4de1000ebc7ca811c484501071d831b203228ea210844787a40341a0ff36e6c:600" alt="Universal+"></div>
+                    <div class="service-content"><span class="service-tag">Streaming</span><div class="service-name">Universal+</div></div>
+                </div>
 
-    <div class="service-card" onclick="abrirProducto('Viki Rakuten', 'Streaming / Doramas', 'https://yt3.googleusercontent.com/ytc/AIdro_kuMeIFzmBh7miBgkx93Dam8_wlj7xK8MefHeF1xLYOKhQw=s900-c-k-c0x00ffffff-no-rj')">
-        <div class="service-image-box"><img src="https://yt3.googleusercontent.com/ytc/AIdro_kuMeIFzmBh7miBgkx93Dam8_wlj7xK8MefHeF1xLYOKhQw=s900-c-k-c0x00ffffff-no-rj" alt="Viki Rakuten"></div>
-        <div class="service-content"><span class="service-tag">Streaming / Doramas</span><div class="service-name">Viki Rakuten</div></div>
-    </div>
-</div>
+                <div class="service-card" onclick="abrirProducto('Viki Rakuten', 'Streaming / Doramas', 'https://yt3.googleusercontent.com/ytc/AIdro_kuMeIFzmBh7miBgkx93Dam8_wlj7xK8MefHeF1xLYOKhQw=s900-c-k-c0x00ffffff-no-rj')">
+                    <div class="service-image-box"><img src="https://yt3.googleusercontent.com/ytc/AIdro_kuMeIFzmBh7miBgkx93Dam8_wlj7xK8MefHeF1xLYOKhQw=s900-c-k-c0x00ffffff-no-rj" alt="Viki Rakuten"></div>
+                    <div class="service-content"><span class="service-tag">Streaming / Doramas</span><div class="service-name">Viki Rakuten</div></div>
+                </div>
+            </div>
 
             <div class="section-header">
                 <h2 class="section-title">TV en Vivo & <span>IPTV</span></h2>
@@ -858,6 +1201,29 @@
                 <div class="service-card" onclick="abrirProducto('Capcut', 'Edición de Video', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRj9V_tUfcP_gOBrC6OGDOmOtxMJZTQtPPAQbR6g1ojV-PnmyeHUjOFjvYL&s=10')">
                     <div class="service-image-box"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRj9V_tUfcP_gOBrC6OGDOmOtxMJZTQtPPAQbR6g1ojV-PnmyeHUjOFjvYL&s=10" alt="CapCut"></div>
                     <div class="service-content"><span class="service-tag">Edición de Video</span><div class="service-name">Capcut</div></div>
+                </div>
+            </div>
+
+            <!-- CATEGORÍA: GIFT CARDS -->
+            <div class="section-header">
+                <h2 class="section-title">GIFT <span>CARDS</span></h2>
+                <a href="#" class="btn-ver-todos">Ver todos</a>
+            </div>
+
+            <div class="services-grid">
+                <div class="service-card" onclick="abrirProducto('Gift Card PSN', 'Gift Cards / Gaming', 'https://static.wikitide.net/avidwiki/thumb/1/1a/PlayStation_%282020%29.png/534px-PlayStation_%282020%29.png')">
+                    <div class="service-image-box"><img src="https://static.wikitide.net/avidwiki/thumb/1/1a/PlayStation_%282020%29.png/534px-PlayStation_%282020%29.png" alt="Gift Card PSN"></div>
+                    <div class="service-content"><span class="service-tag">Gift Cards / Gaming</span><div class="service-name">Gift Card PSN</div></div>
+                </div>
+
+                <div class="service-card" onclick="abrirProducto('Gift Card Netflix', 'Gift Cards / Streaming', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSCSUJQW9nl_BBDzZFbExg6jNfTRb5m7H8cWErYqu2_vd9gnghg_cqAhCk&s=10')">
+                    <div class="service-image-box"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSCSUJQW9nl_BBDzZFbExg6jNfTRb5m7H8cWErYqu2_vd9gnghg_cqAhCk&s=10" alt="Gift Card Netflix"></div>
+                    <div class="service-content"><span class="service-tag">Gift Cards / Streaming</span><div class="service-name">Gift Card Netflix</div></div>
+                </div>
+
+                <div class="service-card" onclick="abrirProducto('Gift Card Apple', 'Gift Cards / Apple', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTkjH0YCzKvrhdNmomagHleVLSSFC9mUYALBTySUmA2Vw&s=10')">
+                    <div class="service-image-box"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTkjH0YCzKvrhdNmomagHleVLSSFC9mUYALBTySUmA2Vw&s=10" alt="Gift Card Apple"></div>
+                    <div class="service-content"><span class="service-tag">Gift Cards / Apple</span><div class="service-name">Gift Card Apple</div></div>
                 </div>
             </div>
 
@@ -1575,22 +1941,6 @@
             </div>
         </div>
     </footer>
-	
-	<div class="search-form-container">
-    <label for="search-phone-input">NÚMERO DE TELÉFONO</label>
-    <input type="text" id="search-phone-input" placeholder="Ej: 584165017474">
-    
-    <!-- PEGA ESTE BOTÓN AQUÍ, reemplazando el anterior que tenías -->
-    <button onclick="ejecutarBusquedaDatos()">BUSCAR MIS CORREOS ➔</button>
-</div>
-
-<div class="modal-resena" id="modal-resena" style="display: none;">
-    <h3>Escribe tu Reseña</h3>
-    <!-- Campos del formulario (nombre, plataforma, estrellas, comentario...) -->
-    
-    <!-- PEGA ESTE BOTÓN AQUÍ, al final del formulario de la reseña -->
-    <button type="button" onclick="enviarResena(event)">PUBLICAR RESEÑA</button>
-</div>
 
     <!-- BOTÓN FLOTANTE WHATSAPP -->
     <a href="https://wa.me/584124405245" target="_blank" class="whatsapp-float-btn" title="Contactar por WhatsApp">
@@ -1980,9 +2330,61 @@
             { monto: "Gift Card $10", extra: "Código", precioUSD: 0 },
             { monto: "Gift Card $25", extra: "Código", precioUSD: 0 }
         ]
+    },
+    "gift card psn": {
+        categoria: "giftcards",
+        tab1Nombre: "Tarjetas USA",
+        tab2Nombre: "Más Vendidas",
+        idLabel: "CORREO PARA ENTREGA DEL CÓDIGO",
+        idPlaceholder: "Ingresa tu correo electrónico",
+        paquetesTab1: [
+            { monto: "$10 USD", extra: "Región USA", precioUSD: 11.50, active: true },
+            { monto: "$20 USD", extra: "Región USA", precioUSD: 22.00 },
+            { monto: "$25 USD", extra: "Región USA", precioUSD: 27.50 },
+            { monto: "$50 USD", extra: "Región USA", precioUSD: 53.50 },
+            { monto: "$100 USD", extra: "Región USA", precioUSD: 105.00 }
+        ],
+        paquetesTab2: [
+            { monto: "$10 USD", extra: "Región USA", precioUSD: 11.50 },
+            { monto: "$50 USD", extra: "Región USA", precioUSD: 53.50 }
+        ]
+    },
+    "gift card netflix": {
+        categoria: "giftcards",
+        tab1Nombre: "Tarjetas Digitales",
+        tab2Nombre: "Destacadas",
+        idLabel: "CORREO PARA ENTREGA DEL CÓDIGO",
+        idPlaceholder: "Ingresa tu correo electrónico",
+        paquetesTab1: [
+            { monto: "$15 USD", extra: "Código Digital", precioUSD: 17.00, active: true },
+            { monto: "$25 USD", extra: "Código Digital", precioUSD: 27.50 },
+            { monto: "$50 USD", extra: "Código Digital", precioUSD: 54.00 }
+        ],
+        paquetesTab2: [
+            { monto: "$25 USD", extra: "Código Digital", precioUSD: 27.50 }
+        ]
+    },
+    "gift card apple": {
+        categoria: "giftcards",
+        tab1Nombre: "App Store & iTunes",
+        tab2Nombre: "Más Vendidas",
+        idLabel: "CORREO PARA ENTREGA DEL CÓDIGO",
+        idPlaceholder: "Ingresa tu correo electrónico",
+        paquetesTab1: [
+            { monto: "$2 USD", extra: "Región USA", precioUSD: 3.50, active: true },
+            { monto: "$5 USD", extra: "Región USA", precioUSD: 7.50 },
+            { monto: "$10 USD", extra: "Región USA", precioUSD: 12.70 },
+            { monto: "$20 USD", extra: "Región USA", precioUSD: 23.50 },
+            { monto: "$25 USD", extra: "Región USA", precioUSD: 28.00 },
+            { monto: "$50 USD", extra: "Región USA", precioUSD: 54.50 },
+            { monto: "$100 USD", extra: "Región USA", precioUSD: 105.00 }
+        ],
+        paquetesTab2: [
+            { monto: "$10 USD", extra: "Región USA", precioUSD: 12.70 },
+            { monto: "$25 USD", extra: "Región USA", precioUSD: 28.00 }
+        ]
     }
 };
-
 const baseDeDatosPreciosDistri = {
     "netflix": {
         categoria: "distribuidores",
@@ -2612,7 +3014,7 @@ function renderizarPaquetes() {
             let totalUSD = (precioUSDActual * cantidad).toFixed(2);
             let totalVES = (precioUSDActual * cantidad * tasaVES).toLocaleString('es-VE', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 
-            let msg = `🎃 Hola STREAMIX STORE, ya realicé mi pago por ${metodo}.\n\n` +
+            let msg = `🎅🏻 Hola STREAMIX STORE, ya realicé mi pago por ${metodo}.\n\n` +
                       `📌 *Producto:* ${productoNombreActual}\n` +
                       `📦 *Plan:* ${paquete} (x${cantidad})\n` +
                       `👤 *${productoActualData.idLabel}:* ${idCuenta}\n` +
@@ -3430,6 +3832,99 @@ document.addEventListener("DOMContentLoaded", () => {
 document.addEventListener("DOMContentLoaded", () => {
   cargarResenas();
 });
+
+function filtrarSeccion(categoria, botonElemento) {
+        // Remueve la clase active de todos los botones y la coloca en el presionado
+        document.querySelectorAll('.pill-btn').forEach(btn => btn.classList.remove('active'));
+        botonElemento.classList.add('active');
+
+        // Mapeo de categorías con los títulos o secciones de tu tienda
+        let elementos = document.querySelectorAll('.section-header');
+        let objetivo = null;
+
+        elementos.forEach(header => {
+            let texto = header.innerText.toLowerCase();
+            if (categoria === 'cines' && texto.includes('cines')) objetivo = header;
+            if (categoria === 'iptv' && texto.includes('tv en vivo')) objetivo = header;
+            if (categoria === 'musica' && texto.includes('música')) objetivo = header;
+            if (categoria === 'ia' && texto.includes('ia &')) objetivo = header;
+            if (categoria === 'giftcards' && texto.includes('gift')) objetivo = header;
+            if (categoria === 'otros' && texto.includes('otros')) objetivo = header;
+        });
+
+        if (objetivo) {
+            objetivo.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+    }
+	
+	document.addEventListener("DOMContentLoaded", function() {
+    // 1. VERIFICACIÓN DE HORARIO CON TUS ID ORIGINALES
+    function verificarHorarioTienda() {
+        const container = document.getElementById('estado-tienda-container');
+        const textEl = document.getElementById('texto-estado-tienda');
+        if (!container || !textEl) return;
+
+        try {
+            const options = { timeZone: 'America/Caracas', hour: 'numeric', minute: 'numeric', hour12: false };
+            const formatter = new Intl.DateTimeFormat('en-US', options);
+            const parts = formatter.formatToParts(new Date());
+            
+            let hora = 0;
+            let minuto = 0;
+            for (let p of parts) {
+                if (p.type === 'hour') hora = parseInt(p.value, 10);
+                if (p.type === 'minute') minuto = parseInt(p.value, 10);
+            }
+
+            const horaDecimal = hora + (minuto / 60);
+            const abierto = horaDecimal >= 9 && horaDecimal < 22; // De 9:00 AM a 10:00 PM
+
+            if (abierto) {
+                container.className = "badge-estado-tienda abierto";
+                textEl.innerText = "Abierto ahora: 9:00 AM - 10:00 PM";
+            } else {
+                container.className = "badge-estado-tienda cerrado";
+                textEl.innerText = "Cerrado (Abre mañana a las 9:00 AM)";
+            }
+        } catch (e) {
+            // Fallback por seguridad
+            container.className = "badge-estado-tienda abierto";
+            textEl.innerText = "Abierto ahora: 9:00 AM - 10:00 PM";
+        }
+    }
+    verificarHorarioTienda();
+
+    // 2. EFECTO DE COPOS DE NIEVE GLOBAL
+    const snowContainer = document.getElementById('snow-container');
+    if (snowContainer) {
+        const numSnowflakes = 40;
+        for (let i = 0; i < numSnowflakes; i++) {
+            createSnowflake();
+        }
+
+        function createSnowflake() {
+            const snowflake = document.createElement('div');
+            snowflake.classList.add('snowflake');
+            snowflake.innerHTML = Math.random() > 0.4 ? '❄' : '•';
+            snowflake.style.left = Math.random() * 100 + 'vw';
+            
+            const duration = Math.random() * 7 + 5;
+            snowflake.style.animationDuration = duration + 's';
+            snowflake.style.animationDelay = (Math.random() * 10) + 's';
+            
+            const size = Math.random() * 0.8 + 0.4;
+            snowflake.style.fontSize = size + 'rem';
+            
+            snowContainer.appendChild(snowflake);
+
+            snowflake.addEventListener('animationiteration', () => {
+                snowflake.style.left = Math.random() * 100 + 'vw';
+                snowflake.style.animationDuration = (Math.random() * 7 + 5) + 's';
+            });
+        }
+    }
+});
+		
 
         let currentSlide = 0;
         function goToSlide(index) {
