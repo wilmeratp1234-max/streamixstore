@@ -117,6 +117,626 @@
     color: #00FFEF;
 }
 
+/* Asegurar visibilidad de la vista de detalle de videojuego */
+.view-section {
+    display: none;
+}
+.view-section.active {
+    display: block !important;
+}
+
+/* ==================== CATÁLOGO Y FICHA DETALLADA DE VIDEOJUEGOS ==================== */
+.vj-kicker {
+    font-size: 0.72rem;
+    font-weight: 800;
+    color: #00FFEF;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 4px;
+}
+
+.vj-cat-title {
+    font-size: 2.2rem;
+    font-weight: 900;
+    color: #ffffff;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+}
+
+.vj-cat-sub {
+    color: #9ca3af;
+    font-size: 0.9rem;
+    margin-bottom: 24px;
+}
+
+.vj-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 20px;
+}
+
+.vj-card {
+    background: #0b0f19;
+    border: 1px solid #1f2937;
+    border-radius: 18px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+    cursor: pointer;
+}
+
+.vj-card:hover {
+    transform: translateY(-4px);
+    border-color: #00FFEF;
+    box-shadow: 0 10px 28px rgba(0, 255, 239, 0.18);
+}
+
+.vj-card-cover {
+    position: relative;
+    width: 100%;
+    height: 175px;
+    background: #111827;
+    overflow: hidden;
+}
+
+.vj-card-cover img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.vj-card:hover .vj-card-cover img {
+    transform: scale(1.05);
+}
+
+.vj-console-pill {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    background: rgba(4, 6, 11, 0.85);
+    backdrop-filter: blur(6px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: #ffffff;
+    font-size: 0.62rem;
+    font-weight: 800;
+    padding: 4px 10px;
+    border-radius: 20px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.vj-card-body {
+    padding: 18px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    justify-content: space-between;
+}
+
+.vj-type-tag {
+    font-size: 0.65rem;
+    font-weight: 800;
+    color: #00FFEF;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    margin-bottom: 6px;
+    display: block;
+}
+
+.vj-card-title {
+    font-size: 1.05rem;
+    font-weight: 900;
+    color: #ffffff;
+    text-transform: uppercase;
+    line-height: 1.25;
+    margin-bottom: 8px;
+}
+
+.vj-card-desc {
+    font-size: 0.78rem;
+    color: #9ca3af;
+    line-height: 1.45;
+    margin-bottom: 18px;
+}
+
+.vj-price-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 12px;
+    border-top: 1px solid #151c2c;
+    margin-bottom: 14px;
+}
+
+.vj-price-from {
+    font-size: 1rem;
+    font-weight: 900;
+    color: #ffffff;
+}
+
+.vj-price-hint {
+    font-size: 0.72rem;
+    color: #9ca3af;
+    text-align: right;
+}
+
+.btn-vj-ver {
+    width: 100%;
+    background: #131b2e;
+    border: 1px solid #1f2937;
+    color: #ffffff;
+    padding: 10px;
+    border-radius: 10px;
+    font-size: 0.8rem;
+    font-weight: 800;
+    text-align: center;
+    transition: all 0.2s;
+}
+
+.vj-card:hover .btn-vj-ver {
+    background: #00FFEF;
+    color: #04060b;
+    border-color: #00FFEF;
+}
+
+/* ==================== VISTA DETALLE DE VIDEOJUEGO ==================== */
+.vj-detail-layout {
+    display: grid;
+    grid-template-columns: 1fr 1.05fr;
+    gap: 26px;
+    margin-bottom: 24px;
+}
+
+.vj-detail-left {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.vj-detail-cover-box {
+    position: relative;
+    background: #0b0f19;
+    border: 1px solid #1f2937;
+    border-radius: 20px;
+    overflow: hidden;
+    height: 330px;
+}
+
+.vj-detail-cover-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.vj-badges-3col {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+}
+
+.vj-mini-badge {
+    background: #0b0f19;
+    border: 1px solid #1f2937;
+    border-radius: 14px;
+    padding: 14px 10px;
+    text-align: center;
+}
+
+.vj-mini-badge-title {
+    font-size: 0.75rem;
+    font-weight: 800;
+    color: #ffffff;
+    margin-bottom: 4px;
+}
+
+.vj-mini-badge-sub {
+    font-size: 0.68rem;
+    color: #9ca3af;
+    line-height: 1.3;
+}
+
+.vj-detail-right {
+    background: #0b0f19;
+    border: 1px solid #1f2937;
+    border-radius: 20px;
+    padding: 28px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.vj-detail-title {
+    font-size: 2rem;
+    font-weight: 900;
+    color: #ffffff;
+    text-transform: uppercase;
+    line-height: 1.15;
+    margin: 6px 0 12px 0;
+}
+
+.vj-console-inline {
+    display: inline-block;
+    background: #131b2e;
+    border: 1px solid #2b3548;
+    color: #ffffff;
+    font-size: 0.68rem;
+    font-weight: 800;
+    padding: 5px 12px;
+    border-radius: 20px;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+}
+
+.vj-trust-line {
+    font-size: 0.78rem;
+    color: #9ca3af;
+    margin-bottom: 14px;
+}
+
+.vj-trust-line span {
+    color: #00FFEF;
+    margin-right: 6px;
+}
+
+.vj-detail-desc {
+    font-size: 0.86rem;
+    color: #d1d5db;
+    line-height: 1.5;
+    padding-bottom: 18px;
+    border-bottom: 1px solid #151c2c;
+    margin-bottom: 18px;
+}
+
+.vj-price-big-label {
+    font-size: 0.68rem;
+    font-weight: 800;
+    color: #9ca3af;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    margin-bottom: 4px;
+}
+
+.vj-price-big-row {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    margin-bottom: 18px;
+}
+
+.vj-price-big-val {
+    font-size: 2.1rem;
+    font-weight: 900;
+    color: #ffffff;
+}
+
+.vj-price-big-mod {
+    font-size: 0.78rem;
+    color: #9ca3af;
+}
+
+.vj-select-label {
+    font-size: 0.7rem;
+    font-weight: 800;
+    color: #9ca3af;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    margin-bottom: 8px;
+    display: block;
+}
+
+.vj-modalidad-select {
+    width: 100%;
+    background: #070a12;
+    border: 1px solid #1f2937;
+    border-radius: 12px;
+    padding: 13px 16px;
+    color: #ffffff;
+    font-size: 0.9rem;
+    font-weight: 600;
+    outline: none;
+    margin-bottom: 16px;
+    cursor: pointer;
+}
+
+.vj-modalidad-select:focus {
+    border-color: #00FFEF;
+}
+
+.vj-actions-row {
+    display: grid;
+    grid-template-columns: 1.3fr 1fr;
+    gap: 12px;
+    margin-top: 16px;
+    margin-bottom: 16px;
+}
+
+.btn-vj-buy-now {
+    background: #00FFEF;
+    color: #04060b;
+    border: none;
+    padding: 14px 18px;
+    border-radius: 12px;
+    font-weight: 900;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    box-shadow: 0 4px 15px rgba(0, 255, 239, 0.3);
+}
+
+.btn-vj-buy-now:hover {
+    background: #00e6d6;
+    transform: translateY(-1px);
+}
+
+.btn-vj-keep-shopping {
+    background: #131b2e;
+    border: 1px solid #1f2937;
+    color: #ffffff;
+    padding: 14px 18px;
+    border-radius: 12px;
+    font-weight: 800;
+    font-size: 0.88rem;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.btn-vj-keep-shopping:hover {
+    border-color: #00FFEF;
+    color: #00FFEF;
+}
+
+.vj-verify-note {
+    background: #070a12;
+    border: 1px solid #1f2937;
+    border-radius: 12px;
+    padding: 12px 14px;
+    font-size: 0.76rem;
+    color: #9ca3af;
+    line-height: 1.4;
+}
+
+.vj-bottom-info-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.vj-info-card {
+    background: #0b0f19;
+    border: 1px solid #1f2937;
+    border-radius: 18px;
+    padding: 22px 24px;
+}
+
+.vj-info-card h4 {
+    font-size: 0.95rem;
+    font-weight: 900;
+    color: #ffffff;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.vj-info-card p {
+    font-size: 0.82rem;
+    color: #9ca3af;
+    line-height: 1.5;
+}
+
+@media (max-width: 900px) {
+    .vj-detail-layout,
+    .vj-bottom-info-grid {
+        grid-template-columns: 1fr;
+    }
+    .vj-detail-cover-box {
+        height: 230px;
+    }
+    .vj-actions-row {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ==================== NUEVO DISEÑO SECCIÓN RECARGAS ==================== */
+.recargas-hero-wrapper {
+    max-width: 960px;
+    margin: 10px auto 30px auto;
+}
+
+.recargas-kicker {
+    font-size: 0.72rem;
+    font-weight: 800;
+    color: #00FFEF;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 6px;
+}
+
+.recargas-main-title {
+    font-size: 2.3rem;
+    font-weight: 900;
+    color: #ffffff;
+    text-transform: uppercase;
+    line-height: 1.15;
+    margin-bottom: 8px;
+}
+
+.recargas-main-title span {
+    color: #00FFEF;
+    text-shadow: 0 0 12px rgba(0, 255, 239, 0.35);
+}
+
+.recargas-subtitle {
+    color: #9ca3af;
+    font-size: 0.92rem;
+    margin-bottom: 24px;
+}
+
+.recargas-search-label {
+    display: block;
+    font-size: 0.7rem;
+    font-weight: 800;
+    color: #9ca3af;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+}
+
+.recargas-search-box {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: #0b0f19;
+    border: 1.5px solid #1f2937;
+    border-radius: 14px;
+    padding: 14px 18px;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.recargas-search-box:focus-within {
+    border-color: #00FFEF;
+    box-shadow: 0 0 15px rgba(0, 255, 239, 0.2);
+}
+
+.recargas-search-box svg {
+    width: 18px;
+    height: 18px;
+    fill: #00FFEF;
+    flex-shrink: 0;
+}
+
+.recargas-search-box input {
+    background: transparent;
+    border: none;
+    outline: none;
+    color: #ffffff;
+    font-size: 0.95rem;
+    width: 100%;
+}
+
+.recargas-search-hint {
+    font-size: 0.75rem;
+    color: #6b7280;
+    margin-top: 8px;
+    margin-bottom: 28px;
+}
+
+/* Grid de 3 Categorías (Videojuegos, Gift Cards, Recargas) */
+.recargas-cat-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+    margin-bottom: 28px;
+}
+
+.recarga-cat-card {
+    background: linear-gradient(145deg, #0e1424 0%, #090d18 100%);
+    border: 1px solid #1f2937;
+    border-radius: 18px;
+    padding: 28px 18px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.recarga-cat-card:hover,
+.recarga-cat-card.active {
+    border-color: #00FFEF;
+    background: linear-gradient(145deg, #101b2e 0%, #0b1120 100%);
+    transform: translateY(-4px);
+    box-shadow: 0 10px 25px rgba(0, 255, 239, 0.18);
+}
+
+.recarga-cat-icon {
+    width: 52px;
+    height: 52px;
+    border-radius: 14px;
+    background: rgba(0, 255, 239, 0.08);
+    border: 1px solid rgba(0, 255, 239, 0.25);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.6rem;
+    margin-bottom: 4px;
+}
+
+.recarga-cat-title {
+    font-size: 1.05rem;
+    font-weight: 800;
+    color: #ffffff;
+}
+
+.recarga-cat-sub {
+    font-size: 0.78rem;
+    color: #9ca3af;
+}
+
+/* Banner Inferior "Solicitar un producto" */
+.recargas-request-banner {
+    background: linear-gradient(135deg, #0b1324 0%, #0a1c26 50%, #0b0f19 100%);
+    border: 1px solid rgba(0, 255, 239, 0.3);
+    border-radius: 18px;
+    padding: 24px 28px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+}
+
+.recargas-request-text h3 {
+    font-size: 1.15rem;
+    font-weight: 900;
+    color: #ffffff;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+}
+
+.recargas-request-text p {
+    font-size: 0.85rem;
+    color: #9ca3af;
+}
+
+.btn-solicitar-producto {
+    background: #00FFEF;
+    color: #04060b;
+    padding: 13px 22px;
+    border-radius: 12px;
+    font-weight: 900;
+    font-size: 0.85rem;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 15px rgba(0, 255, 239, 0.3);
+    white-space: nowrap;
+}
+
+.btn-solicitar-producto:hover {
+    background: #00e6d6;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 255, 239, 0.5);
+}
+
+@media (max-width: 768px) {
+    .recargas-main-title { font-size: 1.65rem; }
+    .recargas-cat-grid { grid-template-columns: 1fr; gap: 12px; }
+    .recarga-cat-card { flex-direction: row; text-align: left; padding: 16px; justify-content: flex-start; gap: 15px; }
+    .recarga-cat-icon { width: 44px; height: 44px; font-size: 1.3rem; margin-bottom: 0; flex-shrink: 0; }
+    .recargas-request-banner { padding: 18px; }
+    .btn-solicitar-producto { width: 100%; justify-content: center; }
+}
+
         /* ==================== BANNER BLACK FRIDAY ==================== */
         .bf-banner-wrapper {
             display: flex;
@@ -1378,7 +1998,7 @@
                 <!-- NUEVO: Netflix Personal -->
                 <div class="service-card" onclick="abrirProducto('Netflix Personal', 'Streaming', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0cMo-_nUdZeTFpq-DtJpYjfxcodMcWpU1GlzFugCSGIuYH7z1bRq21V9a&s=10')">
                     <div class="service-image-box"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0cMo-_nUdZeTFpq-DtJpYjfxcodMcWpU1GlzFugCSGIuYH7z1bRq21V9a&s=10" alt="Netflix Personal"></div>
-                    <div class="service-content"><span class="service-tag">Streaming</span><div class="service-name">Netflix Personal (BAJO RESERVA)</div></div>
+                    <div class="service-content"><span class="service-tag">Streaming</span><div class="service-name">Netflix Personal</div></div>
                 </div>
 
                 <div class="service-card" onclick="abrirProducto('Disney+ Premium', 'Streaming', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSqq1cMuB1cYRHSa6tNkK7nf_DRk8drwjF1lvYHPltlUiwl1Pwzthbiu3E-&s=10')">
@@ -1541,7 +2161,7 @@
                 <!-- NUEVO: Netflix Personal VIP -->
                 <div class="service-card" onclick="abrirProductoDistri('Netflix Personal', 'Streaming Mayorista', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0cMo-_nUdZeTFpq-DtJpYjfxcodMcWpU1GlzFugCSGIuYH7z1bRq21V9a&s=10')">
                     <div class="service-image-box"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0cMo-_nUdZeTFpq-DtJpYjfxcodMcWpU1GlzFugCSGIuYH7z1bRq21V9a&s=10" alt="Netflix Personal"></div>
-                    <div class="service-content"><span class="service-tag">PRECIO MAYORISTA</span><div class="service-name">Netflix Personal (BAJO RESERVA)</div></div>
+                    <div class="service-content"><span class="service-tag">PRECIO MAYORISTA</span><div class="service-name">Netflix Personal</div></div>
                 </div>
 
                 <div class="service-card" onclick="abrirProductoDistri('Disney+ Premium', 'Streaming Mayorista', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSqq1cMuB1cYRHSa6tNkK7nf_DRk8drwjF1lvYHPltlUiwl1Pwzthbiu3E-&s=10')">
@@ -1622,39 +2242,202 @@
         </div>
 
         <!-- ==================== VISTA 2: JUEGOS DE RECARGA ==================== -->
-        <div id="vista-recargas" class="view-section">
-            <div class="section-header" style="margin-top: 10px;">
-                <h2 class="section-title">Juegos de <span>Recarga</span></h2>
-                <a href="#" class="btn-ver-todos">Ver todos</a>
+<div id="vista-recargas" class="view-section">
+    <div class="recargas-hero-wrapper">
+        <div class="recargas-kicker">ENCUENTRA LO QUE NECESITAS</div>
+        <h1 class="recargas-main-title">¿QUÉ QUIERES <span>JUGAR HOY?</span></h1>
+        <p class="recargas-subtitle">Busca por nombre o entra directamente a una categoría. El catálogo aparecerá cuando elijas.</p>
+
+        <label class="recargas-search-label" for="buscador-recargas-input">BUSCAR JUEGO, PRODUCTO O CATEGORÍA</label>
+        <div class="recargas-search-box">
+            <svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+            <input type="text" id="buscador-recargas-input" placeholder="Ej.: Free Fire, Roblox, PSN, Call of Duty..." oninput="filtrarCatalogoRecargas()">
+        </div>
+        <div class="recargas-search-hint">Escribe para ver resultados o selecciona una categoría.</div>
+
+        <!-- 3 Categorías principales (Sin Membresías) -->
+        <div class="recargas-cat-grid" id="recargas-categorias-cards">
+            <div class="recarga-cat-card" id="cat-card-videojuegos" onclick="seleccionarCategoriaRecargas('videojuegos')">
+                <div class="recarga-cat-icon">🎮</div>
+                <div>
+                    <div class="recarga-cat-title">Videojuegos</div>
+                    <div class="recarga-cat-sub">PS4 · PS5 · Xbox · PC</div>
+                </div>
             </div>
 
-            <div class="services-grid">
-                <div class="service-card" onclick="abrirProducto('Free fire', 'GLOBAL', 'https://gamerstyle.com.mx/wp-content/uploads/2022/06/Garena-Free-Fire-Nuevo-Logo-2022.jpg')">
-                    <div class="service-image-box"><img src="https://gamerstyle.com.mx/wp-content/uploads/2022/06/Garena-Free-Fire-Nuevo-Logo-2022.jpg" alt="Free Fire"></div>
-                    <div class="service-content"><span class="service-tag">GLOBAL</span><div class="service-name">Free fire</div></div>
+            <div class="recarga-cat-card" id="cat-card-giftcards" onclick="seleccionarCategoriaRecargas('giftcards')">
+                <div class="recarga-cat-icon">🎁</div>
+                <div>
+                    <div class="recarga-cat-title">Gift Cards</div>
+                    <div class="recarga-cat-sub">Saldo digital</div>
                 </div>
+            </div>
 
-                <div class="service-card" onclick="abrirProducto('Blood Strike', 'GLOBAL', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQPFMnmbAyB7z9PX-NEu2m0WhvchXOOmHKODEu_KEX0Dw&s=10')">
-                    <div class="service-image-box"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQPFMnmbAyB7z9PX-NEu2m0WhvchXOOmHKODEu_KEX0Dw&s=10" alt="Blood Strike"></div>
-                    <div class="service-content"><span class="service-tag">GLOBAL</span><div class="service-name">Blood Strike</div></div>
-                </div>
-
-                <div class="service-card" onclick="abrirProducto('Mobile Legends', 'GLOBAL', 'https://articles-img.sftcdn.net/t_article_cover_xl/auto-mapping-folder/sites/2/2023/02/How-to-Download-Play-Win-at-Mobile-Legends.jpg')">
-                    <div class="service-image-box"><img src="https://articles-img.sftcdn.net/t_article_cover_xl/auto-mapping-folder/sites/2/2023/02/How-to-Download-Play-Win-at-Mobile-Legends.jpg" alt="Mobile Legends"></div>
-                    <div class="service-content"><span class="service-tag">GLOBAL</span><div class="service-name">Mobile Legends</div></div>
-                </div>
-
-                <div class="service-card" onclick="abrirProducto('Call of Duty Mobile', 'GLOBAL', 'https://images.appspy.com/articles/13712/cod-mobile.jpg')">
-                    <div class="service-image-box"><img src="https://images.appspy.com/articles/13712/cod-mobile.jpg" alt="Call of Duty"></div>
-                    <div class="service-content"><span class="service-tag">GLOBAL</span><div class="service-name">Call of Duty Mobile</div></div>
-                </div>
-
-                <div class="service-card" onclick="abrirProducto('Roblox', 'GLOBAL', 'https://i0.wp.com/mnn.mv/wp-content/uploads/2025/09/roblox.webp?fit=1920%2C1080&ssl=1')">
-                    <div class="service-image-box"><img src="https://i0.wp.com/mnn.mv/wp-content/uploads/2025/09/roblox.webp?fit=1920%2C1080&ssl=1" alt="Roblox"></div>
-                    <div class="service-content"><span class="service-tag">GLOBAL</span><div class="service-name">Roblox</div></div>
+            <div class="recarga-cat-card" id="cat-card-recargas" onclick="seleccionarCategoriaRecargas('recargas')">
+                <div class="recarga-cat-icon">💎</div>
+                <div>
+                    <div class="recarga-cat-title">Recargas</div>
+                    <div class="recarga-cat-sub">Juegos móviles</div>
                 </div>
             </div>
         </div>
+		
+		<!-- ==================== VISTA DETALLE DE VIDEOJUEGO ==================== -->
+<div id="vista-videojuego-detalle" class="view-section">
+    <div class="breadcrumbs">
+        <a onclick="mostrarVista('recargas')">Recargas</a> &gt;
+        <a onclick="mostrarVista('recargas'); seleccionarCategoriaRecargas('videojuegos');">Videojuegos</a> &gt;
+        <span id="vj-bread-title">Juego</span>
+    </div>
+
+    <div class="vj-detail-layout">
+        <div class="vj-detail-left">
+            <div class="vj-detail-cover-box">
+                <span class="vj-console-pill" id="vj-detail-pill">PLAYSTATION 4 · PLAYSTATION 5</span>
+                <img id="vj-detail-img" src="" alt="Portada Videojuego">
+            </div>
+
+            <div class="vj-badges-3col">
+                <div class="vj-mini-badge">
+                    <div class="vj-mini-badge-title">✓ Producto digital</div>
+                    <div class="vj-mini-badge-sub">Consulta el formato disponible</div>
+                </div>
+                <div class="vj-mini-badge">
+                    <div class="vj-mini-badge-title">🌐 Región</div>
+                    <div class="vj-mini-badge-sub">Confirma compatibilidad antes de comprar</div>
+                </div>
+                <div class="vj-mini-badge">
+                    <div class="vj-mini-badge-title">💬 Atención</div>
+                    <div class="vj-mini-badge-sub">Asesoría por WhatsApp</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="vj-detail-right">
+            <div>
+                <span class="vj-type-tag">VIDEOJUEGO</span>
+                <h1 class="vj-detail-title" id="vj-detail-title">EA SPORTS FC 27 STANDARD EDITION</h1>
+                <div class="vj-console-inline" id="vj-detail-console-badge">PLAYSTATION 4 · PLAYSTATION 5</div>
+                <div class="vj-trust-line"><span>★★★★★</span> Compra acompañada por STREAMIX STORE</div>
+                <p class="vj-detail-desc" id="vj-detail-desc">Descripción del juego.</p>
+
+                <div class="vj-price-big-label">PRECIO</div>
+                <div class="vj-price-big-row">
+                    <div class="vj-price-big-val" id="vj-detail-price">$28.00 USD</div>
+                    <div class="vj-price-big-mod" id="vj-detail-mod-label">Modalidad: PS5 · Primaria</div>
+                </div>
+
+                <label class="vj-select-label" for="vj-modalidad-select">ELIGE TU MODALIDAD</label>
+                <select class="vj-modalidad-select" id="vj-modalidad-select" onchange="actualizarModalidadVideojuego()"></select>
+
+                <label class="vj-select-label">CANTIDAD</label>
+                <div class="quantity-control" style="width: fit-content;">
+                    <button class="btn-qty" onclick="cambiarCantidadVideojuego(-1)">-</button>
+                    <span class="qty-number" id="vj-qty-val">1</span>
+                    <button class="btn-qty" onclick="cambiarCantidadVideojuego(1)">+</button>
+                </div>
+            </div>
+
+            <div>
+                <div class="vj-actions-row">
+                    <button class="btn-vj-buy-now" onclick="comprarVideojuegoDirecto()">Comprar ahora</button>
+                    <button class="btn-vj-keep-shopping" onclick="mostrarVista('recargas'); seleccionarCategoriaRecargas('videojuegos');">← Seguir comprando</button>
+                </div>
+
+                <div class="vj-verify-note">
+                    📍 Antes de confirmar tu pedido verificamos contigo la plataforma, región, modalidad y disponibilidad para evitar incompatibilidades.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="vj-bottom-info-grid">
+        <div class="vj-info-card">
+            <h4>📘 SOBRE ESTE PRODUCTO</h4>
+            <p>Consulta con STREAMIX STORE la versión, plataforma, región y modalidad disponibles para este producto.</p>
+        </div>
+        <div class="vj-info-card">
+            <h4>🛒 ¿CÓMO COMPRAR?</h4>
+            <p>Selecciona las opciones que correspondan y realiza tu pedido. Nuestro equipo te confirmará el precio final, disponibilidad y pasos para completar la entrega.</p>
+        </div>
+    </div>
+</div>
+
+        <!-- Contenedor dinámico del catálogo (aparece al elegir categoría o buscar) -->
+        <div id="recargas-catalogo-dinamico" style="display: none; margin-bottom: 30px;">
+            <div class="section-header" style="margin-top: 0;">
+                <h2 class="section-title" id="recargas-catalogo-titulo">Catálogo <span>Disponible</span></h2>
+                <button class="btn-ver-todos" onclick="resetearVistaRecargas()">✕ Cerrar catálogo</button>
+            </div>
+
+            <div class="services-grid" id="recargas-services-grid">
+    <!-- RECARGAS (Juegos Móviles) -->
+    <div class="service-card item-recarga" data-cat="recargas" data-nombre="free fire diamantes" onclick="abrirProducto('Free fire', 'GLOBAL', 'https://gamerstyle.com.mx/wp-content/uploads/2022/06/Garena-Free-Fire-Nuevo-Logo-2022.jpg')">
+        <div class="service-image-box"><img src="https://gamerstyle.com.mx/wp-content/uploads/2022/06/Garena-Free-Fire-Nuevo-Logo-2022.jpg" alt="Free Fire"></div>
+        <div class="service-content"><span class="service-tag">RECARGAS · GLOBAL</span><div class="service-name">Free fire</div></div>
+    </div>
+
+    <div class="service-card item-recarga" data-cat="recargas" data-nombre="blood strike oro" onclick="abrirProducto('Blood Strike', 'GLOBAL', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQPFMnmbAyB7z9PX-NEu2m0WhvchXOOmHKODEu_KEX0Dw&s=10')">
+        <div class="service-image-box"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQPFMnmbAyB7z9PX-NEu2m0WhvchXOOmHKODEu_KEX0Dw&s=10" alt="Blood Strike"></div>
+        <div class="service-content"><span class="service-tag">RECARGAS · GLOBAL</span><div class="service-name">Blood Strike</div></div>
+    </div>
+
+    <div class="service-card item-recarga" data-cat="recargas" data-nombre="mobile legends diamantes" onclick="abrirProducto('Mobile Legends', 'GLOBAL', 'https://articles-img.sftcdn.net/t_article_cover_xl/auto-mapping-folder/sites/2/2023/02/How-to-Download-Play-Win-at-Mobile-Legends.jpg')">
+        <div class="service-image-box"><img src="https://articles-img.sftcdn.net/t_article_cover_xl/auto-mapping-folder/sites/2/2023/02/How-to-Download-Play-Win-at-Mobile-Legends.jpg" alt="Mobile Legends"></div>
+        <div class="service-content"><span class="service-tag">RECARGAS · GLOBAL</span><div class="service-name">Mobile Legends</div></div>
+    </div>
+
+    <div class="service-card item-recarga" data-cat="recargas" data-nombre="call of duty mobile cp" onclick="abrirProducto('Call of Duty Mobile', 'GLOBAL', 'https://images.appspy.com/articles/13712/cod-mobile.jpg')">
+        <div class="service-image-box"><img src="https://images.appspy.com/articles/13712/cod-mobile.jpg" alt="Call of Duty"></div>
+        <div class="service-content"><span class="service-tag">RECARGAS · GLOBAL</span><div class="service-name">Call of Duty Mobile</div></div>
+    </div>
+
+    <div class="service-card item-recarga" data-cat="recargas" data-nombre="roblox robux" onclick="abrirProducto('Roblox', 'GLOBAL', 'https://i0.wp.com/mnn.mv/wp-content/uploads/2025/09/roblox.webp?fit=1920%2C1080&ssl=1')">
+        <div class="service-image-box"><img src="https://i0.wp.com/mnn.mv/wp-content/uploads/2025/09/roblox.webp?fit=1920%2C1080&ssl=1" alt="Roblox"></div>
+        <div class="service-content"><span class="service-tag">RECARGAS · GLOBAL</span><div class="service-name">Roblox</div></div>
+    </div>
+
+    <!-- GIFT CARDS (Saldo Digital) -->
+    <div class="service-card item-recarga" data-cat="giftcards" data-nombre="gift card psn playstation" onclick="abrirProducto('Gift Card PSN', 'Gift Cards / Gaming', 'https://static.wikitide.net/avidwiki/thumb/1/1a/PlayStation_%282020%29.png/534px-PlayStation_%282020%29.png')">
+        <div class="service-image-box"><img src="https://static.wikitide.net/avidwiki/thumb/1/1a/PlayStation_%282020%29.png/534px-PlayStation_%282020%29.png" alt="Gift Card PSN"></div>
+        <div class="service-content"><span class="service-tag">GIFT CARDS</span><div class="service-name">Gift Card PSN</div></div>
+    </div>
+
+    <div class="service-card item-recarga" data-cat="giftcards" data-nombre="gift card netflix" onclick="abrirProducto('Gift Card Netflix', 'Gift Cards / Streaming', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSCSUJQW9nl_BBDzZFbExg6jNfTRb5m7H8cWErYqu2_vd9gnghg_cqAhCk&s=10')">
+        <div class="service-image-box"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSCSUJQW9nl_BBDzZFbExg6jNfTRb5m7H8cWErYqu2_vd9gnghg_cqAhCk&s=10" alt="Gift Card Netflix"></div>
+        <div class="service-content"><span class="service-tag">GIFT CARDS</span><div class="service-name">Gift Card Netflix</div></div>
+    </div>
+
+    <div class="service-card item-recarga" data-cat="giftcards" data-nombre="gift card apple itunes" onclick="abrirProducto('Gift Card Apple', 'Gift Cards / Apple', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTkjH0YCzKvrhdNmomagHleVLSSFC9mUYALBTySUmA2Vw&s=10')">
+        <div class="service-image-box"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTkjH0YCzKvrhdNmomagHleVLSSFC9mUYALBTySUmA2Vw&s=10" alt="Gift Card Apple"></div>
+        <div class="service-content"><span class="service-tag">GIFT CARDS</span><div class="service-name">Gift Card Apple</div></div>
+    </div>
+</div>
+
+<!-- Grid exclusivo para Videojuegos (estilo tarjetas detalladas) -->
+<div class="vj-grid" id="videojuegos-cards-grid" style="display: none;"></div>
+
+            <!-- Mensaje cuando entran a Videojuegos o no hay coincidencias -->
+            <div id="recargas-vacio-msg" style="display: none; background: #0b0f19; border: 1px solid #1f2937; border-radius: 16px; padding: 30px; text-align: center; color: #9ca3af;">
+                <div style="font-size: 2rem; margin-bottom: 8px;">🎮</div>
+                <div style="color: #ffffff; font-weight: 800; margin-bottom: 6px;">Catálogo bajo consulta directa</div>
+                <p style="font-size: 0.85rem; margin-bottom: 15px;">Contamos con títulos digitales para PS4, PS5, Xbox y PC. Consulta disponibilidad al instante.</p>
+                <a href="https://wa.me/584124405245?text=Hola,%20quiero%20consultar%20el%20cat%C3%A1logo%20de%20Videojuegos" target="_blank" class="btn-solicitar-producto">Consultar Videojuegos ↗</a>
+            </div>
+        </div>
+
+        <!-- Banner Inferior "¿No encuentras el juego que buscas?" -->
+        <div class="recargas-request-banner">
+            <div class="recargas-request-text">
+                <h3>¿NO ENCUENTRAS EL JUEGO QUE BUSCAS?</h3>
+                <p>Escríbenos. Consultamos disponibilidad, región y precio para ti.</p>
+            </div>
+            <a href="https://wa.me/584124405245?text=Hola,%20quisiera%20solicitar%20un%20juego%20o%20recarga%20que%20no%20veo%20en%20el%20cat%C3%A1logo" target="_blank" class="btn-solicitar-producto">
+                Solicitar un producto ↗
+            </a>
+        </div>
+    </div>
+</div>
 		
 		<!-- ==================== VISTA: RESEÑAS ==================== -->
         <div id="vista-resenas" class="view-section">
@@ -2234,7 +3017,7 @@
 
      <!-- SCRIPTS CON LA MISMA LÓGICA ORIGINAL DE TU TIENDA -->
     <script>
-        let tasaVES = 1135.00;
+       let tasaVES = 1135.00;
         let monedaActual = 'VES';
         let estadoCheckoutStep = 1;
         let metodoPagoSeleccionado = 'pago_movil';
@@ -2249,7 +3032,7 @@
         let currentSlide = 0;
         window.cuentasEncontradasCache = [];
 
-        const URL_GOOGLE_APPS_SCRIPT = "https://script.google.com/macros/s/AKfycbyoYeBjA8F4gBBAdNREsB0Ac_xaoTv_4c-fsX3wlSF4Tr5IlQDOCMv7vEhDWro4Ox_uKw/exec";
+        const URL_GOOGLE_APPS_SCRIPT = "https://script.google.com/macros/s/AKfycbx5orVM_OBnrOd6CJvX4DAGsMpB8JWcC1aFnxiURwduxLSQEqrA6-_UyZ226vDI9Ayn/exec";
         const TOKEN_SECRETO = "S482146POJEHSTY125WUEHWAS";
 
         const baseDeDatosPrecios = {
@@ -2630,6 +3413,77 @@
             { monto: "$10 USD", extra: "Región USA", precioAntesUSD: 14.50, precioUSD: 12.70 },
             { monto: "$25 USD", extra: "Región USA", precioAntesUSD: 31.00, precioUSD: 28.00 }
         ]
+    },
+    "ea sports fc 27 standard edition": {
+        categoria: "juegos",
+        tab1Nombre: "PlayStation 4",
+        tab2Nombre: "PlayStation 5",
+        idLabel: "CORREO O USUARIO PSN",
+        idPlaceholder: "Ingresa tu correo de contacto o PSN",
+        paquetesTab1: [
+            { monto: "Secundaria", extra: "PS4", precioAntesUSD: 0, precioUSD: 0, active: true },
+            { monto: "Primaria", extra: "PS4", precioAntesUSD: 0, precioUSD: 0 }
+        ],
+        paquetesTab2: [
+            { monto: "Secundaria", extra: "PS5", precioAntesUSD: 69.99, precioUSD: 19.99, active: true },
+            { monto: "Primaria", extra: "PS5", precioAntesUSD: 69.99, precioUSD: 34.99 }
+        ]
+    },
+    "grand theft auto vi standar": {
+        categoria: "juegos",
+        tab1Nombre: "Modalidades PS5",
+        tab2Nombre: "Opciones VIP",
+        idLabel: "CORREO O USUARIO PSN",
+        idPlaceholder: "Ingresa tu correo de contacto o PSN",
+        paquetesTab1: [
+            { monto: "Secundaria", extra: "PS5", precioAntesUSD: 56.00, precioUSD: 52.00, active: true },
+            { monto: "Primaria", extra: "PS5", precioAntesUSD: 48.00, precioUSD: 40.00 }
+        ],
+        paquetesTab2: [
+            { monto: "Primaria", extra: "PS5", precioAntesUSD: 0, precioUSD: 0, active: true }
+        ]
+    },
+    "grand theft auto vi: ultimate edition": {
+        categoria: "juegos",
+        tab1Nombre: "Modalidades PS5",
+        tab2Nombre: "Opciones VIP",
+        idLabel: "CORREO O USUARIO PSN",
+        idPlaceholder: "Ingresa tu correo de contacto o PSN",
+        paquetesTab1: [
+            { monto: "Secundaria", extra: "PS5 Ultimate", precioAntesUSD: 59.99, precioUSD: 54.00, active: true },
+            { monto: "Primaria", extra: "PS5 Ultimate", precioAntesUSD: 69.99, precioUSD: 66.00 }
+        ],
+        paquetesTab2: [
+            { monto: "Primaria", extra: "PS5 Ultimate", precioAntesUSD: 0, precioUSD: 0, active: true }
+        ]
+    },
+    "marvel's spider-man 2": {
+        categoria: "juegos",
+        tab1Nombre: "Modalidades PS5",
+        tab2Nombre: "Opciones VIP",
+        idLabel: "CORREO O USUARIO PSN",
+        idPlaceholder: "Ingresa tu correo de contacto o PSN",
+        paquetesTab1: [
+            { monto: "Secundaria", extra: "PS5", precioAntesUSD: 0, precioUSD: 0, active: true },
+            { monto: "Primaria", extra: "PS5", precioAntesUSD: 69.99, precioUSD: 29.50 }
+        ],
+        paquetesTab2: [
+            { monto: "Primaria", extra: "PS5", precioAntesUSD: 0, precioUSD: 0, active: true }
+        ]
+    },
+    "red dead redemption": {
+        categoria: "juegos",
+        tab1Nombre: "Modalidades PS5",
+        tab2Nombre: "Opciones VIP",
+        idLabel: "CORREO O USUARIO PSN",
+        idPlaceholder: "Ingresa tu correo de contacto o PSN",
+        paquetesTab1: [
+            { monto: "Secundaria", extra: "PS5", precioAntesUSD: 0, precioUSD: 0, active: true },
+            { monto: "Primaria", extra: "PS5", precioAntesUSD: 0.00, precioUSD: 27.00 }
+        ],
+        paquetesTab2: [
+            { monto: "Primaria", extra: "PS5", precioAntesUSD: 49.99, precioUSD: 19.99, active: true }
+        ]
     }
 };
 
@@ -2768,47 +3622,107 @@ const baseDeDatosPreciosDistri = {
     }
 };
 
-        const CONTROL_DE_STOCK = {
-            "netflix": 1,
-            "netflix personal": 0,
-            "disney+ premium": 0,
-            "prime video": 10,
-            "hbo max standar": 1,
-            "crunchyroll": 3,
-            "paramount+": 1,
-            "vix": 8,
-            "appletv": 1,
-            "universal+": 1,
-            "viki rakuten": 5,
-            "streamix tv": 15,
-            "flujotv": 12,
-            "spotify premium": 1,
-            "youtube premium": 1,
-            "canva pro edu": 50,
-            "capcut": 10,
-            "google one": 8,
-            "monedas tiktok": 100,
-            "estrellas telegram": 50,
-            "free fire": 100,
-            "blood strike": 0,
-            "mobile legends": 0,
-            "call of duty mobile": 30,
-            "roblox": 10,
-            "netflix-vip": 1,
-            "netflix personal-vip": 0,
-            "disney+ premium-vip": 0,
-            "prime video-vip": 5,
-            "hbo max standar-vip": 2,
-            "crunchyroll-vip": 4,
-            "paramount+-vip": 5,
-            "vix-vip": 5,
-            "streamix tv-vip": 10,
-            "flujotv-vip": 10,
-            "spotify premium-vip": 1,
-            "youtube premium-vip": 10,
-            "canva pro edu-vip": 20,
-            "capcut-vip": 5
-        };
+        // ==================== CONFIGURACIÓN EN VIVO DESDE GOOGLE SHEETS (CONFIG_WEB) ====================
+const CONTROL_DE_STOCK = {};
+let estadoStockSheets = {};
+
+function aplicarTasaDesdeSheet(nuevaTasa) {
+    const tasaNum = Number(String(nuevaTasa).replace(',', '.'));
+    if (!tasaNum || isNaN(tasaNum) || tasaNum <= 0) return;
+
+    if (typeof tasaVES !== 'undefined') {
+        tasaVES = tasaNum;
+    }
+    window.tasaVES = tasaNum;
+
+    if (typeof actualizarPreciosEnPantalla === 'function') actualizarPreciosEnPantalla();
+    if (typeof actualizarPrecios === 'function') actualizarPrecios();
+    if (typeof renderizarPaquetes === 'function') renderizarPaquetes();
+    if (typeof calcularPrecios === 'function') calcularPrecios();
+    if (typeof actualizarVistaProducto === 'function') actualizarVistaProducto();
+}
+
+function normalizarClaveStock(str) {
+    return String(str || "")
+        .toLowerCase()
+        .normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+        .replace(/\(.*?\)/g, "")
+        .replace(/\s+/g, " ")
+        .trim();
+}
+
+function aplicarStockEnTarjetas(stockMap) {
+    if (stockMap) estadoStockSheets = stockMap;
+    if (!estadoStockSheets || Object.keys(estadoStockSheets).length === 0) return;
+
+    Object.keys(CONTROL_DE_STOCK).forEach(k => delete CONTROL_DE_STOCK[k]);
+
+    // Ordenar claves de mayor a menor longitud para que "netflix personal" gane sobre "netflix"
+    const clavesOrdenadas = Object.keys(estadoStockSheets)
+        .map(k => ({ original: k, limpia: normalizarClaveStock(k), info: estadoStockSheets[k] }))
+        .filter(item => item.limpia && item.info)
+        .sort((a, b) => b.limpia.length - a.limpia.length);
+
+    clavesOrdenadas.forEach(({ limpia, info }) => {
+        const valorNum = typeof info.stock === "number"
+            ? info.stock
+            : (info.disponible ? 1 : 0);
+        CONTROL_DE_STOCK[limpia] = valorNum;
+        CONTROL_DE_STOCK[`${limpia}-vip`] = valorNum;
+    });
+
+    const tarjetas = document.querySelectorAll(".service-card, [data-producto], [data-servicio], .card");
+
+    tarjetas.forEach(card => {
+        const attrRaw =
+            card.getAttribute("data-producto") ||
+            card.getAttribute("data-servicio") ||
+            card.dataset.producto ||
+            card.dataset.servicio ||
+            "";
+
+        const textoCard = normalizarClaveStock(attrRaw || card.textContent);
+        if (!textoCard) return;
+
+        // Buscar la coincidencia más específica (más larga) que aparezca en la tarjeta
+        const match = clavesOrdenadas.find(({ limpia }) =>
+            textoCard === limpia ||
+            textoCard.includes(limpia)
+        );
+
+        if (!match) return;
+
+        const estaAgotado = !match.info.disponible;
+        card.classList.toggle("agotado", estaAgotado);
+    });
+
+    if (typeof aplicarControlStock === "function") aplicarControlStock();
+}
+
+async function sincronizarConfigDesdeSheet() {
+    if (!URL_GOOGLE_APPS_SCRIPT || !TOKEN_SECRETO) return;
+
+    try {
+        const separador = URL_GOOGLE_APPS_SCRIPT.includes('?') ? '&' : '?';
+        const url = `${URL_GOOGLE_APPS_SCRIPT}${separador}token=${encodeURIComponent(TOKEN_SECRETO)}&accion=obtenerConfigWeb&_t=${Date.now()}`;
+        const res = await fetch(url, { cache: 'no-store' });
+        const data = await res.json();
+        if (!data || !data.ok) return;
+
+        if (data.tasaBs) {
+            aplicarTasaDesdeSheet(data.tasaBs);
+        }
+        if (data.stock) {
+            aplicarStockEnTarjetas(data.stock);
+        }
+    } catch (e) {
+        // Si falla la red, no aplica datos viejos
+    }
+}
+
+window.addEventListener('load', () => {
+    sincronizarConfigDesdeSheet();
+});
 
         // ==================== CUENTA REGRESIVA BLACK FRIDAY (7 DÍAS) ====================
         function iniciarContadorBlackFriday() {
@@ -2895,6 +3809,12 @@ const baseDeDatosPreciosDistri = {
         }
 
         // ==================== NAVEGACIÓN Y VISTAS ====================
+function abrirDetalleVideojuego(idJuego) {
+            const juego = CATALOGO_VIDEOJUEGOS.find(j => j.id === idJuego);
+            if (!juego) return;
+            abrirProducto(juego.titulo, juego.consolas, juego.imagen);
+        }
+
         function mostrarVista(vista, actualizarUrl = true) {
             const vistas = [
                 'vista-servicios', 'vista-recargas', 'vista-distribuidores',
@@ -2918,7 +3838,7 @@ const baseDeDatosPreciosDistri = {
                 buscar: { sec: 'vista-buscar', nav: 'nav-buscar', hash: '#buscar' },
                 soporte: { sec: 'vista-soporte', nav: 'nav-soporte', hash: '#soporte' },
                 resenas: { sec: 'vista-resenas', nav: 'nav-resenas', hash: '#reseñas' },
-                producto: { sec: 'vista-producto', nav: null, hash: null },
+                producto: { sec: 'vista-producto', nav: 'nav-recargas', hash: null },
                 'binance-gateway': { sec: 'vista-binance-gateway', nav: null, hash: null },
                 'pagomovil-gateway': { sec: 'vista-pagomovil-gateway', nav: null, hash: null },
                 servicios: { sec: 'vista-servicios', nav: 'nav-servicios', hash: ' ' }
@@ -3111,6 +4031,12 @@ const baseDeDatosPreciosDistri = {
             renderizarPaquetes();
         }
 
+        function formatearPrecio(montoUSD) {
+            return monedaActual === 'VES'
+                ? `Bs. ${(montoUSD * tasaVES).toLocaleString('es-VE', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`
+                : `$${montoUSD.toFixed(2)}`;
+        }
+
         function renderizarPaquetes() {
             const grid = document.getElementById('packages-grid-container');
             if (!grid || !productoActualData) return;
@@ -3144,9 +4070,11 @@ const baseDeDatosPreciosDistri = {
                     };
                 }
 
-                const precioMostrado = monedaActual === 'VES'
-                    ? `Bs. ${(item.precioUSD * tasaVES).toLocaleString('es-VE', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`
-                    : `$${item.precioUSD.toFixed(2)}`;
+                const precioActualTexto = formatearPrecio(item.precioUSD);
+                const tieneOferta = typeof item.precioAntesUSD === 'number' && item.precioAntesUSD > item.precioUSD;
+                const precioAntesHtml = tieneOferta
+                    ? `<span class="package-price-old">${formatearPrecio(item.precioAntesUSD)}</span>`
+                    : '';
 
                 card.innerHTML = `
                     <div class="package-card-top">
@@ -3156,7 +4084,10 @@ const baseDeDatosPreciosDistri = {
                         </div>
                         <div class="info-small-circle">i</div>
                     </div>
-                    <div class="package-price-badge">${precioMostrado}</div>
+                    <div class="package-price-badge">
+                        ${precioAntesHtml}
+                        <span class="package-price-current">${precioActualTexto}</span>
+                    </div>
                 `;
                 grid.appendChild(card);
             });
@@ -3415,27 +4346,154 @@ const baseDeDatosPreciosDistri = {
         }
 
         function verDetalleCuenta(index) {
-            const item = window.cuentasEncontradasCache[index];
-            if (!item) return;
-            const list = document.getElementById('search-accounts-list');
-            if (!list) return;
+    const item = window.cuentasEncontradasCache[index];
+    if (!item) return;
+    const list = document.getElementById('search-accounts-list');
+    if (!list) return;
 
-            list.innerHTML = `
-                <div style="margin-bottom: 12px;">
-                    <button onclick="ejecutarBusquedaDatos()" style="background: #111827; border: 1px solid #1f2937; color: #ffffff; padding: 6px 14px; border-radius: 12px; font-size: 0.8rem; font-weight: bold; cursor: pointer;">
-                        ❮ Volver a la lista
-                    </button>
+    list.innerHTML = `
+        <div style="display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-bottom: 14px;">
+            <button onclick="ejecutarBusquedaDatos()" style="background: #111827; border: 1px solid #1f2937; color: #ffffff; padding: 7px 14px; border-radius: 12px; font-size: 0.8rem; font-weight: bold; cursor: pointer;">
+                ❮ Volver a la lista
+            </button>
+            <button onclick="verCodigoCuenta(${index})" style="background: #0e1320; border: 1px solid #00FFEF; color: #00FFEF; padding: 7px 16px; border-radius: 12px; font-size: 0.8rem; font-weight: 800; cursor: pointer; box-shadow: 0 0 10px rgba(0, 255, 239, 0.18);">
+                🔐 Ver código
+            </button>
+        </div>
+        <div style="font-weight: 800; color: #00FFEF; margin-bottom: 12px;">SERVICIO: ${item.servicio || ''}</div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+            <div class="pm-box-field"><div><div class="pm-box-label">CORREO / USUARIO</div><div class="pm-box-val">${item.correo || 'N/A'}</div></div></div>
+            <div class="pm-box-field"><div><div class="pm-box-label">CONTRASEÑA</div><div class="pm-box-val">${item.clave || 'N/A'}</div></div></div>
+            <div class="pm-box-field"><div><div class="pm-box-label">PERFIL</div><div class="pm-box-val">${item.perfil || 'Principal'}</div></div></div>
+            <div class="pm-box-field"><div><div class="pm-box-label">PIN</div><div class="pm-box-val">${item.pin || 'Sin PIN'}</div></div></div>
+            <div class="pm-box-field" style="grid-column: span 2;"><div><div class="pm-box-label">FECHA DE CORTE</div><div class="pm-box-val" style="color:#00FFEF;">${item.fechaCorte || 'Sin fecha'} (${item.dias || 0} días restantes)</div></div></div>
+        </div>
+    `;
+}
+
+function verCodigoCuenta(index) {
+    const item = window.cuentasEncontradasCache[index];
+    if (!item) return;
+    const list = document.getElementById('search-accounts-list');
+    if (!list) return;
+
+    const correoInicial = item.correo || '';
+    const servicioInicial = (item.servicio || '').toLowerCase();
+
+    list.innerHTML = `
+        <div style="margin-bottom: 14px;">
+            <button onclick="verDetalleCuenta(${index})" style="background: #111827; border: 1px solid #1f2937; color: #ffffff; padding: 7px 14px; border-radius: 12px; font-size: 0.8rem; font-weight: bold; cursor: pointer;">
+                ❮ Volver a detalles
+            </button>
+        </div>
+
+        <div style="background: #0b0f19; border: 1px solid #1f2937; border-radius: 18px; padding: 22px;">
+            <div style="text-align: center; margin-bottom: 18px;">
+                <div style="font-size: 1.25rem; font-weight: 900; color: #ffffff;">STREAMIX <span style="color:#00FFEF;">CÓDIGOS</span></div>
+                <div style="font-size: 0.78rem; color: #9ca3af; margin-top: 2px;">Consulta de código de acceso / verificación</div>
+            </div>
+
+            <div style="display: flex; flex-direction: column; gap: 14px;">
+                <div>
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                        <label class="distri-input-label" style="margin-bottom: 0;">SELECCIONA LA PLATAFORMA</label>
+                        <span style="font-size: 0.68rem; color: #00FFEF; font-weight: 700;">Obligatorio</span>
+                    </div>
+                    <select id="cod-plataforma-select" class="distri-input-code" style="margin-bottom: 0; padding: 12px 14px; cursor: pointer;">
+                        <option value="">Selecciona una plataforma</option>
+                        <option value="netflix" ${servicioInicial.includes('netflix') ? 'selected' : ''}>Netflix</option>
+                        <option value="disney" ${servicioInicial.includes('disney') ? 'selected' : ''}>Disney+</option>
+                        <option value="prime" ${servicioInicial.includes('prime') ? 'selected' : ''}>Prime Video</option>
+                        <option value="max" ${servicioInicial.includes('max') || servicioInicial.includes('hbo') ? 'selected' : ''}>HBO Max</option>
+                        <option value="crunchyroll" ${servicioInicial.includes('crunchyroll') ? 'selected' : ''}>Crunchyroll</option>
+                        <option value="otro" ${!['netflix','disney','prime','max','hbo','crunchyroll'].some(p => servicioInicial.includes(p)) ? 'selected' : ''}>Otro servicio</option>
+                    </select>
                 </div>
-                <div style="font-weight: 800; color: #00FFEF; margin-bottom: 12px;">SERVICIO: ${item.servicio || ''}</div>
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
-                    <div class="pm-box-field"><div><div class="pm-box-label">CORREO / USUARIO</div><div class="pm-box-val">${item.correo || 'N/A'}</div></div></div>
-                    <div class="pm-box-field"><div><div class="pm-box-label">CONTRASEÑA</div><div class="pm-box-val">${item.clave || 'N/A'}</div></div></div>
-                    <div class="pm-box-field"><div><div class="pm-box-label">PERFIL</div><div class="pm-box-val">${item.perfil || 'Principal'}</div></div></div>
-                    <div class="pm-box-field"><div><div class="pm-box-label">PIN</div><div class="pm-box-val">${item.pin || 'Sin PIN'}</div></div></div>
-                    <div class="pm-box-field" style="grid-column: span 2;"><div><div class="pm-box-label">FECHA DE CORTE</div><div class="pm-box-val" style="color:#00FFEF;">${item.fechaCorte || 'Sin fecha'} (${item.dias || 0} días restantes)</div></div></div>
+
+                <div>
+                    <label class="distri-input-label">CORREO</label>
+                    <input type="email" id="cod-correo-input" class="distri-input-code" value="${correoInicial}" placeholder="usuario@dominio.com" style="margin-bottom: 0; padding: 12px 14px;">
                 </div>
-            `;
-        }
+
+                <div>
+                    <label class="distri-input-label">CÓDIGO DE ACCESO</label>
+                    <input type="text" id="cod-acceso-input" class="distri-input-code" placeholder="0 0 0 0 0" maxlength="12" style="margin-bottom: 0; padding: 13px 14px; text-align: center; font-weight: 800; letter-spacing: 4px;">
+                </div>
+
+                <button type="button" class="btn-distri-verify" onclick="consultarCodigoConAcceso()" style="padding: 14px;">
+                    INGRESAR
+                </button>
+
+                <div style="text-align: center; font-size: 0.72rem; color: #6b7280; line-height: 1.4;">
+                    Solo pueden consultar correos activos con tu código de acceso autorizado.
+                </div>
+
+                <div id="codigo-resultado-box" style="display: none; background: #070a12; border: 1px solid #1f2937; border-radius: 12px; padding: 16px; text-align: center; margin-top: 4px;"></div>
+            </div>
+        </div>
+    `;
+}
+
+function consultarCodigoConAcceso() {
+    const plataformaEl = document.getElementById('cod-plataforma-select');
+    const correoEl = document.getElementById('cod-correo-input');
+    const accesoEl = document.getElementById('cod-acceso-input');
+    const box = document.getElementById('codigo-resultado-box');
+
+    const plataforma = plataformaEl ? plataformaEl.value.trim() : '';
+    const correo = correoEl ? correoEl.value.trim() : '';
+    const codigoAcceso = accesoEl ? accesoEl.value.trim() : '';
+
+    if (!plataforma) {
+        alert('Por favor selecciona una plataforma.');
+        if (plataformaEl) plataformaEl.focus();
+        return;
+    }
+    if (!correo) {
+        alert('Por favor ingresa el correo de la cuenta.');
+        if (correoEl) correoEl.focus();
+        return;
+    }
+    if (!codigoAcceso) {
+        alert('Por favor ingresa tu código de acceso.');
+        if (accesoEl) accesoEl.focus();
+        return;
+    }
+
+    if (box) {
+        box.style.display = 'block';
+        box.innerHTML = `<div style="color: #00FFEF; font-weight: 700; font-size: 0.85rem;">⏳ Verificando código de acceso y buscando código...</div>`;
+    }
+
+    const url = `${URL_GOOGLE_APPS_SCRIPT}?accion=obtenerCodigo&plataforma=${encodeURIComponent(plataforma)}&correo=${encodeURIComponent(correo)}&codigoAcceso=${encodeURIComponent(codigoAcceso)}&token=${encodeURIComponent(TOKEN_SECRETO)}&_t=${Date.now()}`;
+
+    fetch(url, { cache: 'no-store' })
+        .then(res => res.json())
+        .then(data => {
+            if (!box) return;
+            const codigo = data.codigo || data.code || data.otp || '';
+
+            if (data.ok && codigo) {
+                box.innerHTML = `
+                    <div style="font-size: 0.7rem; color: #9ca3af; text-transform: uppercase; margin-bottom: 6px;">CÓDIGO DE VERIFICACIÓN</div>
+                    <div style="font-size: 1.9rem; font-weight: 900; color: #00FFEF; letter-spacing: 3px; margin-bottom: 8px;">${codigo}</div>
+                    ${data.asunto ? `<div style="font-size: 0.78rem; color: #d1d5db;">${data.asunto}</div>` : ''}
+                    ${data.fecha ? `<div style="font-size: 0.72rem; color: #6b7280; margin-top: 4px;">${data.fecha}</div>` : ''}
+                `;
+            } else {
+                box.innerHTML = `
+                    <div style="color: #ff4d4d; font-size: 0.85rem; font-weight: 700;">
+                        ${data.error || data.mensaje || 'Código de acceso inválido o sin códigos recientes.'}
+                    </div>
+                `;
+            }
+        })
+        .catch(() => {
+            if (box) {
+                box.innerHTML = `<div style="color: #ff4d4d; font-size: 0.85rem;">Error de conexión al consultar el código.</div>`;
+            }
+        });
+}
 
         // ==================== RESEÑAS ====================
         function abrirModalResena() {
@@ -3520,7 +4578,7 @@ const baseDeDatosPreciosDistri = {
                 .catch(() => alert('Error de conexión al guardar la reseña.'));
         }
 
-        // ==================== TÉRMINOS, STOCK Y NIEVE ====================
+        // ==================== TÉRMINOS, STOCK Y EFECTOS ====================
         function abrirModalTerminos() {
             const el = document.getElementById('modalTerminos');
             if (el) el.style.display = 'flex';
@@ -3560,83 +4618,21 @@ const baseDeDatosPreciosDistri = {
         }
 
         function iniciarEfectoBlackFriday() {
-    const container = document.getElementById('bf-particles-container');
-    if (!container) return;
-    container.innerHTML = '';
+            const container = document.getElementById('bf-particles-container');
+            if (!container) return;
+            container.innerHTML = '';
 
-    for (let i = 0; i < 30; i++) {
-        const spark = document.createElement('div');
-        spark.classList.add('bf-spark');
-        spark.innerHTML = Math.random() > 0.45 ? '✦' : '•';
-        spark.style.left = Math.random() * 100 + 'vw';
-        spark.style.animationDuration = (Math.random() * 7 + 5) + 's';
-        spark.style.animationDelay = (Math.random() * 10) + 's';
-        spark.style.fontSize = (Math.random() * 0.75 + 0.45) + 'rem';
-        container.appendChild(spark);
-    }
-}
-		
-		function formatearPrecio(montoUSD) {
-    return monedaActual === 'VES'
-        ? `Bs. ${(montoUSD * tasaVES).toLocaleString('es-VE', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`
-        : `$${montoUSD.toFixed(2)}`;
-}
-
-function renderizarPaquetes() {
-    const grid = document.getElementById('packages-grid-container');
-    if (!grid || !productoActualData) return;
-    grid.innerHTML = '';
-
-    const lista = tabActivaIndex === 0 ? productoActualData.paquetesTab1 : productoActualData.paquetesTab2;
-    const esDistri = productoNombreActual.toLowerCase().includes('(vip mayorista)');
-    const claveBase = productoNombreActual.toLowerCase().replace(' (vip mayorista)', '').trim();
-    const claveStock = esDistri ? `${claveBase}-vip` : claveBase;
-    const stockDisponible = (CONTROL_DE_STOCK[claveStock] !== undefined) ? CONTROL_DE_STOCK[claveStock] : 1;
-    const estaAgotado = stockDisponible <= 0;
-
-    lista.forEach((item, idx) => {
-        const esActivo = !estaAgotado && (item.active || (idx === 0 && !lista.some(p => p.active)));
-        if (esActivo) {
-            precioUSDActual = item.precioUSD;
-            document.getElementById('summary-pkg-text').innerText = `${item.monto} ${item.extra ? '(' + item.extra + ')' : ''}`;
-            actualizarTotal();
+            for (let i = 0; i < 30; i++) {
+                const spark = document.createElement('div');
+                spark.classList.add('bf-spark');
+                spark.innerHTML = Math.random() > 0.45 ? '✦' : '•';
+                spark.style.left = Math.random() * 100 + 'vw';
+                spark.style.animationDuration = (Math.random() * 7 + 5) + 's';
+                spark.style.animationDelay = (Math.random() * 10) + 's';
+                spark.style.fontSize = (Math.random() * 0.75 + 0.45) + 'rem';
+                container.appendChild(spark);
+            }
         }
-
-        const card = document.createElement('div');
-        card.className = `package-card ${esActivo ? 'active' : ''} ${estaAgotado ? 'sold-out' : ''}`;
-
-        if (!estaAgotado) {
-            card.onclick = function() {
-                document.querySelectorAll('.package-card').forEach(el => el.classList.remove('active'));
-                card.classList.add('active');
-                precioUSDActual = item.precioUSD;
-                document.getElementById('summary-pkg-text').innerText = `${item.monto} ${item.extra ? '(' + item.extra + ')' : ''}`;
-                actualizarTotal();
-            };
-        }
-
-        const precioActualTexto = formatearPrecio(item.precioUSD);
-        const tieneOferta = typeof item.precioAntesUSD === 'number' && item.precioAntesUSD > item.precioUSD;
-        const precioAntesHtml = tieneOferta
-            ? `<span class="package-price-old">${formatearPrecio(item.precioAntesUSD)}</span>`
-            : '';
-
-        card.innerHTML = `
-            <div class="package-card-top">
-                <div>
-                    <span class="package-amount">${item.monto}</span>
-                    <span class="package-extra"> ${item.extra ? '/ ' + item.extra : ''}</span>
-                </div>
-                <div class="info-small-circle">i</div>
-            </div>
-            <div class="package-price-badge">
-                ${precioAntesHtml}
-                <span class="package-price-current">${precioActualTexto}</span>
-            </div>
-        `;
-        grid.appendChild(card);
-    });
-}
 
         function verificarHashUrl() {
             const hash = window.location.hash.toLowerCase();
@@ -3651,26 +4647,348 @@ function renderizarPaquetes() {
             const modalRegion = document.getElementById('modalRegion');
             const modalDist = document.getElementById('modal-distribuidores');
             const modalRes = document.getElementById('modalEscribirResena');
+            const modalTerm = document.getElementById('modalTerminos');
             if (event.target === modalRegion) cerrarModalRegion();
             if (event.target === modalDist) cerrarModalDistribuidores();
             if (event.target === modalRes) cerrarModalResena();
+            if (event.target === modalTerm) modalTerm.style.display = 'none';
         };
 
         window.addEventListener('popstate', verificarHashUrl);
 
+        // ==================== CATÁLOGO DE VIDEOJUEGOS ====================
+        const CATALOGO_VIDEOJUEGOS = [
+            {
+                id: "fc27",
+                titulo: "EA SPORTS FC 27 STANDARD EDITION",
+                consolas: "PLAYSTATION 4 · PLAYSTATION 5",
+                imagen: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRAdHHGmXLBDuCeQ2zS6dNMfwupS_qN4warvbH4fxIniQC1l6sNQeKwb03R&s=10",
+                descripcionCorta: "Edición Standard para PlayStation 4 y PlayStation 5. Elige tu consola y modalidad de acceso.",
+                precioDesdeUSD: 19.99,
+                modalidades: [
+                    { nombre: "PS4 · Secundaria", precioUSD: 19.50 },
+                    { nombre: "PS4 · Primaria", precioUSD: 25.00 },
+                    { nombre: "PS5 · Secundaria", precioUSD: 22.00 },
+                    { nombre: "PS5 · Primaria", precioUSD: 28.00 }
+                ]
+            },
+            {
+                id: "gtavi",
+                titulo: "grand theft auto vi standar",
+                consolas: "PLAYSTATION 5",
+                imagen: "https://blog.es.playstation.com/tachyon/sites/14/2026/11/5bbfb0e0ef20e63cbca5093109550bc5ab16e062.jpg?resize=1088%2C612&crop_strategy=smart",
+                descripcionCorta: "Elige la modalidad de acceso que necesitas. Consulta disponibilidad antes de realizar tu pedido.",
+                precioDesdeUSD: 40.00,
+                modalidades: [
+                    { nombre: "PS5 · Secundaria", precioUSD: 40.00 },
+                    { nombre: "PS5 · Primaria", precioUSD: 52.00 }
+                ]
+            },
+            {
+                id: "gtavi-ult",
+                titulo: "GRAND THEFT AUTO VI: ULTIMATE EDITION",
+                consolas: "PLAYSTATION 5",
+                imagen: "https://blog.es.playstation.com/tachyon/sites/14/2026/11/5bbfb0e0ef20e63cbca5093109550bc5ab16e062.jpg?resize=1088%2C612&crop_strategy=smart",
+                descripcionCorta: "Edición Ultimate. Elige la modalidad de acceso que necesitas. Consulta disponibilidad antes de realizar tu pedido.",
+                precioDesdeUSD: 54.00,
+                modalidades: [
+                    { nombre: "PS5 · Secundaria", precioUSD: 54.00 },
+                    { nombre: "PS5 · Primaria", precioUSD: 66.00 }
+                ]
+            },
+            {
+                id: "spiderman2",
+                titulo: "MARVEL'S SPIDER-MAN 2",
+                consolas: "PLAYSTATION 5",
+                imagen: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT5BUUow65kBv0sI63nOhApgF1C5kHDPmKB3cWXpwVhkTiUEagWxiA6FfLX&s=10",
+                descripcionCorta: "Elige la modalidad de acceso que necesitas. Consulta disponibilidad antes de realizar tu pedido.",
+                precioDesdeUSD: 29.50,
+                modalidades: [
+                    { nombre: "PS5 · Secundaria", precioUSD: 0 },
+                    { nombre: "PS5 · Primaria", precioUSD: 29.50 }
+                ]
+            },
+            {
+                id: "reddeadredeption",
+                titulo: "RED DEAD REDEMPTION",
+                consolas: "PLAYSTATION 5",
+                imagen: "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2668510/8f73dc378141e642d00e40484adde709e0ad33cb/capsule_616x353.jpg?t=1781132266",
+                descripcionCorta: "Elige la modalidad de acceso que necesitas. Consulta disponibilidad antes de realizar tu pedido.",
+                precioDesdeUSD: 20.00,
+                modalidades: [
+                    { nombre: "PS5 · Secundaria", precioUSD: 0 },
+                    { nombre: "PS5 · Primaria", precioUSD: 20.00 }
+                ]
+            }
+        ];
+
+        let videojuegoActual = null;
+        let cantidadVideojuego = 1;
+
+        function formatearPrecioVideojuego(usd) {
+            if (monedaActual === 'VES') {
+                return `Bs. ${(usd * tasaVES).toLocaleString('es-VE', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+            }
+            return `$${usd.toFixed(2)} USD`;
+        }
+
+        function renderizarGridVideojuegos(filtroTexto = "") {
+            const vjGrid = document.getElementById('videojuegos-cards-grid');
+            if (!vjGrid) return;
+            vjGrid.innerHTML = '';
+
+            const filtrados = CATALOGO_VIDEOJUEGOS.filter(j =>
+                j.titulo.toLowerCase().includes(filtroTexto) ||
+                j.consolas.toLowerCase().includes(filtroTexto)
+            );
+
+            filtrados.forEach(juego => {
+                const precioDesde = monedaActual === 'VES'
+                    ? `Desde Bs. ${(juego.precioDesdeUSD * tasaVES).toLocaleString('es-VE', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`
+                    : `Desde $${juego.precioDesdeUSD.toFixed(2)} USD`;
+
+                const card = document.createElement('div');
+                card.className = 'vj-card';
+                card.onclick = () => abrirDetalleVideojuego(juego.id);
+                card.innerHTML = `
+                    <div class="vj-card-cover">
+                        <span class="vj-console-pill">${juego.consolas}</span>
+                        <img src="${juego.imagen}" alt="${juego.titulo}">
+                    </div>
+                    <div class="vj-card-body">
+                        <div>
+                            <span class="vj-type-tag">VIDEOJUEGO</span>
+                            <div class="vj-card-title">${juego.titulo}</div>
+                            <p class="vj-card-desc">${juego.descripcionCorta}</p>
+                        </div>
+                        <div>
+                            <div class="vj-price-row">
+                                <div class="vj-price-from">${precioDesde}</div>
+                                <div class="vj-price-hint">Elige tu<br>modalidad</div>
+                            </div>
+                            <div class="btn-vj-ver">Ver artículo →</div>
+                        </div>
+                    </div>
+                `;
+                vjGrid.appendChild(card);
+            });
+
+            return filtrados.length;
+        }
+
+        // ==================== LÓGICA DE SECCIÓN RECARGAS ====================
+        function seleccionarCategoriaRecargas(categoria) {
+            const input = document.getElementById('buscador-recargas-input');
+            if (input) input.value = '';
+
+            document.querySelectorAll('.recarga-cat-card').forEach(c => c.classList.remove('active'));
+            const cardActiva = document.getElementById('cat-card-' + categoria);
+            if (cardActiva) cardActiva.classList.add('active');
+
+            const contenedor = document.getElementById('recargas-catalogo-dinamico');
+            const titulo = document.getElementById('recargas-catalogo-titulo');
+            const grid = document.getElementById('recargas-services-grid');
+            const vjGrid = document.getElementById('videojuegos-cards-grid');
+            const vacioMsg = document.getElementById('recargas-vacio-msg');
+            const items = document.querySelectorAll('.item-recarga');
+
+            if (contenedor) contenedor.style.display = 'block';
+            if (vacioMsg) vacioMsg.style.display = 'none';
+
+            if (categoria === 'videojuegos') {
+                if (titulo) {
+                    titulo.innerHTML = `<div class="vj-kicker">TU SELECCIÓN</div><div class="vj-cat-title">VIDEOJUEGOS</div><div class="vj-cat-sub">Productos disponibles en esta categoría. Selecciona uno para ver sus detalles y opciones de compra.</div>`;
+                }
+                if (grid) grid.style.display = 'none';
+                if (vjGrid) {
+                    vjGrid.style.display = 'grid';
+                    renderizarGridVideojuegos();
+                }
+                return;
+            }
+
+            if (vjGrid) vjGrid.style.display = 'none';
+            if (titulo) {
+                titulo.innerHTML = categoria === 'giftcards'
+                    ? 'Tarjetas de Regalo <span>Gift Cards</span>'
+                    : 'Recargas de <span>Juegos Móviles</span>';
+            }
+
+            let visibles = 0;
+            items.forEach(item => {
+                if (item.getAttribute('data-cat') === categoria) {
+                    item.style.display = 'block';
+                    visibles++;
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+
+            if (grid) grid.style.display = visibles > 0 ? 'grid' : 'none';
+            if (vacioMsg) vacioMsg.style.display = visibles === 0 ? 'block' : 'none';
+        }
+
+        function filtrarCatalogoRecargas() {
+            const input = document.getElementById('buscador-recargas-input');
+            const texto = input ? input.value.trim().toLowerCase() : '';
+
+            document.querySelectorAll('.recarga-cat-card').forEach(c => c.classList.remove('active'));
+
+            const contenedor = document.getElementById('recargas-catalogo-dinamico');
+            const titulo = document.getElementById('recargas-catalogo-titulo');
+            const grid = document.getElementById('recargas-services-grid');
+            const vjGrid = document.getElementById('videojuegos-cards-grid');
+            const vacioMsg = document.getElementById('recargas-vacio-msg');
+            const items = document.querySelectorAll('.item-recarga');
+
+            if (!texto) {
+                if (contenedor) contenedor.style.display = 'none';
+                if (vjGrid) vjGrid.style.display = 'none';
+                if (grid) grid.style.display = 'none';
+                return;
+            }
+
+            if (contenedor) contenedor.style.display = 'block';
+            if (titulo) titulo.innerHTML = `Resultados para <span>"${input.value}"</span>`;
+
+            const cantVJ = renderizarGridVideojuegos(texto);
+            if (vjGrid) {
+                vjGrid.style.display = cantVJ > 0 ? 'grid' : 'none';
+                vjGrid.style.marginBottom = cantVJ > 0 ? '24px' : '0';
+            }
+
+            let cantOtros = 0;
+            items.forEach(item => {
+                const nombre = (item.getAttribute('data-nombre') || '').toLowerCase();
+                const cat = (item.getAttribute('data-cat') || '').toLowerCase();
+                if (nombre.includes(texto) || cat.includes(texto)) {
+                    item.style.display = 'block';
+                    cantOtros++;
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+
+            if (grid) grid.style.display = cantOtros > 0 ? 'grid' : 'none';
+            if (vacioMsg) vacioMsg.style.display = (cantVJ + cantOtros === 0) ? 'block' : 'none';
+        }
+
+        function abrirDetalleVideojuego(idJuego) {
+    const juego = CATALOGO_VIDEOJUEGOS.find(j => j.id === idJuego);
+    if (!juego) return;
+    abrirProducto(juego.titulo, juego.consolas, juego.imagen);
+}
+
+function mostrarVista(vista, actualizarUrl = true) {
+    const vistas = [
+        'vista-servicios', 'vista-recargas', 'vista-distribuidores',
+        'vista-soporte', 'vista-producto', 'vista-binance-gateway',
+        'vista-pagomovil-gateway', 'vista-buscar', 'vista-resenas'
+    ];
+    vistas.forEach(v => {
+        const el = document.getElementById(v);
+        if (el) el.classList.remove('active');
+    });
+
+    const navs = ['nav-servicios', 'nav-recargas', 'nav-distribuidores', 'nav-buscar', 'nav-soporte', 'nav-resenas'];
+    navs.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.classList.remove('active');
+    });
+
+    const mapaVistas = {
+        recargas: { sec: 'vista-recargas', nav: 'nav-recargas', hash: '#recargas' },
+        distribuidores: { sec: 'vista-distribuidores', nav: 'nav-distribuidores', hash: '#distribuidores' },
+        buscar: { sec: 'vista-buscar', nav: 'nav-buscar', hash: '#buscar' },
+        soporte: { sec: 'vista-soporte', nav: 'nav-soporte', hash: '#soporte' },
+        resenas: { sec: 'vista-resenas', nav: 'nav-resenas', hash: '#reseñas' },
+        producto: { sec: 'vista-producto', nav: 'nav-recargas', hash: null },
+        'binance-gateway': { sec: 'vista-binance-gateway', nav: null, hash: null },
+        'pagomovil-gateway': { sec: 'vista-pagomovil-gateway', nav: null, hash: null },
+        servicios: { sec: 'vista-servicios', nav: 'nav-servicios', hash: ' ' }
+    };
+
+    const cfg = mapaVistas[vista] || mapaVistas.servicios;
+    const secEl = document.getElementById(cfg.sec);
+    if (secEl) secEl.classList.add('active');
+    if (cfg.nav) {
+        const navEl = document.getElementById(cfg.nav);
+        if (navEl) navEl.classList.add('active');
+    }
+    if (actualizarUrl && cfg.hash) {
+        history.pushState(null, null, cfg.hash);
+    }
+
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+        function actualizarModalidadVideojuego() {
+            if (!videojuegoActual) return;
+            const select = document.getElementById('vj-modalidad-select');
+            const mod = videojuegoActual.modalidades[select.selectedIndex] || videojuegoActual.modalidades[0];
+            const totalUSD = mod.precioUSD * cantidadVideojuego;
+
+            document.getElementById('vj-detail-price').innerText = formatearPrecioVideojuego(totalUSD);
+            document.getElementById('vj-detail-mod-label').innerText = `Modalidad: ${mod.nombre}`;
+        }
+
+        function cambiarCantidadVideojuego(delta) {
+            if (cantidadVideojuego + delta >= 1) {
+                cantidadVideojuego += delta;
+                document.getElementById('vj-qty-val').innerText = cantidadVideojuego;
+                actualizarModalidadVideojuego();
+            }
+        }
+
+        function comprarVideojuegoDirecto() {
+            if (!videojuegoActual) return;
+            const select = document.getElementById('vj-modalidad-select');
+            const mod = videojuegoActual.modalidades[select.selectedIndex] || videojuegoActual.modalidades[0];
+
+            productoNombreActual = videojuegoActual.titulo;
+            productoActualData = {
+                idLabel: "CORREO O USUARIO PSN / XBOX",
+                idPlaceholder: "Ingresa tu correo de contacto",
+                tab1Nombre: "Modalidad",
+                tab2Nombre: "Consola",
+                paquetesTab1: [{ monto: mod.nombre, extra: videojuegoActual.consolas, precioUSD: mod.precioUSD, active: true }],
+                paquetesTab2: []
+            };
+
+            document.getElementById('prod-title').innerText = videojuegoActual.titulo;
+            document.getElementById('prod-bread-title').innerText = videojuegoActual.titulo;
+            document.getElementById('prod-tag').innerText = videojuegoActual.consolas;
+            document.getElementById('summary-prod-name').innerText = videojuegoActual.titulo;
+            document.getElementById('summary-prod-img').src = videojuegoActual.imagen;
+            document.getElementById('label-field-text').innerText = productoActualData.idLabel;
+            document.getElementById('input-field-id').placeholder = productoActualData.idPlaceholder;
+            document.getElementById('input-field-id').value = '';
+
+            cantidad = cantidadVideojuego;
+            precioUSDActual = mod.precioUSD;
+            document.getElementById('qty-val').innerText = cantidad;
+            document.getElementById('summary-pkg-text').innerText = `${mod.nombre} (${videojuegoActual.consolas})`;
+            actualizarTotal();
+
+            estadoCheckoutStep = 1;
+            document.getElementById('step2-title-head').innerHTML = 'MODALIDAD <span>SELECCIONADA</span>';
+            document.getElementById('step2-packages-wrapper').style.display = 'block';
+            document.getElementById('step2-payment-wrapper').style.display = 'none';
+            document.getElementById('btn-main-action').innerText = 'VERIFICAR PEDIDO >';
+            renderizarPaquetes();
+            actualizarEstadoTienda();
+            mostrarVista('producto');
+        }
+
+        // ==================== INICIALIZACIÓN AL CARGAR ====================
         document.addEventListener("DOMContentLoaded", function() {
             actualizarEstadoTienda();
             setInterval(actualizarEstadoTienda, 30000);
             iniciarContadorBlackFriday();
-            aplicarStockTarjetas();
             iniciarEfectoBlackFriday();
+            aplicarStockTarjetas();
             cargarResenas();
             verificarHashUrl();
-
-            if (!sessionStorage.getItem('streamix_terminos_aceptados')) {
-                const modalTerm = document.getElementById('modalTerminos');
-                if (modalTerm) modalTerm.style.display = 'flex';
-            }
         });
     </script>
 </body>
