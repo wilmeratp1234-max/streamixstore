@@ -4616,6 +4616,14 @@ function consultarCodigoConAcceso() {
                 }
             });
         }
+		
+		function verificarTerminosAlEntrar() {
+    const yaAcepto = sessionStorage.getItem('streamix_terminos_aceptados') === 'true';
+    const modal = document.getElementById('modalTerminos');
+    if (!yaAcepto && modal) {
+        modal.style.display = 'flex';
+    }
+}
 
         function iniciarEfectoBlackFriday() {
             const container = document.getElementById('bf-particles-container');
@@ -4710,7 +4718,7 @@ function consultarCodigoConAcceso() {
             },
             {
                 id: "reddeadredeption",
-                titulo: "RED DEAD REDEMPTION",
+                titulo: "red dead redemption",
                 consolas: "PLAYSTATION 5",
                 imagen: "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2668510/8f73dc378141e642d00e40484adde709e0ad33cb/capsule_616x353.jpg?t=1781132266",
                 descripcionCorta: "Elige la modalidad de acceso que necesitas. Consulta disponibilidad antes de realizar tu pedido.",
@@ -4989,6 +4997,7 @@ function mostrarVista(vista, actualizarUrl = true) {
             aplicarStockTarjetas();
             cargarResenas();
             verificarHashUrl();
+			verificarTerminosAlEntrar();
         });
     </script>
 </body>
